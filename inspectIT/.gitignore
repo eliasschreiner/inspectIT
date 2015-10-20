@@ -1,13 +1,1 @@
-/bin
-/test-output
-/reports
-temp-testng-customsuite.xml
-/lib
-/release/build
-/release/dist
-/release/jvm
-/release/pdebuild
-/release/runtime
-/release/resources/ivy/install
-/release/thirdparty.txt
-/storage
+/bin/

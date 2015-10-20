@@ -1,39 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="inspectIT" uid="info.novatec.inspectit.rcp.product" id="info.novatec.inspectit.rcp.product" application="info.novatec.inspectit.rcp.application" version="1.5.0" useFeatures="false" includeLaunchers="true">
+<product name="inspectIT" uid="info.novatec.inspectit.rcp.product" id="info.novatec.inspectit.rcp.product.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.5.0" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
-      <image path="about.png"/>
-      <text>
-         %aboutText
-      </text>
+      <image path="/inspectIT/about.png"/>
    </aboutInfo>
 
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
-      <vmArgs>-Xmx1024M -Xms128m</vmArgs>
+      <vmArgs>-Xmx1024M -Xms128m
+      </vmArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
    </launcherArgs>
 
    <windowImages i16="/inspectIT/icons/selfmade/16x16.png" i32="/inspectIT/icons/selfmade/32x32.png" i48="/inspectIT/icons/selfmade/48x48.png" i64="/inspectIT/icons/selfmade/64x64.png" i128="/inspectIT/icons/selfmade/128x128.png"/>
 
-   <splash
-      location="info.novatec.inspectit.rcp"
-      startupMessageRect="5,10,560,20"
-      startupForegroundColor="FFFFFF" />
+
    <launcher name="inspectIT">
-      <linux icon="info.novatec.inspectit.rcp/icons/selfmade/inspectIT.xpm"/>
-      <macosx icon="info.novatec.inspectit.rcp/icons/selfmade/inspectIT.icns"/>
       <solaris/>
       <win useIco="true">
-         <ico path="info.novatec.inspectit.rcp/icons/selfmade/inspectIT.ico"/>
+         <ico path="/inspectIT/icons/selfmade/inspectIT.ico"/>
          <bmp/>
       </win>
    </launcher>
 
-   <intro introId="info.novatec.inspectit.rcp.intro"/>
 
    <vm>
    </vm>
@@ -89,65 +83,79 @@ NTSales_Allgemeine_Nutzungsbedingungen_inspectIT_en.doc_V2.0 / 24.07.2012
    </license>
 
    <plugins>
-      <plugin id="ch.qos.logback.classic"/>
-      <plugin id="ch.qos.logback.core"/>
-      <plugin id="com.esotericsoftware.kryo"/>
-      <plugin id="com.google.guava.jdk5"/>
       <plugin id="com.ibm.icu"/>
-      <plugin id="com.springsource.net.sf.cglib"/>
-      <plugin id="com.springsource.org.aopalliance"/>
-      <plugin id="info.novatec.asm"/>
-      <plugin id="info.novatec.hamcrest-all"/>
-      <plugin id="info.novatec.high-scale-lib"/>
-      <plugin id="info.novatec.httpclient"/>
-      <plugin id="info.novatec.httpcore"/>
-      <plugin id="info.novatec.httpmime"/>
-      <plugin id="info.novatec.inspectit.commons"/>
-      <plugin id="info.novatec.inspectit.commonscs"/>
-      <plugin id="info.novatec.inspectit.rcp"/>
-      <plugin id="info.novatec.jcommon"/>
-      <plugin id="info.novatec.jfreechart"/>
-      <plugin id="info.novatec.jfreechart-experimental"/>
-      <plugin id="info.novatec.jfreechart-swt"/>
-      <plugin id="info.novatec.kryo-serializers"/>
-      <plugin id="info.novatec.kryonet"/>
-      <plugin id="info.novatec.minlog"/>
-      <plugin id="info.novatec.reflectasm"/>
-      <plugin id="info.novatec.swtgraphics2d"/>
-      <plugin id="info.novatec.sysout-over-slf4j"/>
-      <plugin id="javax.servlet"/>
-      <plugin id="jcl.over.slf4j"/>
-      <plugin id="log4j.over.slf4j"/>
-      <plugin id="org.apache.commons.collections"/>
-      <plugin id="org.apache.commons.fileupload"/>
-      <plugin id="org.apache.commons.io"/>
-      <plugin id="org.apache.commons.lang"/>
-      <plugin id="org.apache.commons.pool"/>
+      <plugin id="info.novatec.inspectit.rcp.product"/>
+      <plugin id="javax.annotation"/>
+      <plugin id="javax.inject"/>
+      <plugin id="javax.xml"/>
+      <plugin id="org.apache.batik.css"/>
+      <plugin id="org.apache.batik.util"/>
+      <plugin id="org.apache.batik.util.gui"/>
+      <plugin id="org.apache.commons.jxpath"/>
+      <plugin id="org.apache.commons.logging"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.databinding"/>
+      <plugin id="org.eclipse.core.databinding.beans"/>
       <plugin id="org.eclipse.core.databinding.observable"/>
       <plugin id="org.eclipse.core.databinding.property"/>
       <plugin id="org.eclipse.core.expressions"/>
+      <plugin id="org.eclipse.core.filesystem"/>
+      <plugin id="org.eclipse.core.filesystem.aix.ppc" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.hpux.ia64_32" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.linux.ppc" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.linux.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.macosx" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.solaris.sparc" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.resources"/>
+      <plugin id="org.eclipse.core.resources.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
+      <plugin id="org.eclipse.e4.core.commands"/>
+      <plugin id="org.eclipse.e4.core.contexts"/>
+      <plugin id="org.eclipse.e4.core.di"/>
+      <plugin id="org.eclipse.e4.core.di.annotations"/>
+      <plugin id="org.eclipse.e4.core.di.extensions"/>
+      <plugin id="org.eclipse.e4.core.services"/>
+      <plugin id="org.eclipse.e4.emf.xpath"/>
+      <plugin id="org.eclipse.e4.ui.bindings"/>
+      <plugin id="org.eclipse.e4.ui.css.core"/>
+      <plugin id="org.eclipse.e4.ui.css.swt"/>
+      <plugin id="org.eclipse.e4.ui.css.swt.theme"/>
+      <plugin id="org.eclipse.e4.ui.di"/>
+      <plugin id="org.eclipse.e4.ui.model.workbench"/>
+      <plugin id="org.eclipse.e4.ui.services"/>
+      <plugin id="org.eclipse.e4.ui.widgets"/>
+      <plugin id="org.eclipse.e4.ui.workbench"/>
+      <plugin id="org.eclipse.e4.ui.workbench.renderers.swt"/>
+      <plugin id="org.eclipse.e4.ui.workbench.renderers.swt.cocoa" fragment="true"/>
+      <plugin id="org.eclipse.e4.ui.workbench.swt"/>
+      <plugin id="org.eclipse.e4.ui.workbench3"/>
+      <plugin id="org.eclipse.emf.common"/>
+      <plugin id="org.eclipse.emf.databinding"/>
+      <plugin id="org.eclipse.emf.ecore"/>
+      <plugin id="org.eclipse.emf.ecore.change"/>
+      <plugin id="org.eclipse.emf.ecore.xmi"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.concurrent"/>
+      <plugin id="org.eclipse.equinox.ds"/>
+      <plugin id="org.eclipse.equinox.event"/>
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
-      <plugin id="org.eclipse.help"/>
+      <plugin id="org.eclipse.equinox.util"/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
-      <plugin id="org.eclipse.nebula.cwt"/>
-      <plugin id="org.eclipse.nebula.widgets.cdatetime"/>
       <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
+      <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true"/>
       <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.aix.ppc" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.aix.ppc64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.hpux.ia64_32" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.linux.ppc64" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.linux.s390" fragment="true"/>
@@ -158,29 +166,22 @@ NTSales_Allgemeine_Nutzungsbedingungen_inspectIT_en.doc_V2.0 / 24.07.2012
       <plugin id="org.eclipse.swt.gtk.solaris.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.ui"/>
-      <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
-      <plugin id="org.eclipse.ui.forms"/>
-      <plugin id="org.eclipse.ui.intro"/>
-      <plugin id="org.eclipse.ui.workbench"/>
-      <plugin id="org.objenesis"/>
-      <plugin id="org.springframework.aop"/>
-      <plugin id="org.springframework.asm"/>
-      <plugin id="org.springframework.beans"/>
-      <plugin id="org.springframework.context"/>
-      <plugin id="org.springframework.core"/>
-      <plugin id="org.springframework.expression"/>
-      <plugin id="org.springframework.osgi.core"/>
-      <plugin id="org.springframework.osgi.extender"/>
-      <plugin id="org.springframework.osgi.io"/>
-      <plugin id="org.springframework.web"/>
-      <plugin id="slf4j.api"/>
+      <plugin id="org.w3c.css.sac"/>
+      <plugin id="org.w3c.dom.events"/>
+      <plugin id="org.w3c.dom.smil"/>
+      <plugin id="org.w3c.dom.svg"/>
    </plugins>
 
    <configurations>
       <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
       <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
-      <plugin id="org.springframework.osgi.extender" autoStart="true" startLevel="0" />
    </configurations>
+
+   <preferencesInfo>
+      <targetfile overwrite="false"/>
+   </preferencesInfo>
+
+   <cssInfo>
+   </cssInfo>
 
 </product>
