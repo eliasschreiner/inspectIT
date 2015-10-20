@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: inspectIT
-Bundle-SymbolicName: info.novatec.inspectit.rcp;singleton:=true
+Bundle-SymbolicName: info.novatec.inspectit.rcp.product;singleton:=true
 Bundle-Version: 1.5.0
 Bundle-Vendor: Novatec GmbH
 Require-Bundle: javax.inject;bundle-version="0.0.0",
