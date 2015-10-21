@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.window.main" label="inspectIT" width="700" height="700">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.window.main" label="inspectIT" iconURI="platform:/plugin/info.novatec.inspectIT.rcp/about.png" width="700" height="700">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_6wlLkMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.ide.perspectivestack">
       <children xsi:type="advanced:Perspective" xmi:id="_6wlLkcgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.perspective.mainview" accessibilityPhrase="Main View" selectedElement="_6wlLksgZEeSyMNYR5xypkQ" label="Main View">
         <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.partsashcontainer.sample" horizontal="true">
           <children xsi:type="basic:PartSashContainer" xmi:id="_R0YYEHf_EeWp6ekdJTcqtQ" elementId="inspectit.partsashcontainer.1" accessibilityPhrase="View">
             <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.partstack.sample" accessibilityPhrase="View1" selectedElement="_6wlLlMgZEeSyMNYR5xypkQ">
-              <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.part.sample" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.parts.SamplePart" label="View"/>
+              <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.part.sample" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.parts.SamplePart" label="View">
+                <menus xsi:type="menu:PopupMenu" xmi:id="_MwHQIHgDEeWp6ekdJTcqtQ" elementId="inspectit.popupmenu.dfgh" label="dfgh">
+                  <children xsi:type="menu:HandledMenuItem" xmi:id="_OMIiMHgDEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.1"/>
+                </menus>
+              </children>
             </children>
           </children>
           <children xsi:type="basic:PartStack" xmi:id="_O3qvUHf_EeWp6ekdJTcqtQ" elementId="inspectit.partstack.2"/>
