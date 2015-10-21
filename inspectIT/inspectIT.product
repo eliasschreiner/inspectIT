@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="inspectIT" uid="info.novatec.inspectit.rcp.product" id="info.novatec.inspectit.rcp.product.inspectIT" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.5.0" useFeatures="false" includeLaunchers="true">
+<product name="inspectIT" uid="info.novatec.inspectit.rcp.product" id="info.novatec.inspectIT.rcp.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.5.0" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
-      <image path="/inspectIT/about.png"/>
+      <image path="about.png"/>
+      <text>
+         %aboutText
+      </text>
    </aboutInfo>
 
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
+      <programArgs>-clearPersistedState
+      </programArgs>
       <vmArgs>-Xmx1024M -Xms128m
       </vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
@@ -19,6 +24,7 @@
 
    <windowImages i16="/inspectIT/icons/selfmade/16x16.png" i32="/inspectIT/icons/selfmade/32x32.png" i48="/inspectIT/icons/selfmade/48x48.png" i64="/inspectIT/icons/selfmade/64x64.png" i128="/inspectIT/icons/selfmade/128x128.png"/>
 
+
    <launcher name="inspectIT">
       <solaris/>
       <win useIco="true">
@@ -26,6 +32,7 @@
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
    </vm>
@@ -82,7 +89,7 @@ NTSales_Allgemeine_Nutzungsbedingungen_inspectIT_en.doc_V2.0 / 24.07.2012
 
    <plugins>
       <plugin id="com.ibm.icu"/>
-      <plugin id="info.novatec.inspectit.rcp.product"/>
+      <plugin id="info.novatec.inspectIT.rcp"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
       <plugin id="javax.xml"/>
@@ -170,6 +177,10 @@ NTSales_Allgemeine_Nutzungsbedingungen_inspectIT_en.doc_V2.0 / 24.07.2012
       <plugin id="org.w3c.dom.svg"/>
    </plugins>
 
+   <configurations>
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+   </configurations>
 
    <preferencesInfo>
       <targetfile overwrite="false"/>

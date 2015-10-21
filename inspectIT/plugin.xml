@@ -3,22 +3,26 @@
 <plugin>
 
    <extension
-         id="inspectIT"
+         id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="org.eclipse.e4.ui.workbench.swt.E4Application"
-            name="inspectIT">
+            name="inspectIT"
+            application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
-               name="windowImages"
-               value="icons/selfmade/16x16.png,icons/selfmade/32x32.png,icons/selfmade/48x48.png,icons/selfmade/64x64.png,icons/selfmade/128x128.png">
+               name="appName"
+               value="inspectIT">
          </property>
          <property
                name="aboutImage"
                value="about.png">
          </property>
          <property
-               name="appName"
-               value="inspectIT">
+               name="aboutText"
+               value="%aboutText">
+         </property>
+         <property
+               name="windowImages"
+               value="icons/selfmade/16x16.png,icons/selfmade/32x32.png,icons/selfmade/48x48.png,icons/selfmade/64x64.png,icons/selfmade/128x128.png">
          </property>
       </product>
    </extension>
