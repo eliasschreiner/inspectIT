@@ -12,13 +12,32 @@
 package testagainforemfneed.handlers;
 
 import org.eclipse.e4.core.di.annotations.Execute;
+
+
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
+
+import java.awt.Desktop;
+import java.net.URI;
+
+
 public class OpenHandler {
 
+	
+	
 	@Execute
-	public void execute(Shell shell){
-		FileDialog dialog = new FileDialog(shell);
-		dialog.open();
+	public void execute(Shell shell)throws Exception{
+		
+		        String url = "http://stackoverflow.com";
+
+		        if (Desktop.isDesktopSupported()) {
+		            // Windows
+		            Desktop.getDesktop().browse(new URI(url));
+		        } else {
+		            // Ubuntu
+		            Runtime runtime = Runtime.getRuntime();
+		            runtime.exec("/usr/bin/firefox -new-window " + url);
+		        }
+		    }
 	}
 }

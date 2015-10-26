@@ -33,7 +33,7 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_HGMhoHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.welcome" label="Welcome" command="_wdZDgHjVEeWfB_YImTWJSA"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_PcQNoHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.dokumentation" label="Documentation" command="_hbz8sHi_EeWfB_YImTWJSA"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_TMMqIHgAEeWp6ekdJTcqtQ" elementId="inspectit.menuseparator.0"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLj8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.handleditem.about" label="About" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLj8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.handleditem.about" label="About" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
       </children>
     </mainMenu>
     <trimBars xmi:id="_6wlLlcgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.trimbar.top">

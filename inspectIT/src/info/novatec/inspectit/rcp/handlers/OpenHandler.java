@@ -11,12 +11,18 @@
  *******************************************************************************/
 package info.novatec.inspectit.rcp.handlers;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
@@ -24,10 +30,28 @@ import org.eclipse.swt.widgets.Shell;
 public class OpenHandler {
 
 	String url = "http://www.google.de";
-	Browser browser;
-
+	Browser browser;	
+	
 	@Execute
-	public void execute(MApplication application, MWindow window) {
-		application.getChildren().add((MWindow) EcoreUtil.copy((EObject) window));
+	public void execute(Shell shell) {
+		/*if (Desktop.isDesktopSupported()) {
+            // Windows
+            try {
+				Desktop.getDesktop().browse(new URI(url));
+			} catch (IOException | URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } else {
+            // Ubuntu
+            Runtime runtime = Runtime.getRuntime();
+            try {
+				runtime.exec("/usr/bin/firefox -new-window " + url);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }*/
+		Program.launch(url);
 	}
 }

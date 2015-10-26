@@ -13,7 +13,9 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.expressions.IEvaluationContext;
+import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.swt.program.Program;
+/*
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.browser.IWebBrowser;
@@ -25,24 +27,23 @@ import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
  * @author Ivan Senic
  * 
  */
-public abstract class OpenUrlHandler extends AbstractHandler {
+public abstract class OpenUrlHandler{
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
+	@Execute
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IWorkbenchBrowserSupport browserSupport = PlatformUI.getWorkbench().getBrowserSupport();
-		String urlString = getUrlString(event);
+		
+		//String urlString = getUrlString(event);
+		String urlString = "http://www.google.de";
 		if (null == urlString) {
 			return null;
 		}
 
-		try {
-			IWebBrowser browser = browserSupport.createBrowser(null);
-			URL url = new URL(urlString);
-			browser.openURL(url);
-		} catch (PartInitException | MalformedURLException e) {
+		try {	
+			Program.launch(urlString);
+		} catch ( Exception e) {
 			throw new ExecutionException("Error opening the URL ('" + urlString + "') in the system browser.", e);
 		}
 		return null;
@@ -120,7 +121,7 @@ public abstract class OpenUrlHandler extends AbstractHandler {
 	 * @author Ivan Senic
 	 * 
 	 */
-	public static class ExceptionSupportHandler extends OpenUrlHandler {
+	//public static class ExceptionSupportHandler extends OpenUrlHandler {
 
 		/**
 		 * ID of the command.
@@ -135,9 +136,11 @@ public abstract class OpenUrlHandler extends AbstractHandler {
 		/**
 		 * {@inheritDoc}
 		 */
-		@Override
+	/*	@Override
 		protected String getUrlString(ExecutionEvent event) {
-			// Get the exception out of the context
+			
+			
+			// Get the exception out of the context			
 			IEvaluationContext context = (IEvaluationContext) event.getApplicationContext();
 			Throwable throwable = (Throwable) context.getVariable(INPUT);
 			if (null == throwable) {
@@ -173,7 +176,7 @@ public abstract class OpenUrlHandler extends AbstractHandler {
 			return result;
 		}
 	}
-
+*/
 	/**
 	 * Handler for searching the documentation.
 	 * 
