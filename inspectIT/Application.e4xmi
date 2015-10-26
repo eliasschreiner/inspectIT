@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.window.main" label="inspectIT" width="700" height="700">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.window.main" selectedElement="_6wlLkMgZEeSyMNYR5xypkQ" label="inspectIT" width="1200" height="1200">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_6wlLkMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.ide.perspectivestack">
       <children xsi:type="advanced:Perspective" xmi:id="_6wlLkcgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.perspective.mainview" accessibilityPhrase="Main View" selectedElement="_6wlLksgZEeSyMNYR5xypkQ" label="Main View">
         <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.partsashcontainer.sample" horizontal="true">
-          <children xsi:type="basic:PartSashContainer" xmi:id="_R0YYEHf_EeWp6ekdJTcqtQ" elementId="inspectit.partsashcontainer.1" accessibilityPhrase="View">
-            <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.partstack.sample" accessibilityPhrase="View1" selectedElement="_6wlLlMgZEeSyMNYR5xypkQ">
-              <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.part.sample" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.parts.SamplePart" label="View"/>
+          <children xsi:type="basic:PartSashContainer" xmi:id="_miAO4HjJEeWfB_YImTWJSA" elementId="inspectit.partsashcontainer.0">
+            <children xsi:type="basic:PartStack" xmi:id="_pSFJ0HjJEeWfB_YImTWJSA" elementId="inspectit.partstack.0">
+              <children xsi:type="basic:Part" xmi:id="_q5S_QHjJEeWfB_YImTWJSA" elementId="inspectit.part.repositorymanager" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.parts.SamplePart" label="Repository Manager"/>
+              <children xsi:type="basic:Part" xmi:id="_rUiw0HjJEeWfB_YImTWJSA" elementId="inspectit.part.storagemanager" label="Storage Manager"/>
+              <children xsi:type="basic:Part" xmi:id="_vzyjUHjJEeWfB_YImTWJSA" elementId="inspectit.part.dataexplorer" label="Data Explorer"/>
             </children>
           </children>
-          <children xsi:type="basic:PartStack" xmi:id="_O3qvUHf_EeWp6ekdJTcqtQ" elementId="inspectit.partstack.2"/>
+          <children xsi:type="basic:PartStack" xmi:id="_O3qvUHf_EeWp6ekdJTcqtQ" elementId="inspectit.partstack.2">
+            <children xsi:type="basic:Part" xmi:id="_KW6IUHvNEeWfB_YImTWJSA" elementId="inspectit.part.0" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.parts.SWTHandlerClass"/>
+          </children>
         </children>
       </children>
     </children>
     <mainMenu xmi:id="_6wlLicgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.menu">
       <children xsi:type="menu:Menu" xmi:id="_XjHnEHgAEeWp6ekdJTcqtQ" elementId="inspectit.menu.file" label="File">
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_Y0rVkHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.exit" label="Exit"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_Y0rVkHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.exit" label="Exit" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_eWnwoHf_EeWp6ekdJTcqtQ" elementId="inspectit.menu.window" label="Window">
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_gKVxAHf_EeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.resetperspective" label="Reset Perspective"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_gKVxAHf_EeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.resetperspective" label="Reset Perspective" command="_eAsdQHvLEeWfB_YImTWJSA"/>
         <children xsi:type="menu:Menu" xmi:id="_7AL8oHgAEeWp6ekdJTcqtQ" elementId="inspectit.menu.showview" label="Show View">
           <children xsi:type="menu:HandledMenuItem" xmi:id="_7OcbEHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.repositorymanager" label="Repository Manager"/>
           <children xsi:type="menu:HandledMenuItem" xmi:id="__seFkHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.storagemanager" label="Storage Manager"/>
@@ -26,8 +30,8 @@
         </children>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_6wlLjsgZEeSyMNYR5xypkQ" elementId="help" label="Help">
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_HGMhoHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.welcome" label="Welcome"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_PcQNoHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.dokumentation" label="Dokumentation"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_HGMhoHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.welcome" label="Welcome" command="_wdZDgHjVEeWfB_YImTWJSA"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_PcQNoHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.dokumentation" label="Documentation" command="_hbz8sHi_EeWfB_YImTWJSA"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_TMMqIHgAEeWp6ekdJTcqtQ" elementId="inspectit.menuseparator.0"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLj8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.handleditem.about" label="About" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
       </children>
@@ -43,6 +47,9 @@
   <handlers xmi:id="_6wlLgcgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectit.rcp.handler.openCommand" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.handlers.OpenHandler" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
   <handlers xmi:id="_6wlLhMgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectit.rcp.handler.saveCommand" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.handlers.SaveHandler" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
   <handlers xmi:id="_6wlLh8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectit.rcp.handler.aboutCommand" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.handlers.AboutHandler" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
+  <handlers xmi:id="_bo_CcHi_EeWfB_YImTWJSA" elementId="info.novatec.inspectit.handler.DocumentationHandler" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.handlers.OpenHandler" command="_hbz8sHi_EeWfB_YImTWJSA"/>
+  <handlers xmi:id="_sk1dkHjVEeWfB_YImTWJSA" elementId="inspectit.handler.WelcomeHandler" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.handlers.WelcomeHandler" command="_wdZDgHjVEeWfB_YImTWJSA"/>
+  <handlers xmi:id="_bi16wHvLEeWfB_YImTWJSA" elementId="inspectit.handler.0" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.parts.SWTHandlerClass" command="_eAsdQHvLEeWfB_YImTWJSA"/>
   <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.bindingtable" bindingContext="_6wlLecgZEeSyMNYR5xypkQ">
     <bindings xmi:id="_6wlLf8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.keybinding.m1q" keySequence="M1+Q" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
     <bindings xmi:id="_6wlLgsgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.keybinding.m1o" keySequence="M1+O" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
@@ -57,6 +64,9 @@
   <commands xmi:id="_6wlLgMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.open" commandName="openCommand"/>
   <commands xmi:id="_6wlLg8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
   <commands xmi:id="_6wlLhsgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.help.aboutAction" commandName="aboutCommand"/>
+  <commands xmi:id="_hbz8sHi_EeWfB_YImTWJSA" elementId="info.novatec.inspectit.command.DocumentationHandler" commandName="DocumentationCommand" description="Opens the Documentation URL"/>
+  <commands xmi:id="_wdZDgHjVEeWfB_YImTWJSA" elementId="inspectit.command.welcomehandler" commandName="Welcome Handler" description="Open the welcome Page of the inspectIT UI"/>
+  <commands xmi:id="_eAsdQHvLEeWfB_YImTWJSA" elementId="inspectit.command.testcommand" commandName="TESTCOMMAND"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="inspectIT Main Target" sequenceNumber="17">
+<?pde version="3.8"?><target name="inspectIT Main Target" sequenceNumber="23">
 <locations>
 <location path="${project_loc}/lib/osgi" type="Directory"/>
 <location path="${project_loc}/../CommonsCS/lib/prod" type="Directory"/>
 <location path="${project_loc}/../Commons/lib/prod" type="Directory"/>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.ecore.feature.group" version="2.11.0.v20150512-0501"/>
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.11.0.v20150601-0402"/>
-<unit id="org.eclipse.emf.feature.group" version="2.11.0.v20150601-0402"/>
-<repository location="http://download.eclipse.org/modeling/emf/emf/updates/releases/."/>
-</location>
-<location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.common.feature.group" version="2.11.0.v20150805-0538"/>
+<unit id="org.eclipse.e4.rcp.feature.group" version="1.4.0.v20150903-1804"/>
+<unit id="org.eclipse.emf.ecore.feature.group" version="2.11.1.v20150805-0538"/>
+<unit id="org.eclipse.platform.source.feature.group" version="4.5.1.v20150904-0015"/>
+<unit id="org.eclipse.e4.core.tools.feature.source.feature.group" version="4.5.0.v20150818-0640"/>
+<unit id="org.eclipse.pde.feature.group" version="3.11.1.v20150904-0345"/>
+<unit id="org.eclipse.e4.rcp.source.feature.group" version="1.4.0.v20150903-1804"/>
+<unit id="org.eclipse.rcp.source.feature.group" version="4.5.1.v20150904-0015"/>
 <unit id="org.eclipse.platform.sdk" version="4.5.1.M20150904-0015"/>
+<unit id="org.eclipse.pde.source.feature.group" version="3.11.1.v20150904-0345"/>
+<unit id="org.eclipse.e4.core.tools.feature.feature.group" version="4.5.0.v20150818-0640"/>
 <repository location="http://download.eclipse.org/eclipse/updates/4.5"/>
 </location>
 </locations>

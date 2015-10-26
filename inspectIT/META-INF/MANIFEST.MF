@@ -14,7 +14,7 @@ Require-Bundle: javax.inject;bundle-version="0.0.0",
  org.eclipse.e4.core.di;bundle-version="0.0.0",
  org.eclipse.e4.ui.di;bundle-version="0.0.0",
  org.eclipse.e4.core.contexts;bundle-version="0.0.0",
-  info.novatec.inspectit.commons;bundle-version="1.5.0",
+ info.novatec.inspectit.commons;bundle-version="1.5.0",
  info.novatec.inspectit.commonscs;bundle-version="1.5.0",
  com.springsource.net.sf.cglib;bundle-version="2.2.0",
  com.springsource.org.aopalliance;bundle-version="1.0.0",
@@ -49,5 +49,6 @@ Require-Bundle: javax.inject;bundle-version="0.0.0",
  ch.qos.logback.core;bundle-version="1.0.13",
  info.novatec.sysout-over-slf4j;bundle-version="1.0.2",
  com.esotericsoftware.kryo;bundle-version="2.24.0",
- com.google.guava.jdk5;bundle-version="13.0.0"
+ com.google.guava.jdk5;bundle-version="13.0.0",
+ org.eclipse.e4.core.commands;bundle-version="0.11.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
