@@ -12,13 +12,20 @@
 package testagainforemfneed.handlers;
 
 import org.eclipse.e4.core.di.annotations.Execute;
-
-
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MBasicFactory;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
+import testagainforemfneed.parts.Secondsample;
+
 import java.awt.Desktop;
-import java.net.URI;
+import javax.inject.Named;
 
 
 public class OpenHandler {
@@ -26,18 +33,14 @@ public class OpenHandler {
 	
 	
 	@Execute
-	public void execute(Shell shell)throws Exception{
-		
-		        String url = "http://stackoverflow.com";
-
-		        if (Desktop.isDesktopSupported()) {
-		            // Windows
-		            Desktop.getDesktop().browse(new URI(url));
-		        } else {
-		            // Ubuntu
-		            Runtime runtime = Runtime.getRuntime();
-		            runtime.exec("/usr/bin/firefox -new-window " + url);
-		        }
-		    }
+	public void execute(MApplication application, @Optional @Named(IServiceConstants.ACTIVE_SHELL) Shell shelly) throws InterruptedException {
+		   MWindow mWindow = MBasicFactory.INSTANCE.createTrimmedWindow();
+		    mWindow.setHeight(200);
+		    mWindow.setWidth(400);
+		    mWindow.getChildren().add(MBasicFactory.INSTANCE.createPart());
+		    application.getChildren().add(mWindow);
+	    
+	    
 	}
+	
 }
