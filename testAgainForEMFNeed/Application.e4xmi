@@ -6,6 +6,7 @@
         <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="testAgainForEMFNeed.partsashcontainer.sample">
           <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="testAgainForEMFNeed.partstack.sample">
             <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="testAgainForEMFNeed.part.sample" contributionURI="bundleclass://testAgainForEMFNeed/testagainforemfneed.parts.SamplePart" label="Sample Part"/>
+            <children xsi:type="basic:Part" xmi:id="_fcOH0IhHEeWwgPB9fkeseg" elementId="testagainforemfneed.part.0" contributionURI="bundleclass://testAgainForEMFNeed/testagainforemfneed.parts.FileBrowserPart" closeable="true"/>
           </children>
         </children>
       </children>
