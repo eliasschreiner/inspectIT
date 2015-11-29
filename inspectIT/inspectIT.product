@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
+<<<<<<< HEAD
 <product name="inspectIT" uid="info.novatec.inspectit.rcp.product" id="info.novatec.inspectIT.rcp.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.5.0" useFeatures="false" includeLaunchers="true">
+=======
+<product name="inspectIT" uid="info.novatec.inspectit.rcp.product" id="info.novatec.inspectit.rcp.product" application="info.novatec.inspectit.rcp.application" version="1.5.0" useFeatures="false" includeLaunchers="true">
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
 
    <aboutInfo>
       <image path="about.png"/>
@@ -14,25 +18,46 @@
    </configIni>
 
    <launcherArgs>
+<<<<<<< HEAD
       <programArgs>-clearPersistedState
       </programArgs>
       <vmArgs>-Xmx1024M -Xms128m
       </vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
       </vmArgsMac>
+=======
+      <vmArgs>-Xmx1024M -Xms128m</vmArgs>
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
    </launcherArgs>
 
    <windowImages i16="/inspectIT/icons/selfmade/16x16.png" i32="/inspectIT/icons/selfmade/32x32.png" i48="/inspectIT/icons/selfmade/48x48.png" i64="/inspectIT/icons/selfmade/64x64.png" i128="/inspectIT/icons/selfmade/128x128.png"/>
 
+<<<<<<< HEAD
 
    <launcher name="inspectIT">
       <solaris/>
       <win useIco="true">
          <ico path="/inspectIT/icons/selfmade/inspectIT.ico"/>
+=======
+   <splash
+      location="info.novatec.inspectit.rcp"
+      startupMessageRect="5,10,560,20"
+      startupForegroundColor="FFFFFF" />
+   <launcher name="inspectIT">
+      <linux icon="info.novatec.inspectit.rcp/icons/selfmade/inspectIT.xpm"/>
+      <macosx icon="info.novatec.inspectit.rcp/icons/selfmade/inspectIT.icns"/>
+      <solaris/>
+      <win useIco="true">
+         <ico path="info.novatec.inspectit.rcp/icons/selfmade/inspectIT.ico"/>
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
          <bmp/>
       </win>
    </launcher>
 
+<<<<<<< HEAD
+=======
+   <intro introId="info.novatec.inspectit.rcp.intro"/>
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
 
    <vm>
    </vm>
@@ -101,9 +126,15 @@ NTSales_Allgemeine_Nutzungsbedingungen_inspectIT_en.doc_V2.0 / 24.07.2012
       <plugin id="info.novatec.httpclient"/>
       <plugin id="info.novatec.httpcore"/>
       <plugin id="info.novatec.httpmime"/>
+<<<<<<< HEAD
       <plugin id="info.novatec.inspectIT.rcp"/>
       <plugin id="info.novatec.inspectit.commons"/>
       <plugin id="info.novatec.inspectit.commonscs"/>
+=======
+      <plugin id="info.novatec.inspectit.commons"/>
+      <plugin id="info.novatec.inspectit.commonscs"/>
+      <plugin id="info.novatec.inspectit.rcp"/>
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
       <plugin id="info.novatec.jcommon"/>
       <plugin id="info.novatec.jfreechart"/>
       <plugin id="info.novatec.jfreechart-experimental"/>
@@ -114,6 +145,7 @@ NTSales_Allgemeine_Nutzungsbedingungen_inspectIT_en.doc_V2.0 / 24.07.2012
       <plugin id="info.novatec.reflectasm"/>
       <plugin id="info.novatec.swtgraphics2d"/>
       <plugin id="info.novatec.sysout-over-slf4j"/>
+<<<<<<< HEAD
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
       <plugin id="javax.servlet"/>
@@ -129,10 +161,20 @@ NTSales_Allgemeine_Nutzungsbedingungen_inspectIT_en.doc_V2.0 / 24.07.2012
       <plugin id="org.apache.commons.jxpath"/>
       <plugin id="org.apache.commons.lang"/>
       <plugin id="org.apache.commons.logging"/>
+=======
+      <plugin id="javax.servlet"/>
+      <plugin id="jcl.over.slf4j"/>
+      <plugin id="log4j.over.slf4j"/>
+      <plugin id="org.apache.commons.collections"/>
+      <plugin id="org.apache.commons.fileupload"/>
+      <plugin id="org.apache.commons.io"/>
+      <plugin id="org.apache.commons.lang"/>
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
       <plugin id="org.apache.commons.pool"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.databinding"/>
+<<<<<<< HEAD
       <plugin id="org.eclipse.core.databinding.beans"/>
       <plugin id="org.eclipse.core.databinding.observable"/>
       <plugin id="org.eclipse.core.databinding.property"/>
@@ -193,22 +235,44 @@ NTSales_Allgemeine_Nutzungsbedingungen_inspectIT_en.doc_V2.0 / 24.07.2012
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.util"/>
+=======
+      <plugin id="org.eclipse.core.databinding.observable"/>
+      <plugin id="org.eclipse.core.databinding.property"/>
+      <plugin id="org.eclipse.core.expressions"/>
+      <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
+      <plugin id="org.eclipse.equinox.app"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.preferences"/>
+      <plugin id="org.eclipse.equinox.registry"/>
+      <plugin id="org.eclipse.help"/>
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
       <plugin id="org.eclipse.nebula.cwt"/>
       <plugin id="org.eclipse.nebula.widgets.cdatetime"/>
       <plugin id="org.eclipse.osgi"/>
+<<<<<<< HEAD
       <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
       <plugin id="org.eclipse.osgi.services"/>
+=======
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true"/>
       <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.aix.ppc" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.aix.ppc64" fragment="true"/>
+<<<<<<< HEAD
       <plugin id="org.eclipse.swt.gtk.hpux.ia64" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.linux.ppc64" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.linux.ppc64le" fragment="true"/>
+=======
+      <plugin id="org.eclipse.swt.gtk.hpux.ia64_32" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc64" fragment="true"/>
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
       <plugin id="org.eclipse.swt.gtk.linux.s390" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.linux.s390x" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
@@ -217,6 +281,14 @@ NTSales_Allgemeine_Nutzungsbedingungen_inspectIT_en.doc_V2.0 / 24.07.2012
       <plugin id="org.eclipse.swt.gtk.solaris.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
+<<<<<<< HEAD
+=======
+      <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
+      <plugin id="org.eclipse.ui.forms"/>
+      <plugin id="org.eclipse.ui.intro"/>
+      <plugin id="org.eclipse.ui.workbench"/>
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
       <plugin id="org.objenesis"/>
       <plugin id="org.springframework.aop"/>
       <plugin id="org.springframework.asm"/>
@@ -228,10 +300,13 @@ NTSales_Allgemeine_Nutzungsbedingungen_inspectIT_en.doc_V2.0 / 24.07.2012
       <plugin id="org.springframework.osgi.extender"/>
       <plugin id="org.springframework.osgi.io"/>
       <plugin id="org.springframework.web"/>
+<<<<<<< HEAD
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.events"/>
       <plugin id="org.w3c.dom.smil"/>
       <plugin id="org.w3c.dom.svg"/>
+=======
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
       <plugin id="slf4j.api"/>
    </plugins>
 
@@ -241,6 +316,7 @@ NTSales_Allgemeine_Nutzungsbedingungen_inspectIT_en.doc_V2.0 / 24.07.2012
       <plugin id="org.springframework.osgi.extender" autoStart="true" startLevel="0" />
    </configurations>
 
+<<<<<<< HEAD
    <preferencesInfo>
       <targetfile overwrite="false"/>
    </preferencesInfo>
@@ -248,4 +324,6 @@ NTSales_Allgemeine_Nutzungsbedingungen_inspectIT_en.doc_V2.0 / 24.07.2012
    <cssInfo>
    </cssInfo>
 
+=======
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
 </product>

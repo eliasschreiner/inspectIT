@@ -24,4 +24,12 @@
 		</property>
 	</bean>
 	
+<<<<<<< HEAD
+=======
+	
+	<bean id="versionService" class="info.novatec.inspectit.version.VersionService" />
+	<bean id="versionProvider" class="info.novatec.inspectit.rcp.version.BundleVersionProvider" />
+	<bean id="documentationService" class="info.novatec.inspectit.rcp.documentation.DocumentationService" />
+	
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
 </beans>

@@ -16,5 +16,12 @@
 		interface="info.novatec.inspectit.rcp.repository.service.cmr.CmrServiceProvider" />
 	<osgi:service id="detailsGenerationFactoryService" ref="detailsGenerationFactory"
 		interface="info.novatec.inspectit.rcp.details.DetailsGenerationFactory" />
+<<<<<<< HEAD
+=======
+	<osgi:service id="exposedVersionService" ref="versionService"
+		interface="info.novatec.inspectit.version.VersionService" />
+	<osgi:service id="exposedDocumentationService" ref="documentationService" 
+		interface="info.novatec.inspectit.rcp.documentation.DocumentationService" />
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
 
 </beans>

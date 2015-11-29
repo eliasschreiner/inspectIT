@@ -1,1 +1,17 @@
+<<<<<<< HEAD
 /bin/
+=======
+/bin
+/test-output
+/reports
+temp-testng-customsuite.xml
+/lib
+/release/build
+/release/dist
+/release/jvm
+/release/pdebuild
+/release/runtime
+/release/resources/ivy/install
+/release/thirdparty.txt
+/storage
+>>>>>>> 05dea9942f336a2ce370b3f3e5f86539fa1f767c
