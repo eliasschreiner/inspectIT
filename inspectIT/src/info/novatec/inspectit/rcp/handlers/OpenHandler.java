@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
@@ -27,31 +28,33 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
-public class OpenHandler {
+import info.novatec.inspectit.rcp.InspectIT;
+import info.novatec.inspectit.rcp.documentation.DocumentationService;
 
+public class OpenHandler {	
+	/**
+	 * Documentation Service.
+	 */
+//	protected DocumentationService documentationService = InspectIT.getService(DocumentationService.class);
+//
+//	/**
+//	 * {@inheritDoc}
+//	 */	
+//	protected String getUrlString() {
+//		return documentationService.getDocumentationUrl();
+//	}
+	
+	protected String getUrlString(ExecutionEvent event) {
+		return "mailto:support.inspectit@novatec-gmbh.de&subject=Support%20needed";
+	}
+	
 	String url = "http://www.google.de";
 	Browser browser;	
 	
 	@Execute
-	public void execute(Shell shell) {
-		/*if (Desktop.isDesktopSupported()) {
-            // Windows
-            try {
-				Desktop.getDesktop().browse(new URI(url));
-			} catch (IOException | URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        } else {
-            // Ubuntu
-            Runtime runtime = Runtime.getRuntime();
-            try {
-				runtime.exec("/usr/bin/firefox -new-window " + url);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }*/
+	public void execute(ExecutionEvent event) {
+		//url=getUrlString(event);		
+		
 		Program.launch(url);
 	}
 }

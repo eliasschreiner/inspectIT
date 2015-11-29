@@ -1,10 +1,14 @@
 package info.novatec.inspectit.rcp;
 
 import info.novatec.inspectit.minlog.MinlogToSLF4JLogger;
+import com.opcoach.e4.preferences.*;
 import info.novatec.inspectit.rcp.log.LogListener;
+import info.novatec.inspectit.rcp.preferences.InspectITPreferenceInitializer;
+import info.novatec.inspectit.rcp.preferences.PreferenceSupplierDUMMY;
+import info.novatec.inspectit.rcp.preferences.PreferencesConstants;
+//import info.novatec.inspectit.rcp.preferences.ScopedPreferenceStore;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryManager;
 import info.novatec.inspectit.rcp.storage.InspectITStorageManager;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +21,11 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.inject.Provider;
+
+
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.ILogListener;
 import org.eclipse.core.runtime.IStatus;
@@ -26,15 +35,16 @@ import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.jface.util.StatusHandler;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
-import org.eclipse.ui.statushandlers.StatusManager;
+import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.LoggerFactory;
+
 
 import uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J;
 import ch.qos.logback.classic.LoggerContext;
@@ -42,11 +52,21 @@ import ch.qos.logback.classic.joran.JoranConfigurator;
 import ch.qos.logback.core.joran.spi.JoranException;
 import ch.qos.logback.core.util.StatusPrinter;
 
+
 /**
  * The main plugin class to be used in the desktop.
  */
-public class InspectIT extends AbstractUIPlugin {
+public class InspectIT implements BundleActivator {
 
+	private static BundleContext context;
+
+	static BundleContext getContext() {
+		return context;
+	}
+	
+	//Alles probeweiﬂe 	
+	Provider<StatusHandler> statusHandler;
+	
 	/**
 	 * The id of this plugin.
 	 */
@@ -76,7 +96,7 @@ public class InspectIT extends AbstractUIPlugin {
 	/**
 	 * Preferences store for the plug-in.
 	 */
-	private volatile ScopedPreferenceStore preferenceStore;
+	private volatile ScopedPreferenceStore  preferenceStore;
 
 	/**
 	 * The global storage manager.
@@ -110,18 +130,15 @@ public class InspectIT extends AbstractUIPlugin {
 	 * @throws Exception
 	 *             in case of error.
 	 */
-	@Override
-	public void start(BundleContext context) throws Exception {
-		plugin = this;
 
+	public void start(BundleContext context) throws Exception {
+		plugin = this;		
+		InspectIT.context = context;
 		locateRuntimeDir();
 		initLogger();
-
-		// add log listener once logger is initialized
 		logListener = new LogListener();
 		Platform.addLogListener(logListener);
 
-		super.start(context);
 	}
 
 	/**
@@ -130,7 +147,7 @@ public class InspectIT extends AbstractUIPlugin {
 	private void locateRuntimeDir() {
 		File bundleFile = null;
 		try {
-			bundleFile = FileLocator.getBundleFile(getBundle());
+			bundleFile =  FileLocator.getBundleFile(context.getBundle()); //context.getBundle().getBundleContext().getDataFile(getBundle()); 
 		} catch (IOException e) { // NOPMD //NOCHK
 		}
 
@@ -139,7 +156,7 @@ public class InspectIT extends AbstractUIPlugin {
 		} else {
 			runtimeDir = Paths.get("");
 		}
-	}
+		}
 
 	/**
 	 * Initializes the logger.
@@ -200,7 +217,6 @@ public class InspectIT extends AbstractUIPlugin {
 	 * @throws Exception
 	 *             in case of error.
 	 */
-	@Override
 	public void stop(BundleContext context) throws Exception {
 		if (null != cmrRepositoryManager) {
 			cmrRepositoryManager.cancelAllUpdateRepositoriesJobs();
@@ -210,7 +226,7 @@ public class InspectIT extends AbstractUIPlugin {
 		Platform.removeLogListener(logListener);
 		logListener = null; // NOPMD
 
-		super.stop(context);
+	    InspectIT.context = null;
 		plugin = null; // NOPMD
 	}
 
@@ -261,9 +277,9 @@ public class InspectIT extends AbstractUIPlugin {
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
 	protected void initializeImageRegistry(ImageRegistry reg) {
 		Field[] allFields = InspectITImages.class.getFields();
+		
 		for (Field field : allFields) {
 			if (field.getName().startsWith("IMG") && String.class.equals(field.getType())) {
 				if (!field.isAccessible()) {
@@ -271,7 +287,7 @@ public class InspectIT extends AbstractUIPlugin {
 				}
 				try {
 					String key = (String) field.get(null);
-					URL url = getBundle().getEntry(key);
+					URL url = context.getBundle().getEntry(key);
 					
 					if (null != reg.get(key)) {
 						// if we already have an icon with the same key continue
@@ -287,11 +303,11 @@ public class InspectIT extends AbstractUIPlugin {
 					} else {
 						// if image does not exists (url is null) show and log error
 						Status status = new Status(Status.ERROR, ID, "Image with the key '" + field.getName() + "' does not exist on the disk. ");
-						StatusManager.getManager().handle(status, StatusManager.SHOW | StatusManager.LOG);
+						  statusHandler.get().show(status, "Image with the key '" + field.getName() + "' does not exist on the disk. ");
 					}
 				} catch (Exception e) {
 					Status status = new Status(Status.ERROR, ID, "Error loading image with the key'" + field.getName() + "'. ");
-					StatusManager.getManager().handle(status, StatusManager.SHOW | StatusManager.LOG);
+				    statusHandler.get().show(status, "Error loading image with the key");
 					continue;
 				}
 			}
@@ -308,8 +324,10 @@ public class InspectIT extends AbstractUIPlugin {
 	 *            The key of the image to look for in the registry.
 	 * @return The generated image.
 	 */
+
 	public Image getImage(String imageKey) {
-		return getImageRegistry().get(imageKey);
+		
+		return JFaceResources.getImageRegistry().get(imageKey);
 	}
 
 	/**
@@ -324,7 +342,8 @@ public class InspectIT extends AbstractUIPlugin {
 	 * @return The image descriptor for the given image key.
 	 */
 	public ImageDescriptor getImageDescriptor(String imageKey) {
-		return getImageRegistry().getDescriptor(imageKey);
+		
+		return  JFaceResources.getImageRegistry().getDescriptor(imageKey);
 	}
 
 	/**
@@ -336,10 +355,13 @@ public class InspectIT extends AbstractUIPlugin {
 	 *            Type
 	 * @return Service or <code>null</code> is service is not registered at the moment.
 	 */
+		
+
 	public static <E> E getService(Class<E> clazz) {
-		ServiceReference<E> reference = getDefault().getBundle().getBundleContext().getServiceReference(clazz);
-		if (null != reference) {
-			return getDefault().getBundle().getBundleContext().getService(reference);
+		ServiceReference<E> reference = context.getServiceReference(clazz);
+		if (null != reference) {  
+			
+			return context.getService(reference);
 		}
 		throw new RuntimeException("Requested service of the class " + clazz.getName() + " is not registered in the bundle.");
 	}
@@ -348,13 +370,16 @@ public class InspectIT extends AbstractUIPlugin {
 	 * {@inheritDoc}
 	 */
 	public ScopedPreferenceStore getPreferenceStore() {
+		
 		if (null == preferenceStore) {
 			synchronized (this) {
 				if (null == preferenceStore) { // NOCHK: DCL works with volatile.
-					preferenceStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, ID);
-				}
-			}
-		}
+
+					//preferenceStore = new ScopedPreferenceStore(PreferenceSupplierDUMMY.SCOPE_CONTEXT, PreferenceSupplierDUMMY.PREFERENCE_NODE); 
+					preferenceStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, ID); 
+				} 
+			} 
+		} 
 		return preferenceStore;
 	}
 
@@ -419,7 +444,7 @@ public class InspectIT extends AbstractUIPlugin {
 	 */
 	public void createErrorDialog(String message, Throwable throwable, int code) {
 		IStatus status = new Status(IStatus.ERROR, ID, code, message, throwable);
-		StatusManager.getManager().handle(status, StatusManager.SHOW | StatusManager.LOG);
+	    statusHandler.get().show(status, message);
 	}
 
 	/**
@@ -433,7 +458,7 @@ public class InspectIT extends AbstractUIPlugin {
 	public void createErrorDialog(String message, int code) {
 		// Status sets exception to <code>null</code> internally.
 		IStatus status = new Status(IStatus.ERROR, ID, code, message, null);
-		StatusManager.getManager().handle(status, StatusManager.SHOW | StatusManager.LOG);
+	    statusHandler.get().show(status, message);
 	}
 
 	/**

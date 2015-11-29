@@ -1,28 +1,5 @@
 package info.novatec.inspectit.rcp.view.impl;
 
-import info.novatec.inspectit.cmr.model.PlatformIdent;
-import info.novatec.inspectit.communication.data.cmr.AgentStatusData;
-import info.novatec.inspectit.rcp.InspectIT;
-import info.novatec.inspectit.rcp.InspectITImages;
-import info.novatec.inspectit.rcp.editor.tree.DeferredTreeViewer;
-import info.novatec.inspectit.rcp.editor.viewers.StyledCellIndexLabelProvider;
-import info.novatec.inspectit.rcp.form.CmrRepositoryPropertyForm;
-import info.novatec.inspectit.rcp.formatter.ImageFormatter;
-import info.novatec.inspectit.rcp.formatter.TextFormatter;
-import info.novatec.inspectit.rcp.handlers.ShowRepositoryHandler;
-import info.novatec.inspectit.rcp.model.AgentLeaf;
-import info.novatec.inspectit.rcp.model.Component;
-import info.novatec.inspectit.rcp.model.DeferredAgentsComposite;
-import info.novatec.inspectit.rcp.provider.ICmrRepositoryProvider;
-import info.novatec.inspectit.rcp.repository.CmrRepositoryChangeListener;
-import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
-import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition.OnlineStatus;
-import info.novatec.inspectit.rcp.repository.CmrRepositoryManager;
-import info.novatec.inspectit.rcp.repository.CmrRepositoryManager.UpdateRepositoryJob;
-import info.novatec.inspectit.rcp.repository.RepositoryDefinition;
-import info.novatec.inspectit.rcp.view.IRefreshableView;
-import info.novatec.inspectit.rcp.view.tree.TreeContentProvider;
-import info.novatec.inspectit.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,20 +12,43 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.eclipse.core.commands.Command;
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.expressions.IEvaluationContext;
+import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.Preference;
+import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.model.application.ui.menu.MDirectToolItem;
+import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
+import org.eclipse.e4.ui.services.EMenuService;
+import org.eclipse.e4.ui.workbench.lifecycle.PostContextCreate;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.util.StatusHandler;
 import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -74,15 +74,40 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.commands.ICommandService;
+
+
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.handlers.IHandlerService;
-import org.eclipse.ui.part.ViewPart;
-import org.eclipse.ui.progress.IProgressConstants;
-import org.eclipse.ui.progress.UIJob;
+import org.osgi.service.prefs.BackingStoreException;
+import org.springframework.expression.EvaluationContext;
 
+import ch.qos.logback.classic.boolex.IEvaluator;
+import info.novatec.inspectit.cmr.model.PlatformIdent;
+import info.novatec.inspectit.communication.data.cmr.AgentStatusData;
+import info.novatec.inspectit.rcp.InspectIT;
+import info.novatec.inspectit.rcp.InspectITImages;
+import info.novatec.inspectit.rcp.editor.tree.DeferredTreeViewer;
+import info.novatec.inspectit.rcp.editor.viewers.StyledCellIndexLabelProvider;
+import info.novatec.inspectit.rcp.form.CmrRepositoryPropertyForm;
+import info.novatec.inspectit.rcp.formatter.ImageFormatter;
+import info.novatec.inspectit.rcp.formatter.TextFormatter;
+import info.novatec.inspectit.rcp.handlers.ShowRepositoryHandler;
+import info.novatec.inspectit.rcp.model.AgentLeaf;
+import info.novatec.inspectit.rcp.model.Component;
+import info.novatec.inspectit.rcp.model.DeferredAgentsComposite;
+import info.novatec.inspectit.rcp.preferences.PreferencesConstants;
+import info.novatec.inspectit.rcp.provider.ICmrRepositoryProvider;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryChangeListener;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition.OnlineStatus;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryManager;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryManager.UpdateRepositoryJob;
+import info.novatec.inspectit.rcp.repository.RepositoryDefinition;
+import info.novatec.inspectit.rcp.view.IRefreshableView;
+import info.novatec.inspectit.rcp.view.tree.TreeContentProvider2;
+import info.novatec.inspectit.util.ObjectUtils;
+
+import org.eclipse.e4.core.services.events.IEventBroker;  
 /**
  * Repository manager view where user can work with repositories, check agents, and give input for
  * the data explorer view.
@@ -90,7 +115,7 @@ import org.eclipse.ui.progress.UIJob;
  * @author Ivan Senic
  * 
  */
-public class RepositoryManagerView extends ViewPart implements IRefreshableView, CmrRepositoryChangeListener {
+public class RepositoryManagerView implements IRefreshableView, CmrRepositoryChangeListener {
 
 	/**
 	 * ID of this view.
@@ -173,23 +198,56 @@ public class RepositoryManagerView extends ViewPart implements IRefreshableView,
 	 * List of the objects that is expanded in the tree.
 	 */
 	private List<Object> expandedList;
+	
+	//@Inject EPartService ePartService;
 
+	@Inject private MApplication mApplication;
+	
+	@Inject ESelectionService eSelectionService;
+	
+	//@Inject MPart mPart;
+	
+	//@Inject MToolBar mToolBar;
+	
+	@Inject EMenuService eMenuService;	
+	
+	
+	
 	/**
 	 * Default constructor.
 	 */
-	public RepositoryManagerView() {
+	public RepositoryManagerView()  {
 		cmrRepositoryManager = InspectIT.getDefault().getCmrRepositoryManager();
 		cmrRepositoryManager.addCmrRepositoryChangeListener(this);
-		createInputList();
+		createInputList();				
 	}
-
+	
 	/**
 	 * {@inheritDoc}
-	 */
-	@Override
-	public void createPartControl(Composite parent) {
-		createViewToolbar();
+	 */		
+//	@PostConstruct
+//	@Optional
+//	public void createControls(Composite parent, @Preference(nodePath = "/default/" + InspectIT.ID)
+//    IEclipsePreferences preferences) throws BackingStoreException 
+	
+	@PostConstruct
+	@Optional
+	public void createControls(Composite parent, @Preference(nodePath = InspectIT.ID, 
+			  value = PreferencesConstants.CMR_REPOSITORY_DEFINITIONS )String CMR_REPOSITORY_DEFINITIONS)
+		{
+		
+		
+		String text = Platform.getPreferencesService().
+		  getString(InspectIT.ID,PreferencesConstants.CMR_REPOSITORY_DEFINITIONS,"CMR_REPOSITORY_DEFINITIONS",null); 
 
+		String text2 = InspectIT.getDefault().getPreferenceStore().getString(PreferencesConstants.CMR_REPOSITORY_DEFINITIONS);
+
+		String tex3 = InspectIT.getDefault().getPreferenceStore().getDefaultString("DUMMY");
+		String text4 = InspectIT.getDefault().getPreferenceStore().getString("DUMMY");
+		
+		createViewToolbar();		
+
+		
 		toolkit = new FormToolkit(parent.getDisplay());
 
 		mainComposite = new SashForm(parent, SWT.VERTICAL);
@@ -207,7 +265,7 @@ public class RepositoryManagerView extends ViewPart implements IRefreshableView,
 		treeViewer = new DeferredTreeViewer(tree);
 
 		// create tree content provider
-		TreeContentProvider treeContentProvider = new TreeContentProvider() {
+		TreeContentProvider2 treeContentProvider = new TreeContentProvider2() {
 			@SuppressWarnings("unchecked")
 			@Override
 			public Object[] getElements(Object inputElement) {
@@ -264,7 +322,7 @@ public class RepositoryManagerView extends ViewPart implements IRefreshableView,
 
 		MenuManager menuManager = new MenuManager();
 		menuManager.setRemoveAllWhenShown(true);
-		getSite().registerContextMenu(MENU_ID, menuManager, treeViewer);
+		eMenuService.registerContextMenu(menuManager, MENU_ID); //treeViewer ? wo kommt der nun hin ?
 		Control control = treeViewer.getControl();
 		Menu menu = menuManager.createContextMenu(control);
 		control.setMenu(menu);
@@ -292,17 +350,27 @@ public class RepositoryManagerView extends ViewPart implements IRefreshableView,
 
 		agentStatusUpdateJob = new AgentStatusUpdateJob();
 
-		getSite().setSelectionProvider(treeViewer);
+		eSelectionService.setSelection(treeViewer); 
 	}
 
+	//Method to test, whether i can access the initializer via DI
+	@Inject
+	public void testPrefs(@Preference(nodePath = "/default/" + InspectIT.ID)
+	        IEclipsePreferences preferences) throws BackingStoreException 
+	{
+	    preferences.put("DUMMY","DUMMYVALUE222");
+	        
+	    preferences.flush();
+	}
+	
 	/**
 	 * Creates the view tool-bar.
 	 */
-	private void createViewToolbar() {
-		IToolBarManager toolBarManager = getViewSite().getActionBars().getToolBarManager();
-		toolBarManager.add(new ShowAgentsAction());
-		toolBarManager.add(new ShowPropertiesAction());
-		toolBarManager.add(new Separator());
+	private void createViewToolbar() { 
+	//	IToolBarManager toolBarManager = eHandlerService.  mPart.getToolbar().getParent();  getViewSite().getActionBars().getToolBarManager();
+//		toolBarManager.add(new ShowAgentsAction());
+//		toolBarManager.add(new ShowPropertiesAction());
+//		toolBarManager.add(new Separator());
 	}
 
 	/**
@@ -379,7 +447,7 @@ public class RepositoryManagerView extends ViewPart implements IRefreshableView,
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
+	@Focus
 	public void setFocus() {
 		if (treeViewer.getTree().isVisible()) {
 			treeViewer.getTree().setFocus();
@@ -634,11 +702,10 @@ public class RepositoryManagerView extends ViewPart implements IRefreshableView,
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
+	@PreDestroy
 	public void dispose() {
 		cmrRepositoryManager.removeCmrRepositoryChangeListener(this);
 		agentStatusUpdateJob.cancel();
-		super.dispose();
 	}
 
 	/**
@@ -721,15 +788,18 @@ public class RepositoryManagerView extends ViewPart implements IRefreshableView,
 	 */
 	private class RepositoryManagerDoubleClickListener implements IDoubleClickListener {
 
+		@Inject EHandlerService eHandlerService;
+		@Inject ECommandService eCommandService;
+		@Inject	private IEventBroker eventBroker; 
 		/**
 		 * {@inheritDoc}
 		 */
 		@Override
 		public void doubleClick(final DoubleClickEvent event) {
-			UIJob openDataExplorerJob = new UIJob("Opening Data Explorer..") {
-
+			Job openDataExplorerJob = new Job("Opening Data Explorer..") {
+				
 				@Override
-				public IStatus runInUIThread(IProgressMonitor monitor) {
+				protected IStatus run(IProgressMonitor monitor) {					
 					process();
 					return Status.OK_STATUS;
 				}
@@ -762,20 +832,29 @@ public class RepositoryManagerView extends ViewPart implements IRefreshableView,
 				}
 			}
 
-			if (null != repositoryDefinition) {
-				IHandlerService handlerService = (IHandlerService) PlatformUI.getWorkbench().getService(IHandlerService.class);
-				ICommandService commandService = (ICommandService) PlatformUI.getWorkbench().getService(ICommandService.class);
-
-				Command command = commandService.getCommand(ShowRepositoryHandler.COMMAND);
-				ExecutionEvent executionEvent = handlerService.createExecutionEvent(command, new Event());
-				IEvaluationContext context = (IEvaluationContext) executionEvent.getApplicationContext();
-				context.addVariable(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
+			if (null != repositoryDefinition) { 				
+				
+				Command command = eCommandService.getCommand(ShowRepositoryHandler.COMMAND);				
+				     
+		
+				
+				if ( eventBroker != null ) //Sends async. for sending sync. use send()
+				     eventBroker.post(ShowRepositoryHandler.COMMAND, new Event());
+						
+				eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new Event());
+				
+				ParameterizedCommand parameterCommand = eCommandService.createCommand(ShowRepositoryHandler.COMMAND, null);
+			//	IEvaluationContext context = (IEvaluationContext) executionEvent.getApplicationContext();
+				
+				mApplication.getContext().set(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
+				//context.addVariable(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
 				if (null != platformIdent) {
-					context.addVariable(ShowRepositoryHandler.AGENT, platformIdent);
+					mApplication.getContext().set(ShowRepositoryHandler.AGENT, platformIdent); 
+					//context.addVariable(ShowRepositoryHandler.AGENT, platformIdent);
 				}
 
 				try {
-					command.executeWithChecks(executionEvent);
+					if(eHandlerService.canExecute(parameterCommand)) eHandlerService.executeHandler(parameterCommand);
 				} catch (Exception e) {
 					throw new RuntimeException(e);
 				}
@@ -865,8 +944,11 @@ public class RepositoryManagerView extends ViewPart implements IRefreshableView,
 	 * @author Ivan Senic
 	 * 
 	 */
-	private final class AgentStatusUpdateJob extends Job {
+	public final class AgentStatusUpdateJob extends Job {
 
+
+		@Inject EModelService eModelService;		
+		@Inject MWindow mWindow;
 		/**
 		 * Update rate in milliseconds. Currently every 60 seconds.
 		 */
@@ -878,7 +960,8 @@ public class RepositoryManagerView extends ViewPart implements IRefreshableView,
 		public AgentStatusUpdateJob() {
 			super("Agents status auto-update");
 			setUser(false);
-			setProperty(IProgressConstants.ICON_PROPERTY, InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT));
+			eModelService.getActivePerspective(mWindow).setIconURI(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT).toString());
+		//	setProperty(IProgressConstants.ICON_PROPERTY, InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT));
 			schedule(UPDATE_RATE);
 		}
 

@@ -1,5 +1,6 @@
 package info.novatec.inspectit.rcp.editor.tree;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,7 +19,6 @@ import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.ui.progress.PendingUpdateAdapter;
 
 /**
  * This tree viewer works in conjunction with the
@@ -167,7 +167,7 @@ public class DeferredTreeViewer extends TreeViewer {
 		if (level > 1 || TreeViewer.ALL_LEVELS == level) {
 			// we want to open more than one level, have to take care of that.
 			Object data = widget.getData();
-			if (!(data instanceof PendingUpdateAdapter)) {
+			if (!(data instanceof File)) {
 				// just care about our own widgets
 				parentWidgets.put(widget, Integer.valueOf(level));
 			}
@@ -193,7 +193,7 @@ public class DeferredTreeViewer extends TreeViewer {
 		// our Map
 		if (1 == elementsOrPaths.length) {
 			Object object = elementsOrPaths[0];
-			if (object instanceof PendingUpdateAdapter) {
+			if (object instanceof File) {
 				Widget[] widgets = findItems(object);
 				if (null != widgets && widgets.length > 0) {
 					Widget widget = widgets[0];

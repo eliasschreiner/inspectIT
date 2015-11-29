@@ -2,13 +2,14 @@ package info.novatec.inspectit.rcp.view.tree;
 
 import info.novatec.inspectit.rcp.model.DeferredComposite;
 
+import java.io.File;
+
 import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreePathViewerSorter;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.ui.progress.PendingUpdateAdapter;
 
 /**
  * This comparator is used to sort the elements in the server view. Only the ones in the
@@ -29,7 +30,7 @@ public class TreeViewerComparator extends TreePathViewerSorter {
 			return 1;
 		}
 
-		if (e1 instanceof PendingUpdateAdapter) {
+		if (e1 instanceof File) {
 			return -1;
 		}
 

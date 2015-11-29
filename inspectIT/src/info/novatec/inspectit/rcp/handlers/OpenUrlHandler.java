@@ -1,5 +1,4 @@
 package info.novatec.inspectit.rcp.handlers;
-
 import info.novatec.inspectit.rcp.InspectIT;
 import info.novatec.inspectit.rcp.documentation.DocumentationService;
 
@@ -8,16 +7,26 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import org.apache.commons.lang.SystemUtils;
-import org.apache.commons.lang.exception.ExceptionUtils;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.expressions.IEvaluationContext;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.browser.IWebBrowser;
-import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
+import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MBasicFactory;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.workbench.UIEvents.Context;
+import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.program.Program;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 
 /**
  * Handler that opens that InspectIT Documentation page on Confluence.
@@ -25,29 +34,38 @@ import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
  * @author Ivan Senic
  * 
  */
-public abstract class OpenUrlHandler extends AbstractHandler {
+public class OpenUrlHandler{
 
+	@Inject ECommandService commandService;
+	@Inject EHandlerService handlerService;
+	
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
+	@Execute
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IWorkbenchBrowserSupport browserSupport = PlatformUI.getWorkbench().getBrowserSupport();
+	//	@Inject IWorkbenchBrowserSupport browserSupport = PlatformUI.getWorkbench().getBrowserSupport();
+				
 		String urlString = getUrlString(event);
+	
 		if (null == urlString) {
 			return null;
 		}
 
 		try {
-			IWebBrowser browser = browserSupport.createBrowser(null);
+//			Browser browser = new Browser(parent,0);
 			URL url = new URL(urlString);
-			browser.openURL(url);
-		} catch (PartInitException | MalformedURLException e) {
+//		browser.setUrl(url.toString());
+			
+			Program.launch(url.toString());
+		} catch (MalformedURLException e) {
 			throw new ExecutionException("Error opening the URL ('" + urlString + "') in the system browser.", e);
 		}
 		return null;
 	}
 
+	
+	
 	/**
 	 * Implementing classes should return the correct URL string to open.
 	 * 
@@ -56,7 +74,10 @@ public abstract class OpenUrlHandler extends AbstractHandler {
 	 * @return URL as a string or <code>null</code> to signal the abort of the action due to the not
 	 *         regular behavior.
 	 */
-	protected abstract String getUrlString(ExecutionEvent event);
+	protected String getUrlString(ExecutionEvent event){
+		
+		return "http://www.google.de";
+	};
 
 	/**
 	 * Handler for opening the Confluence documentation.
@@ -64,7 +85,7 @@ public abstract class OpenUrlHandler extends AbstractHandler {
 	 * @author Ivan Senic
 	 * 
 	 */
-	public static class OpenDocumentationHandler extends OpenUrlHandler {
+	public class OpenDocumentationHandler extends OpenUrlHandler {
 
 		/**
 		 * Documentation Service.
@@ -73,11 +94,33 @@ public abstract class OpenUrlHandler extends AbstractHandler {
 
 		/**
 		 * {@inheritDoc}
-		 */
-		@Override
+		 */	
 		protected String getUrlString(ExecutionEvent event) {
 			return documentationService.getDocumentationUrl();
 		}
+		
+		@Execute
+		public Object execute(ExecutionEvent event) throws ExecutionException {
+		//	@Inject IWorkbenchBrowserSupport browserSupport = PlatformUI.getWorkbench().getBrowserSupport();
+			
+			
+		//	String urlString = getUrlString(event);
+			String urlString = "http://www.google.de";
+			if (null == urlString) {
+				return null;
+			}
+
+			try {
+//				Browser browser = new Browser(parent,0);
+				URL url = new URL(urlString);
+//			browser.setUrl(url.toString());
+				
+				Program.launch(url.toString());
+			} catch (MalformedURLException e) {
+				throw new ExecutionException("Error opening the URL ('" + urlString + "') in the system browser.", e);
+			}
+			return null;
+		}	
 	}
 
 	/**
@@ -88,6 +131,28 @@ public abstract class OpenUrlHandler extends AbstractHandler {
 	 */
 	public static class GiveFeedbackHandler extends OpenUrlHandler {
 
+		@Execute
+		public Object execute(ExecutionEvent event) throws ExecutionException {
+		//	@Inject IWorkbenchBrowserSupport browserSupport = PlatformUI.getWorkbench().getBrowserSupport();
+					
+			String urlString = getUrlString(event);
+		
+			if (null == urlString) {
+				return null;
+			}
+
+			try {
+//				Browser browser = new Browser(parent,0);
+				URL url = new URL(urlString);
+//			browser.setUrl(url.toString());
+				
+				Program.launch(url.toString());
+			} catch (MalformedURLException e) {
+				throw new ExecutionException("Error opening the URL ('" + urlString + "') in the system browser.", e);
+			}
+			return null;
+		}
+		
 		/**
 		 * {@inheritDoc}
 		 */
@@ -132,10 +197,18 @@ public abstract class OpenUrlHandler extends AbstractHandler {
 		 */
 		public static final String INPUT = "info.novatec.inspectit.rcp.sendErrorReport.throwable";
 
+		
+		//Das wieder durch die alte ersetzen, soweit wie möglich
+		@Override
+		protected String getUrlString(ExecutionEvent event) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 		/**
 		 * {@inheritDoc}
 		 */
-		@Override
+	/*	@Override
 		protected String getUrlString(ExecutionEvent event) {
 			// Get the exception out of the context
 			IEvaluationContext context = (IEvaluationContext) event.getApplicationContext();
@@ -171,7 +244,7 @@ public abstract class OpenUrlHandler extends AbstractHandler {
 				return result;
 			}
 			return result;
-		}
+		}*/
 	}
 
 	/**
@@ -180,20 +253,21 @@ public abstract class OpenUrlHandler extends AbstractHandler {
 	 * @author Ivan Senic
 	 * 
 	 */
-	public static class SearchDocumentationHandler extends OpenDocumentationHandler {
-
-		/**
-		 * Parameter for the SearchDocumentationHandler.
-		 */
-		public static final String SEARCH_DOCUMENTATION_PARAMETER = "info.novatec.inspectit.rcp.commands.searchDocumentation.searchString";
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		protected String getUrlString(ExecutionEvent event) {
-			String param = event.getParameter(SEARCH_DOCUMENTATION_PARAMETER);
-			return documentationService.getSearchUrlFor(param);
-		}
-	}
+//	public static class SearchDocumentationHandler extends OpenDocumentationHandler {
+//
+//		/**
+//		 * Parameter for the SearchDocumentationHandler.
+//		 */
+//		public static final String SEARCH_DOCUMENTATION_PARAMETER = "info.novatec.inspectit.rcp.commands.searchDocumentation.searchString";
+//
+//		/**
+//		 * {@inheritDoc}
+//		 */
+//		@Override
+//		protected String getUrlString(ExecutionEvent event) {
+//			String param = event.getParameter(SEARCH_DOCUMENTATION_PARAMETER);
+//			return documentationService.getSearchUrlFor(param);
+//		}
+//	}
 }
+

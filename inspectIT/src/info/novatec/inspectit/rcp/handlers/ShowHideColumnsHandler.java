@@ -8,10 +8,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.expressions.IEvaluationContext;
+import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.workbench.UIEvents.Context;
 import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TreeColumn;
@@ -23,8 +27,10 @@ import org.eclipse.swt.widgets.TreeColumn;
  * @author Ivan Senic
  * 
  */
-public class ShowHideColumnsHandler extends AbstractHandler {
+public class ShowHideColumnsHandler{
 
+	@Inject MApplication mApplication;
+	
 	/**
 	 * Command ID.
 	 */
@@ -64,16 +70,22 @@ public class ShowHideColumnsHandler extends AbstractHandler {
 		startUp();
 	}
 
+
+	
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
+	@Execute 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		// Get the input definition out of the context
-		IEvaluationContext context = (IEvaluationContext) event.getApplicationContext();
-		Item column = (Item) context.getVariable(COLUMN_PARAM);
-		Boolean visible = (Boolean) context.getVariable(VISIBLE_PARAM);
-		Class<?> inputControllerClass = (Class<?>) context.getVariable(CONTROLLER_CLASS_PARAM);
+		
+		Item column = (Item) mApplication.getContext().get(COLUMN_PARAM);
+		Boolean visible = (Boolean)  mApplication.getContext().get(VISIBLE_PARAM);
+		Class<?> inputControllerClass = (Class<?>) mApplication.getContext().get(CONTROLLER_CLASS_PARAM);
+		
+//		Item column = (Item) context.getVariable(COLUMN_PARAM);
+//		Boolean visible = (Boolean) context.getVariable(VISIBLE_PARAM);
+//		Class<?> inputControllerClass = (Class<?>) context.getVariable(CONTROLLER_CLASS_PARAM);
 
 		showHideColumn(column, column.getText(), visible.booleanValue(), inputControllerClass);
 		return null;

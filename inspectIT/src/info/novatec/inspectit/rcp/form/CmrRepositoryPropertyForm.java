@@ -48,7 +48,6 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.forms.widgets.TableWrapData;
 import org.eclipse.ui.forms.widgets.TableWrapLayout;
-import org.eclipse.ui.progress.UIJob;
 
 /**
  * Class having a form for displaying the properties of a {@link CmrRepositoryDefinition}.
@@ -625,7 +624,7 @@ public class CmrRepositoryPropertyForm implements ISelectionChangedListener {
 	 * @author Ivan Senic
 	 * 
 	 */
-	private class RecordCountdownJob extends UIJob {
+	private class RecordCountdownJob extends Job {
 
 		/**
 		 * Default constructor.
@@ -639,7 +638,7 @@ public class CmrRepositoryPropertyForm implements ISelectionChangedListener {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public IStatus runInUIThread(IProgressMonitor monitor) {
+		public IStatus run(IProgressMonitor monitor) {
 			if (null != recordingData && !form.isDisposed()) {
 				Date endDate = recordingData.getRecordEndDate();
 				Date startDate = recordingData.getRecordStartDate();
@@ -679,6 +678,8 @@ public class CmrRepositoryPropertyForm implements ISelectionChangedListener {
 			this.schedule(1000);
 			return Status.OK_STATUS;
 		}
+
+	
 	}
 
 }

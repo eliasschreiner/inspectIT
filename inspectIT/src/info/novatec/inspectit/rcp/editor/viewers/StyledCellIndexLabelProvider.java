@@ -2,6 +2,7 @@ package info.novatec.inspectit.rcp.editor.viewers;
 
 import info.novatec.inspectit.rcp.editor.tooltip.IColumnToolTipProvider;
 
+import java.io.File;
 import java.util.Arrays;
 
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
@@ -11,7 +12,6 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.progress.PendingUpdateAdapter;
 
 /**
  * This class extends the {@link StyledCellLabelProvider} with support for the index of the cell,
@@ -30,7 +30,7 @@ public class StyledCellIndexLabelProvider extends StyledCellLabelProvider implem
 		Object element = cell.getElement();
 		// we don't care about the PendingUpdateAdapter which is used in some of
 		// the trees and tables.
-		if (element instanceof PendingUpdateAdapter) {
+		if (element instanceof File) {
 			cell.setText(element.toString());
 		} else {
 			int index = cell.getColumnIndex();

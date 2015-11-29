@@ -12,8 +12,6 @@ import java.util.List;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.ui.INewWizard;
-import org.eclipse.ui.IWorkbench;
 
 /**
  * Manage Labels wizard.
@@ -21,7 +19,7 @@ import org.eclipse.ui.IWorkbench;
  * @author Ivan Senic
  * 
  */
-public class ManageLabelWizard extends Wizard implements INewWizard {
+public class ManageLabelWizard extends Wizard{
 
 	/**
 	 * CMR to manage labels for.
@@ -44,13 +42,7 @@ public class ManageLabelWizard extends Wizard implements INewWizard {
 		this.setWindowTitle("Manage Labels");
 		this.setDefaultPageImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_WIZBAN_LABEL));
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-	}
+	
 
 	/**
 	 * {@inheritDoc}

@@ -6,7 +6,6 @@ import info.novatec.inspectit.exception.enumeration.StorageErrorCodeEnum;
 import info.novatec.inspectit.indexing.storage.IStorageDescriptor;
 import info.novatec.inspectit.indexing.storage.impl.StorageDescriptor;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
-import info.novatec.inspectit.rcp.storage.http.TransferDataMonitor;
 import info.novatec.inspectit.storage.IStorageData;
 import info.novatec.inspectit.storage.LocalStorageData;
 import info.novatec.inspectit.storage.StorageData;
@@ -564,38 +563,38 @@ public class DataRetriever {
 	 */
 	private void downloadAndSaveObjects(CmrRepositoryDefinition cmrRepositoryDefinition, Map<String, Long> files, PostDownloadRunnable postDownloadRunnable, boolean useGzipCompression,
 			boolean decompressContent, final SubMonitor subMonitor) throws IOException, BusinessException {
-		DefaultHttpClient httpClient = new DefaultHttpClient();
-		final TransferDataMonitor transferDataMonitor = new TransferDataMonitor(subMonitor, files, useGzipCompression);
-		httpClient.addResponseInterceptor(new HttpResponseInterceptor() {
-			@Override
-			public void process(HttpResponse response, HttpContext context) throws HttpException, IOException {
-				response.setEntity(new DownloadHttpEntityWrapper(response.getEntity(), transferDataMonitor));
-			}
-		});
-
-		if (useGzipCompression && decompressContent) {
-			httpClient.addResponseInterceptor(new GzipHttpResponseInterceptor());
-		}
-
-		for (Map.Entry<String, Long> fileEntry : files.entrySet()) {
-			String fileName = fileEntry.getKey();
-			String fileLocation = getServerUri(cmrRepositoryDefinition) + fileName;
-			HttpGet httpGet = new HttpGet(fileLocation);
-			if (useGzipCompression) {
-				httpGet.addHeader("accept-encoding", "gzip");
-			}
-
-			transferDataMonitor.startTransfer(fileName);
-			HttpResponse response = httpClient.execute(httpGet);
-			StatusLine statusLine = response.getStatusLine();
-			if (HttpStatus.valueOf(statusLine.getStatusCode()).series().equals(Series.SUCCESSFUL)) {
-				HttpEntity entity = response.getEntity();
-				try (InputStream is = entity.getContent()) {
-					postDownloadRunnable.process(is, fileName);
-				}
-			}
-			transferDataMonitor.endTransfer(fileName);
-		}
+//		DefaultHttpClient httpClient = new DefaultHttpClient();
+//		final TransferDataMonitor transferDataMonitor = new TransferDataMonitor(subMonitor, files, useGzipCompression);
+//		httpClient.addResponseInterceptor(new HttpResponseInterceptor() {
+//			@Override
+//			public void process(HttpResponse response, HttpContext context) throws HttpException, IOException {
+//				response.setEntity(new DownloadHttpEntityWrapper(response.getEntity(), transferDataMonitor));
+//			}
+//		});
+//
+//		if (useGzipCompression && decompressContent) {
+//			httpClient.addResponseInterceptor(new GzipHttpResponseInterceptor());
+//		}
+//
+//		for (Map.Entry<String, Long> fileEntry : files.entrySet()) {
+//			String fileName = fileEntry.getKey();
+//			String fileLocation = getServerUri(cmrRepositoryDefinition) + fileName;
+//			HttpGet httpGet = new HttpGet(fileLocation);
+//			if (useGzipCompression) {
+//				httpGet.addHeader("accept-encoding", "gzip");
+//			}
+//
+//			transferDataMonitor.startTransfer(fileName);
+//			HttpResponse response = httpClient.execute(httpGet);
+//			StatusLine statusLine = response.getStatusLine();
+//			if (HttpStatus.valueOf(statusLine.getStatusCode()).series().equals(Series.SUCCESSFUL)) {
+//				HttpEntity entity = response.getEntity();
+//				try (InputStream is = entity.getContent()) {
+//					postDownloadRunnable.process(is, fileName);
+//				}
+//			}
+//			transferDataMonitor.endTransfer(fileName);
+//		}
 	}
 
 	/**

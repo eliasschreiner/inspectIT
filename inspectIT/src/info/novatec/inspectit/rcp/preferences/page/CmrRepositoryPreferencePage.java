@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -40,8 +41,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPreferencePage;
+//import org.eclipse.ui.IWorkbench;
+//import org.eclipse.ui.IWorkbenchPreferencePage;
 
 /**
  * Preference page for {@link CmrRepositoryDefinition} management.
@@ -52,7 +53,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
  * @author Ivan Senic
  * 
  */
-public class CmrRepositoryPreferencePage extends PreferencePage implements IWorkbenchPreferencePage, CmrRepositoryChangeListener {
+public class CmrRepositoryPreferencePage extends PreferencePage implements CmrRepositoryChangeListener {
 
 	/**
 	 * {@link CmrRepositoryManager}.
@@ -120,7 +121,6 @@ public class CmrRepositoryPreferencePage extends PreferencePage implements IWork
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
 	public void init(IWorkbench workbench) {
 		cmrRepositoryManager = InspectIT.getDefault().getCmrRepositoryManager();
 		cmrRepositoryManager.addCmrRepositoryChangeListener(this);
@@ -222,7 +222,7 @@ public class CmrRepositoryPreferencePage extends PreferencePage implements IWork
 		manageLabelsButton.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		manageLabelsButton.setEnabled(false);
 		manageLabelsButton.addSelectionListener(new SelectionAdapter() {
-			@Override
+
 			public void widgetSelected(SelectionEvent e) {
 				StructuredSelection selection = (StructuredSelection) tableViewer.getSelection();
 				for (Object selectedObject : selection.toArray()) {

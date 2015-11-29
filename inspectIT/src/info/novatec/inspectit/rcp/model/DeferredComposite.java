@@ -2,12 +2,13 @@ package info.novatec.inspectit.rcp.model;
 
 import info.novatec.inspectit.rcp.repository.RepositoryDefinition;
 
+import javax.inject.Inject;
+
+import org.eclipse.core.runtime.IAdapterManager;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.progress.IDeferredWorkbenchAdapter;
-import org.eclipse.ui.progress.IElementCollector;
-
+import org.eclipse.e4.ui.progress.IElementCollector;
 /**
  * Abstract class of a deferred composite type where the sub tree is only initialized if it is
  * requested.
@@ -15,8 +16,9 @@ import org.eclipse.ui.progress.IElementCollector;
  * @author Patrice Bouillet
  * 
  */
-public abstract class DeferredComposite extends Composite implements IDeferredWorkbenchAdapter {
+public abstract class DeferredComposite extends Composite{
 
+	@Inject  IAdapterManager iAdapterManager;
 	/**
 	 * {@inheritDoc}
 	 */

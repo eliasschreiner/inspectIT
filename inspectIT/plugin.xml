@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.4"?>
 <plugin>
 
+ <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            icon="icons/selfmade/inspectIT.ico"
+            thread="main"
+            visible="true">
+         <run
+               class="info.novatec.inspectit.rcp.Application">
+         </run>
+      </application>
+   </extension>
    <extension
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
             name="inspectIT"
-            application="org.eclipse.e4.ui.workbench.swt.E4Application">
+            application="info.novatec.inspectIT.rcp.application">
          <property
                name="appName"
                value="inspectIT">
@@ -24,7 +36,29 @@
                name="windowImages"
                value="icons/selfmade/16x16.png,icons/selfmade/32x32.png,icons/selfmade/48x48.png,icons/selfmade/64x64.png,icons/selfmade/128x128.png">
          </property>
+         <property
+               name="startupForegroundColor"
+               value="FFFFFF">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="5,10,560,20">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="5,275,445,15">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
       </product>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="info.novatec.inspectit.rcp.preferences.InspectITPreferenceInitializer">
+      </initializer>
    </extension>
 
 </plugin>

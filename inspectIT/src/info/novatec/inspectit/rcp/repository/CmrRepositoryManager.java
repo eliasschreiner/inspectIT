@@ -13,12 +13,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.inject.Inject;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.ui.progress.IProgressConstants;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 
 /**
  * The repository manager only for {@link CmrRepositoryDefinition}s.
@@ -251,6 +254,9 @@ public class CmrRepositoryManager {
 	 */
 	public static class UpdateRepositoryJob extends Job {
 
+		@Inject EModelService eModelService;
+		
+		@Inject MWindow mWindow;
 		/**
 		 * CMR to update.
 		 */
@@ -274,7 +280,8 @@ public class CmrRepositoryManager {
 			this.cmrRepositoryDefinition = cmrRepositoryDefinition;
 			this.rescheduleJob = rescheduleJob;
 			this.setUser(false);
-			this.setProperty(IProgressConstants.ICON_PROPERTY, InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_SERVER_REFRESH_SMALL));
+			//this.setProperty(  IProgressConstants.ICON_PROPERTY, InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_SERVER_REFRESH_SMALL));
+			eModelService.getActivePerspective(mWindow).setIconURI(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT).toString());
 		}
 
 		/**

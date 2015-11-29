@@ -2,18 +2,22 @@ package info.novatec.inspectit.rcp.handlers;
 
 import info.novatec.inspectit.cmr.model.PlatformIdent;
 import info.novatec.inspectit.rcp.repository.RepositoryDefinition;
-import info.novatec.inspectit.rcp.view.impl.DataExplorerView;
+
+import javax.inject.Inject;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
-import org.eclipse.core.expressions.IEvaluationContext;
-import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.core.commands.IHandlerListener;
+import org.eclipse.e4.core.contexts.Active;
+import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.springframework.expression.EvaluationContext;
+
+import com.esotericsoftware.kryo.serializers.FieldSerializer.Optional;
 
 /**
  * Opens the {@link RepositoryDefinition} in the {@link DataExplorerView}.
@@ -21,8 +25,10 @@ import org.eclipse.ui.handlers.HandlerUtil;
  * @author Ivan Senic
  * 
  */
-public class ShowRepositoryHandler extends AbstractHandler implements IHandler {
+public class ShowRepositoryHandler  {
 
+	@Inject EPartService ePartService;
+	
 	/**
 	 * The corresponding command id.
 	 */
@@ -37,35 +43,35 @@ public class ShowRepositoryHandler extends AbstractHandler implements IHandler {
 	 * The repository to look up.
 	 */
 	public static final String AGENT = COMMAND + ".agent";
+	
+	@Inject MApplication mApplication;	
 
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		// Get the repository definition and agent out of the context
-		IEvaluationContext context = (IEvaluationContext) event.getApplicationContext();
-		RepositoryDefinition repositoryDefinition = (RepositoryDefinition) context.getVariable(REPOSITORY_DEFINITION);
-		PlatformIdent platformIdent = (PlatformIdent) context.getVariable(AGENT);
-
-		if (null != repositoryDefinition) {
-			// find view
-			IWorkbenchWindow workbenchWindow = HandlerUtil.getActiveWorkbenchWindow(event);
-			if (null == workbenchWindow) {
-				workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-			}
-
-			IViewPart viewPart = workbenchWindow.getActivePage().findView(DataExplorerView.VIEW_ID);
-			if (viewPart == null) {
-				try {
-					viewPart = workbenchWindow.getActivePage().showView(DataExplorerView.VIEW_ID);
-				} catch (PartInitException e) {
-					return null;
-				}
-			}
-			if (viewPart instanceof DataExplorerView) {
-				workbenchWindow.getActivePage().activate(viewPart);
-				((DataExplorerView) viewPart).showRepository(repositoryDefinition, platformIdent);
-			}
-		}
-		return null;
+	@Execute
+	public Object execute(ExecutionEvent event, @Active MWindow activeWindow) throws ExecutionException {
+		return activeWindow;
+//		// Get the repository definition and agent out of the context
+//		RepositoryDefinition repositoryDefinition = (RepositoryDefinition) mApplication.getContext().get(REPOSITORY_DEFINITION);
+//		PlatformIdent platformIdent = (PlatformIdent) mApplication.getContext().get(AGENT);
+//
+//		if (null != repositoryDefinition) {
+//			// find view
+//			MWindow workbenchWindow;		
+//				workbenchWindow = activeWindow; 
+//			
+//
+//			MPart viewPart = ePartService.findPart(DataExplorerView.VIEW_ID); 
+//			if (viewPart == null) {
+//				try {
+//					viewPart = ePartService.showPart(viewPart, PartState.VISIBLE);
+//				} catch (Exception e) {
+//					return null;
+//				}
+//			}
+//			if (viewPart instanceof DataExplorerView) {
+//				ePartService.activate(viewPart);
+//				((DataExplorerView) viewPart).showRepository(repositoryDefinition, platformIdent);
+//			}
+//		}
+//		return null;
 	}
-
 }

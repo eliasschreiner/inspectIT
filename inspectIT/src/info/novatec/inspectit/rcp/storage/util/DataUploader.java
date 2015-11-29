@@ -1,7 +1,6 @@
 package info.novatec.inspectit.rcp.storage.util;
 
 import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
-import info.novatec.inspectit.rcp.storage.http.TransferDataMonitor;
 
 import java.io.File;
 import java.io.IOException;
@@ -75,50 +74,50 @@ public class DataUploader {
 	 *             If file to upload does not exist or exception occurs during the upload.
 	 */
 	public void uploadFileToStorageUploads(List<Path> filesToUpload, Path relativizePath, String tmpDir, CmrRepositoryDefinition cmrRepositoryDefinition, SubMonitor subMonitor) throws IOException {
-		// calculate how much is there to upload
-		Map<String, Long> files = new HashMap<String, Long>();
-		for (Path file : filesToUpload) {
-			if (Files.notExists(file)) {
-				throw new IOException("File to upload (" + file + ") does not exist.");
-			}
-			files.put(file.toString(), Files.size(file));
-		}
-		TransferDataMonitor transferDataMonitor = new TransferDataMonitor(subMonitor, files, false);
-
-		// prepare uri
-		String uri = getServerUri(cmrRepositoryDefinition) + UPLOAD_SERVLET;
-
-		// execute post for each file
-		for (Path file : filesToUpload) {
-			DefaultHttpClient httpClient = null;
-			try {
-				httpClient = new DefaultHttpClient();
-				HttpPost httpPost = new HttpPost(uri);
-				// create entity
-				MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-				if (Files.notExists(file)) {
-					throw new IOException("File to upload (" + file + ") does not exist.");
-				}
-				FileBody bin = new FileBody(file.toFile());
-				StringBuilder pathString = new StringBuilder(relativizePath.relativize(file).toString());
-				if (null != tmpDir) {
-					pathString.insert(0, tmpDir + File.separator);
-				}
-				entity.addPart(pathString.toString(), bin);
-				// wrap entity
-				UploadHttpEntityWrapper entityWrapper = new UploadHttpEntityWrapper(entity, transferDataMonitor);
-				httpPost.setEntity(entityWrapper);
-
-				// execute upload
-				transferDataMonitor.startTransfer(file.toString());
-				httpClient.execute(httpPost);
-				transferDataMonitor.endTransfer(file.toString());
-			} finally {
-				if (null != httpClient) {
-					httpClient.getConnectionManager().shutdown();
-				}
-			}
-		}
+//		// calculate how much is there to upload
+//		Map<String, Long> files = new HashMap<String, Long>();
+//		for (Path file : filesToUpload) {
+//			if (Files.notExists(file)) {
+//				throw new IOException("File to upload (" + file + ") does not exist.");
+//			}
+//			files.put(file.toString(), Files.size(file));
+//		}
+//		TransferDataMonitor transferDataMonitor = new TransferDataMonitor(subMonitor, files, false);
+//
+//		// prepare uri
+//		String uri = getServerUri(cmrRepositoryDefinition) + UPLOAD_SERVLET;
+//
+//		// execute post for each file
+//		for (Path file : filesToUpload) {
+//			DefaultHttpClient httpClient = null;
+//			try {
+//				httpClient = new DefaultHttpClient();
+//				HttpPost httpPost = new HttpPost(uri);
+//				// create entity
+//				MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+//				if (Files.notExists(file)) {
+//					throw new IOException("File to upload (" + file + ") does not exist.");
+//				}
+//				FileBody bin = new FileBody(file.toFile());
+//				StringBuilder pathString = new StringBuilder(relativizePath.relativize(file).toString());
+//				if (null != tmpDir) {
+//					pathString.insert(0, tmpDir + File.separator);
+//				}
+//				entity.addPart(pathString.toString(), bin);
+//				// wrap entity
+//				UploadHttpEntityWrapper entityWrapper = new UploadHttpEntityWrapper(entity, transferDataMonitor);
+//				httpPost.setEntity(entityWrapper);
+//
+//				// execute upload
+//				transferDataMonitor.startTransfer(file.toString());
+//				httpClient.execute(httpPost);
+//				transferDataMonitor.endTransfer(file.toString());
+//			} finally {
+//				if (null != httpClient) {
+//					httpClient.getConnectionManager().shutdown();
+//				}
+//			}
+//		}
 
 	}
 

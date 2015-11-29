@@ -12,8 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.ui.progress.IElementCollector;
+import org.eclipse.e4.ui.progress.IElementCollector;
 
 import com.google.common.base.Objects;
 
@@ -146,5 +147,6 @@ public class DeferredAgentsComposite extends DeferredComposite implements ICmrRe
 		DeferredAgentsComposite that = (DeferredAgentsComposite) object;
 		return Objects.equal(this.cmrRepositoryDefinition, that.cmrRepositoryDefinition);
 	}
+
 
 }
