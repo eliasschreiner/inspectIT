@@ -5,6 +5,8 @@
 		<accessrules>
 			<accessrule kind="accessible" pattern="org/eclipse/e4/core/di/extensions/Preference"/>
 			<accessrule kind="accessible" pattern="org/eclipse/e4/ui/internal/workbench/swt/E4Application"/>
+			<accessrule kind="accessible" pattern="org/eclipse/e4/core/commands/EHandlerService;"/>
+			<accessrule kind="accessible" pattern="org/eclipse/e4/core/commands/ECommandService;"/>
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>

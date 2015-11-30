@@ -64,3 +64,4 @@ Require-Bundle: javax.inject;bundle-version="0.0.0",
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
+Export-Package: info.novatec.inspectit.rcp.preferences

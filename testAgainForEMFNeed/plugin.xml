@@ -9,7 +9,7 @@
             thread="main"
             visible="true">
          <run
-               class="testagainforemfneed.Application">
+               class="info.novatec.inspectit.rcp.Application">
          </run>
       </application>
    </extension>
@@ -29,7 +29,7 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="testagainforemfneed.MyPreferences">
+            class="info.novatec.inspectit.rcp.preferences.InspectITPreferenceInitializer">
       </initializer>
    </extension>
 

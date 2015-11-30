@@ -29,8 +29,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.osgi.service.prefs.BackingStoreException;
 
-import testagainforemfneed.Activator;
-import testagainforemfneed.PreferenceSupplier;
+import info.novatec.inspectit.rcp.InspectIT;
+import info.novatec.inspectit.rcp.preferences.PreferenceSupplier;
 
 public class SamplePart {
 
@@ -42,7 +42,7 @@ public class SamplePart {
 	public String text;
 	
 	@Inject
-	public void testPrefs(@Preference(nodePath = "/default/"+ Activator.ID)
+	public void testPrefs(@Preference(nodePath = "/default/"+ InspectIT.ID)
 	        IEclipsePreferences preferences)  throws BackingStoreException 
 	{
 	    preferences.put("DUMMY","DUMMYVALUE222");
