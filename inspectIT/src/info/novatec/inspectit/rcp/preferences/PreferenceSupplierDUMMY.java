@@ -3,6 +3,7 @@ package info.novatec.inspectit.rcp.preferences;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 
@@ -22,7 +23,7 @@ public class PreferenceSupplierDUMMY {
 	 public static final long DEF_LONG = 23;
 	
 	public static final IScopeContext SCOPE_CONTEXT = InstanceScope.INSTANCE;
-    public static final String PREFERENCE_NODE = "info.novatex.inspectit.rcp";
+    public static final String PREFERENCE_NODE = "info.novatec.inspectit.rcp";
     
     
     public static Map<String, String> getInitializationEntries() {
@@ -38,5 +39,11 @@ public class PreferenceSupplierDUMMY {
         //
         return entries;
     }
+
+	public static IEclipsePreferences getPreferences() {
+		 
+        return SCOPE_CONTEXT.getNode(PREFERENCE_NODE);
+    }
+	
 	
 }

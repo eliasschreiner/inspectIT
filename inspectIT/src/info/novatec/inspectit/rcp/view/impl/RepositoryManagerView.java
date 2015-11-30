@@ -95,6 +95,7 @@ import info.novatec.inspectit.rcp.handlers.ShowRepositoryHandler;
 import info.novatec.inspectit.rcp.model.AgentLeaf;
 import info.novatec.inspectit.rcp.model.Component;
 import info.novatec.inspectit.rcp.model.DeferredAgentsComposite;
+import info.novatec.inspectit.rcp.preferences.PreferenceSupplierDUMMY;
 import info.novatec.inspectit.rcp.preferences.PreferencesConstants;
 import info.novatec.inspectit.rcp.provider.ICmrRepositoryProvider;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryChangeListener;
@@ -211,8 +212,6 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	
 	@Inject EMenuService eMenuService;	
 	
-	
-	
 	/**
 	 * Default constructor.
 	 */
@@ -230,11 +229,15 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 //	public void createControls(Composite parent, @Preference(nodePath = "/default/" + InspectIT.ID)
 //    IEclipsePreferences preferences) throws BackingStoreException 
 	
+//	, @Preference(nodePath = "/default/" + InspectIT.ID, 
+//			  value = PreferencesConstants.CMR_REPOSITORY_DEFINITIONS 
+	
 	@PostConstruct
-	@Optional
-	public void createControls(Composite parent, @Preference(nodePath = InspectIT.ID, 
-			  value = PreferencesConstants.CMR_REPOSITORY_DEFINITIONS )String CMR_REPOSITORY_DEFINITIONS)
-		{
+	public void createComposite(Composite parent)		{
+		
+		IEclipsePreferences preferences = PreferenceSupplierDUMMY.getPreferences();
+		int theAnswerToTheQuestionOfAllQuestions = preferences.getInt(PreferenceSupplierDUMMY.P_INT, PreferenceSupplierDUMMY.DEF_INT);
+	
 		
 		
 		String text = Platform.getPreferencesService().
@@ -359,7 +362,6 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	        IEclipsePreferences preferences) throws BackingStoreException 
 	{
 	    preferences.put("DUMMY","DUMMYVALUE222");
-	        
 	    preferences.flush();
 	}
 	

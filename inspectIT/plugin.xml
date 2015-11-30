@@ -19,7 +19,7 @@
          point="org.eclipse.core.runtime.products">
       <product
             name="inspectIT"
-            application="info.novatec.inspectIT.rcp.application">
+            application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
                name="appName"
                value="inspectIT">

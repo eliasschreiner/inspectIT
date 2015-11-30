@@ -1,11 +1,13 @@
 package info.novatec.inspectit.rcp;
 
 import info.novatec.inspectit.minlog.MinlogToSLF4JLogger;
-import com.opcoach.e4.preferences.*;
+
+
 import info.novatec.inspectit.rcp.log.LogListener;
 import info.novatec.inspectit.rcp.preferences.InspectITPreferenceInitializer;
 import info.novatec.inspectit.rcp.preferences.PreferenceSupplierDUMMY;
 import info.novatec.inspectit.rcp.preferences.PreferencesConstants;
+import info.novatec.inspectit.rcp.preferences.ScopedPreferenceStore;
 //import info.novatec.inspectit.rcp.preferences.ScopedPreferenceStore;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryManager;
 import info.novatec.inspectit.rcp.storage.InspectITStorageManager;
@@ -96,7 +98,7 @@ public class InspectIT implements BundleActivator {
 	/**
 	 * Preferences store for the plug-in.
 	 */
-	private volatile ScopedPreferenceStore  preferenceStore;
+	private volatile static ScopedPreferenceStore  preferenceStore;
 
 	/**
 	 * The global storage manager.
@@ -132,12 +134,12 @@ public class InspectIT implements BundleActivator {
 	 */
 
 	public void start(BundleContext context) throws Exception {
-		plugin = this;		
 		InspectIT.context = context;
-		locateRuntimeDir();
-		initLogger();
-		logListener = new LogListener();
-		Platform.addLogListener(logListener);
+		plugin = this;	
+//		locateRuntimeDir();
+//		initLogger();
+//		logListener = new LogListener();
+//		Platform.addLogListener(logListener);
 
 	}
 
@@ -369,16 +371,13 @@ public class InspectIT implements BundleActivator {
 	/**
 	 * {@inheritDoc}
 	 */
-	public ScopedPreferenceStore getPreferenceStore() {
+	public static ScopedPreferenceStore getPreferenceStore() {
 		
 		if (null == preferenceStore) {
-			synchronized (this) {
-				if (null == preferenceStore) { // NOCHK: DCL works with volatile.
-
-					//preferenceStore = new ScopedPreferenceStore(PreferenceSupplierDUMMY.SCOPE_CONTEXT, PreferenceSupplierDUMMY.PREFERENCE_NODE); 
-					preferenceStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, ID); 
-				} 
-			} 
+					
+				preferenceStore = new ScopedPreferenceStore(PreferenceSupplierDUMMY.SCOPE_CONTEXT, PreferenceSupplierDUMMY.PREFERENCE_NODE); 
+				//preferenceStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, ID); 
+					
 		} 
 		return preferenceStore;
 	}

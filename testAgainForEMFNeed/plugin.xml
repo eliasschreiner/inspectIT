@@ -9,14 +9,28 @@
             name="testAgainForEMFNeed"
             application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
-               name="applicationCSS"
-               value="platform:/plugin/testAgainForEMFNeed/css/default.css">
-         </property>
-         <property
                name="appName"
                value="testAgainForEMFNeed">
          </property>
       </product>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="testagainforemfneed.MyPreferences">
+      </initializer>
+   </extension>
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="testagainforemfneed.Application">
+         </run>
+      </application>
    </extension>
 
 </plugin>

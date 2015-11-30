@@ -8,12 +8,11 @@ import info.novatec.inspectit.communication.data.TimerData;
 import info.novatec.inspectit.rcp.InspectIT;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
 
+
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.e4.core.di.extensions.Preference;
-import org.eclipse.e4.ui.internal.workbench.Activator;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.inject.Inject;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
@@ -40,12 +41,22 @@ public class InspectITPreferenceInitializer extends AbstractPreferenceInitialize
 
 	}
     
+	@Inject
+	public void testPrefs(@Preference(nodePath = "/default/" + InspectIT.ID)
+	        IEclipsePreferences preferences) throws BackingStoreException 
+	{
+	    preferences.put("DUMMY","DUMMYVALUE222");
+	        
+	    
+	    
+	    preferences.flush();
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void initializeDefaultPreferences() {
-		 
 		Preferences defaults = DefaultScope.INSTANCE.getNode(InspectIT.ID);
 		  // Set defaults using things like:
 		  defaults.put("DUMMY", "DUMMYCONTENT");
@@ -59,12 +70,19 @@ public class InspectITPreferenceInitializer extends AbstractPreferenceInitialize
 		  IPreferenceStore store = InspectIT.getDefault().getPreferenceStore();
 		  store.setDefault("DUMMY", "DUMMYCONTENT");		 
 		  try {
-			((Preferences) store).flush();
+			  ((Preferences) store).flush();
 		} catch (BackingStoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
+		  
+		 
+	        Map<String, String> initializationEntries = PreferenceSupplierDUMMY.getInitializationEntries();
+	        for(Map.Entry<String, String> entry : initializationEntries.entrySet()) {
+	            store.setDefault(entry.getKey(), entry.getValue());
+	        }
+		  
+		  
        // store.setDefault(PreferencesConstants.CMR_REPOSITORY_DEFINITIONS, true); //statt true muss ich glaub ein stirng geben .. 
 		// CMR list
 //		List<CmrRepositoryDefinition> defaultCmrList = new ArrayList<CmrRepositoryDefinition>(1); // (1) ??

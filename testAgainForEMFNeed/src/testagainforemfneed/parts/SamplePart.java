@@ -14,6 +14,8 @@ package testagainforemfneed.parts;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
@@ -25,6 +27,10 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.osgi.service.prefs.BackingStoreException;
+
+import testagainforemfneed.Activator;
+import testagainforemfneed.PreferenceSupplier;
 
 public class SamplePart {
 
@@ -33,9 +39,27 @@ public class SamplePart {
 
 	@Inject
 	private MDirtyable dirty;
-
+	public String text;
+	
+	@Inject
+	public void testPrefs(@Preference(nodePath = "/default/"+ Activator.ID)
+	        IEclipsePreferences preferences)  throws BackingStoreException 
+	{
+	    preferences.put("DUMMY","DUMMYVALUE222");
+	        
+	    
+	    
+	    preferences.flush();
+	}
+	
+	
 	@PostConstruct
 	public void createComposite(Composite parent) {
+//		text = Activator.getDefault().getPreferenceStore().getDefaultString("DUMMY");
+//		
+//		IEclipsePreferences preferences = PreferenceSupplier.getPreferences();
+//		int theAnswerToTheQuestionOfAllQuestions = preferences.getInt(PreferenceSupplier.P_INT, PreferenceSupplier.DEF_INT);
+		
 		parent.setLayout(new GridLayout(1, false));
 
 		txtInput = new Text(parent, SWT.BORDER);

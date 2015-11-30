@@ -11,5 +11,6 @@
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=inspectIT&amp;ivyXmlPath=release%2Fresources%2Fivy%2Fivy.xml&amp;confs=*&amp;ivySettingsPath=%24%7Bivyproject_loc%7D%2F..%2FCommons%2Fresources%2Fshared%2Fconfig%2Fivy%2Fivysettings.xml&amp;loadSettingsOnDemand=false&amp;ivyUserDir=&amp;propertyFiles="/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
