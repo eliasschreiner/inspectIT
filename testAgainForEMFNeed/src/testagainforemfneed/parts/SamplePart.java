@@ -57,8 +57,8 @@ public class SamplePart {
 	public void createComposite(Composite parent) {
 //		text = Activator.getDefault().getPreferenceStore().getDefaultString("DUMMY");
 //		
-//		IEclipsePreferences preferences = PreferenceSupplier.getPreferences();
-//		int theAnswerToTheQuestionOfAllQuestions = preferences.getInt(PreferenceSupplier.P_INT, PreferenceSupplier.DEF_INT);
+		IEclipsePreferences preferences = PreferenceSupplier.getPreferences();
+		int theAnswerToTheQuestionOfAllQuestions = preferences.getInt(PreferenceSupplier.P_INT, PreferenceSupplier.DEF_INT);
 		
 		parent.setLayout(new GridLayout(1, false));
 

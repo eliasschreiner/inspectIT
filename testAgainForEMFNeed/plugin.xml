@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="testagainforemfneed.Application">
+         </run>
+      </application>
+   </extension>
 
    <extension
          id="product"
@@ -19,18 +31,6 @@
       <initializer
             class="testagainforemfneed.MyPreferences">
       </initializer>
-   </extension>
-   <extension
-         id="application"
-         point="org.eclipse.core.runtime.applications">
-      <application
-            cardinality="singleton-global"
-            thread="main"
-            visible="true">
-         <run
-               class="testagainforemfneed.Application">
-         </run>
-      </application>
    </extension>
 
 </plugin>
