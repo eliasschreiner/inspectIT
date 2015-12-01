@@ -18,11 +18,11 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            name="testAgainForEMFNeed"
+            name="inspectIT"
             application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
                name="appName"
-               value="testAgainForEMFNeed">
+               value="inspectIT">
          </property>
       </product>
    </extension>

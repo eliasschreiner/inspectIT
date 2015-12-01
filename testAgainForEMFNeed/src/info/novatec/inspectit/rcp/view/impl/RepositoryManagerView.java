@@ -202,15 +202,15 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	
 	//@Inject EPartService ePartService;
 
-	@Inject private MApplication mApplication;
+	//@Inject MApplication mApplication;
 	
-	@Inject ESelectionService eSelectionService;
+	//@Inject ESelectionService eSelectionService;
 	
 	//@Inject MPart mPart;
 	
 	//@Inject MToolBar mToolBar;
 	
-	@Inject EMenuService eMenuService;	
+	//@Inject EMenuService eMenuService;	
 	
 	/**
 	 * Default constructor.
@@ -237,9 +237,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		
 		IEclipsePreferences preferences = PreferenceSupplier.getPreferences();
 		int theAnswerToTheQuestionOfAllQuestions = preferences.getInt(PreferenceSupplier.P_INT, PreferenceSupplier.DEF_INT);
-	
-		
-		
+			
 		String text = Platform.getPreferencesService().
 		  getString(InspectIT.ID,PreferencesConstants.CMR_REPOSITORY_DEFINITIONS,"CMR_REPOSITORY_DEFINITIONS",null); 
 
@@ -325,7 +323,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 		MenuManager menuManager = new MenuManager();
 		menuManager.setRemoveAllWhenShown(true);
-		eMenuService.registerContextMenu(menuManager, MENU_ID); //treeViewer ? wo kommt der nun hin ?
+		//eMenuService.registerContextMenu(menuManager, MENU_ID); //treeViewer ? wo kommt der nun hin ?
 		Control control = treeViewer.getControl();
 		Menu menu = menuManager.createContextMenu(control);
 		control.setMenu(menu);
@@ -353,7 +351,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 		agentStatusUpdateJob = new AgentStatusUpdateJob();
 
-		eSelectionService.setSelection(treeViewer); 
+		//eSelectionService.setSelection(treeViewer); 
 	}
 
 	//Method to test, whether i can access the initializer via DI
@@ -721,6 +719,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		/**
 		 * Default constructor.
 		 */
+		@SuppressWarnings("unused")
 		public ShowPropertiesAction() {
 			super(null, AS_CHECK_BOX);
 			setImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_PROPERTIES));
@@ -753,6 +752,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		/**
 		 * Default constructor.
 		 */
+		@SuppressWarnings("unused")
 		public ShowAgentsAction() {
 			super(null, AS_CHECK_BOX);
 			setImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT));
@@ -793,6 +793,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		@Inject EHandlerService eHandlerService;
 		@Inject ECommandService eCommandService;
 		@Inject	private IEventBroker eventBroker; 
+		@Inject MApplication mApplication;
 		/**
 		 * {@inheritDoc}
 		 */

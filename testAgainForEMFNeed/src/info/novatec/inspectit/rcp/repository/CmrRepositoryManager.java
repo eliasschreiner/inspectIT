@@ -254,9 +254,9 @@ public class CmrRepositoryManager {
 	 */
 	public static class UpdateRepositoryJob extends Job {
 
-		@Inject EModelService eModelService;
+		//@Inject EModelService eModelService;
 		
-		@Inject MWindow mWindow;
+		//@Inject MWindow mWindow;
 		/**
 		 * CMR to update.
 		 */
@@ -281,7 +281,7 @@ public class CmrRepositoryManager {
 			this.rescheduleJob = rescheduleJob;
 			this.setUser(false);
 			//this.setProperty(  IProgressConstants.ICON_PROPERTY, InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_SERVER_REFRESH_SMALL));
-			eModelService.getActivePerspective(mWindow).setIconURI(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT).toString());
+			//eModelService.getActivePerspective(mWindow).setIconURI(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT).toString());
 		}
 
 		/**

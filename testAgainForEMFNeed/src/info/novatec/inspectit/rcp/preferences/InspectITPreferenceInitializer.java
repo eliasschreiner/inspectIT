@@ -33,18 +33,18 @@ public class InspectITPreferenceInitializer extends AbstractPreferenceInitialize
 //			}
 			
 			  //And this other approach to make sure that one of them works
-			  IPreferenceStore store = InspectIT.getDefault().getPreferenceStore();
-			  store.setDefault("DUMMY", "DUMMYCONTENT");		 
-			  try {
-				  ((Preferences) store).flush();
-			} catch (BackingStoreException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		        Map<String, String> initializationEntries = PreferenceSupplier.getInitializationEntries();
-		        for(Map.Entry<String, String> entry : initializationEntries.entrySet()) {
-		            store.setDefault(entry.getKey(), entry.getValue());
-		        }			  
+//			  IPreferenceStore store = InspectIT.getDefault().getPreferenceStore();
+//			  store.setDefault("DUMMY", "DUMMYCONTENT");		 
+//			  try {
+//				  ((Preferences) store).flush();
+//			} catch (BackingStoreException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		        Map<String, String> initializationEntries = PreferenceSupplier.getInitializationEntries();
+//		        for(Map.Entry<String, String> entry : initializationEntries.entrySet()) {
+//		            store.setDefault(entry.getKey(), entry.getValue());
+//		        }			  
 		        
 		        
 			

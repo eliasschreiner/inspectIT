@@ -358,7 +358,7 @@ public class InspectIT implements BundleActivator {
 	/**
 	 * {@inheritDoc}
 	 */
-	public static ScopedPreferenceStore getPreferenceStore() {
+	public ScopedPreferenceStore getPreferenceStore() {
 		
 		if (null == preferenceStore) {
 					
