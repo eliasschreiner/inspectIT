@@ -41,16 +41,14 @@ public class SamplePart {
 	private MDirtyable dirty;
 	public String text;
 	
-	@Inject
-	public void testPrefs(@Preference(nodePath = "/default/"+ InspectIT.ID)
-	        IEclipsePreferences preferences)  throws BackingStoreException 
-	{
-	    preferences.put("DUMMY","DUMMYVALUE222");
-	        
-	    
-	    
-	    preferences.flush();
-	}
+//	@Inject
+//	public void testPrefs(@Preference(nodePath = "/default/"+ InspectIT.ID)
+//	        IEclipsePreferences preferences)  throws BackingStoreException 
+//	{
+//	    preferences.put("DUMMY","DUMMYVALUE222");    
+//	    
+//	    preferences.flush();
+//	}
 	
 	
 	@PostConstruct
@@ -60,6 +58,7 @@ public class SamplePart {
 		IEclipsePreferences preferences = PreferenceSupplier.getPreferences();
 		int theAnswerToTheQuestionOfAllQuestions = preferences.getInt(PreferenceSupplier.P_INT, PreferenceSupplier.DEF_INT);
 		
+		String t2 = InspectIT.getDefault().getPreferenceStore().getDefaultString("DUMMY");
 		parent.setLayout(new GridLayout(1, false));
 
 		txtInput = new Text(parent, SWT.BORDER);

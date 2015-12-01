@@ -1,6 +1,7 @@
 package info.novatec.inspectit.rcp.preferences;
 
 import info.novatec.inspectit.rcp.InspectIT;
+//import com.opcoach.e4.preferences.*;
 import info.novatec.inspectit.rcp.preferences.valueproviders.PreferenceValueProviderFactory;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
 

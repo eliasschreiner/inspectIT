@@ -15,7 +15,7 @@ import info.novatec.inspectit.communication.data.InvocationSequenceData;
 import info.novatec.inspectit.communication.data.SqlStatementData;
 import info.novatec.inspectit.communication.data.TimerData;
 import info.novatec.inspectit.indexing.storage.IStorageTreeComponent;
-import info.novatec.inspectit.rcp.repository.service.storage.StorageServiceProvider;
+//import info.novatec.inspectit.rcp.repository.service.storage.StorageServiceProvider;
 import info.novatec.inspectit.storage.LocalStorageData;
 
 import java.util.List;
@@ -79,7 +79,7 @@ public class StorageRepositoryDefinition implements RepositoryDefinition {
 	/**
 	 * {@link StorageServiceProvider} for instantiating storage services.
 	 */
-	private StorageServiceProvider storageServiceProvider;
+	//private StorageServiceProvider storageServiceProvider;
 
 	/**
 	 * Indexing tree for storage.
@@ -168,16 +168,16 @@ public class StorageRepositoryDefinition implements RepositoryDefinition {
 	 */
 	@SuppressWarnings("unchecked")
 	public void initServices() {
-		// init services
-		globalDataAccessService = storageServiceProvider.createStorageGlobalDataAccessService(this, localStorageData, (IStorageTreeComponent<DefaultData>) indexingTree, agents);
-		exceptionDataAccessService = storageServiceProvider.createStorageExceptionDataAccessService(this, localStorageData, (IStorageTreeComponent<ExceptionSensorData>) indexingTree);
-		invocationDataAccessService = storageServiceProvider.createStorageInvocationDataAccessService(this, localStorageData, (IStorageTreeComponent<InvocationSequenceData>) indexingTree);
-		sqlDataAccessService = storageServiceProvider.createStorageSqlDataAccessService(this, localStorageData, (IStorageTreeComponent<SqlStatementData>) indexingTree);
-		timerDataAccessService = storageServiceProvider.createStorageTimerDataAccessService(this, localStorageData, (IStorageTreeComponent<TimerData>) indexingTree);
-		httpTimerDataAccessService = storageServiceProvider.createStorageHttpTimerDataAccessService(this, localStorageData, (IStorageTreeComponent<HttpTimerData>) indexingTree);
-
-		// for storage we use the regular cached data service because ids can never change
-		cachedDataService = new CachedDataService(globalDataAccessService);
+//		// init services
+//		globalDataAccessService = storageServiceProvider.createStorageGlobalDataAccessService(this, localStorageData, (IStorageTreeComponent<DefaultData>) indexingTree, agents);
+//		exceptionDataAccessService = storageServiceProvider.createStorageExceptionDataAccessService(this, localStorageData, (IStorageTreeComponent<ExceptionSensorData>) indexingTree);
+//		invocationDataAccessService = storageServiceProvider.createStorageInvocationDataAccessService(this, localStorageData, (IStorageTreeComponent<InvocationSequenceData>) indexingTree);
+//		sqlDataAccessService = storageServiceProvider.createStorageSqlDataAccessService(this, localStorageData, (IStorageTreeComponent<SqlStatementData>) indexingTree);
+//		timerDataAccessService = storageServiceProvider.createStorageTimerDataAccessService(this, localStorageData, (IStorageTreeComponent<TimerData>) indexingTree);
+//		httpTimerDataAccessService = storageServiceProvider.createStorageHttpTimerDataAccessService(this, localStorageData, (IStorageTreeComponent<HttpTimerData>) indexingTree);
+//
+//		// for storage we use the regular cached data service because ids can never change
+//		cachedDataService = new CachedDataService(globalDataAccessService);
 	}
 
 	/**
@@ -210,13 +210,13 @@ public class StorageRepositoryDefinition implements RepositoryDefinition {
 		this.localStorageData = localStorageData;
 	}
 
-	/**
-	 * @param storageServiceProvider
-	 *            the storageServiceProvider to set
-	 */
-	public void setStorageServiceProvider(StorageServiceProvider storageServiceProvider) {
-		this.storageServiceProvider = storageServiceProvider;
-	}
+//	/**
+//	 * @param storageServiceProvider
+//	 *            the storageServiceProvider to set
+//	 */
+//	public void setStorageServiceProvider(StorageServiceProvider storageServiceProvider) {
+//		this.storageServiceProvider = storageServiceProvider;
+//	}
 
 	/**
 	 * @param indexingTree

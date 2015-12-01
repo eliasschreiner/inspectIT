@@ -21,7 +21,7 @@ public class PreferenceSupplier {
 		    public static final String P_FLOAT = "float";
 		    public static final float DEF_FLOAT = 1.618f;
 		    public static final String P_INT = "int";
-		    public static final int DEF_INT = 42;
+		    public static final int DEF_INT = 424;
 		    public static final String P_LONG = "long";
 		    public static final long DEF_LONG = 23;
 		 

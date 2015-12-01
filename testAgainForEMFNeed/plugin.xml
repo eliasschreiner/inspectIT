@@ -29,7 +29,7 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="info.novatec.inspectit.rcp.MyPreferences">
+            class="info.novatec.inspectit.rcp.preferences.InspectITPreferenceInitializer">
       </initializer>
    </extension>
 
