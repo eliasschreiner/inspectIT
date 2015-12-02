@@ -356,14 +356,14 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		eSelectionService.setSelection(treeViewer); 
 	}
 
-	//Method to test, whether i can access the initializer via DI
-	@Inject
-	public void testPrefs(@Preference(nodePath = "/default/" + InspectIT.ID)
-	        IEclipsePreferences preferences) throws BackingStoreException 
-	{
-	    preferences.put("DUMMY","DUMMYVALUE222");
-	    preferences.flush();
-	}
+//	//Method to test, whether i can access the initializer via DI
+//	@Inject
+//	public void testPrefs(@Preference(nodePath = "/default/" + InspectIT.ID)
+//	        IEclipsePreferences preferences) throws BackingStoreException 
+//	{
+//	    preferences.put("DUMMY","DUMMYVALUE222");
+//	    preferences.flush();
+//	}
 	
 	/**
 	 * Creates the view tool-bar.

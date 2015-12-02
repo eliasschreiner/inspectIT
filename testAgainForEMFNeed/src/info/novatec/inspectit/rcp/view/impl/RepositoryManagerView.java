@@ -1,6 +1,5 @@
 package info.novatec.inspectit.rcp.view.impl;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -38,6 +37,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
+import org.eclipse.e4.ui.progress.UIJob;
 import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.workbench.lifecycle.PostContextCreate;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
@@ -204,13 +204,13 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 	//@Inject MApplication mApplication;
 	
-	//@Inject ESelectionService eSelectionService;
+	@Inject ESelectionService eSelectionService;
 	
 	//@Inject MPart mPart;
 	
 	//@Inject MToolBar mToolBar;
 	
-	//@Inject EMenuService eMenuService;	
+	@Inject EMenuService eMenuService;	
 	
 	/**
 	 * Default constructor.
@@ -219,18 +219,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		cmrRepositoryManager = InspectIT.getDefault().getCmrRepositoryManager();
 		cmrRepositoryManager.addCmrRepositoryChangeListener(this);
 		createInputList();				
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */		
-//	@PostConstruct
-//	@Optional
-//	public void createControls(Composite parent, @Preference(nodePath = "/default/" + InspectIT.ID)
-//    IEclipsePreferences preferences) throws BackingStoreException 
-	
-//	, @Preference(nodePath = "/default/" + InspectIT.ID, 
-//			  value = PreferencesConstants.CMR_REPOSITORY_DEFINITIONS 
+	}	
 	
 	@PostConstruct
 	public void createComposite(Composite parent)		{
@@ -241,14 +230,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		String text = Platform.getPreferencesService().
 		  getString(InspectIT.ID,PreferencesConstants.CMR_REPOSITORY_DEFINITIONS,"CMR_REPOSITORY_DEFINITIONS",null); 
 
-		String text2 = InspectIT.getDefault().getPreferenceStore().getString(PreferencesConstants.CMR_REPOSITORY_DEFINITIONS);
-
-		String tex3 = InspectIT.getDefault().getPreferenceStore().getDefaultString("DUMMY");
-		String text4 = InspectIT.getDefault().getPreferenceStore().getString("DUMMY");
-		
-		createViewToolbar();		
-
-		
+		createViewToolbar();				
 		toolkit = new FormToolkit(parent.getDisplay());
 
 		mainComposite = new SashForm(parent, SWT.VERTICAL);
@@ -265,7 +247,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		Tree tree = toolkit.createTree(mainForm.getBody(), SWT.V_SCROLL | SWT.H_SCROLL);
 		treeViewer = new DeferredTreeViewer(tree);
 
-		// create tree content provider
+		// create tree content provider, why is there a TreecontentProvider2 ? 
 		TreeContentProvider2 treeContentProvider = new TreeContentProvider2() {
 			@SuppressWarnings("unchecked")
 			@Override
@@ -323,7 +305,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 		MenuManager menuManager = new MenuManager();
 		menuManager.setRemoveAllWhenShown(true);
-		//eMenuService.registerContextMenu(menuManager, MENU_ID); //treeViewer ? wo kommt der nun hin ?
+		eMenuService.registerContextMenu(menuManager, MENU_ID); //treeViewer ? wo kommt der nun hin ?
 		Control control = treeViewer.getControl();
 		Menu menu = menuManager.createContextMenu(control);
 		control.setMenu(menu);
@@ -351,17 +333,17 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 		agentStatusUpdateJob = new AgentStatusUpdateJob();
 
-		//eSelectionService.setSelection(treeViewer); 
+		eSelectionService.setSelection(treeViewer); 
 	}
 
-	//Method to test, whether i can access the initializer via DI
-	@Inject
-	public void testPrefs(@Preference(nodePath = "/default/" + InspectIT.ID)
-	        IEclipsePreferences preferences) throws BackingStoreException 
-	{
-	    preferences.put("DUMMY","DUMMYVALUE222");
-	    preferences.flush();
-	}
+//	//Method to test, whether i can access the initializer via DI
+//	@Inject
+//	public void testPrefs(@Preference(nodePath = "/default/" + InspectIT.ID)
+//	        IEclipsePreferences preferences) throws BackingStoreException 
+//	{
+//	    preferences.put("DUMMY","DUMMYVALUE222");
+//	    preferences.flush();
+//	}
 	
 	/**
 	 * Creates the view tool-bar.
@@ -950,8 +932,8 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	public final class AgentStatusUpdateJob extends Job {
 
 
-		@Inject EModelService eModelService;		
-		@Inject MWindow mWindow;
+		//@Inject EModelService eModelService;		
+		//@Inject MWindow mWindow;
 		/**
 		 * Update rate in milliseconds. Currently every 60 seconds.
 		 */
@@ -963,7 +945,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		public AgentStatusUpdateJob() {
 			super("Agents status auto-update");
 			setUser(false);
-			eModelService.getActivePerspective(mWindow).setIconURI(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT).toString());
+		//	eModelService.getActivePerspective(mWindow).setIconURI(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT).toString());
 		//	setProperty(IProgressConstants.ICON_PROPERTY, InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT));
 			schedule(UPDATE_RATE);
 		}
@@ -1012,7 +994,6 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 			}
 		}
-
 	}
 
 	/**
