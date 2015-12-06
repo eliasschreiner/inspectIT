@@ -19,7 +19,7 @@ import org.eclipse.jface.wizard.Wizard;
  * @author Ivan Senic
  * 
  */
-public class ManageLabelWizard extends Wizard{
+public class ManageLabelWizard extends Wizard   {
 
 	/**
 	 * CMR to manage labels for.
@@ -42,7 +42,6 @@ public class ManageLabelWizard extends Wizard{
 		this.setWindowTitle("Manage Labels");
 		this.setDefaultPageImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_WIZBAN_LABEL));
 	}
-	
 
 	/**
 	 * {@inheritDoc}

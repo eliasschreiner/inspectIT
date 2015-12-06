@@ -17,9 +17,10 @@
 
    <windowImages/>
 
-   <launcher>
+   <launcher name="inspectIT">
       <solaris/>
-      <win useIco="false">
+      <win useIco="true">
+         <ico path="/inspectIT/icons/selfmade/inspectIT.ico"/>
          <bmp/>
       </win>
    </launcher>
