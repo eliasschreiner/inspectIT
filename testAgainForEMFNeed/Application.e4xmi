@@ -12,6 +12,8 @@
                   <children xsi:type="menu:HandledToolItem" xmi:id="_uGNkkIL4EeWfEs4fkpwvew" elementId="inspectit.handledtoolitem.showagents" label="Show Agents"/>
                   <children xsi:type="menu:ToolBarSeparator" xmi:id="_y2A7kIL4EeWfEs4fkpwvew" elementId="inspectit.toolbarseparator.2"/>
                   <children xsi:type="menu:DirectToolItem" xmi:id="_vk4skIL5EeWfEs4fkpwvew" elementId="inspectit.directtoolitem.1" accessibilityPhrase="ShowPropertiesAction" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.view.impl.RepositoryManagerView"/>
+                  <children xsi:type="menu:HandledToolItem" xmi:id="_Aeg9AJzhEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.0" tooltip="Start Recording" command="_oXAKcJzgEeWRX9fcCYEZ4w"/>
+                  <children xsi:type="menu:HandledToolItem" xmi:id="_EjlU8JzhEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.1" tooltip="Stop Recording" command="_igBI8JzgEeWRX9fcCYEZ4w"/>
                 </toolbar>
               </children>
               <children xsi:type="basic:Part" xmi:id="_rUiw0HjJEeWfB_YImTWJSA" elementId="inspectit.part.storagemanager" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.view.impl.StorageManagerView" label="Storage Manager" closeable="true">
@@ -66,12 +68,15 @@
     </trimBars>
   </children>
   <handlers xmi:id="_6wlLfcgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectit.rcp.handler.quitCommand" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.handlers.QuitHandler" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
-  <handlers xmi:id="_6wlLgcgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectit.rcp.handler.openCommand" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.handlers.OpenHandler" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
+  <handlers xmi:id="_6wlLgcgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectit.rcp.handlers.StartRecordingHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.StartRecordingHandler" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
   <handlers xmi:id="_6wlLhMgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectit.rcp.handler.saveCommand" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.handlers.SaveHandler" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
   <handlers xmi:id="_6wlLh8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectit.rcp.handler.aboutCommand" contributionURI="bundleclass://info.novatec.inspectIT.rcp/info.novatec.inspectit.rcp.handlers.AboutHandler" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
   <handlers xmi:id="_R5CowJulEeWA2dIM0yBmlQ" elementId="info.novatec.inspectit.rcp.handlers.CloseAndShowStorage" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.CloseAndShowStorageHandler" command="_mO4-AJuZEeWA2dIM0yBmlQ"/>
   <handlers xmi:id="_ctIdcJulEeWA2dIM0yBmlQ" elementId="info.novatec.inspectit.rcp.handlers.RemoveStorageLabelHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.RemoveStorageLabelHandler" command="_umVwIJukEeWA2dIM0yBmlQ"/>
   <handlers xmi:id="_TEvKYJumEeWA2dIM0yBmlQ" elementId="info.novatec.inspectit.rcp.handlers.AddStorageLabelHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.AddStorageLabelHandler" command="_Mgk50JumEeWA2dIM0yBmlQ"/>
+  <handlers xmi:id="_N2pcwJzWEeWRX9fcCYEZ4w" elementId="info.novatec.inspectit.rcp.handlers.ShowRepositoryHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.ShowRepositoryHandler" command="_7QNtIJzVEeWRX9fcCYEZ4w"/>
+  <handlers xmi:id="_rbw78JzgEeWRX9fcCYEZ4w" elementId="info.novatec.inspectit.rcp.handlers.StartRecordingHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.StartRecordingHandler" command="_oXAKcJzgEeWRX9fcCYEZ4w"/>
+  <handlers xmi:id="_zNvDcJzgEeWRX9fcCYEZ4w" elementId="info.novatec.inspectit.rcp.handlers.StopRecordingHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.StopRecordingHanlder" command="_igBI8JzgEeWRX9fcCYEZ4w"/>
   <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.bindingtable" bindingContext="_6wlLecgZEeSyMNYR5xypkQ">
     <bindings xmi:id="_6wlLf8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.keybinding.m1q" keySequence="M1+Q" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
     <bindings xmi:id="_6wlLgsgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.keybinding.m1o" keySequence="M1+O" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
@@ -92,6 +97,9 @@
   </commands>
   <commands xmi:id="_umVwIJukEeWA2dIM0yBmlQ" elementId="info.novatec.inspectit.rcp.commands.removeStorageLabel" commandName="RemoveStorageLabel Command"/>
   <commands xmi:id="_Mgk50JumEeWA2dIM0yBmlQ" elementId="info.novatec.inspectit.rcp.commands.addStorageLabel" commandName="AddStorageLabelCommand"/>
+  <commands xmi:id="_7QNtIJzVEeWRX9fcCYEZ4w" elementId="info.novatec.inspectit.rcp.commands.showRepository" commandName="ShowRepository Command"/>
+  <commands xmi:id="_igBI8JzgEeWRX9fcCYEZ4w" elementId="info.novatec.inspectit.rcp.commands.stopRecordingCommand" commandName="StopRecordingCommand"/>
+  <commands xmi:id="_oXAKcJzgEeWRX9fcCYEZ4w" elementId="info.novatec.inspectit.rcp.commands.startRecordingCommand" commandName="StartRecordingCommand"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

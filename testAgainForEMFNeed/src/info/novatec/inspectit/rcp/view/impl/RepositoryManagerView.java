@@ -210,6 +210,10 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	//@Inject MToolBar mToolBar;
 	
 	@Inject EMenuService eMenuService;	
+	@Inject EHandlerService eHandlerService;
+	@Inject ECommandService eCommandService;
+	@Inject	private IEventBroker eventBroker; 
+	@Inject MApplication mApplication;
 	
 	/**
 	 * Default constructor.
@@ -771,19 +775,16 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	 */
 	private class RepositoryManagerDoubleClickListener implements IDoubleClickListener {
 
-		@Inject EHandlerService eHandlerService;
-		@Inject ECommandService eCommandService;
-		@Inject	private IEventBroker eventBroker; 
-		@Inject MApplication mApplication;
+
 		/**
 		 * {@inheritDoc}
 		 */
 		@Override
 		public void doubleClick(final DoubleClickEvent event) {
-			Job openDataExplorerJob = new Job("Opening Data Explorer..") {
+			UIJob openDataExplorerJob = new UIJob("Opening Data Explorer..") {
 				
 				@Override
-				protected IStatus run(IProgressMonitor monitor) {					
+				public IStatus runInUIThread(IProgressMonitor monitor) {					
 					process();
 					return Status.OK_STATUS;
 				}
@@ -818,12 +819,11 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 			if (null != repositoryDefinition) { 				
 				
-				Command command = eCommandService.getCommand(ShowRepositoryHandler.COMMAND);				
-				     
-		
+				@SuppressWarnings("unused")
+				Command command = eCommandService.getCommand(ShowRepositoryHandler.COMMAND);    
 				
-				if ( eventBroker != null ) //Sends async. for sending sync. use send()
-				     eventBroker.post(ShowRepositoryHandler.COMMAND, new Event());
+//				if ( eventBroker != null ) //Sends async. for sending sync. use send()
+//				     eventBroker.post(ShowRepositoryHandler.COMMAND, new Event());
 						
 				eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new Event());
 				
@@ -836,9 +836,9 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 					mApplication.getContext().set(ShowRepositoryHandler.AGENT, platformIdent); 
 					//context.addVariable(ShowRepositoryHandler.AGENT, platformIdent);
 				}
-
 				try {
-					if(eHandlerService.canExecute(parameterCommand)) eHandlerService.executeHandler(parameterCommand);
+					if(eHandlerService.canExecute(parameterCommand)) 
+						eHandlerService.executeHandler(parameterCommand);
 				} catch (Exception e) {
 					throw new RuntimeException(e);
 				}
@@ -954,7 +954,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		 */
 		protected IStatus run(IProgressMonitor monitor) {
 			updateAgentsAndCmrStatus();
-			schedule(UPDATE_RATE);
+			//schedule(UPDATE_RATE);
 			return Status.OK_STATUS;
 		}
 

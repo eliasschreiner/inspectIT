@@ -62,7 +62,6 @@ public class CloseAndShowStorageHandler {
 	@Inject EPartService ePartService;
 	@Inject EHandlerService eHandlerService;
 	@Inject ECommandService eCommandService;
-
 	@Inject MApplication mApplication;
 	/**
 	 * {@inheritDoc}
