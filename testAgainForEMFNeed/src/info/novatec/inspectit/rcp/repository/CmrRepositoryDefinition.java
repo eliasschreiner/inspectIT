@@ -45,7 +45,7 @@ public class CmrRepositoryDefinition implements RepositoryDefinition, ICmrReposi
 	/**
 	 * Default CMR port.
 	 */
-	public static final int DEFAULT_PORT = 8182;
+	public static final int DEFAULT_PORT = 8183;
 
 	/**
 	 * Default description.

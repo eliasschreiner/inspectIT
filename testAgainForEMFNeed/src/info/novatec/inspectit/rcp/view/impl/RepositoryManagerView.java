@@ -39,7 +39,6 @@ import org.eclipse.e4.ui.model.application.ui.menu.MDirectToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
 import org.eclipse.e4.ui.progress.UIJob;
 import org.eclipse.e4.ui.services.EMenuService;
-import org.eclipse.e4.ui.workbench.lifecycle.PostContextCreate;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
@@ -203,12 +202,10 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 	//@Inject MApplication mApplication;
 	
-	@Inject ESelectionService eSelectionService;
-	
 	//@Inject MPart mPart;
 	
 	//@Inject MToolBar mToolBar;
-	
+	@Inject ESelectionService eSelectionService;
 	@Inject EMenuService eMenuService;	
 	@Inject EHandlerService eHandlerService;
 	@Inject ECommandService eCommandService;
@@ -732,12 +729,12 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	 * @author Patrice Bouillet
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	private class ShowAgentsAction extends Action {
 
 		/**
 		 * Default constructor.
 		 */
-		@SuppressWarnings("unused")
 		public ShowAgentsAction() {
 			super(null, AS_CHECK_BOX);
 			setImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT));

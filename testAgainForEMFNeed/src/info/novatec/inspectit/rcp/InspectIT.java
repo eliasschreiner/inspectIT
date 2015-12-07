@@ -28,8 +28,10 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.util.StatusHandler;
 import org.eclipse.swt.graphics.Image;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.LoggerFactory;
 
@@ -55,6 +57,8 @@ public class InspectIT implements BundleActivator {
 	
 	//Alles probeweiﬂe 	
 	Provider<StatusHandler> statusHandler;
+	
+	ImageRegistry imageRegistry = new ImageRegistry();
 	
 	/**
 	 * The id of this plugin.
@@ -123,79 +127,81 @@ public class InspectIT implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 		InspectIT.context = context;
 		plugin = this;	
-//		locateRuntimeDir();
-//		initLogger();
-//		logListener = new LogListener();
-//		Platform.addLogListener(logListener);
-
+		
+		//initLogger();
+		//logListener = new LogListener();
+		//Platform.addLogListener(logListener);		
+		initializeImageRegistry(imageRegistry);
+		locateRuntimeDir();
+		
 	}
 
-//	/**
-//	 * Locates the runtime directory. It's needed for distinguish between development and runtime.
-//	 */
-//	private void locateRuntimeDir() {
-//		File bundleFile = null;
-//		try {
-//			bundleFile =  FileLocator.getBundleFile(context.getBundle()); //context.getBundle().getBundleContext().getDataFile(getBundle()); 
-//		} catch (IOException e) { // NOPMD //NOCHK
-//		}
-//
-//		if (null != bundleFile && bundleFile.isDirectory()) {
-//			runtimeDir = Paths.get(bundleFile.getAbsolutePath());
-//		} else {
-//			runtimeDir = Paths.get("");
-//		}
-//		}
-//
-//	/**
-//	 * Initializes the logger.
-//	 */
-//	private void initLogger() {
-//		LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
-//
-//		JoranConfigurator configurator = new JoranConfigurator();
-//		configurator.setContext(context);
-//		context.reset();
-//
-//		InputStream is = null;
-//
-//		try {
-//			// first check if it's supplied as parameter
-//			String logFileLocation = System.getProperty(LOG_FILE_PROPERTY);
-//			if (null != logFileLocation) {
-//				Path logPath = Paths.get(logFileLocation).toAbsolutePath();
-//				if (Files.exists(logPath)) {
-//					is = Files.newInputStream(logPath, StandardOpenOption.READ);
-//				}
-//			}
-//
-//			// then fail to default if none is specified
-//			if (null == is) {
-//				Path logPath = getRuntimeDir().resolve(DEFAULT_LOG_FILE_NAME).toAbsolutePath();
-//				if (Files.exists(logPath)) {
-//					is = Files.newInputStream(logPath, StandardOpenOption.READ);
-//				}
-//			}
-//
-//			if (null != is) {
-//				try {
-//					configurator.doConfigure(is);
-//				} catch (JoranException e) { // NOPMD NOCHK StatusPrinter will handle this
-//				} finally {
-//					is.close();
-//				}
-//			}
-//		} catch (IOException e) { // NOPMD NOCHK StatusPrinter will handle this
-//		}
-//
-//		StatusPrinter.printInCaseOfErrorsOrWarnings(context);
-//
-//		// use sysout-over-slf4j to redirect out and err calls to logger
-//		SysOutOverSLF4J.sendSystemOutAndErrToSLF4J();
-//
-//		// initialize out minlog bridge to the slf4j
-//		MinlogToSLF4JLogger.init();
-//	}
+	/**
+	 * Locates the runtime directory. It's needed for distinguish between development and runtime.
+	 */
+	private void locateRuntimeDir() {
+		File bundleFile = null;
+		try {
+			bundleFile =  FileLocator.getBundleFile(context.getBundle()); //context.getBundle().getBundleContext().getDataFile(getBundle()); 
+		} catch (IOException e) { // NOPMD //NOCHK
+		}
+
+		if (null != bundleFile && bundleFile.isDirectory()) {
+			runtimeDir = Paths.get(bundleFile.getAbsolutePath());
+		} else {
+			runtimeDir = Paths.get("");
+		}
+		}
+
+	/**
+	 * Initializes the logger.
+	 */
+	private void initLogger() {
+		LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
+
+		JoranConfigurator configurator = new JoranConfigurator();
+		configurator.setContext(context);
+		context.reset();
+
+		InputStream is = null;
+
+		try {
+			// first check if it's supplied as parameter
+			String logFileLocation = System.getProperty(LOG_FILE_PROPERTY);
+			if (null != logFileLocation) {
+				Path logPath = Paths.get(logFileLocation).toAbsolutePath();
+				if (Files.exists(logPath)) {
+					is = Files.newInputStream(logPath, StandardOpenOption.READ);
+				}
+			}
+
+			// then fail to default if none is specified
+			if (null == is) {
+				Path logPath = getRuntimeDir().resolve(DEFAULT_LOG_FILE_NAME).toAbsolutePath();
+				if (Files.exists(logPath)) {
+					is = Files.newInputStream(logPath, StandardOpenOption.READ);
+				}
+			}
+
+			if (null != is) {
+				try {
+					configurator.doConfigure(is);
+				} catch (JoranException e) { // NOPMD NOCHK StatusPrinter will handle this
+				} finally {
+					is.close();
+				}
+			}
+		} catch (IOException e) { // NOPMD NOCHK StatusPrinter will handle this
+		}
+
+		StatusPrinter.printInCaseOfErrorsOrWarnings(context);
+
+		// use sysout-over-slf4j to redirect out and err calls to logger
+		SysOutOverSLF4J.sendSystemOutAndErrToSLF4J();
+
+		// initialize out minlog bridge to the slf4j
+		MinlogToSLF4JLogger.init();
+	}
 
 	/**
 	 * This method is called when the plug-in is stopped.
@@ -262,7 +268,7 @@ public class InspectIT implements BundleActivator {
 			listener.propertyChange(event);
 		}
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -299,8 +305,8 @@ public class InspectIT implements BundleActivator {
 				    statusHandler.get().show(status, "Error loading image with the key");
 					continue;
 				}
-			}
-		}
+			}			
+		}	
 	}
 
 	/**
@@ -315,8 +321,8 @@ public class InspectIT implements BundleActivator {
 	 */
 
 	public Image getImage(String imageKey) {
-		
-		return JFaceResources.getImageRegistry().get(imageKey);
+		Image img2 = imageRegistry.get(imageKey);
+		return img2;
 	}
 
 	/**

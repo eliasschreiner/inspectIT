@@ -280,14 +280,14 @@ public class InspectIT implements BundleActivator {
 	 * {@inheritDoc}
 	 */
 	protected void initializeImageRegistry(ImageRegistry reg) {
-		Field[] allFields = InspectITImages.class.getFields();
-		
+		Field[] allFields = InspectITImages.class.getFields();		
 		for (Field field : allFields) {
 			if (field.getName().startsWith("IMG") && String.class.equals(field.getType())) {
 				if (!field.isAccessible()) {
 					field.setAccessible(true);
 				}
 				try {
+					
 					String key = (String) field.get(null);
 					URL url = context.getBundle().getEntry(key);
 					

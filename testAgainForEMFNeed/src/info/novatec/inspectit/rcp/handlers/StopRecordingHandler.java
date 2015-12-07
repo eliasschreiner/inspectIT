@@ -33,7 +33,7 @@ import org.eclipse.swt.widgets.Display;
  * @author Ivan Senic
  * 
  */
-public class StopRecordingHanlder  {
+public class StopRecordingHandler  {
 
 	@Inject ESelectionService eSelectionService;
 	@Inject EPartService ePartService;
@@ -41,7 +41,7 @@ public class StopRecordingHanlder  {
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public Object execute(final ExecutionEvent event) throws ExecutionException {
+	public void execute() throws ExecutionException {
 		CmrRepositoryDefinition cmrRepositoryDefinition = null;
 		ISelection selection = (ISelection) eSelectionService.getSelection();
 		if (selection instanceof StructuredSelection) {
@@ -88,8 +88,7 @@ public class StopRecordingHanlder  {
 			} else {
 				throw new ExecutionException("Recording can not be stopped, because the repository is currently offline.");
 			}
-		}
-		return null;
+		}		
 	}
 
 }

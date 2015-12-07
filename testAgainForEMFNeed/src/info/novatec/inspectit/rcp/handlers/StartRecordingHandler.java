@@ -29,6 +29,7 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.progress.IProgressConstants;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -47,11 +48,12 @@ public class StartRecordingHandler{
 
 	@Inject ESelectionService eSelectionService;
 	@Inject EPartService ePartService;
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public Object execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, ExecutionEvent event) throws ExecutionException {
+	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
 		// try to get the CMR where recording should start.
 		CmrRepositoryDefinition cmrRepositoryDefinition = null;
 		Collection<PlatformIdent> autoSelectedAgents = Collections.emptyList();
@@ -74,7 +76,7 @@ public class StartRecordingHandler{
 					String leftSpace = NumberFormatter.humanReadableByteCount(cmrStatusData.getStorageDataSpaceLeft());
 					if (!MessageDialog.openQuestion(shell, "Confirm", "For selected CMR there is an active warning about insufficient storage space left. Only "
 							+ leftSpace + " are left on the target server, are you sure you want to continue?")) {
-						return null;
+						//return null;
 					}
 				}
 			} catch (Exception e) { // NOPMD NOCHK
@@ -122,7 +124,7 @@ public class StartRecordingHandler{
 				refreshStorageManagerJob.schedule(delay);
 			}
 		}
-		return null;
+		//return null;
 	}
 
 }
