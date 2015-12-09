@@ -34,8 +34,6 @@ import com.esotericsoftware.kryo.serializers.FieldSerializer.Optional;
  */
 public class ShowRepositoryHandler  {
 
-	@Inject EPartService ePartService;
-	
 	/**
 	 * The corresponding command id.
 	 */
@@ -50,11 +48,10 @@ public class ShowRepositoryHandler  {
 	 * The repository to look up.
 	 */
 	public static final String AGENT = COMMAND + ".agent";
-	
-	@Inject MApplication mApplication;	
+
 
 	@Execute
-	public Object execute(@Named(IServiceConstants.ACTIVE_PART) MPart mPart, ExecutionEvent event) throws ExecutionException {
+	public void execute(EPartService ePartService, MApplication mApplication, @Named(IServiceConstants.ACTIVE_PART) MPart mPart) throws ExecutionException {
 		
 		// Get the repository definition and agent out of the context
 		IEclipseContext context = (IEclipseContext) mApplication.getContext();
@@ -63,20 +60,20 @@ public class ShowRepositoryHandler  {
 
 		if (null != repositoryDefinition) {
 			// find view		
-
 			MPart viewPart = ePartService.findPart(DataExplorerView.VIEW_ID); 
-			if (viewPart == null) {
+			DataExplorerView dev = (DataExplorerView) viewPart.getObject();
+			if (dev == null) {
 				try {
 					viewPart = ePartService.showPart(viewPart, PartState.VISIBLE);
+					dev = (DataExplorerView) viewPart.getObject();
 				} catch (Exception e) {
-					return null;
 				}
 			}
-			if (viewPart instanceof DataExplorerView) {
+			if (dev instanceof DataExplorerView) {
+				//ePartService.showPart(viewPart, PartState.VISIBLE);
 				ePartService.activate(viewPart);
-				((DataExplorerView) viewPart).showRepository(repositoryDefinition, platformIdent);
+				dev.showRepository(repositoryDefinition, platformIdent);
 			}
 		}
-		return null;
 	}
 }

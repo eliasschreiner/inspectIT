@@ -263,6 +263,8 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 	@Inject EHandlerService eHandlerService; 
 	@Inject IEventBroker eventBroker;
 	@Inject IProgressService progressService;
+	@Inject MApplication mApplication;
+	
 	/**
 	 * Default constructor.
 	 */
@@ -282,7 +284,7 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 	public void createPartControl(Composite parent) {
 		toolkit = new FormToolkit(parent.getDisplay());
 		createViewToolbar();
-
+		
 		mainComposite = new SashForm(parent, SWT.VERTICAL);
 		GridLayout mainLayout = new GridLayout(1, true);
 		mainLayout.marginWidth = 0;
@@ -423,21 +425,21 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 //		IToolBarManager toolBarManager = getViewSite().getActionBars().getToolBarManager();
 //		toolBarManager.add(new ShowPropertiesAction());
 //
-//		MenuAction filterMenuAction = new MenuAction();
-//		filterMenuAction.setText("Group and Filter");
-//		filterMenuAction.setImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_FILTER));
-//
-//		groupByLabelMenu = new MenuManager("Group Storages By");
-//		filterMenuAction.addContributionItem(groupByLabelMenu);
-//
-//		filterByRepositoryMenu = new MenuManager("Filter By Repository");
-//		filterMenuAction.addContributionItem(filterByRepositoryMenu);
-//
-//		filterByStateMenu = new MenuManager("Filter By Storage State");
-//		filterByStateMenu.add(new FilterStatesAction("Writable", StorageState.OPENED));
-//		filterByStateMenu.add(new FilterStatesAction("Recording", StorageState.RECORDING));
-//		filterByStateMenu.add(new FilterStatesAction("Readable", StorageState.CLOSED));
-//		filterMenuAction.addContributionItem(filterByStateMenu);
+		MenuAction filterMenuAction = new MenuAction();
+		filterMenuAction.setText("Group and Filter");
+		filterMenuAction.setImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_FILTER));
+
+		groupByLabelMenu = new MenuManager("Group Storages By");
+		filterMenuAction.addContributionItem(groupByLabelMenu);
+
+		filterByRepositoryMenu = new MenuManager("Filter By Repository");
+		filterMenuAction.addContributionItem(filterByRepositoryMenu);
+
+		filterByStateMenu = new MenuManager("Filter By Storage State");
+		filterByStateMenu.add(new FilterStatesAction("Writable", StorageState.OPENED));
+		filterByStateMenu.add(new FilterStatesAction("Recording", StorageState.RECORDING));
+		filterByStateMenu.add(new FilterStatesAction("Readable", StorageState.CLOSED));
+		filterMenuAction.addContributionItem(filterByStateMenu);
 //
 //		toolBarManager.add(filterMenuAction);
 //		toolBarManager.add(new Separator());

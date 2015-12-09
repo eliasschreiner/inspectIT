@@ -59,15 +59,11 @@ public class CloseAndShowStorageHandler {
 	 */
 	public static final String STORAGE_DATA_PROVIDER = "info.novatec.inspectit.rcp.commands.closeAndShowStorage.param";
 
-	@Inject EPartService ePartService;
-	@Inject EHandlerService eHandlerService;
-	@Inject ECommandService eCommandService;
-	@Inject MApplication mApplication;
 	/**
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public Object execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, final ExecutionEvent event) throws ExecutionException {
+	public void execute(EPartService ePartService, EHandlerService eHandlerService, ECommandService eCommandService, MApplication mApplication,@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, final ExecutionEvent event) throws ExecutionException {
 		IStorageDataProvider storageDataProvider = (IStorageDataProvider) mApplication.getContext().get(STORAGE_DATA_PROVIDER);// HandlerUtil.getVariable(event, STORAGE_DATA_PROVIDER);
 
 		final StorageData storageData = storageDataProvider.getStorageData();
@@ -130,6 +126,5 @@ public class CloseAndShowStorageHandler {
 		} else {
 			InspectIT.getDefault().createInfoDialog("Can not finalize storage, CMR repository is offline.", -1);
 		}
-		return null;
 	}
 }

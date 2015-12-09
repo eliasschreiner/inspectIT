@@ -27,6 +27,7 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreeViewer;
 
 /**
  * Handler for removing a list of labels from storage.
@@ -46,15 +47,12 @@ public class RemoveStorageLabelHandler {
 	 */
 	public static final String INPUT = COMMAND + ".input";
 
-	@Inject EPartService ePartService;
-	@Inject ESelectionService eSelectionService;
-	@Inject MApplication mApplication; 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Execute
 	@SuppressWarnings("unchecked")
-	public Object execute(ExecutionEvent event) throws ExecutionException {
+	public void execute(MApplication mApplication, ESelectionService eSelectionService, EPartService ePartService) throws ExecutionException {
 		// Get the input list out of the context
 		IEclipseContext context = mApplication.getContext();//(IEvaluationContext) event.getApplicationContext();
 		List<AbstractStorageLabel<?>> inputList = (List<AbstractStorageLabel<?>>) mApplication.getContext().get(INPUT); // context.getVariable(INPUT);
@@ -62,10 +60,10 @@ public class RemoveStorageLabelHandler {
 		IStorageDataProvider storageProvider = null;
 
 		// try to get it from selection
-		ISelection selection = (ISelection) eSelectionService.getSelection();// HandlerUtil.getCurrentSelection(event);
-		if (selection instanceof StructuredSelection) {
-			if (((StructuredSelection) selection).getFirstElement() instanceof IStorageDataProvider) {
-				storageProvider = (IStorageDataProvider) ((StructuredSelection) selection).getFirstElement();
+		TreeViewer selection = (TreeViewer) eSelectionService.getSelection();// HandlerUtil.getCurrentSelection(event);
+		if (selection.getSelection() instanceof StructuredSelection) {
+			if (((StructuredSelection) selection.getSelection()).getFirstElement() instanceof IStorageDataProvider) {
+				storageProvider = (IStorageDataProvider) ((StructuredSelection) selection.getSelection()).getFirstElement();
 			}
 		}
 
@@ -90,7 +88,5 @@ public class RemoveStorageLabelHandler {
 				throw new ExecutionException("Labels could not be removed from storage, because the underlying repository is offline.");
 			}
 		}
-
-		return null;
 	}
 }

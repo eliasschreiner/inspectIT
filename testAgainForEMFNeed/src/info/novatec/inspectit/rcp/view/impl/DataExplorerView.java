@@ -529,11 +529,11 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	 * Updates view tool-bar.
 	 */
 	private void updateViewToolbar() {
-		collapseAction.updateEnabledState();
-		toolBarManager.find(REFRESH_CONTRIBUTION_ITEM).setVisible(displayedRepositoryDefinition instanceof CmrRepositoryDefinition);
-		toolBarManager.find(CLEAR_BUFFER_CONTRIBUTION_ITEM).setVisible(
-				displayedRepositoryDefinition instanceof CmrRepositoryDefinition && !OnlineStatus.OFFLINE.equals(((CmrRepositoryDefinition) displayedRepositoryDefinition).getOnlineStatus()));
-		toolBarManager.update(true);
+//		collapseAction.updateEnabledState();
+//		toolBarManager.find(REFRESH_CONTRIBUTION_ITEM).setVisible(displayedRepositoryDefinition instanceof CmrRepositoryDefinition);
+//		toolBarManager.find(CLEAR_BUFFER_CONTRIBUTION_ITEM).setVisible(
+//				displayedRepositoryDefinition instanceof CmrRepositoryDefinition && !OnlineStatus.OFFLINE.equals(((CmrRepositoryDefinition) displayedRepositoryDefinition).getOnlineStatus()));
+//		toolBarManager.update(true);
 	}
 
 	/**

@@ -26,6 +26,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -41,20 +42,16 @@ public class ShutdownCmrHandler{
 	 */
 	public static final String SHOULD_RESTART_PARAMETER = "info.novatec.inspectit.rcp.commands.shutdown.shouldRestart";
 
-	@Inject ESelectionService eSelectionService;
-	@Inject MApplication mApplication;
-	@Inject IProgressService progressServiceInject;
-	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
+	public void execute(IProgressService progressServiceInject, MApplication mApplication, ESelectionService eSelectionService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
 		String param = (String) mApplication.getContext().get(SHOULD_RESTART_PARAMETER);//event.getParameter(SHOULD_RESTART_PARAMETER);
-		ISelection selection = (ISelection) eSelectionService.getSelection();
-		if (StringUtils.isNotEmpty(param) && selection instanceof StructuredSelection) {
+		TreeViewer selection = (TreeViewer) eSelectionService.getSelection();
+		if (StringUtils.isNotEmpty(param) && selection.getSelection() instanceof StructuredSelection) {
 			final boolean shouldRestart = Boolean.parseBoolean(param);
-			Object selectedObject = ((StructuredSelection) selection).getFirstElement();
+			Object selectedObject = ((StructuredSelection) selection.getSelection()).getFirstElement();
 			if (selectedObject instanceof ICmrRepositoryProvider) {
 				final CmrRepositoryDefinition cmrRepositoryDefinition = ((ICmrRepositoryProvider) selectedObject).getCmrRepositoryDefinition();
 				String cmrName = "'" + cmrRepositoryDefinition.getName() + "' (" + cmrRepositoryDefinition.getIp() + ":" + cmrRepositoryDefinition.getPort() + ")";

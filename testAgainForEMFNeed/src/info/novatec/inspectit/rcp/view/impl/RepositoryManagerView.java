@@ -37,6 +37,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
+import org.eclipse.e4.ui.progress.IProgressConstants;
 import org.eclipse.e4.ui.progress.UIJob;
 import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
@@ -106,7 +107,8 @@ import info.novatec.inspectit.rcp.view.IRefreshableView;
 import info.novatec.inspectit.rcp.view.tree.TreeContentProvider2;
 import info.novatec.inspectit.util.ObjectUtils;
 
-import org.eclipse.e4.core.services.events.IEventBroker;  
+import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.core.services.log.Logger;  
 /**
  * Repository manager view where user can work with repositories, check agents, and give input for
  * the data explorer view.
@@ -816,29 +818,44 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 			if (null != repositoryDefinition) { 				
 				
-				@SuppressWarnings("unused")
-				Command command = eCommandService.getCommand(ShowRepositoryHandler.COMMAND);    
-				
-//				if ( eventBroker != null ) //Sends async. for sending sync. use send()
-//				     eventBroker.post(ShowRepositoryHandler.COMMAND, new Event());
-						
-				eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new Event());
-				
-				ParameterizedCommand parameterCommand = eCommandService.createCommand(ShowRepositoryHandler.COMMAND, null);
-			//	IEvaluationContext context = (IEvaluationContext) executionEvent.getApplicationContext();
-				
+				ParameterizedCommand command =
+						eCommandService.createCommand(ShowRepositoryHandler.COMMAND, null);
+				eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new ShowRepositoryHandler());
 				mApplication.getContext().set(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
-				//context.addVariable(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
-				if (null != platformIdent) {
-					mApplication.getContext().set(ShowRepositoryHandler.AGENT, platformIdent); 
-					//context.addVariable(ShowRepositoryHandler.AGENT, platformIdent);
+				try{
+					if(eHandlerService.canExecute(command)) {
+						 eHandlerService.executeHandler(command);						 
+					}
 				}
-				try {
-					if(eHandlerService.canExecute(parameterCommand)) 
-						eHandlerService.executeHandler(parameterCommand);
-				} catch (Exception e) {
+				catch (Exception e) {
 					throw new RuntimeException(e);
 				}
+				
+				
+				
+//				@SuppressWarnings("unused")
+//				Command command = eCommandService.getCommand(ShowRepositoryHandler.COMMAND);    
+//				
+//	//			if ( eventBroker != null ) //Sends async. for sending sync. use send()
+////				     eventBroker.post(ShowRepositoryHandler.COMMAND, new Event());
+//						
+//				eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new Event());
+//				
+//				ParameterizedCommand parameterCommand = eCommandService.createCommand(ShowRepositoryHandler.COMMAND, null);
+//			//	IEvaluationContext context = (IEvaluationContext) executionEvent.getApplicationContext();
+//				
+//				mApplication.getContext().set(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
+//				//context.addVariable(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
+//				if (null != platformIdent) {
+//					mApplication.getContext().set(ShowRepositoryHandler.AGENT, platformIdent); 
+//					//context.addVariable(ShowRepositoryHandler.AGENT, platformIdent);
+//				}
+//				try {
+//					if(eHandlerService.canExecute(parameterCommand)) 
+//						eHandlerService.executeHandler(parameterCommand);
+//				} catch (Exception e) {
+//					throw new RuntimeException(e);
+//				}
 			} else {
 				if (treeViewer.getExpandedState(firstElement)) {
 					treeViewer.collapseToLevel(firstElement, 1);
@@ -940,9 +957,8 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		 */
 		public AgentStatusUpdateJob() {
 			super("Agents status auto-update");
-			setUser(false);
-		//	eModelService.getActivePerspective(mWindow).setIconURI(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT).toString());
-		//	setProperty(IProgressConstants.ICON_PROPERTY, InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT));
+			setUser(false);		
+			setProperty(IProgressConstants.ICON_PROPERTY, InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT));
 			schedule(UPDATE_RATE);
 		}
 

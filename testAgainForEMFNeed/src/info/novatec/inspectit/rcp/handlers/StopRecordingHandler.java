@@ -26,6 +26,7 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Display;
 /**
  * Stops recording.
@@ -35,20 +36,18 @@ import org.eclipse.swt.widgets.Display;
  */
 public class StopRecordingHandler  {
 
-	@Inject ESelectionService eSelectionService;
-	@Inject EPartService ePartService;
 	/**
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public void execute() throws ExecutionException {
+	public void execute(EPartService ePartService, ESelectionService eSelectionService) throws ExecutionException {
 		CmrRepositoryDefinition cmrRepositoryDefinition = null;
-		ISelection selection = (ISelection) eSelectionService.getSelection();
-		if (selection instanceof StructuredSelection) {
-			Object selectedObject = ((StructuredSelection) selection).getFirstElement();
+		TreeViewer selection = (TreeViewer) eSelectionService.getSelection();
+		if (selection.getSelection() instanceof StructuredSelection) {
+			Object selectedObject = ((StructuredSelection) selection.getSelection()).getFirstElement();
 			if (selectedObject instanceof ICmrRepositoryProvider) {
 				cmrRepositoryDefinition = ((ICmrRepositoryProvider) selectedObject).getCmrRepositoryDefinition();
-			} else if (((StructuredSelection) selection).getFirstElement() instanceof ICmrRepositoryAndAgentProvider) {
+			} else if (((StructuredSelection) selection.getSelection()).getFirstElement() instanceof ICmrRepositoryAndAgentProvider) {
 				cmrRepositoryDefinition = ((ICmrRepositoryAndAgentProvider) selectedObject).getCmrRepositoryDefinition();
 			}
 		}

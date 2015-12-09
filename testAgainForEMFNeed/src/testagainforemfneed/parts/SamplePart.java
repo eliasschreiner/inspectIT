@@ -14,27 +14,23 @@ package testagainforemfneed.parts;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import org.eclipse.core.runtime.preferences.IEclipsePreferences;
-import org.eclipse.e4.core.di.extensions.Preference;
+import org.eclipse.core.commands.ParameterizedCommand;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Text;
-import org.osgi.service.prefs.BackingStoreException;
 
-import info.novatec.inspectit.rcp.InspectIT;
-import info.novatec.inspectit.rcp.preferences.PreferenceSupplier;
+import info.novatec.inspectit.rcp.handlers.ShowRepositoryHandler;
+import testagainforemfneed.handlers.AboutHandler;
 
 public class SamplePart {
 
-	private Text txtInput;
 	private TableViewer tableViewer;
 
 	@Inject
@@ -52,42 +48,59 @@ public class SamplePart {
 	
 	
 	@PostConstruct
-	public void createComposite(Composite parent) {
-//		text = Activator.getDefault().getPreferenceStore().getDefaultString("DUMMY");
-//		
-		IEclipsePreferences preferences = PreferenceSupplier.getPreferences();
-		int theAnswerToTheQuestionOfAllQuestions = preferences.getInt(PreferenceSupplier.P_INT, PreferenceSupplier.DEF_INT);
+	public void createComposite(EHandlerService eHandlerService, ECommandService eCommandService ,Composite parent) {
+			Button btn = new Button(parent, 1);
+			btn.addSelectionListener(new SelectionListener() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+	
+					//Test
+					ParameterizedCommand command =
+							eCommandService.createCommand("info.novatec.inspectit.rcp.commands.showRepository", null);
+					eHandlerService.activateHandler("info.novatec.inspectit.rcp.commands.showRepository", new ShowRepositoryHandler());
+					//mApplication.getContext().set(ShowRepositoryHandler.REPOSITORY_DEFINITION, reposito//ryDefinition);
+					try{
+						if(eHandlerService.canExecute(command)) {
+							 eHandlerService.executeHandler(command);						 
+						}
+					}
+					catch (Exception ex) {
+						throw new RuntimeException(ex);
+					}
+					
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent e) {
+
+					
+					//Test
+					ParameterizedCommand command =
+							eCommandService.createCommand(ShowRepositoryHandler.COMMAND, null);
+					eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new ShowRepositoryHandler());
+				//	mApplication.getContext().set(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
+					try{
+						if(eHandlerService.canExecute(command)) {
+							 eHandlerService.executeHandler(command);						 
+						}
+					}
+					catch (Exception ex) {
+						throw new RuntimeException(ex);
+					}
+				}
+			});
 		
-		String t2 = InspectIT.getDefault().getPreferenceStore().getDefaultString("DUMMY");
-		parent.setLayout(new GridLayout(1, false));
 
-		txtInput = new Text(parent, SWT.BORDER);
-		txtInput.setMessage("Enter text to mark part as dirty");
-		txtInput.addModifyListener(new ModifyListener() {
-			@Override
-			public void modifyText(ModifyEvent e) {
-				dirty.setDirty(true);
-			}
-		});
-		txtInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
-		tableViewer = new TableViewer(parent);
-
-		tableViewer.add("Sample item 1");
-		tableViewer.add("Sample item 2");
-		tableViewer.add("Sample item 3");
-		tableViewer.add("Sample item 4");
-		tableViewer.add("Sample item 5");
-		tableViewer.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
 	}
 
 	@Focus
 	public void setFocus() {
-		tableViewer.getTable().setFocus();
+		//tableViewer.getTable().setFocus();
 	}
 
 	@Persist
 	public void save() {
-		dirty.setDirty(false);
+		//dirty.setDirty(false);
 	}
 }

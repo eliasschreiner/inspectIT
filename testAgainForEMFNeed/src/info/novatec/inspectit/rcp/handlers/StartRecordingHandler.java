@@ -35,6 +35,7 @@ import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -46,20 +47,18 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class StartRecordingHandler{
 
-	@Inject ESelectionService eSelectionService;
-	@Inject EPartService ePartService;
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
+	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, EPartService ePartService,  ESelectionService eSelectionService) throws ExecutionException {
 		// try to get the CMR where recording should start.
 		CmrRepositoryDefinition cmrRepositoryDefinition = null;
 		Collection<PlatformIdent> autoSelectedAgents = Collections.emptyList();
-		ISelection selection = (ISelection) eSelectionService.getSelection();
-		if (selection instanceof StructuredSelection) {
-			Object selectedObject = ((StructuredSelection) selection).getFirstElement();
+		TreeViewer selection = (TreeViewer) eSelectionService.getSelection();
+		if (selection.getSelection() instanceof StructuredSelection) {
+			Object selectedObject = ((StructuredSelection) selection.getSelection()).getFirstElement();
 			if (selectedObject instanceof ICmrRepositoryProvider) {
 				cmrRepositoryDefinition = ((ICmrRepositoryProvider) selectedObject).getCmrRepositoryDefinition();
 			} else if (selectedObject instanceof ICmrRepositoryAndAgentProvider) {

@@ -26,6 +26,7 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
@@ -42,16 +43,15 @@ import org.eclipse.e4.ui.services.IServiceConstants;
  */
 public class CloseStorageHandler  {
 
-	@Inject ESelectionService eSelectionService;
 	/**
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public Object execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, final ExecutionEvent event) throws ExecutionException {
-		final ISelection selection = (ISelection) eSelectionService.getSelection();// HandlerUtil.getCurrentSelection(event);
+	public void execute(ESelectionService eSelectionService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, final ExecutionEvent event) throws ExecutionException {
+		final TreeViewer selection = (TreeViewer) eSelectionService.getSelection();// HandlerUtil.getCurrentSelection(event);
 		
-		if (selection instanceof StructuredSelection) {
-			Object firstElement = ((StructuredSelection) selection).getFirstElement();
+		if (selection.getSelection() instanceof StructuredSelection) {
+			Object firstElement = ((StructuredSelection) selection.getSelection()).getFirstElement();
 			if (firstElement instanceof IStorageDataProvider) {
 				StorageData storageData = ((IStorageDataProvider) firstElement).getStorageData();
 				CmrRepositoryDefinition cmrRepositoryDefinition = ((IStorageDataProvider) firstElement).getCmrRepositoryDefinition();
@@ -67,7 +67,6 @@ public class CloseStorageHandler  {
 				}
 			}
 		}
-		return null;
 	}
 
 	/**

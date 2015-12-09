@@ -17,8 +17,11 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreeSelection;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -30,16 +33,16 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class EditCmrRepositoryHandler {
 
-	@Inject ESelectionService eSelectionService;
-	@Inject EPartService ePartService;
+//	@Inject ESelectionService eSelectionService;
+//	@Inject EPartService ePartService;
 	/**
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
+	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, EPartService ePartService, ESelectionService eSelectionService) throws ExecutionException {
 		CmrRepositoryDefinition cmrRepositoryDefinition = null;
-		IStructuredSelection selection = (IStructuredSelection) eSelectionService.getSelection();
-		Object selectedElement = (StructuredSelection) selection.getFirstElement();
+		TreeViewer selection = (TreeViewer) eSelectionService.getSelection();
+		Object selectedElement = ((StructuredSelection)selection.getSelection()).getFirstElement();
 		if (selectedElement instanceof ICmrRepositoryProvider) {
 			cmrRepositoryDefinition = ((ICmrRepositoryProvider) selectedElement).getCmrRepositoryDefinition();
 		} else {
