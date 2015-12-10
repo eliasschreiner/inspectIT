@@ -1,48 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmlns:ui="http://www.eclipse.org/ui/2010/UIModel/application/ui" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.window.main" selectedElement="_6wlLkMgZEeSyMNYR5xypkQ" label="inspectIT" iconURI="platform:/plugin/testAgainForEMFNeed/icons/selfmade/48x48.png" width="1280" height="960">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_6wlLkMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.ide.perspectivestack">
       <children xsi:type="advanced:Perspective" xmi:id="_6wlLkcgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.perspective.mainview" accessibilityPhrase="Main View" selectedElement="_6wlLksgZEeSyMNYR5xypkQ" label="Main View" iconURI="platform:/plugin/testAgainForEMFNeed/icons/selfmade/16x16.png">
         <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.partsashcontainer.sample" horizontal="true">
-          <children xsi:type="basic:PartSashContainer" xmi:id="_miAO4HjJEeWfB_YImTWJSA" elementId="inspectit.partsashcontainer.0">
-            <children xsi:type="basic:PartStack" xmi:id="_pSFJ0HjJEeWfB_YImTWJSA" elementId="inspectit.partstack.0">
-              <children xsi:type="basic:Part" xmi:id="_q5S_QHjJEeWfB_YImTWJSA" elementId="info.novatec.inspectit.rcp.view.impl.RepositoryManagerView" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.view.impl.RepositoryManagerView" label="Repository Manager" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/server_instance.gif" closeable="true">
-                <toolbar xmi:id="_6LYcEIL3EeWfEs4fkpwvew" elementId="inspectit.toolbar.">
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_tGgbEIL4EeWfEs4fkpwvew" elementId="inspectit.handledtoolitem.showproperties" label="Show Properties" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/agent.gif" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_uGNkkIL4EeWfEs4fkpwvew" elementId="inspectit.handledtoolitem.showagents" label="Show Agents" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/properties.gif"/>
-                  <children xsi:type="menu:ToolBarSeparator" xmi:id="_y2A7kIL4EeWfEs4fkpwvew" elementId="inspectit.toolbarseparator.2"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_YK6ZgJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.6" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/add_obj.gif"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_X17oAJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.5" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/remove_correction.gif" command="_X2RmcJ0JEeWoUtGQMZICDw"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_UJwfIJ0OEeWoUtGQMZICDw" elementId="testagainforemfneed.handledtoolitem.editcmrrepositoryhandler" accessibilityPhrase="Edit CMR" label="EditCmrRepositoryHandler" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/transform.gif" tooltip="Edit CMR" command="_DOYjIJ0OEeWoUtGQMZICDw"/>
-                  <children xsi:type="menu:ToolBarSeparator" xmi:id="_e8gCEJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.toolbarseparator.0"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_Aeg9AJzhEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.0" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/record.gif" tooltip="Start Recording" command="_oXAKcJzgEeWRX9fcCYEZ4w"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_EjlU8JzhEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.1" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/record_term.gif" tooltip="Stop Recording" command="_igBI8JzgEeWRX9fcCYEZ4w"/>
-                  <children xsi:type="menu:ToolBarSeparator" xmi:id="_r2J1EJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.toolbarseparator.1"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_tB-vAJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.copybuffertostoragehandler" accessibilityPhrase="Copy Buffer to Storage" label="CopyBuffertoStorageHandler" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/buffer_copy.gif" tooltip="Copy Buffer to Storage" command="_bpGKQJ0pEeWcydh7kQA73w"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_stwygJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.7" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/buffer_clear.gif"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_tjUhgJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.managecmrlabels" accessibilityPhrase="Manage CMR Labels" label="Manage CMR Labels" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/label.gif" tooltip="Manage CMR Labels" command="_aHKykJ0rEeWcydh7kQA73w"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_ubGeEJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.11" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/term_restart.gif"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_u2pKkJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.shutdowncmrhandler" accessibilityPhrase="Shutdown CMR" label="ShutdownCmrHandler" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/terminate_co.gif" tooltip="Kills the selected CMR" command="_nKz1kJ0LEeWoUtGQMZICDw"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_tTJXgJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.9" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/build.gif"/>
-                  <children xsi:type="menu:ToolBarSeparator" xmi:id="_sKBzUJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.toolbarseparator.2"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="_Qv6LEJzlEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.13" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/refresh.gif"/>
-                </toolbar>
-              </children>
-              <children xsi:type="basic:Part" xmi:id="_rUiw0HjJEeWfB_YImTWJSA" elementId="inspectit.part.storagemanager" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.view.impl.StorageManagerView" label="Storage Manager" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/catalog.gif" closeable="true">
-                <toolbar xmi:id="_-dVukIL5EeWfEs4fkpwvew" elementId="inspectit.toolbar.1">
-                  <children xsi:type="menu:DirectToolItem" xmi:id="__LWEEIL5EeWfEs4fkpwvew" elementId="inspectit.directtoolitem.2"/>
-                  <children xsi:type="menu:HandledToolItem" xmi:id="__uOHoIL5EeWfEs4fkpwvew" elementId="inspectit.handledtoolitem.6"/>
-                </toolbar>
-              </children>
-              <children xsi:type="basic:Part" xmi:id="_vzyjUHjJEeWfB_YImTWJSA" elementId="info.novatec.inspectit.rcp.view.dataExplorer" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.view.impl.DataExplorerView" label="Data Explorer" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/storage.gif" closeable="true">
-                <toolbar xmi:id="_xnV2wIRdEeWfEs4fkpwvew" elementId="inspectit.toolbar.2"/>
-              </children>
+          <children xsi:type="basic:PartStack" xmi:id="_pSFJ0HjJEeWfB_YImTWJSA" elementId="inspectit.partstack.0">
+            <children xsi:type="basic:Part" xmi:id="_q5S_QHjJEeWfB_YImTWJSA" elementId="info.novatec.inspectit.rcp.view.impl.RepositoryManagerView" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.view.impl.RepositoryManagerView" label="Repository Manager" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/server_instance.gif" closeable="true">
+              <toolbar xmi:id="_6LYcEIL3EeWfEs4fkpwvew" elementId="inspectit.toolbar.">
+                <children xsi:type="menu:HandledToolItem" xmi:id="_tGgbEIL4EeWfEs4fkpwvew" elementId="inspectit.handledtoolitem.showproperties" label="Show Properties" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/agent.gif" type="Check" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_uGNkkIL4EeWfEs4fkpwvew" elementId="inspectit.handledtoolitem.showagents" label="Show Agents" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/properties.gif" type="Check"/>
+                <children xsi:type="menu:ToolBarSeparator" xmi:id="_y2A7kIL4EeWfEs4fkpwvew" elementId="inspectit.toolbarseparator.2"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_YK6ZgJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.6" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/add_obj.gif"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_X17oAJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.5" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/remove_correction.gif" command="_X2RmcJ0JEeWoUtGQMZICDw"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_UJwfIJ0OEeWoUtGQMZICDw" elementId="testagainforemfneed.handledtoolitem.editcmrrepositoryhandler" accessibilityPhrase="Edit CMR" label="EditCmrRepositoryHandler" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/transform.gif" tooltip="Edit CMR" command="_DOYjIJ0OEeWoUtGQMZICDw"/>
+                <children xsi:type="menu:ToolBarSeparator" xmi:id="_e8gCEJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.toolbarseparator.0"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_Aeg9AJzhEeWRX9fcCYEZ4w" elementId="info.novatec.inspectit.rcp.toolitems.startRecording" accessibilityPhrase="Start recording" label="Start recording" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/record.gif" tooltip="Start Recording" command="_oXAKcJzgEeWRX9fcCYEZ4w">
+                  <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_FMNoAJ6eEeWeW-hwSGo__g" coreExpressionId="info.novatec.inspectit.recordingExpression"/>
+                </children>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_EjlU8JzhEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.1" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/record_term.gif" tooltip="Stop Recording" command="_igBI8JzgEeWRX9fcCYEZ4w">
+                  <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_cbLPQJ8dEeWeW-hwSGo__g" coreExpressionId="info.novatec.inspectit.recordingActive"/>
+                </children>
+                <children xsi:type="menu:ToolBarSeparator" xmi:id="_r2J1EJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.toolbarseparator.1"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_tB-vAJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.copybuffertostoragehandler" accessibilityPhrase="Copy Buffer to Storage" label="CopyBuffertoStorageHandler" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/buffer_copy.gif" tooltip="Copy Buffer to Storage" command="_bpGKQJ0pEeWcydh7kQA73w"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_stwygJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.7" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/buffer_clear.gif"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_tjUhgJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.managecmrlabels" accessibilityPhrase="Manage CMR Labels" label="Manage CMR Labels" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/label.gif" tooltip="Manage CMR Labels" command="_aHKykJ0rEeWcydh7kQA73w"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_ubGeEJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.11" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/term_restart.gif"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_u2pKkJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.shutdowncmrhandler" accessibilityPhrase="Shutdown CMR" label="ShutdownCmrHandler" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/terminate_co.gif" tooltip="Kills the selected CMR" command="_nKz1kJ0LEeWoUtGQMZICDw"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_tTJXgJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.9" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/build.gif"/>
+                <children xsi:type="menu:ToolBarSeparator" xmi:id="_sKBzUJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.toolbarseparator.2"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_Qv6LEJzlEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.13" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/refresh.gif"/>
+              </toolbar>
+            </children>
+            <children xsi:type="basic:Part" xmi:id="_vzyjUHjJEeWfB_YImTWJSA" elementId="info.novatec.inspectit.rcp.view.storageManager" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.view.impl.StorageManagerView" label="Storage Manager" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/catalog.gif" closeable="true">
+              <toolbar xmi:id="_xnV2wIRdEeWfEs4fkpwvew" elementId="inspectit.toolbar.2">
+                <children xsi:type="menu:HandledToolItem" xmi:id="_F3q7cJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.12" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/properties.gif" type="Check"/>
+                <children xsi:type="menu:ToolBarSeparator" xmi:id="_IyrUAJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.toolbarseparator.3"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_Hvk4QJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.14" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/filter_ps.gif">
+                  <menu xmi:id="_VTsvIJ6BEeWeW-hwSGo__g" elementId="testagainforemfneed.menu.0">
+                    <children xsi:type="menu:HandledMenuItem" xmi:id="_XBMywJ6BEeWeW-hwSGo__g" elementId="testagainforemfneed.handledmenuitem.0"/>
+                    <children xsi:type="menu:HandledMenuItem" xmi:id="_XXqyAJ6BEeWeW-hwSGo__g" elementId="testagainforemfneed.handledmenuitem.1"/>
+                    <children xsi:type="menu:HandledMenuItem" xmi:id="_XmPZgJ6BEeWeW-hwSGo__g" elementId="testagainforemfneed.handledmenuitem.2"/>
+                  </menu>
+                </children>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_JDCrQJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.16" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/add_obj.gif"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_JXIE4J6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.editstoragedatahandler" accessibilityPhrase="Edit Storage Data" label="EditStorageDataHandler" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/edit.gif" tooltip="Edit Storage Data" command="_lb5KYJ80EeWeW-hwSGo__g"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_Jq6jkJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.18" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/label_add.gif"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_J-QWUJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.19" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/storage_finalize.gif"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_KeFs8J6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.20" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/delete_obj.gif"/>
+                <children xsi:type="menu:ToolBarSeparator" xmi:id="_K_29QJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.toolbarseparator.4"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_LYs7EJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.downloadstoragecommand" accessibilityPhrase="Download Storage" label="DownloadStorageCommand" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/storage_download.gif" tooltip="Download Storage" command="_ZM2d0J84EeWeW-hwSGo__g"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_Lx_k0J6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.22" accessibilityPhrase="UploadStorageHandler" label="UploadStorageHandler" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/storage_upload.gif" tooltip="Upload Storage" command="_e_k8UJ82EeWeW-hwSGo__g"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_MB63MJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.importstoragewizard" accessibilityPhrase="Import Storage" label="Import Storage Wizard" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/import.gif" tooltip="Import Storage" command="_BaQgcJ86EeWeW-hwSGo__g"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_MqYlYJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.exportstoragewizard" accessibilityPhrase="Export Storage " label="Export Storage Wizard" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/export.gif" tooltip="Export Storage " command="_KiqPYJ86EeWeW-hwSGo__g"/>
+                <children xsi:type="menu:ToolBarSeparator" xmi:id="_NPIRMJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.toolbarseparator.5"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_NpdcwJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.25" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/refresh.gif"/>
+              </toolbar>
+            </children>
+            <children xsi:type="basic:Part" xmi:id="_rUiw0HjJEeWfB_YImTWJSA" elementId="info.novatec.inspectit.rcp.view.dataExplorer" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.view.impl.DataExplorerView" label="Data Explorer" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/storage.gif" closeable="true">
+              <toolbar xmi:id="_FMQKcJ6BEeWeW-hwSGo__g" elementId="testagainforemfneed.toolbar.0">
+                <children xsi:type="menu:HandledToolItem" xmi:id="_G1Iz0J6BEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.8" iconURI="platform:/plugin/testAgainForEMFNeed/icons/fugue/document-tree.png" type="Radio"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_HEUfUJ6BEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.10" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/collapseall.gif"/>
+                <children xsi:type="menu:HandledToolItem" xmi:id="_HSv84J6BEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.15" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/refresh.gif"/>
+              </toolbar>
             </children>
           </children>
           <children xsi:type="basic:PartStack" xmi:id="__hg2MIh8EeWPeeIbKDQGtQ" elementId="inspectit.partstack.1">
             <children xsi:type="basic:Part" xmi:id="_ByRX4Ih9EeWPeeIbKDQGtQ" elementId="inspectit.part.editorpart" contributionURI="bundleclass://org.eclipse.e4.ui.progress/org.eclipse.e4.ui.progress.ProgressView" label="Editor Part"/>
           </children>
         </children>
+        <properties key="onlineStatus" value="UNKNOWN"/>
+        <properties key="recordingActive" value="false"/>
       </children>
     </children>
     <mainMenu xmi:id="_6wlLicgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.menu">
@@ -96,6 +123,11 @@
   <handlers xmi:id="_Ixm7IJ0OEeWoUtGQMZICDw" elementId="info.novatec.inspectit.rcp.handlers.EditCmrRepositoryHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.EditCmrRepositoryHandler" command="_DOYjIJ0OEeWoUtGQMZICDw"/>
   <handlers xmi:id="_hZNHsJ0pEeWcydh7kQA73w" elementId="info.novatec.inspectit.rcp.handlers.CopyBufferToStorage" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.CopyBufferToStorageHandler" command="_bpGKQJ0pEeWcydh7kQA73w"/>
   <handlers xmi:id="_gVyQ8J0rEeWcydh7kQA73w" elementId="info.novatec.inspectit.rcp.handlers.ShowLabelsManagerHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.ShowLabelsManagerHandler" command="_aHKykJ0rEeWcydh7kQA73w"/>
+  <handlers xmi:id="_uoL60J80EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.handlers.EditStorageDataHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.EditStorageDataHandler" command="_lb5KYJ80EeWeW-hwSGo__g"/>
+  <handlers xmi:id="_ktycUJ82EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.handlers.UploadStorageHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.UploadStorageHandler" command="_e_k8UJ82EeWeW-hwSGo__g"/>
+  <handlers xmi:id="_eyl-UJ84EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.handlers.DownloadStorageHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.DownloadStorageHandler" command="_ZM2d0J84EeWeW-hwSGo__g"/>
+  <handlers xmi:id="_OZPfYJ86EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.wizard.ImportStorageWizard" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.wizard.ImportStorageWizard" command="_BaQgcJ86EeWeW-hwSGo__g"/>
+  <handlers xmi:id="_oNncYJ86EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.wizard.ExportStorageWizard" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.wizard.ExportStorageWizard" command="_KiqPYJ86EeWeW-hwSGo__g"/>
   <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.bindingtable" bindingContext="_6wlLecgZEeSyMNYR5xypkQ">
     <bindings xmi:id="_6wlLf8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.keybinding.m1q" keySequence="M1+Q" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
     <bindings xmi:id="_6wlLgsgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.keybinding.m1o" keySequence="M1+O" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
@@ -124,6 +156,11 @@
   <commands xmi:id="_DOYjIJ0OEeWoUtGQMZICDw" elementId="info.novatec.inspectit.rcp.commands.editCmrRepositoryCommand" commandName="EditCmrRepositoryCommand" description="Edit the Cmr Command"/>
   <commands xmi:id="_bpGKQJ0pEeWcydh7kQA73w" elementId="info.novatec.inspectit.rcp.commands.copyBufferToStorageCommand" commandName="CopyBufferToStorageCommand" description="Copy Buffer to Storage Command"/>
   <commands xmi:id="_aHKykJ0rEeWcydh7kQA73w" elementId="info.novatec.inspectit.rcp.commands.showLabelsManagerHandler" commandName="ShowLabelsManagerHandler" description="Handles the Label Manager"/>
+  <commands xmi:id="_lb5KYJ80EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.commands.editStorageDataCommand" commandName="EditStorageDataHandler" description="EditStorageDataHandler"/>
+  <commands xmi:id="_e_k8UJ82EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.commands.uploadStorageCommand" commandName="uploadStorageCommand" description="uploadStorageCommand"/>
+  <commands xmi:id="_ZM2d0J84EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.commands.downloadStorageCommand" commandName="DownloadStorageCommand" description="Download Storage"/>
+  <commands xmi:id="_BaQgcJ86EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.commands.importStorageCommand" commandName="ImportStorageCommand" description="ImportStorageCommand"/>
+  <commands xmi:id="_KiqPYJ86EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.commands.exportStorageCommand" commandName="ExportStorageCommand" description="ExportStorageCommand"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

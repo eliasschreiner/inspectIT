@@ -21,6 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
+import org.eclipse.e4.ui.model.application.MApplication;
+
 /**
  * The CMR repository definition initializes the services exposed by the CMR.
  * 
@@ -413,10 +417,12 @@ public class CmrRepositoryDefinition implements RepositoryDefinition, ICmrReposi
 	 *            New status.
 	 * @return True if change was successful, false if the change is not allowed.
 	 */
+	@Inject	MApplication mApplication;
+	
 	public boolean changeOnlineStatus(OnlineStatus newStatus) {
 		if (onlineStatus.canChangeTo(newStatus)) {
 			OnlineStatus oldStatus = onlineStatus;
-			onlineStatus = newStatus;
+			onlineStatus = newStatus;		
 			synchronized (cmrRepositoryChangeListeners) {
 				for (CmrRepositoryChangeListener changeListener : cmrRepositoryChangeListeners) {
 					changeListener.repositoryOnlineStatusUpdated(this, oldStatus, newStatus);

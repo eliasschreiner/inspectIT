@@ -1,5 +1,40 @@
 package info.novatec.inspectit.rcp.handlers;
 
+import java.util.Collection;
+import java.util.Collections;
+
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.CanExecute;
+import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.ui.di.UIEventTopic;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.menu.impl.HandledToolItemImpl;
+import org.eclipse.e4.ui.progress.IProgressConstants;
+import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.workbench.UIEvents;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreeSelection;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.widgets.Shell;
+
 import info.novatec.inspectit.cmr.model.PlatformIdent;
 import info.novatec.inspectit.communication.data.cmr.CmrStatusData;
 import info.novatec.inspectit.rcp.InspectIT;
@@ -8,36 +43,11 @@ import info.novatec.inspectit.rcp.formatter.NumberFormatter;
 import info.novatec.inspectit.rcp.provider.ICmrRepositoryAndAgentProvider;
 import info.novatec.inspectit.rcp.provider.ICmrRepositoryProvider;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition.OnlineStatus;
 import info.novatec.inspectit.rcp.view.impl.RepositoryManagerView;
 import info.novatec.inspectit.rcp.view.impl.StorageManagerView;
 import info.novatec.inspectit.rcp.wizard.StartRecordingWizard;
 import info.novatec.inspectit.storage.recording.RecordingProperties;
-
-import java.util.Collection;
-import java.util.Collections;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.e4.core.di.annotations.Execute;
-import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.progress.IProgressConstants;
-import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.e4.ui.workbench.IWorkbench;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
-import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.wizard.WizardDialog;
-import org.eclipse.swt.widgets.Shell;
 
 /**
  * Starts recording.
@@ -47,12 +57,19 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class StartRecordingHandler{
 
+
+	public static final String KEY = "recordingExpression"; //$NON-NLS-1$
+	@Inject MApplication mApplication;
+	@Inject	IEventBroker eventBroker;
 	
+	HandledToolItemImpl toolItem; 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, EPartService ePartService,  ESelectionService eSelectionService) throws ExecutionException {
+			
+		
 		// try to get the CMR where recording should start.
 		CmrRepositoryDefinition cmrRepositoryDefinition = null;
 		Collection<PlatformIdent> autoSelectedAgents = Collections.emptyList();
@@ -125,5 +142,42 @@ public class StartRecordingHandler{
 		}
 		//return null;
 	}
+	
+//	@SuppressWarnings("restriction")
+//	@PostConstruct
+//	public void postConstruct(MApplication application, EModelService modelService, @UIEventTopic(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC) String test, 
+//			@Named(KEY) Boolean recordingExpression) {
+//		toolItem = (HandledToolItemImpl) modelService.find("info.novatec.inspectit.rcp.toolitems.startRecording", application);
+//		String test1 = test;
+//		toolItem.setVisible(recordingExpression);
+//		
+//	}
+	
+	
 
+
+	
+//	boolean canExecute(MApplication mApplication, @Named(IServiceConstants.ACTIVE_SELECTION) @Optional ISelection selection) {		
+	@CanExecute
+	@Inject
+	@Optional
+	boolean canExecute(	@UIEventTopic(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC) String test, 
+			@Named(KEY) Boolean debugEnabled)
+		{	
+		//		boolean visible = null != selection;
+//		if(selection instanceof ICmrRepositoryProvider || selection instanceof ICmrRepositoryAndAgentProvider)
+//		{
+//			
+//			
+//			
+//		}
+//			
+//		toolItem.setVisible(visible);
+		
+		Boolean b =  (Boolean) mApplication.getContext().get(RepositoryManagerView.KEY);
+		if(debugEnabled!=null)return debugEnabled;
+		return b;		
+		
+	}
+	
 }

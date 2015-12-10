@@ -24,6 +24,10 @@
                name="appName"
                value="inspectIT">
          </property>
+         <property
+               name="lifeCycleURI"
+               value="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.LifecycleHook">
+         </property>
       </product>
    </extension>
    <extension
@@ -32,5 +36,123 @@
             class="info.novatec.inspectit.rcp.preferences.InspectITPreferenceInitializer">
       </initializer>
    </extension>
-
+ <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="info.novatec.inspectit.rcp.editor.testers.ActiveSubViewTester"
+            id="info.novatec.inspectit.ActiveSubViewTester"
+            namespace="info.novatec.inspectit"
+            properties="activeSubView, hasSubView"
+            type="info.novatec.inspectit.rcp.editor.root.AbstractRootEditor">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.editor.testers.SubViewClassificationTester"
+            id="info.novatec.inspectit.SubViewClassificationTester"
+            namespace="info.novatec.inspectit"
+            properties="subViewClassification"
+            type="info.novatec.inspectit.rcp.editor.root.AbstractRootEditor">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.editor.testers.NavigationTester"
+            id="info.novatec.inspectit.NavigationTester"
+            namespace="info.novatec.inspectit"
+            properties="canNavigateToPlotting, canNavigateToInvocations, canNavigateToExceptionType, canNavigateToAggregatedTimerData, canNavigateToAggregatedSqlData"
+            type="org.eclipse.jface.viewers.StructuredSelection">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.editor.testers.AddToSteppingObjectsTester"
+            id="info.novatec.inspectit.AddToSteppingObjectsTester"
+            namespace="info.novatec.inspectit"
+            properties="canAddToSteppingObjects"
+            type="org.eclipse.jface.viewers.StructuredSelection">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.editor.testers.MaximizeMinimizeTester"
+            id="info.novatec.inspectit.MaximizeMinimizeTester"
+            namespace="info.novatec.inspectit"
+            properties="canMaximize, canMinimize"
+            type="info.novatec.inspectit.rcp.editor.root.AbstractRootEditor">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.tester.StorageStateTester"
+            id="info.inspectit.rcp.StorageStateTester"
+            namespace="info.novatec.inspectit"          properties="storageState, isStorageMounted, isStorageDownloaded"
+            type="info.novatec.inspectit.rcp.provider.IStorageDataProvider">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.tester.CmrOnlineStatusTester"
+            id="info.inspectit.rcp.CmrTester"
+            namespace="info.novatec.inspectit"
+            properties="onlineStatus, recordingActive"
+            type="info.novatec.inspectit.rcp.provider.ICmrRepositoryProvider">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.tester.CmrOnlineStatusTester"
+            id="info.inspectit.rcp.CmrTester"
+            namespace="info.novatec.inspectit"
+            properties="onlineStatus, recordingActive"
+            type="info.novatec.inspectit.rcp.provider.ICmrRepositoryAndAgentProvider">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.tester.CmrOnlineStatusTester"
+            id="info.inspectit.rcp.CmrTester"
+            namespace="info.novatec.inspectit"
+            properties="onlineStatus, recordingActive"
+            type="info.novatec.inspectit.rcp.provider.IStorageDataProvider">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.tester.CmrOnlineStatusTester"
+            id="info.inspectit.rcp.CmrTester"
+            namespace="info.novatec.inspectit"
+            properties="onlineStatus, recordingActive"
+            type="info.novatec.inspectit.rcp.provider.IInputDefinitionProvider">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.tester.InputDefinitionTester"
+            id="info.inspectit.rcp.InputDefinitionTester"
+            namespace="info.novatec.inspectit"
+            properties="repositoryType"
+            type="info.novatec.inspectit.rcp.provider.IInputDefinitionProvider">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.tester.CanRefreshViewTester"
+            id="info.inspectit.rcp.CanRefreshTester"
+            namespace="info.novatec.inspectit"
+            properties="canRefresh"
+            type="info.novatec.inspectit.rcp.view.IRefreshableView">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.tester.AgentTester"
+            id="info.inspectit.rcp.AgentTester"
+            namespace="info.novatec.inspectit"
+            properties="canDelete"
+            type="info.novatec.inspectit.rcp.model.AgentLeaf">
+      </propertyTester>
+      <propertyTester
+            class="info.novatec.inspectit.rcp.tester.TimerDataTester"
+            id="info.inspectit.rcp.TimerDataTester"
+            namespace="info.novatec.inspectit"
+            properties="canChart"
+            type="info.novatec.inspectit.communication.data.TimerData">
+      </propertyTester>
+   </extension>
+ <extension
+       point="org.eclipse.core.expressions.definitions">
+    <definition
+          id="info.novatec.inspectit.recordingExpression">
+          <with variable="recordingExpression">
+             <equals
+                  value="true">
+            </equals>
+         </with>
+    </definition>
+    <definition
+          id="recordingActive">
+          <with variable="recordingActive">
+            <equals
+                  value="false">
+            </equals>
+          </with>
+    </definition>
+ </extension>
 </plugin>

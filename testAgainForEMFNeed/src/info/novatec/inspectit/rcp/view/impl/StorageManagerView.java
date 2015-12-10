@@ -945,7 +945,6 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 	public void dispose() {
 		cmrRepositoryManager.removeCmrRepositoryChangeListener(this);
 		storageManager.removeStorageChangeListener(this);
-		dispose();
 	}
 
 	/**

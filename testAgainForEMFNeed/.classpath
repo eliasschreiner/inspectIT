@@ -7,6 +7,8 @@
 			<accessrule kind="accessible" pattern="org/eclipse/e4/ui/internal/workbench/swt/E4Application"/>
 			<accessrule kind="accessible" pattern="org/eclipse/e4/core/commands/EHandlerService"/>
 			<accessrule kind="accessible" pattern="org/eclipse/e4/core/commands/ECommandService"/>
+			<accessrule kind="accessible" pattern="org/eclipse/e4/ui/model/application/ui/menu/impl/HandledToolItemImpl"/>
+			<accessrule kind="accessible" pattern="org/eclipse/e4/ui/workbench/lifecycle/ProcessAdditions"/>
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>

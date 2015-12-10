@@ -12,6 +12,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Provider;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -20,6 +21,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
@@ -33,6 +35,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
+import org.osgi.service.log.LogService;
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.LoggerContext;
@@ -112,7 +115,7 @@ public class InspectIT implements BundleActivator {
 	/**
 	 * {@link ILogListener} used for logging.
 	 */
-	private ILogListener logListener;
+	@Inject private Logger logListener;
 
 	/**
 	 * This method is called upon plug-in activation.
@@ -128,9 +131,7 @@ public class InspectIT implements BundleActivator {
 		InspectIT.context = context;
 		plugin = this;	
 		
-		//initLogger();
-		//logListener = new LogListener();
-		//Platform.addLogListener(logListener);		
+		//initLogger();		
 		initializeImageRegistry(imageRegistry);
 		locateRuntimeDir();
 		
@@ -213,12 +214,10 @@ public class InspectIT implements BundleActivator {
 	 *             in case of error.
 	 */
 	public void stop(BundleContext context) throws Exception {
-//		if (null != cmrRepositoryManager) {
-//			cmrRepositoryManager.cancelAllUpdateRepositoriesJobs();
-//		}
+		if (null != cmrRepositoryManager) {
+			cmrRepositoryManager.cancelAllUpdateRepositoriesJobs();
+		}
 
-		// remove log listener
-		Platform.removeLogListener(logListener);
 		logListener = null; // NOPMD
 
 	    InspectIT.context = null;

@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Provider;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -29,17 +30,21 @@ import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
+import org.eclipse.e4.ui.model.application.ui.menu.impl.HandledToolItemImpl;
 import org.eclipse.e4.ui.progress.IProgressConstants;
 import org.eclipse.e4.ui.progress.UIJob;
 import org.eclipse.e4.ui.services.EMenuService;
+import org.eclipse.e4.ui.workbench.UIEvents;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
@@ -64,10 +69,14 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -200,11 +209,9 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	 */
 	private List<Object> expandedList;
 	
-	//@Inject EPartService ePartService;
+	public static final String KEY = "recordingExpression"; //$NON-NLS-1$
 
-	//@Inject MApplication mApplication;
 	
-	//@Inject MPart mPart;
 	
 	//@Inject MToolBar mToolBar;
 	@Inject ESelectionService eSelectionService;
@@ -213,6 +220,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	@Inject ECommandService eCommandService;
 	@Inject	private IEventBroker eventBroker; 
 	@Inject MApplication mApplication;
+	@Inject EModelService eModelService;
 	
 	/**
 	 * Default constructor.
@@ -223,14 +231,34 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		createInputList();				
 	}	
 	
+	
+	@SuppressWarnings("restriction")
 	@PostConstruct
-	public void createComposite(Composite parent)		{
-		
-		IEclipsePreferences preferences = PreferenceSupplier.getPreferences();
-		int theAnswerToTheQuestionOfAllQuestions = preferences.getInt(PreferenceSupplier.P_INT, PreferenceSupplier.DEF_INT);
+	public void createComposite(Composite parent)		
+	{	
+		Button btn = new Button(parent,3);
+		btn.addSelectionListener(new SelectionListener() {
 			
-		String text = Platform.getPreferencesService().
-		  getString(InspectIT.ID,PreferencesConstants.CMR_REPOSITORY_DEFINITIONS,"CMR_REPOSITORY_DEFINITIONS",null); 
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				mApplication.getContext().modify(KEY, "false");
+				eventBroker.post(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC,
+						UIEvents.ALL_ELEMENT_ID);
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		//		IEclipsePreferences preferences = PreferenceSupplier.getPreferences();
+//		int theAnswerToTheQuestionOfAllQuestions = preferences.getInt(PreferenceSupplier.P_INT, PreferenceSupplier.DEF_INT);
+//			
+//		String text = Platform.getPreferencesService().
+//		  getString(InspectIT.ID,PreferencesConstants.CMR_REPOSITORY_DEFINITIONS,"CMR_REPOSITORY_DEFINITIONS",null); 
 
 		createViewToolbar();				
 		toolkit = new FormToolkit(parent.getDisplay());
