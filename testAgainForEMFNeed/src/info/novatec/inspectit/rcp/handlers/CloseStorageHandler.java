@@ -47,9 +47,9 @@ public class CloseStorageHandler  {
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public void execute(ESelectionService eSelectionService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, final ExecutionEvent event) throws ExecutionException {
+	public void execute(ESelectionService eSelectionService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, @Named(IServiceConstants.ACTIVE_SELECTION) TreeViewer treeViewer) throws ExecutionException {
 		final TreeViewer selection = (TreeViewer) eSelectionService.getSelection();// HandlerUtil.getCurrentSelection(event);
-		
+		TreeViewer selection2 = treeViewer;
 		if (selection.getSelection() instanceof StructuredSelection) {
 			Object firstElement = ((StructuredSelection) selection.getSelection()).getFirstElement();
 			if (firstElement instanceof IStorageDataProvider) {

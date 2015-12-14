@@ -7,9 +7,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.expressions.IEvaluationContext;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
+import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
@@ -21,11 +28,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.commands.ICommandService;
-import org.eclipse.ui.menus.WorkbenchWindowControlContribution;
-import org.eclipse.ui.services.IEvaluationService;
-
 /**
  * The documentation search contribution item displayed in the main toolbar.
  * 
@@ -44,6 +46,9 @@ public class SearchDocumentationContributionItem{
 	 */
 	private Text searchText;
 
+	@Inject ECommandService eCommandService;
+	@Inject EHandlerService eHandlerService;
+	@Inject MApplication mApplication;
 	/**
 	 * Default constructor.
 	 */
@@ -57,14 +62,14 @@ public class SearchDocumentationContributionItem{
 	 *            Id of contribution item
 	 */
 	public SearchDocumentationContributionItem(String id) {
-		super(id);
+		//super(id);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	protected Control createControl(Composite parent) {
+	@PostConstruct
+	public void createControl(Composite parent) {
 		Composite main = new Composite(parent, SWT.NONE);
 		GridLayout gl = new GridLayout(1, false);
 		gl.marginHeight = 0;
@@ -72,6 +77,7 @@ public class SearchDocumentationContributionItem{
 
 		searchText = new Text(main, SWT.SINGLE | SWT.BORDER | SWT.ICON_SEARCH | SWT.SEARCH);
 		setDefaultText();
+		
 		GridData gridData = new GridData(SWT.CENTER, SWT.CENTER, false, false);
 		gridData.widthHint = 150;
 		searchText.setLayoutData(gridData);
@@ -101,8 +107,6 @@ public class SearchDocumentationContributionItem{
 				}
 			}
 		});
-
-		return main;
 	}
 
 	/**
@@ -121,19 +125,21 @@ public class SearchDocumentationContributionItem{
 		searchText.setForeground(Display.getDefault().getSystemColor(SWT.COLOR_BLACK));
 	}
 
-	/**
+	/**org.eclipse.core.expressions
 	 * Executes the search.
 	 */
 	private void executeSearch() {
 		String searchString = searchText.getText();
-		if (StringUtils.isNotBlank(searchString)) {
-			ICommandService commandService = (ICommandService) PlatformUI.getWorkbench().getService(ICommandService.class);
-			IEvaluationService evaluationService = (IEvaluationService) PlatformUI.getWorkbench().getService(IEvaluationService.class);
+		if (StringUtils.isNotBlank(searchString)) {					
 			try {
-				Command searchCommand = commandService.getCommand("info.novatec.inspectit.rcp.commands.searchDocumentation");
+				Command searchCommand = eCommandService.getCommand("info.novatec.inspectit.rcp.commands.searchDocumentation");
+			
 				Map<String, String> params = new HashMap<String, String>();
 				params.put(SearchDocumentationHandler.SEARCH_DOCUMENTATION_PARAMETER, searchString);
-				searchCommand.executeWithChecks(new ExecutionEvent(searchCommand, params, searchText, evaluationService.getCurrentState()));
+				mApplication.getContext().set(SearchDocumentationHandler.SEARCH_DOCUMENTATION_PARAMETER, searchString);
+				searchCommand.executeWithChecks(new ExecutionEvent(searchCommand, params, searchText,  mApplication.getContext().get(SearchDocumentationHandler.SEARCH_DOCUMENTATION_PARAMETER)));
+				
+			
 			} catch (Exception e) {
 				InspectIT.getDefault().createErrorDialog("There was an exception executing the wiki search.", e, -1);
 			}

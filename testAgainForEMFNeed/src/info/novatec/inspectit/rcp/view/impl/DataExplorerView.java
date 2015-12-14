@@ -818,7 +818,6 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	public void dispose() {
 		InspectIT.getDefault().getCmrRepositoryManager().removeCmrRepositoryChangeListener(this);
 		InspectIT.getDefault().getInspectITStorageManager().removeStorageChangeListener(this);
-		dispose();
 	}
 
 	/**

@@ -40,6 +40,7 @@ import info.novatec.inspectit.communication.data.cmr.CmrStatusData;
 import info.novatec.inspectit.rcp.InspectIT;
 import info.novatec.inspectit.rcp.InspectITImages;
 import info.novatec.inspectit.rcp.formatter.NumberFormatter;
+import info.novatec.inspectit.rcp.model.DeferredAgentsComposite;
 import info.novatec.inspectit.rcp.provider.ICmrRepositoryAndAgentProvider;
 import info.novatec.inspectit.rcp.provider.ICmrRepositoryProvider;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
@@ -58,22 +59,22 @@ import info.novatec.inspectit.storage.recording.RecordingProperties;
 public class StartRecordingHandler{
 
 
-	public static final String KEY = "recordingExpression"; //$NON-NLS-1$
-	@Inject MApplication mApplication;
-	@Inject	IEventBroker eventBroker;
-	
-	HandledToolItemImpl toolItem; 
+//	public static final String KEY = "recordingExpression"; //$NON-NLS-1$
+//	@Inject MApplication mApplication;
+//	@Inject	IEventBroker eventBroker;
+//	
+//	HandledToolItemImpl toolItem; 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, EPartService ePartService,  ESelectionService eSelectionService) throws ExecutionException {
-			
-		
 		// try to get the CMR where recording should start.
 		CmrRepositoryDefinition cmrRepositoryDefinition = null;
 		Collection<PlatformIdent> autoSelectedAgents = Collections.emptyList();
+		
 		TreeViewer selection = (TreeViewer) eSelectionService.getSelection();
+		
 		if (selection.getSelection() instanceof StructuredSelection) {
 			Object selectedObject = ((StructuredSelection) selection.getSelection()).getFirstElement();
 			if (selectedObject instanceof ICmrRepositoryProvider) {
@@ -158,26 +159,26 @@ public class StartRecordingHandler{
 
 	
 //	boolean canExecute(MApplication mApplication, @Named(IServiceConstants.ACTIVE_SELECTION) @Optional ISelection selection) {		
-	@CanExecute
-	@Inject
-	@Optional
-	boolean canExecute(	@UIEventTopic(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC) String test, 
-			@Named(KEY) Boolean debugEnabled)
-		{	
-		//		boolean visible = null != selection;
-//		if(selection instanceof ICmrRepositoryProvider || selection instanceof ICmrRepositoryAndAgentProvider)
-//		{
-//			
-//			
-//			
-//		}
-//			
-//		toolItem.setVisible(visible);
-		
-		Boolean b =  (Boolean) mApplication.getContext().get(RepositoryManagerView.KEY);
-		if(debugEnabled!=null)return debugEnabled;
-		return b;		
-		
-	}
+//	@CanExecute
+//	@Inject
+//	@Optional
+//	boolean canExecute(	@UIEventTopic(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC) String test, 
+//			@Named(KEY) Boolean debugEnabled)
+//		{	
+//		//		boolean visible = null != selection;
+////		if(selection instanceof ICmrRepositoryProvider || selection instanceof ICmrRepositoryAndAgentProvider)
+////		{
+////			
+////			
+////			
+////		}
+////			
+////		toolItem.setVisible(visible);
+//		
+//		Boolean b =  (Boolean) mApplication.getContext().get(RepositoryManagerView.KEY);
+//		if(debugEnabled!=null)return debugEnabled;
+//		return b;		
+//		
+//	}
 	
 }

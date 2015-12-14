@@ -63,7 +63,7 @@ public class CloseAndShowStorageHandler {
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public void execute(EPartService ePartService, EHandlerService eHandlerService, ECommandService eCommandService, MApplication mApplication,@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, final ExecutionEvent event) throws ExecutionException {
+	public void execute(EPartService ePartService, EHandlerService eHandlerService, ECommandService eCommandService, MApplication mApplication,@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
 		IStorageDataProvider storageDataProvider = (IStorageDataProvider) mApplication.getContext().get(STORAGE_DATA_PROVIDER);// HandlerUtil.getVariable(event, STORAGE_DATA_PROVIDER);
 
 		final StorageData storageData = storageDataProvider.getStorageData();

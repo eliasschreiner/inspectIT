@@ -3,6 +3,7 @@ package info.novatec.inspectit.rcp.handlers;
 import info.novatec.inspectit.rcp.InspectIT;
 import info.novatec.inspectit.rcp.documentation.DocumentationService;
 
+
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,10 +15,10 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.expressions.IEvaluationContext;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.browser.IWebBrowser;
-import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.widgets.Composite;
 
 /**
  * Handler that opens that InspectIT Documentation page on Confluence.
@@ -30,22 +31,21 @@ public abstract class OpenUrlHandler {
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IWorkbenchBrowserSupport browserSupport = PlatformUI.getWorkbench().getBrowserSupport();
+	@Execute
+	public void execute(Composite parent ,ExecutionEvent event) throws ExecutionException {
+		//IWorkbenchBrowserSupport browserSupport = PlatformUI.getWorkbench().getBrowserSupport();
 		String urlString = getUrlString(event);
 		if (null == urlString) {
-			return null;
+			
 		}
 
 		try {
-			IWebBrowser browser = browserSupport.createBrowser(null);
+			Browser browser = new Browser(parent, 1);
 			URL url = new URL(urlString);
-			browser.openURL(url);
-		} catch (PartInitException | MalformedURLException e) {
+			 browser.setUrl(url.toString());
+		} catch (Exception e) {
 			throw new ExecutionException("Error opening the URL ('" + urlString + "') in the system browser.", e);
 		}
-		return null;
 	}
 
 	/**
@@ -147,7 +147,7 @@ public abstract class OpenUrlHandler {
 			// create body
 			StringBuilder body = new StringBuilder("I would like to report the following exception that occurred in inspectIT:\n\n");
 			body.append("inspectIT Version: ");
-			body.append(InspectIT.getDefault().getBundle().getVersion());
+			body.append(Platform.getBundle("info.novatec.inspectit.rcp").getVersion());
 			body.append("\nOperating system: ");
 			body.append(SystemUtils.OS_NAME + " " + SystemUtils.OS_VERSION + " (" + SystemUtils.OS_ARCH + ")"); // NOPMD
 			body.append("\nJava version: ");

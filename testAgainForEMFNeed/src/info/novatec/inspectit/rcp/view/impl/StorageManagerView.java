@@ -264,7 +264,8 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 	@Inject IEventBroker eventBroker;
 	@Inject IProgressService progressService;
 	@Inject MApplication mApplication;
-	
+	@Inject @Named(IServiceConstants.ACTIVE_SHELL) Shell shell;
+
 	/**
 	 * Default constructor.
 	 */
@@ -1305,8 +1306,7 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 	 */
 	private class DoubleClickListener implements IDoubleClickListener {
 
-		@Inject @Named(IServiceConstants.ACTIVE_SHELL) Shell shell;
-		@Inject MApplication mApplication;
+		
 		/**
 		 * {@inheritDoc}
 		 */
@@ -1316,7 +1316,7 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 
 				@Override
 				public IStatus runInUIThread(IProgressMonitor monitor) {
-					process(shell);
+					process();
 					return Status.OK_STATUS;
 				}
 			};
@@ -1327,11 +1327,10 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 		/**
 		 * Processes the double-click.
 		 */
-		@Inject
-		private void process(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) {
+		private void process() {
 			StructuredSelection selection = (StructuredSelection) treeViewer.getSelection();
 			if (selection.getFirstElement() instanceof IStorageDataProvider) {
-				showStorage(shell, (IStorageDataProvider) selection.getFirstElement(), InspectIT.getDefault().getInspectITStorageManager());
+				showStorage((IStorageDataProvider) selection.getFirstElement(), InspectIT.getDefault().getInspectITStorageManager());
 			} else if (selection.getFirstElement() instanceof ILocalStorageDataProvider) {
 				showStorage((ILocalStorageDataProvider) selection.getFirstElement(), InspectIT.getDefault().getInspectITStorageManager());
 			} else {
@@ -1355,18 +1354,16 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 		 *            Repository to open.
 		 */
 		private void executeShowRepositoryCommand(RepositoryDefinition repositoryDefinition) {
-			try {
-				
-				Command command = eCommandService.getCommand(ShowRepositoryHandler.COMMAND);
-				ParameterizedCommand parameterizedCommand = ParameterizedCommand.generateCommand(command, null);
-				if(eventBroker != null) eventBroker.post(ShowRepositoryHandler.COMMAND, new Event());	
-				eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new Event());
-				
-				IEclipseContext context = mApplication.getContext(); // executionEvent.getApplicationContext();
-				context.set(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
-
-				if(eHandlerService.canExecute(parameterizedCommand)) eHandlerService.executeHandler(parameterizedCommand);
-			} catch (Exception e) {
+			ParameterizedCommand command =
+					eCommandService.createCommand(ShowRepositoryHandler.COMMAND, null);
+			eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new ShowRepositoryHandler());
+			mApplication.getContext().set(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
+			try{
+				if(eHandlerService.canExecute(command)) {
+					 eHandlerService.executeHandler(command);						 
+				}
+			}
+			catch (Exception e) {
 				throw new RuntimeException(e);
 			}
 		}
@@ -1379,9 +1376,7 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 		 * @param storageManager
 		 *            {@link InspectITStorageManager}
 		 */
-		
-		@Inject
-		private void showStorage(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, IStorageDataProvider storageDataProvider, final InspectITStorageManager storageManager) {
+		private void showStorage(IStorageDataProvider storageDataProvider, final InspectITStorageManager storageManager) {
 			final StorageData storageData = storageDataProvider.getStorageData();
 			final CmrRepositoryDefinition cmrRepositoryDefinition = storageDataProvider.getCmrRepositoryDefinition();
 			try {
