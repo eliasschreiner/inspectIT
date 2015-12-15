@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.imageio.ImageReader;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
@@ -53,6 +54,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.util.StatusHandler;
 import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -231,28 +233,26 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		createInputList();				
 	}	
 	
-	
-	@SuppressWarnings("restriction")
 	@PostConstruct
 	public void createComposite(Composite parent)		
 	{	
-		Button btn = new Button(parent,3);
-		btn.addSelectionListener(new SelectionListener() {
-			
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
-				mApplication.getContext().modify(KEY, "false");
-				eventBroker.post(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC,
-						UIEvents.ALL_ELEMENT_ID);
-			}
-			
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+//		Button btn = new Button(parent,3);
+//		btn.addSelectionListener(new SelectionListener() {
+//			
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				// TODO Auto-generated method stub
+//				mApplication.getContext().modify(KEY, "false");
+//				eventBroker.post(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC,
+//						UIEvents.ALL_ELEMENT_ID);
+//			}
+//			
+//			@Override
+//			public void widgetDefaultSelected(SelectionEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
 		
 		//		IEclipsePreferences preferences = PreferenceSupplier.getPreferences();
 //		int theAnswerToTheQuestionOfAllQuestions = preferences.getInt(PreferenceSupplier.P_INT, PreferenceSupplier.DEF_INT);

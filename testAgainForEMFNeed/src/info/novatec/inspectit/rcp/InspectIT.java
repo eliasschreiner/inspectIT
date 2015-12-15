@@ -43,6 +43,7 @@ import ch.qos.logback.classic.joran.JoranConfigurator;
 import ch.qos.logback.core.joran.spi.JoranException;
 import ch.qos.logback.core.util.StatusPrinter;
 import info.novatec.inspectit.minlog.MinlogToSLF4JLogger;
+import info.novatec.inspectit.rcp.log.LogListener;
 import info.novatec.inspectit.rcp.preferences.PreferenceSupplier;
 import info.novatec.inspectit.rcp.preferences.ScopedPreferenceStore;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryManager;
@@ -115,7 +116,7 @@ public class InspectIT implements BundleActivator {
 	/**
 	 * {@link ILogListener} used for logging.
 	 */
-	@Inject private Logger logListener;
+	@Inject private LogListener logListener;
 
 	/**
 	 * This method is called upon plug-in activation.
@@ -130,11 +131,12 @@ public class InspectIT implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 		InspectIT.context = context;
 		plugin = this;	
-		
-		//initLogger();		
-		initializeImageRegistry(imageRegistry);
-		locateRuntimeDir();
-		
+		locateRuntimeDir();		
+		initLogger();				
+
+		// add log listener once logger is initialized
+		logListener = new LogListener();
+		initializeImageRegistry(imageRegistry);	
 	}
 
 	/**
@@ -219,6 +221,7 @@ public class InspectIT implements BundleActivator {
 		}
 
 		logListener = null; // NOPMD
+		imageRegistry = null;
 
 	    InspectIT.context = null;
 		plugin = null; // NOPMD
