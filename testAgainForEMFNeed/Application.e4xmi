@@ -131,6 +131,7 @@
   <handlers xmi:id="_oNncYJ86EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.wizard.ExportStorageWizard" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.wizard.ExportStorageWizard" command="_KiqPYJ86EeWeW-hwSGo__g"/>
   <handlers xmi:id="_Gi42EJ9ZEeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.handlers.SearchDocumentationHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.SearchDocumentationHandler" command="_BFTzEJ9ZEeWeW-hwSGo__g"/>
   <handlers xmi:id="_HWBDQKTXEeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.handlers.maximizeActiveView" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.MaximizeActiveViewHandler" command="_BbTYUKTXEeW1xYrLGfvZvA"/>
+  <handlers xmi:id="_ArzZgKWREeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.handlers.openView" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.OpenViewHandler" command="_HJ2bAKWREeW1xYrLGfvZvA"/>
   <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.bindingtable" bindingContext="_6wlLecgZEeSyMNYR5xypkQ">
     <bindings xmi:id="_6wlLf8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.keybinding.m1q" keySequence="M1+Q" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
     <bindings xmi:id="_6wlLgsgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.keybinding.m1o" keySequence="M1+O" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
@@ -141,6 +142,7 @@
     <children xmi:id="_6wlLesgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_6wlLe8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
+  <descriptors xmi:id="_-L_r0KVnEeW1xYrLGfvZvA" elementId="testPartDescriptor1" label="Test Part" tooltip="Test Part" allowMultiple="true" category="TestParts" closeable="true" dirtyable="true" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.editor.root.FormRootEditor"/>
   <toolBarContributions xmi:id="_gjAiEKTVEeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.contributions.maximizeActiveView" parentId="inspectit.toolbar.0">
     <children xsi:type="menu:HandledToolItem" xmi:id="_VbfloKTWEeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.contributions.maximizeActiveView" accessibilityPhrase="Maximize Active View" label="Maximize Active View" tooltip="Maximize Active View" command="_BbTYUKTXEeW1xYrLGfvZvA">
       <parameters xmi:id="_-zDuQKTXEeW1xYrLGfvZvA" elementId="testagainforemfneed.parameter.0" name="info.novatec.inspectit.rcp.commands.maximizeActiveView.preferencePanelId" value="info.novatec.inspectit.rcp.commands.maximizeActiveView.preferencePanelId"/>
@@ -171,6 +173,9 @@
   <commands xmi:id="_KiqPYJ86EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.commands.exportStorageCommand" commandName="ExportStorageCommand" description="ExportStorageCommand"/>
   <commands xmi:id="_BFTzEJ9ZEeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.commands.searchDocumentation" commandName="SearchDocumentation" description="SearchDocumentation"/>
   <commands xmi:id="_BbTYUKTXEeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.commands.maximizeActiveView" commandName="Maximize Active View" description="Maximize Active View"/>
+  <commands xmi:id="_HJ2bAKWREeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.commands.openView" commandName="OpenViewCommand" description="opens the Editor Part">
+    <parameters xmi:id="_LTmeoKWREeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.commands.openView.input" name="info.novatec.inspectit.rcp.commands.openView.input" typeId="info.novatec.inspectit.rcp.commands.openView.input"/>
+  </commands>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

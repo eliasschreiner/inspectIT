@@ -166,8 +166,8 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 * @return The input definition.
 	 */
 	public InputDefinition getInputDefinition() {	
-		
-		InputDefinition inputDefinition = (InputDefinition) eModelService.find("info.novatec.inspectit.rcp.editor.inputdefinition.InputDefinition", mApplication); //(InputDefinition) getEditorInput().getAdapter(InputDefinition.class);
+		//ausm Kontext wa ? 
+		InputDefinition inputDefinition = new InputDefinition();//. .find("info.novatec.inspectit.rcp.editor.inputdefinition.InputDefinition");//, mApplication); //(InputDefinition) getEditorInput().getAdapter(InputDefinition.class);
 		Assert.isNotNull(inputDefinition);
 		return inputDefinition;
 	}

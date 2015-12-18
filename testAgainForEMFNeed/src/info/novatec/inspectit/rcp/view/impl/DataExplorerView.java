@@ -7,6 +7,8 @@ import info.novatec.inspectit.rcp.InspectITImages;
 import info.novatec.inspectit.rcp.editor.tree.DeferredTreeViewer;
 import info.novatec.inspectit.rcp.formatter.ImageFormatter;
 import info.novatec.inspectit.rcp.formatter.TextFormatter;
+import info.novatec.inspectit.rcp.handlers.OpenViewHandler;
+import info.novatec.inspectit.rcp.model.Component;
 import info.novatec.inspectit.rcp.model.TreeModelManager;
 import info.novatec.inspectit.rcp.preferences.PreferencesConstants;
 import info.novatec.inspectit.rcp.preferences.PreferencesUtils;
@@ -42,6 +44,7 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -49,14 +52,22 @@ import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreePath;
+import org.eclipse.jface.viewers.TreeSelection;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.window.ToolTip;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -190,7 +201,7 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	 * {@inheritDoc}
 	 */
 	@PostConstruct
-	public void createPartControl(Composite parent) {
+	public void createPartControl(MApplication mApplication ,ECommandService eCommandService, EHandlerService eHandlerService, Composite parent) {
 		createViewToolbar();
 
 		toolkit = new FormToolkit(parent.getDisplay());
@@ -204,7 +215,41 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 		treeViewer.setContentProvider(new TreeContentProvider2());
 		treeViewer.setLabelProvider(new TreeLabelProvider());
 		treeViewer.setComparator(new TreeViewerComparator());
-		treeViewer.addDoubleClickListener(treeViewDoubleClickListener);
+		treeViewer.addDoubleClickListener(new IDoubleClickListener() {
+			
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				TreeSelection selection = (TreeSelection) event.getSelection();
+				Object element = selection.getFirstElement();
+				if (null != element) {
+					if (((Component) element).getInputDefinition() == null) {
+						TreeViewer treeViewer = (TreeViewer) event.getViewer();
+						TreePath path = selection.getPaths()[0];
+						if (null != path) {
+							boolean expanded = treeViewer.getExpandedState(path);
+							if (expanded) {
+								treeViewer.collapseToLevel(path, 1);
+							} else {
+								treeViewer.expandToLevel(path, 1);
+							}
+						}
+					} else {
+						eHandlerService.activateHandler(OpenViewHandler.COMMAND, new OpenViewHandler());
+						ParameterizedCommand parameterCommand = eCommandService.createCommand(OpenViewHandler.COMMAND, null);							
+						mApplication.getContext().set(OpenViewHandler.INPUT, ((Component) element).getInputDefinition()); 
+						
+					
+						try {
+							if(eHandlerService.canExecute(parameterCommand)) eHandlerService.executeHandler(parameterCommand);
+						} catch (Exception e) {
+							throw new RuntimeException(e);
+						}			
+					}
+				}
+			}
+		});
+		
+		
 		ColumnViewerToolTipSupport.enableFor(treeViewer, ToolTip.NO_RECREATE);
 
 		updateFormTitle();
