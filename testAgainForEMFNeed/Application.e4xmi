@@ -15,7 +15,7 @@
                 <children xsi:type="menu:HandledToolItem" xmi:id="_UJwfIJ0OEeWoUtGQMZICDw" elementId="testagainforemfneed.handledtoolitem.editcmrrepositoryhandler" accessibilityPhrase="Edit CMR" label="EditCmrRepositoryHandler" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/transform.gif" tooltip="Edit CMR" command="_DOYjIJ0OEeWoUtGQMZICDw"/>
                 <children xsi:type="menu:ToolBarSeparator" xmi:id="_e8gCEJzkEeWRX9fcCYEZ4w" elementId="testagainforemfneed.toolbarseparator.0"/>
                 <children xsi:type="menu:HandledToolItem" xmi:id="_Aeg9AJzhEeWRX9fcCYEZ4w" elementId="info.novatec.inspectit.rcp.toolitems.startRecording" accessibilityPhrase="Start recording" label="Start recording" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/record.gif" tooltip="Start Recording" command="_oXAKcJzgEeWRX9fcCYEZ4w">
-                  <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_D5_FQKI6EeWfadAx2WbUog"/>
+                  <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_XVZPwKPUEeWu0sLj7R4Iyg"/>
                 </children>
                 <children xsi:type="menu:HandledToolItem" xmi:id="_EjlU8JzhEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.1" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/record_term.gif" tooltip="Stop Recording" command="_igBI8JzgEeWRX9fcCYEZ4w">
                   <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_cbLPQJ8dEeWeW-hwSGo__g" coreExpressionId="info.novatec.inspectit.recordingActive"/>
@@ -65,7 +65,8 @@
             </children>
           </children>
           <children xsi:type="basic:PartStack" xmi:id="__hg2MIh8EeWPeeIbKDQGtQ" elementId="inspectit.partstack.1">
-            <children xsi:type="basic:Part" xmi:id="_ByRX4Ih9EeWPeeIbKDQGtQ" elementId="inspectit.part.editorpart" contributionURI="bundleclass://org.eclipse.e4.ui.progress/org.eclipse.e4.ui.progress.ProgressView" label="Editor Part"/>
+            <children xsi:type="basic:Part" xmi:id="_ByRX4Ih9EeWPeeIbKDQGtQ" elementId="inspectit.part.editorpart" contributionURI="bundleclass://org.eclipse.e4.ui.progress/org.eclipse.e4.ui.progress.ProgressView" label="process manager"/>
+            <children xsi:type="basic:Part" xmi:id="_EHisIKMWEeWfadAx2WbUog" elementId="inspectit.editor.formrooteditor" accessibilityPhrase="Editor Part" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.editor.root.FormRootEditor" label="Editor Part" tooltip="Editor Part"/>
           </children>
         </children>
         <properties key="onlineStatus" value="UNKNOWN"/>
@@ -129,6 +130,7 @@
   <handlers xmi:id="_OZPfYJ86EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.wizard.ImportStorageWizard" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.wizard.ImportStorageWizard" command="_BaQgcJ86EeWeW-hwSGo__g"/>
   <handlers xmi:id="_oNncYJ86EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.wizard.ExportStorageWizard" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.wizard.ExportStorageWizard" command="_KiqPYJ86EeWeW-hwSGo__g"/>
   <handlers xmi:id="_Gi42EJ9ZEeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.handlers.SearchDocumentationHandler" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.SearchDocumentationHandler" command="_BFTzEJ9ZEeWeW-hwSGo__g"/>
+  <handlers xmi:id="_HWBDQKTXEeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.handlers.maximizeActiveView" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.handlers.MaximizeActiveViewHandler" command="_BbTYUKTXEeW1xYrLGfvZvA"/>
   <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.bindingtable" bindingContext="_6wlLecgZEeSyMNYR5xypkQ">
     <bindings xmi:id="_6wlLf8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.keybinding.m1q" keySequence="M1+Q" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
     <bindings xmi:id="_6wlLgsgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.keybinding.m1o" keySequence="M1+O" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
@@ -139,6 +141,11 @@
     <children xmi:id="_6wlLesgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_6wlLe8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
+  <toolBarContributions xmi:id="_gjAiEKTVEeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.contributions.maximizeActiveView" parentId="inspectit.toolbar.0">
+    <children xsi:type="menu:HandledToolItem" xmi:id="_VbfloKTWEeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.contributions.maximizeActiveView" accessibilityPhrase="Maximize Active View" label="Maximize Active View" tooltip="Maximize Active View" command="_BbTYUKTXEeW1xYrLGfvZvA">
+      <parameters xmi:id="_-zDuQKTXEeW1xYrLGfvZvA" elementId="testagainforemfneed.parameter.0" name="info.novatec.inspectit.rcp.commands.maximizeActiveView.preferencePanelId" value="info.novatec.inspectit.rcp.commands.maximizeActiveView.preferencePanelId"/>
+    </children>
+  </toolBarContributions>
   <commands xmi:id="_6wlLfMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.exit" commandName="quitCommand"/>
   <commands xmi:id="_6wlLgMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.open" commandName="openCommand"/>
   <commands xmi:id="_6wlLg8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
@@ -163,6 +170,7 @@
   <commands xmi:id="_BaQgcJ86EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.commands.importStorageCommand" commandName="ImportStorageCommand" description="ImportStorageCommand"/>
   <commands xmi:id="_KiqPYJ86EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.commands.exportStorageCommand" commandName="ExportStorageCommand" description="ExportStorageCommand"/>
   <commands xmi:id="_BFTzEJ9ZEeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.commands.searchDocumentation" commandName="SearchDocumentation" description="SearchDocumentation"/>
+  <commands xmi:id="_BbTYUKTXEeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.commands.maximizeActiveView" commandName="Maximize Active View" description="Maximize Active View"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

@@ -132,10 +132,11 @@ public class InspectIT implements BundleActivator {
 		InspectIT.context = context;
 		plugin = this;	
 		locateRuntimeDir();		
-		initLogger();				
+		//initLogger();				
 
 		// add log listener once logger is initialized
-		logListener = new LogListener();
+		//logListener = new LogListener();
+		
 		initializeImageRegistry(imageRegistry);	
 	}
 

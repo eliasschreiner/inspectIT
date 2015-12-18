@@ -58,7 +58,8 @@ Require-Bundle: javax.inject,
  org.eclipse.e4.core.services,
  org.eclipse.e4.ui.progress,
  org.eclipse.osgi,
- org.eclipse.core.expressions;bundle-version="3.5.0"
+ org.eclipse.core.expressions;bundle-version="3.5.0",
+ org.eclipse.e4.ui.bindings;bundle-version="0.11.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .

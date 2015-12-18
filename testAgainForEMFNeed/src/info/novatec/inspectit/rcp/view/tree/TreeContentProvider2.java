@@ -12,6 +12,7 @@ import org.eclipse.jface.viewers.Viewer;
 
 import info.novatec.inspectit.rcp.model.Composite;
 import info.novatec.inspectit.rcp.model.DeferredAgentsComposite;
+import info.novatec.inspectit.rcp.model.Leaf;
 import info.novatec.inspectit.rcp.model.TreeModelManager;
 import info.novatec.inspectit.rcp.util.ListenerList;
 
@@ -82,12 +83,18 @@ public class TreeContentProvider2 implements ITreeContentProvider{
 				return false;
 			}
 	    	
+	    	if (element instanceof Leaf) {
+				return false;
+			}
+	    	
 			if (element instanceof Composite) {
 				Composite composite = (Composite) element;
 				return composite.hasChildren();
 			}	    	
 			
 	      File file = (File) element;
+	      
+	      
 	      if (file.isDirectory()) {
 	        return true;
 	      }
