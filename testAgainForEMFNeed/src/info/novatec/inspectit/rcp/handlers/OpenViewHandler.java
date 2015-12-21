@@ -51,12 +51,14 @@ public class OpenViewHandler {
 		if (null != inputDefinition) {
 			RootEditorInput input = new RootEditorInput(inputDefinition);
 			ePartService.getActivePart().getContext().set("RootEditorInput", input);
+			mApplication.getContext().set("RootEditorInput", input);
 			try {
 				//ePartService.findPart("testPartDescriptor1").setParent((MElementContainer<MUIElement>) eModelService.find("inspectit.partstack.1", ePartService.getActivePart()));
 				ePartService.showPart(ePartService.createPart("testPartDescriptor1"), PartState.ACTIVATE);//page.openEditor(input, FormRootEditor.ID);
 			} catch (Exception e) {
 				throw new ExecutionException("Exception occurred trying to open the editor.", e);
 			}
+			
 		}
 	}
 }

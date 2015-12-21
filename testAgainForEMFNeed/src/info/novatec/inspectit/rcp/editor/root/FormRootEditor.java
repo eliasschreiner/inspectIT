@@ -12,6 +12,8 @@ import info.novatec.inspectit.rcp.repository.RepositoryDefinition;
 
 import java.util.Objects;
 
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -56,7 +58,7 @@ public class FormRootEditor extends AbstractRootEditor {
 		this.toolkit = new FormToolkit(parent.getDisplay());
 
 		// create the preference panel with the callback
-		IPreferencePanel preferencePanel = new FormPreferencePanel(toolkit);
+		IPreferencePanel preferencePanel = new FormPreferencePanel(toolkit, super.eModelService, super.mApplication);
 		// set the preference panel
 		setPreferencePanel(preferencePanel);
 

@@ -27,12 +27,20 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.model.application.ui.menu.MHandledToolItem;
+import org.eclipse.e4.ui.model.application.ui.menu.MMenuFactory;
+import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBarContribution;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolItem;
+import org.eclipse.e4.ui.services.EMenuService;
+import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
@@ -46,8 +54,11 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
+import org.jfree.ui.action.ActionMenuItem;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.bindings.EBindingService;
 
 /**
@@ -104,6 +115,8 @@ public class FormPreferencePanel implements IPreferencePanel {
 	@Inject MWindow mWindow;
 	@Inject EPartService ePartService;
 	@Inject EBindingService eBindingService;
+	@Inject EModelService eModelService;
+	@Inject MApplication mApplication;
 	
 	/**
 	 * The constructor which needs a {@link ViewController} reference.
@@ -111,11 +124,14 @@ public class FormPreferencePanel implements IPreferencePanel {
 	 * @param toolkit
 	 *            The Form toolkit which defines the used colors.
 	 */
-	public FormPreferencePanel(FormToolkit toolkit) {
+	public FormPreferencePanel(FormToolkit toolkit, EModelService eModelService, MApplication mApplication) {
 		Assert.isNotNull(toolkit);
 
 		this.toolkit = toolkit;
 		this.id = UUID.randomUUID().toString();
+		this.eModelService = eModelService;
+		this.mApplication = mApplication;
+		
 	}
 
 	/**
@@ -268,12 +284,15 @@ public class FormPreferencePanel implements IPreferencePanel {
 //		Map<Object, Object> params = new HashMap<Object, Object>();
 //		params.put(MaximizeActiveViewHandler.PREFERENCE_PANEL_ID_PARAMETER, id);
 		
-		MToolBarContribution maximizeCommandContribution = (MToolBarContribution) ePartService.findPart("info.novatec.inspectit.rcp.contributions.maximizeActiveView");
-		
+//		MToolBarContribution maximizeCommandContribution = (MToolBarContribution) ePartService.findPart("info.novatec.inspectit.rcp.contributions.maximizeActiveView");
+//		MHandledToolItem maximizeCommandContribution = (MHandledToolItem) eModelService.find("info.novatec.inspectit.rcp.contributions.maximizeActiveView", mApplication);
+
+//		MToolBarContribution contri;
+
 //		CommandContributionItemParameter contributionParameters = new CommandContributionItemParameter(workbenchWindow, null, MaximizeActiveViewHandler.COMMAND_ID, params, InspectIT.getDefault()
 //				.getImageDescriptor(InspectITImages.IMG_WINDOW), null, null, null, null, getTooltipTextForMaximizeContributionItem(), SWT.CHECK, null, true);
 //		CommandContributionItem maximizeCommandContribution = new CommandContributionItem(contributionParameters);
-		toolBarManager.add((IAction) maximizeCommandContribution);
+//		toolBarManager.add((IAction) maximizeCommandContribution);
 
 		if (preferenceSet.contains(PreferenceId.HTTP_AGGREGATION_REQUESTMETHOD)) {
 			toolBarManager.add(new SwitchHttpCategorizationRequestMethod("Include Request Method in Categorization"));

@@ -12,11 +12,16 @@ import javax.inject.Inject;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.core.contexts.Active;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.internal.contexts.EclipseContext;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
@@ -36,6 +41,7 @@ import org.eclipse.swt.widgets.Display;
 import info.novatec.inspectit.cmr.model.PlatformIdent;
 import info.novatec.inspectit.communication.DefaultData;
 import info.novatec.inspectit.rcp.InspectIT;
+import info.novatec.inspectit.rcp.editor.AbstractSubView;
 import info.novatec.inspectit.rcp.editor.ISubView;
 import info.novatec.inspectit.rcp.editor.SubViewFactory;
 import info.novatec.inspectit.rcp.editor.composite.AbstractCompositeSubView;
@@ -44,7 +50,9 @@ import info.novatec.inspectit.rcp.editor.preferences.IPreferencePanel;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceEventCallback;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceId;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceId.LiveMode;
+import info.novatec.inspectit.rcp.editor.table.TableSubView;
 import info.novatec.inspectit.rcp.formatter.ImageFormatter;
+import info.novatec.inspectit.rcp.handlers.OpenViewHandler;
 import info.novatec.inspectit.rcp.provider.IInputDefinitionProvider;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryChangeListener;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
@@ -156,6 +164,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	@Inject EPartService ePartService;
 	@Inject ESelectionService eSelectionService;
 	@Inject IEventBroker eventBroker;
+	@Inject EMenuService eMenuService;
 	
 	//Test to initialize this without adding it as a selectionProvider
 	public MultiSubViewSelectionProvider multiSubViewSelectionProvider;
@@ -166,8 +175,9 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 * @return The input definition.
 	 */
 	public InputDefinition getInputDefinition() {	
-		//ausm Kontext wa ? 
-		InputDefinition inputDefinition = new InputDefinition();//. .find("info.novatec.inspectit.rcp.editor.inputdefinition.InputDefinition");//, mApplication); //(InputDefinition) getEditorInput().getAdapter(InputDefinition.class);
+		//ausm Kontext wa ? Hier muss ich mal schaun das ich den jeweiliger partContext nutze, oder evtl mit den Prefs arbeite... aber erstmal das. 
+		InputDefinition inputDefinition = (InputDefinition) mApplication.getContext().get(OpenViewHandler.INPUT); 
+		//InputDefinition itest2 = (InputDefinition) mApplication.getContext().get("RootEditorInput"); //. .find("info.novatec.inspectit.rcp.editor.inputdefinition.InputDefinition");//, mApplication); //(InputDefinition) getEditorInput().getAdapter(InputDefinition.class);
 		Assert.isNotNull(inputDefinition);
 		return inputDefinition;
 	}
@@ -197,7 +207,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 */
 	@Inject
 	public void init(MPart mPart) throws Exception {
-		Map<String, Object> transientData = mPart.getTransientData();
+		mPart.getTransientData();
 		
 		ePartService.getActivePart().setIconURI(ImageFormatter.getOverlayedEditorImage(getInputDefinition().getEditorPropertiesData().getPartImage(), getInputDefinition().getRepositoryDefinition(), resourceManager).toString()); //setTitleImage(ImageFormatter.getOverlayedEditorImage(getInputDefinition().getEditorPropertiesData().getPartImage(), getInputDefinition().getRepositoryDefinition(), resourceManager));
 
@@ -218,6 +228,10 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 		mPart.setLabel(getInputDefinition().getEditorPropertiesData().getPartName());//setPartName(getInputDefinition().getEditorPropertiesData().getPartName());
 		mPart.setTooltip(getInputDefinition().getEditorPropertiesData().getPartTooltip());   //setTitleToolTip(getInputDefinition().getEditorPropertiesData().getPartTooltip());
 
+		//Test for injecting things into further non app model classes....  DOES NOT work in the PostConstruct Annot. 
+//		IEclipseContext ctx = new EclipseContext(mPart.getContext());
+//		ContextInjectionFactory.make(TableSubView.class, mApplication.getContext());
+		
 		// fill the view with content.
 		createView(parent);
 
@@ -669,7 +683,6 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	public ISelection getSelectionProvider(MPart mPart)
 	{		
 		eSelectionService.addSelectionListener(mPart.getElementId(), new ISelectionListener() {
-			ISelection selectionProvider;
 			@Override
 			public void selectionChanged(MPart part, Object selection) {
 				if(mPart!=null)

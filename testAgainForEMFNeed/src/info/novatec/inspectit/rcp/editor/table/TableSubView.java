@@ -33,6 +33,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -67,8 +69,6 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public class TableSubView extends AbstractSubView implements ISearchExecutor {
 
-	@Inject EMenuService eMenuService;
-	
 	/**
 	 * The referenced input controller.
 	 */
@@ -94,11 +94,14 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 	 * 
 	 * @param tableInputController
 	 *            The table input controller.
-	 */
+	 */	
 	public TableSubView(TableInputController tableInputController) {
 		Assert.isNotNull(tableInputController);
-
 		this.tableInputController = tableInputController;
+	}
+	
+	public TableSubView() {
+		this.tableInputController=null;
 	}
 
 	/**
@@ -171,7 +174,8 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 		// normal selection menu manager
 		MenuManager selectionMenuManager = new MenuManager();
 		selectionMenuManager.setRemoveAllWhenShown(true);
-		eMenuService.registerContextMenu(tableViewer, FormRootEditor.ID + ".tablesubview");
+		
+//		eMenuService.registerContextMenu(tableViewer, FormRootEditor.ID + ".tablesubview");
 //nachhaken
 		
 		final Menu selectionMenu = selectionMenuManager.createContextMenu(table);
@@ -276,7 +280,7 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 	public void doRefresh() {
 		if (!jobInSchedule) {
 			jobInSchedule = true;
-
+			
 			Job job = new Job(getDataLoadingJobName()) {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
@@ -494,6 +498,7 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 	 */
 	@Override
 	public void dispose() {
+		doRefresh();
 		tableInputController.dispose();
 	}
 

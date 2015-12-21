@@ -5,7 +5,10 @@ import info.novatec.inspectit.rcp.repository.RepositoryDefinition;
 
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.e4.ui.services.EMenuService;
 
 /**
  * Common abstract class for all sub-views.
