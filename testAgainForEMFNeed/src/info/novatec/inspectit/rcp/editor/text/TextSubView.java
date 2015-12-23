@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -177,6 +178,12 @@ public class TextSubView extends AbstractSubView {
 	@Override
 	public void dispose() {
 		textInputController.dispose();
+	}
+
+	@Override
+	public void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService) {
+		createPartControl(parent, toolkit);
+		
 	}
 
 }

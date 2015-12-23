@@ -35,16 +35,19 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
 import info.novatec.inspectit.cmr.model.PlatformIdent;
 import info.novatec.inspectit.communication.DefaultData;
 import info.novatec.inspectit.rcp.InspectIT;
+import info.novatec.inspectit.rcp.InspectITImages;
 import info.novatec.inspectit.rcp.editor.AbstractSubView;
 import info.novatec.inspectit.rcp.editor.ISubView;
 import info.novatec.inspectit.rcp.editor.SubViewFactory;
 import info.novatec.inspectit.rcp.editor.composite.AbstractCompositeSubView;
+import info.novatec.inspectit.rcp.editor.inputdefinition.EditorPropertiesData.PartType;
 import info.novatec.inspectit.rcp.editor.inputdefinition.InputDefinition;
 import info.novatec.inspectit.rcp.editor.preferences.IPreferencePanel;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceEventCallback;
@@ -207,9 +210,24 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 */
 	@Inject
 	public void init(MPart mPart) throws Exception {
-		mPart.getTransientData();
+		//check for valid Data, I swapped this from RootEditorInput, why do I need RootEditorInput
+		if(!(getInputDefinition() instanceof InputDefinition))
+		{
+			throw new Exception("Invalid Input: Must be InputDefinition");
+		}
+		//This is not working... How to get the Icon URI out of an image
+		Image icon = ImageFormatter.getOverlayedEditorImage(getInputDefinition().getEditorPropertiesData().getPartImage(), getInputDefinition().getRepositoryDefinition(), resourceManager);
+		if(getInputDefinition().getEditorPropertiesData().getPartImageFlag() == PartType.VIEW) 
+		{
+			ePartService.getActivePart().setIconURI(InspectITImages.IMG_SHOW_ALL);
+		}
+		else
+		{
+			ePartService.getActivePart().setIconURI(InspectITImages.IMG_SHOW_ALL);
+		}
+		//setTitleImage(ImageFormatter.getOverlayedEditorImage(getInputDefinition().getEditorPropertiesData().getPartImage(), getInputDefinition().getRepositoryDefinition(), resourceManager);
+		//InspectIT.getDefault().getImage()		
 		
-		ePartService.getActivePart().setIconURI(ImageFormatter.getOverlayedEditorImage(getInputDefinition().getEditorPropertiesData().getPartImage(), getInputDefinition().getRepositoryDefinition(), resourceManager).toString()); //setTitleImage(ImageFormatter.getOverlayedEditorImage(getInputDefinition().getEditorPropertiesData().getPartImage(), getInputDefinition().getRepositoryDefinition(), resourceManager));
 
 		this.subView = SubViewFactory.createSubView(getInputDefinition().getId());
 		this.subView.setRootEditor(this);
@@ -317,6 +335,8 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 		if (null != getActiveSubView() && null != getActiveSubView().getControl()) {
 			getActiveSubView().getControl().setFocus();
 		} else if (null != subView && null != subView.getControl()) {
+//			AbstractRootEditor dummy = (AbstractRootEditor) ePartService.findPart("testPartDescriptor1");
+//			subView.setRootEditor(dummy);  //Due to a setFocus bug concerning the FormRootEditor as it´s root editor, that should be called to a MPart in the Eclipse framework
 			subView.getControl().setFocus();
 		}
 	}

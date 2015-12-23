@@ -8,6 +8,7 @@ import info.novatec.inspectit.rcp.editor.root.AbstractRootEditor;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -54,6 +55,13 @@ public interface ISubView {
 	 *            <code>null</code> to indicate that there is no toolkit.
 	 */
 	void createPartControl(Composite parent, FormToolkit toolkit);
+	
+	/**
+	 * Due to the MenuService isn´t injectable via Field-injection, in the case of the inter @PostConstruct cycle, it has to be given through the process.
+	 * 
+	 * @param EMenuService
+	 */
+	void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService);
 
 	/**
 	 * A sub-view should return all preference IDs itself is in need of and the ones of the children

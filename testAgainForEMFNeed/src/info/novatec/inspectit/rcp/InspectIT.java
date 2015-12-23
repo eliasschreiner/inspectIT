@@ -327,6 +327,8 @@ public class InspectIT implements BundleActivator {
 		Image img2 = imageRegistry.get(imageKey);
 		return img2;
 	}
+	
+	
 
 	/**
 	 * Returns the image descriptor for the given key. The key can be one of the IMG_ definitions in

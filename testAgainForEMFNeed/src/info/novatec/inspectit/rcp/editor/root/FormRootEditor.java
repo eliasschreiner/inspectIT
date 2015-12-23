@@ -82,7 +82,7 @@ public class FormRootEditor extends AbstractRootEditor {
 		preferencePanel.createPartControl(form.getBody(), getSubView().getPreferenceIds(), getInputDefinition(), breadcrumbTitleComposite.getToolBarManager());
 
 		// go further with creating the subview(s)
-		getSubView().createPartControl(form.getBody(), toolkit);
+		getSubView().createPartControl(form.getBody(), toolkit, super.eMenuService);
 		getSubView().getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 	}
 

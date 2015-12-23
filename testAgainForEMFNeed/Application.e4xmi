@@ -3,8 +3,8 @@
   <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.window.main" selectedElement="_6wlLkMgZEeSyMNYR5xypkQ" label="inspectIT" iconURI="platform:/plugin/testAgainForEMFNeed/icons/selfmade/48x48.png" width="1280" height="960">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_6wlLkMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.ide.perspectivestack">
       <children xsi:type="advanced:Perspective" xmi:id="_6wlLkcgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.perspective.mainview" accessibilityPhrase="Main View" selectedElement="_6wlLksgZEeSyMNYR5xypkQ" label="Main View" iconURI="platform:/plugin/testAgainForEMFNeed/icons/selfmade/16x16.png">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.partsashcontainer.sample" horizontal="true">
-          <children xsi:type="basic:PartStack" xmi:id="_pSFJ0HjJEeWfB_YImTWJSA" elementId="inspectit.partstack.0">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.partsashcontainer.sample" selectedElement="_pSFJ0HjJEeWfB_YImTWJSA" horizontal="true">
+          <children xsi:type="basic:PartStack" xmi:id="_pSFJ0HjJEeWfB_YImTWJSA" elementId="inspectit.partstack.0" selectedElement="_q5S_QHjJEeWfB_YImTWJSA">
             <children xsi:type="basic:Part" xmi:id="_q5S_QHjJEeWfB_YImTWJSA" elementId="info.novatec.inspectit.rcp.view.impl.RepositoryManagerView" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.view.impl.RepositoryManagerView" label="Repository Manager" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/server_instance.gif" closeable="true">
               <toolbar xmi:id="_6LYcEIL3EeWfEs4fkpwvew" elementId="inspectit.toolbar.">
                 <children xsi:type="menu:HandledToolItem" xmi:id="_tGgbEIL4EeWfEs4fkpwvew" elementId="inspectit.handledtoolitem.showproperties" label="Show Properties" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/agent.gif" type="Check" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
@@ -66,7 +66,6 @@
           </children>
           <children xsi:type="basic:PartStack" xmi:id="__hg2MIh8EeWPeeIbKDQGtQ" elementId="inspectit.partstack.1">
             <children xsi:type="basic:Part" xmi:id="_ByRX4Ih9EeWPeeIbKDQGtQ" elementId="inspectit.part.editorpart" contributionURI="bundleclass://org.eclipse.e4.ui.progress/org.eclipse.e4.ui.progress.ProgressView" label="process manager"/>
-            <children xsi:type="basic:Part" xmi:id="_EHisIKMWEeWfadAx2WbUog" elementId="inspectit.editor.formrooteditor" accessibilityPhrase="Editor Part" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.editor.root.FormRootEditor" label="Editor Part" tooltip="Editor Part"/>
           </children>
         </children>
         <properties key="onlineStatus" value="UNKNOWN"/>
@@ -142,7 +141,7 @@
     <children xmi:id="_6wlLesgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_6wlLe8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
-  <descriptors xmi:id="_-L_r0KVnEeW1xYrLGfvZvA" elementId="testPartDescriptor1" label="Test Part" tooltip="Test Part" allowMultiple="true" category="TestParts" closeable="true" dirtyable="true" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.editor.root.FormRootEditor"/>
+  <descriptors xmi:id="_-L_r0KVnEeW1xYrLGfvZvA" elementId="inspectit.editor.formrooteditor" label="Test Part" tooltip="Test Part" allowMultiple="true" category="" closeable="true" dirtyable="true" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.editor.root.FormRootEditor"/>
   <toolBarContributions xmi:id="_gjAiEKTVEeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.contributions.maximizeActiveView" parentId="inspectit.toolbar.0">
     <children xsi:type="menu:HandledToolItem" xmi:id="_VbfloKTWEeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.contributions.maximizeActiveView" accessibilityPhrase="Maximize Active View" label="Maximize Active View" tooltip="Maximize Active View" command="_BbTYUKTXEeW1xYrLGfvZvA">
       <parameters xmi:id="_-zDuQKTXEeW1xYrLGfvZvA" elementId="testagainforemfneed.parameter.0" name="info.novatec.inspectit.rcp.commands.maximizeActiveView.preferencePanelId" value="info.novatec.inspectit.rcp.commands.maximizeActiveView.preferencePanelId"/>

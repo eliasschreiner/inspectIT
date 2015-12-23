@@ -6,6 +6,7 @@ import info.novatec.inspectit.util.ObjectUtils;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -163,6 +164,12 @@ public class GridCompositeSubView extends AbstractCompositeSubView {
 	@Override
 	public void layout() {
 		composite.layout();
+	}
+
+	@Override
+	public void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService) {
+		createPartControl(parent, toolkit);
+		
 	}
 
 }

@@ -210,6 +210,16 @@ public class EditorPropertiesData {
 		this.viewName = viewName;
 	}
 
+	
+	/**
+	 * Gets the PartImageFlag for the AbstractRootEditor, for asking which image is to set.
+	 * 
+	 * @return
+	 */
+	public PartType getPartImageFlag()
+	{return partImageFlag;}
+	
+	
 	/**
 	 * {@inheritDoc}
 	 */

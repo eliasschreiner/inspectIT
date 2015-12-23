@@ -64,7 +64,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 
-	@Inject EMenuService eMenuService;
+	EMenuService eMenuService=null;
 	
 	/**
 	 * The referenced input controller.
@@ -160,8 +160,14 @@ public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 		// normal selection menu manager
 		MenuManager selectionMenuManager = new MenuManager();
 		selectionMenuManager.setRemoveAllWhenShown(true);
-		eMenuService.registerContextMenu(treeViewer, FormRootEditor.ID + ".treesubview");
-
+		
+		if(eMenuService != null)
+			eMenuService.registerContextMenu(treeViewer, FormRootEditor.ID + ".treesubview");
+		else {
+				//Log something..
+		}
+		
+			
 		final Menu selectionMenu = selectionMenuManager.createContextMenu(tree);
 		final Menu headerMenu = headerMenuManager.createContextMenu(tree);
 
@@ -475,6 +481,13 @@ public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 	@Override
 	public void dispose() {
 		treeInputController.dispose();
+	}
+
+	@Override
+	public void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService) {
+		this.eMenuService = eMenuService;
+		createPartControl(parent, toolkit);
+		
 	}
 
 }

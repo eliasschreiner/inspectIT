@@ -33,6 +33,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.SWT;
@@ -388,6 +389,11 @@ public class GraphSubView extends AbstractSubView {
 	@Override
 	public void dispose() {
 		plotController.dispose();
+	}
+
+	@Override
+	public void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService) {
+		createPartControl(parent, toolkit);
 	}
 
 

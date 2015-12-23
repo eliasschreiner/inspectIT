@@ -1,0 +1,1126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.9" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="info.novatec.inspectit.rcp.editor.SubViewFactory" project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/SubViewFactory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="208" y="396"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="info.novatec.inspectit.rcp.editor.AbstractSubView" project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/AbstractSubView.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="463" y="486"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="info.novatec.inspectit.rcp.editor.ISubView" project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/ISubView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="97" y="176"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="4" language="java" name="info.novatec.inspectit.rcp.editor.composite.TabbedCompositeSubView" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/composite/TabbedCompositeSubView.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="885" y="690"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="info.novatec.inspectit.rcp.editor.composite.AbstractCompositeSubView" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/composite/AbstractCompositeSubView.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="813" y="591"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="info.novatec.inspectit.rcp.editor.composite.SashCompositeSubView" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/composite/SashCompositeSubView.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1220" y="699"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="info.novatec.inspectit.rcp.editor.composite.GridCompositeSubView" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/composite/GridCompositeSubView.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1520" y="705"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="info.novatec.inspectit.rcp.editor.graph.GraphSubView" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/GraphSubView.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="66" width="247" x="352" y="558"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="info.novatec.inspectit.rcp.editor.graph.PlotFactory" project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/PlotFactory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="928" y="701"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" 
+    name="info.novatec.inspectit.rcp.editor.graph.plot.HttpTimerPlotController.SimpleHttpAggregator" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/HttpTimerPlotController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="255" y="1297"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="info.novatec.inspectit.rcp.editor.graph.plot.DateAxisZoomNotify" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/DateAxisZoomNotify.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-52" y="1187"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="info.novatec.inspectit.rcp.editor.graph.plot.DefaultMemoryPlotController" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/DefaultMemoryPlotController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="793" y="1085"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="info.novatec.inspectit.rcp.editor.graph.plot.HttpTimerPlotController" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/HttpTimerPlotController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="255" y="1191"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="info.novatec.inspectit.rcp.editor.graph.plot.YIntervalSeriesImproved" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/YIntervalSeriesImproved.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1110" y="1191"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="info.novatec.inspectit.rcp.editor.graph.plot.AbstractTimerDataPlotController" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/AbstractTimerDataPlotController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="444" y="1085"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="16" language="java" name="info.novatec.inspectit.rcp.editor.graph.plot.PlotController" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/PlotController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="938" y="884"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="17" language="java" name="info.novatec.inspectit.rcp.editor.graph.plot.AbstractPlotController" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/AbstractPlotController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="930" y="979"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="info.novatec.inspectit.rcp.editor.graph.plot.TimerPlotController" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/TimerPlotController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="569" y="1191"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="info.novatec.inspectit.rcp.editor.graph.plot.DefaultClassesPlotController" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/DefaultClassesPlotController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1111" y="1085"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="info.novatec.inspectit.rcp.editor.graph.plot.DefaultCpuPlotController" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/DefaultCpuPlotController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1426" y="1085"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="21" language="java" name="info.novatec.inspectit.rcp.editor.graph.plot.ZoomListener" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/ZoomListener.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="622" y="877"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="22" language="java" name="info.novatec.inspectit.rcp.editor.graph.plot.DefaultThreadsPlotController" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/graph/plot/DefaultThreadsPlotController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1742" y="1085"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="info.novatec.inspectit.rcp.editor.inputdefinition.InputDefinition" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/inputdefinition/InputDefinition.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1426" y="934"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="info.novatec.inspectit.rcp.editor.inputdefinition.EditorPropertiesData" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/inputdefinition/EditorPropertiesData.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1425" y="813"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" 
+    name="info.novatec.inspectit.rcp.editor.inputdefinition.extra.InputDefinitionExtrasMarkerFactory" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/inputdefinition/extra/InputDefinitionExtrasMarkerFactory.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2590" y="786"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" 
+    name="info.novatec.inspectit.rcp.editor.inputdefinition.extra.CombinedInvocationsInputDefinitionExtra" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/inputdefinition/extra/CombinedInvocationsInputDefinitionExtra.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2991" y="786"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" 
+    name="info.novatec.inspectit.rcp.editor.inputdefinition.extra.HttpChartingInputDefinitionExtra" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/inputdefinition/extra/HttpChartingInputDefinitionExtra.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3392" y="786"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="28" language="java" 
+    name="info.novatec.inspectit.rcp.editor.inputdefinition.extra.IInputDefinitionExtra" project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/inputdefinition/extra/IInputDefinitionExtra.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2594" y="994"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="29" language="java" 
+    name="info.novatec.inspectit.rcp.editor.inputdefinition.extra.ExceptionTypeInputDefinitionExtra" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/inputdefinition/extra/ExceptionTypeInputDefinitionExtra.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3765" y="786"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" 
+    name="info.novatec.inspectit.rcp.editor.inputdefinition.extra.InputDefinitionExtrasMarkerFactory.InputDefinitionExtraMarker" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/inputdefinition/extra/InputDefinitionExtrasMarkerFactory.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2589" y="892"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" 
+    name="info.novatec.inspectit.rcp.editor.inputdefinition.extra.NavigationSteppingInputDefinitionExtra" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/inputdefinition/extra/NavigationSteppingInputDefinitionExtra.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4156" y="786"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" 
+    name="info.novatec.inspectit.rcp.editor.inputdefinition.extra.TimerDataChartingInputDefinitionExtra" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/inputdefinition/extra/TimerDataChartingInputDefinitionExtra.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4562" y="786"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" 
+    name="info.novatec.inspectit.rcp.editor.inputdefinition.extra.SqlStatementInputDefinitionExtra" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/inputdefinition/extra/SqlStatementInputDefinitionExtra.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4949" y="786"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.UpdateAction" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="804" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" 
+    name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.SetRefreshRateAction" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="1130" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" 
+    name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.SwitchHttpUriTransformation" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="1456" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" 
+    name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.FilterByTotalTimeAction" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="2108" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="38" language="java" name="info.novatec.inspectit.rcp.editor.preferences.PreferenceId" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/PreferenceId.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="2434" y="260"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="39" language="java" name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="3086" y="-58"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" 
+    name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.SwitchPreferences" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="2434" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" 
+    name="info.novatec.inspectit.rcp.editor.preferences.PreferenceEventCallback.PreferenceEvent" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/PreferenceEventCallback.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2213" y="183"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" 
+    name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.FilterByExclusiveTimeAction" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="2760" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" 
+    name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.SetTimeDecimalPlaces" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="3086" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" 
+    name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.SetItemCountAction" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="3412" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" 
+    name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.SwitchSteppingControl" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="3738" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="info.novatec.inspectit.rcp.editor.preferences.PreferenceControlFactory" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/PreferenceControlFactory.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="1782" y="-58"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" 
+    name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.FilterByDataTypeAction" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="4064" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="48" language="java" name="info.novatec.inspectit.rcp.editor.preferences.IPreferencePanel" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/IPreferencePanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4349" y="-129"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="49" language="java" 
+    name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.SwitchInvocationSubviewMode" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="298" x="4716" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" 
+    name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.SwitchHttpCategorizationRequestMethod" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="383" x="5054" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="info.novatec.inspectit.rcp.editor.preferences.FormPreferencePanel.SwitchLiveMode" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/FormPreferencePanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4543" y="76"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="52" language="java" name="info.novatec.inspectit.rcp.editor.preferences.PreferenceEventCallback" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/PreferenceEventCallback.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="66" width="286" x="1782" y="48"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="53" language="java" name="info.novatec.inspectit.rcp.editor.preferences.control.IPreferenceControl" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/control/IPreferenceControl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4372" y="-49"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="54" language="java" name="info.novatec.inspectit.rcp.editor.preferences.control.AbstractPreferenceControl" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/preferences/control/AbstractPreferenceControl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3267" y="-135"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="55" language="java" name="info.novatec.inspectit.rcp.editor.root.IRootEditor" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/root/IRootEditor.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="95" y="84"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <enumeration id="56" language="java" 
+    name="info.novatec.inspectit.rcp.editor.root.SubViewClassificationController.SubViewClassification" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/root/SubViewClassificationController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="43" y="-178"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <interface id="57" language="java" name="info.novatec.inspectit.rcp.editor.root.SubViewClassificationController" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/root/SubViewClassificationController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="79" y="-284"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="58" language="java" name="info.novatec.inspectit.rcp.editor.root.AbstractRootEditor" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/root/AbstractRootEditor.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="389" y="-178"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="59" language="java" name="info.novatec.inspectit.rcp.editor.root.MultiSubViewSelectionProvider" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/root/MultiSubViewSelectionProvider.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-1" y="-72"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="info.novatec.inspectit.rcp.editor.root.FormRootEditor" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/root/FormRootEditor.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="389" y="-72"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="61" language="java" name="info.novatec.inspectit.rcp.editor.root.RootEditorInput" 
+    project="testAgainForEMFNeed" 
+    file="/testAgainForEMFNeed/src/info/novatec/inspectit/rcp/editor/root/RootEditorInput.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1786" y="895"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="62">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <nesting id="63">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="43"/>  
+  </nesting>  
+  <nesting id="64">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="10"/>  
+  </nesting>  
+  <association id="65">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="66" name="rootEditor"/>      
+      <multiplicity id="67" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="58" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="68">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="69" name="subView"/>      
+      <multiplicity id="70" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="71">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <nesting id="72">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="37"/>  
+  </nesting>  
+  <association id="73">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="74" name="COMBINED_INVOCATIONS_EXTRAS_MARKER"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="77" name="daemonThreads"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="79">    
+    <end type="SOURCE" refId="58"/>    
+    <end type="TARGET" refId="55"/>  
+  </realization>  
+  <generalization id="80">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="81">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="82" name="liveThreads"/>      
+      <multiplicity id="83" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="84">    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="85" name="preferencePanel"/>      
+      <multiplicity id="86" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="87">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <association id="88">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="89" name="preferenceControlList"/>      
+      <multiplicity id="90" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="53" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="91">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <nesting id="92">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="50"/>  
+  </nesting>  
+  <association id="93">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="94" name="rootEditor"/>      
+      <multiplicity id="95" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="96">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="97" name="HTTP_CHARTING_EXTRAS_MARKER"/>      
+      <multiplicity id="98" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="99">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="100" name="durationSeries"/>      
+      <multiplicity id="101" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="102">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <nesting id="103">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="49"/>  
+  </nesting>  
+  <realization id="104">    
+    <end type="SOURCE" refId="54"/>    
+    <end type="TARGET" refId="53"/>  
+  </realization>  
+  <realization id="105">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <association id="106">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="107" name="rootEditor"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="58" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="109">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="34"/>  
+  </nesting>  
+  <generalization id="110">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="111">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="112" name="plotController"/>      
+      <multiplicity id="113" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="114">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="48"/>  
+  </realization>  
+  <association id="115">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="116" name="cpuUsage"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="119" name="inputDefinition"/>      
+      <multiplicity id="120" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="121">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="122" name="TIMER_DATA_CHARTING_EXTRAS_MARKER"/>      
+      <multiplicity id="123" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="124">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="125" name="totalLoadedClasses"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="127">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <nesting id="128">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="44"/>  
+  </nesting>  
+  <association id="129">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="130" name="SQL_STATEMENT_EXTRAS_MARKER"/>      
+      <multiplicity id="131" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="132">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="133" name="EXCEPTION_TYPE_EXTRAS_MARKER"/>      
+      <multiplicity id="134" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="135">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="40"/>  
+  </nesting>  
+  <nesting id="136">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="30"/>  
+  </nesting>  
+  <realization id="137">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <generalization id="138">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="139">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="140" name="inputDefintionExtras"/>      
+      <multiplicity id="141" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="142">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="35"/>  
+  </nesting>  
+  <nesting id="143">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="36"/>  
+  </nesting>  
+  <nesting id="144">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="45"/>  
+  </nesting>  
+  <association id="145">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="146" name="zoomListener"/>      
+      <multiplicity id="147" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="148">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="51"/>  
+  </nesting>  
+  <association id="149">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="150" name="activeSubView"/>      
+      <multiplicity id="151" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="152">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="153" name="loadedClasses"/>      
+      <multiplicity id="154" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="155">    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="41"/>  
+  </nesting>  
+  <association id="156">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="157" name="callbacks"/>      
+      <multiplicity id="158" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="52" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="159">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="160" name="editorPropertiesData"/>      
+      <multiplicity id="161" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="162">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="163">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="164" name="preferenceId"/>      
+      <multiplicity id="165" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="166">    
+    <end type="SOURCE" refId="61" navigable="false">      
+      <attribute id="167" name="inputDefinition"/>      
+      <multiplicity id="168" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="169">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <generalization id="170">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <nesting id="171">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="42"/>  
+  </nesting>  
+  <nesting id="172">    
+    <end type="SOURCE" refId="57"/>    
+    <end type="TARGET" refId="56"/>  
+  </nesting>  
+  <association id="173">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="174" name="NAVIGATION_STEPPING_EXTRAS_MARKER"/>      
+      <multiplicity id="175" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="176">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="177">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="178" name="subViews"/>      
+      <multiplicity id="179" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="180">    
+    <end type="SOURCE" refId="60"/>    
+    <end type="TARGET" refId="58"/>  
+  </generalization>  
+  <generalization id="181">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="182">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="183" name="heapMemory"/>      
+      <multiplicity id="184" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="185">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="47"/>  
+  </nesting>  
+  <association id="186">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="187" name="multiSubViewSelectionProvider"/>      
+      <multiplicity id="188" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="189">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="190" name="peakThreads"/>      
+      <multiplicity id="191" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="192">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="193" name="nonHeapMemory"/>      
+      <multiplicity id="194" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="195">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <realization id="196">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <generalization id="197">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="198">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="199">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="200" name="preferencePanel"/>      
+      <multiplicity id="201" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false" static="true"/>    
+    <operations public="false" package="false" protected="false" private="false" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

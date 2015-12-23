@@ -247,8 +247,7 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 					}
 				}
 			}
-		});
-		
+		});	
 		
 		ColumnViewerToolTipSupport.enableFor(treeViewer, ToolTip.NO_RECREATE);
 
@@ -270,7 +269,6 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 				}
 			}
 		}
-
 		eSelectionService.setSelection(treeViewer); 
 	}
 

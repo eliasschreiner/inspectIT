@@ -69,6 +69,8 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public class TableSubView extends AbstractSubView implements ISearchExecutor {
 
+	EMenuService eMenuService = null;
+	
 	/**
 	 * The referenced input controller.
 	 */
@@ -175,8 +177,9 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 		MenuManager selectionMenuManager = new MenuManager();
 		selectionMenuManager.setRemoveAllWhenShown(true);
 		
-//		eMenuService.registerContextMenu(tableViewer, FormRootEditor.ID + ".tablesubview");
-//nachhaken
+		if(eMenuService !=null)
+			eMenuService.registerContextMenu(tableViewer, FormRootEditor.ID + ".tablesubview");
+		else{//Log something}
 		
 		final Menu selectionMenu = selectionMenuManager.createContextMenu(table);
 		final Menu headerMenu = headerMenuManager.createContextMenu(table);
@@ -271,6 +274,7 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 					}
 				}
 			});
+		}
 		}
 	}
 
@@ -500,6 +504,14 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 	public void dispose() {
 		doRefresh();
 		tableInputController.dispose();
+	}
+
+	@Override
+	public void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService) {
+		this.eMenuService = eMenuService;
+		
+		createPartControl(parent, toolkit);
+		
 	}
 
 }
