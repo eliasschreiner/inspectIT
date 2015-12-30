@@ -216,15 +216,15 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 			throw new Exception("Invalid Input: Must be InputDefinition");
 		}
 		//This is not working... How to get the Icon URI out of an image
-		Image icon = ImageFormatter.getOverlayedEditorImage(getInputDefinition().getEditorPropertiesData().getPartImage(), getInputDefinition().getRepositoryDefinition(), resourceManager);
-		if(getInputDefinition().getEditorPropertiesData().getPartImageFlag() == PartType.VIEW) 
-		{
-			ePartService.getActivePart().setIconURI(InspectITImages.IMG_SHOW_ALL);
-		}
-		else
-		{
-			ePartService.getActivePart().setIconURI(InspectITImages.IMG_SHOW_ALL);
-		}
+//		Image icon = ImageFormatter.getOverlayedEditorImage(getInputDefinition().getEditorPropertiesData().getPartImage(), getInputDefinition().getRepositoryDefinition(), resourceManager);
+//		if(getInputDefinition().getEditorPropertiesData().getPartImageFlag() == PartType.VIEW) 
+//		{
+//			ePartService.getActivePart().setIconURI(InspectITImages.IMG_SHOW_ALL);
+//		}
+//		else
+//		{
+//			ePartService.getActivePart().setIconURI(InspectITImages.IMG_SHOW_ALL);
+//		}
 		//setTitleImage(ImageFormatter.getOverlayedEditorImage(getInputDefinition().getEditorPropertiesData().getPartImage(), getInputDefinition().getRepositoryDefinition(), resourceManager);
 		//InspectIT.getDefault().getImage()		
 		
@@ -358,10 +358,11 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 			this.activeSubView = subView;
 			ISelectionProvider selectionProvider = activeSubView.getSelectionProvider();
 			if (selectionProvider != null) {				
-				ISelectionProvider outerProvider = (ISelectionProvider) getSelectionProvider((MPart) this);
-				if (outerProvider instanceof MultiSubViewSelectionProvider) {
-					ISelection newSelection = (ISelection) eSelectionService.getSelection(selectionProvider.toString());//selectionProvider.getSelection(); 
-					MultiSubViewSelectionProvider provider = (MultiSubViewSelectionProvider) outerProvider;
+				//ISelectionProvider outerProvider = (ISelectionProvider) getSelectionProvider((MPart) this);
+//				if (outerProvider instanceof MultiSubViewSelectionProvider) {
+//					//Doesn´t work. need a functioning selection provider #TODO 
+					ISelection newSelection = selectionProvider.getSelection();//selectionProvider.getSelection(); 
+					MultiSubViewSelectionProvider provider = multiSubViewSelectionProvider;
 
 					if (ObjectUtils.equals(selection, newSelection)) {
 						// The selection object didn't change, but the selection area did, thus we
@@ -380,7 +381,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 					SelectionChangedEvent event = new SelectionChangedEvent(selectionProvider, selection);
 					provider.fireSelectionChanged(event);
 					provider.firePostSelectionChanged(event);
-				}
+				
 			}
 		}
 	}
@@ -443,7 +444,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 *            The event.
 	 */
 	protected void handleSelectionChanged(SelectionChangedEvent event) {
-		ISelectionProvider provider = (ISelectionProvider) getSelectionProvider((MPart) this);
+		ISelectionProvider provider = (ISelectionProvider) getSelectionProvider();
 		if (provider instanceof MultiSubViewSelectionProvider) {
 			SelectionChangedEvent newEvent = new SelectionChangedEvent(provider, event.getSelection());
 			MultiSubViewSelectionProvider prov = (MultiSubViewSelectionProvider) provider;
@@ -459,7 +460,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 *            The event
 	 */
 	protected void handlePostSelectionChanged(SelectionChangedEvent event) {
-		ISelectionProvider provider = (ISelectionProvider) getSelectionProvider((MPart) this);
+		ISelectionProvider provider = (ISelectionProvider) getSelectionProvider();
 		if (provider instanceof MultiSubViewSelectionProvider) {
 			SelectionChangedEvent newEvent = new SelectionChangedEvent(provider, event.getSelection());
 			MultiSubViewSelectionProvider prov = (MultiSubViewSelectionProvider) provider;
@@ -520,7 +521,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 		if (canMaximizeActiveSubView()) {
 			maximizeSubView((AbstractCompositeSubView) subView, activeSubView);
 			isMaximizedMode = true;
-			ISelectionProvider selectionProvider = (ISelectionProvider) getSelectionProvider((MPart) this);
+			ISelectionProvider selectionProvider = (ISelectionProvider) getSelectionProvider();
 			selectionProvider.setSelection(StructuredSelection.EMPTY);
 		}
 	}
@@ -564,7 +565,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 		if (canMinimizeActiveSubView()) {
 			restoreMaximization((AbstractCompositeSubView) subView);
 			isMaximizedMode = false;
-			ISelectionProvider selectionProvider = (ISelectionProvider) getSelectionProvider((MPart) this);
+			ISelectionProvider selectionProvider = (ISelectionProvider) getSelectionProvider();
 			selectionProvider.setSelection(StructuredSelection.EMPTY);
 		}
 	}
@@ -699,18 +700,20 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	}
 	ISelection provider;
 	
-	@Inject
-	public ISelection getSelectionProvider(MPart mPart)
+
+	public ISelectionProvider getSelectionProvider()
 	{		
-		eSelectionService.addSelectionListener(mPart.getElementId(), new ISelectionListener() {
-			@Override
-			public void selectionChanged(MPart part, Object selection) {
-				if(mPart!=null)
-				provider = (ISelection) selection;
-			}					
-		});
-		
-		return provider;
+		Assert.isNotNull(multiSubViewSelectionProvider);
+		return (ISelectionProvider) multiSubViewSelectionProvider;
+//		eSelectionService.addSelectionListener(mPart.getElementId(), new ISelectionListener() {
+//			@Override
+//			public void selectionChanged(MPart part, Object selection) {
+//				if(mPart!=null)
+//				provider = (ISelection) selection;
+//			}					
+//		});
+//		
+//		return provider;
 	}
 
 	/**

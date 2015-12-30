@@ -13,11 +13,14 @@ import info.novatec.inspectit.rcp.editor.preferences.PreferenceEventCallback.Pre
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceId.LiveMode;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceId.TimeResolution;
 import info.novatec.inspectit.rcp.editor.preferences.control.IPreferenceControl;
+import info.novatec.inspectit.rcp.editor.root.AbstractRootEditor;
+import info.novatec.inspectit.rcp.editor.root.FormRootEditor;
 import info.novatec.inspectit.rcp.handlers.MaximizeActiveViewHandler;
 import info.novatec.inspectit.rcp.preferences.PreferencesConstants;
 import info.novatec.inspectit.rcp.preferences.PreferencesUtils;
 import info.novatec.inspectit.util.ObjectUtils;
 
+import java.awt.MenuItem;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -32,21 +35,28 @@ import javax.inject.Named;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.MUIElement;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenuFactory;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBarContribution;
+import org.eclipse.e4.ui.model.application.ui.menu.MToolBarElement;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolItem;
+import org.eclipse.e4.ui.model.application.ui.menu.impl.MenuFactoryImpl;
 import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.ContributionItem;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.action.ToolBarContributionItem;
 import org.eclipse.jface.bindings.Binding;
 import org.eclipse.jface.bindings.TriggerSequence;
 import org.eclipse.osgi.util.NLS;
@@ -58,8 +68,13 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 import org.jfree.ui.action.ActionMenuItem;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.contexts.ContextFunction;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.bindings.EBindingService;
+import org.eclipse.e4.ui.model.application.ui.menu.MDynamicMenuContribution;
+import org.eclipse.e4.ui.model.application.ui.menu.MHandledItem;
 
 /**
  * This is the class where the preference panel is created.
@@ -117,6 +132,10 @@ public class FormPreferencePanel implements IPreferencePanel {
 	@Inject EBindingService eBindingService;
 	@Inject EModelService eModelService;
 	@Inject MApplication mApplication;
+	@Inject EMenuService eMenuService;
+	@Inject MMenuFactory mMenuFactory;
+	@Inject MPart mPart;
+	@Inject ECommandService eCommandService;
 	
 	/**
 	 * The constructor which needs a {@link ViewController} reference.
@@ -124,13 +143,14 @@ public class FormPreferencePanel implements IPreferencePanel {
 	 * @param toolkit
 	 *            The Form toolkit which defines the used colors.
 	 */
-	public FormPreferencePanel(FormToolkit toolkit, EModelService eModelService, MApplication mApplication) {
+	public FormPreferencePanel(FormToolkit toolkit, EModelService eModelService, MApplication mApplication, MPart mPart) {
 		Assert.isNotNull(toolkit);
 
 		this.toolkit = toolkit;
 		this.id = UUID.randomUUID().toString();
 		this.eModelService = eModelService;
 		this.mApplication = mApplication;
+		this.mPart = mPart;
 		
 	}
 
@@ -272,29 +292,38 @@ public class FormPreferencePanel implements IPreferencePanel {
 	 * @param toolBarManager
 	 *            The tool bar manager.
 	 */
+	@Inject
 	private void createButtons(Set<PreferenceId> preferenceSet, IToolBarManager toolBarManager) {
 		switchLiveMode = new SwitchLiveMode("Live");
 		switchPreferences = new SwitchPreferences("Additional options"); // NOPMD
+		
+		//Test fora more e4 wayofthe toolbar. 
+		MToolBar toolbar =  mPart.getToolbar();
+		
 		MenuAction menuAction = new MenuAction();
 		menuAction.setImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_TOOL));
 		menuAction.setToolTipText("Preferences");
+		
+//		ToolBarContributionItem item1 = new ToolBarContributionItem(toolBarManager); 
 
+		
 		// add the maximize to all forms, let eclipse hide it as declared in plugin.xml
-//		MWindow workbenchWindow = mWindow;
 //		Map<Object, Object> params = new HashMap<Object, Object>();
 //		params.put(MaximizeActiveViewHandler.PREFERENCE_PANEL_ID_PARAMETER, id);
 		
 //		MToolBarContribution maximizeCommandContribution = (MToolBarContribution) ePartService.findPart("info.novatec.inspectit.rcp.contributions.maximizeActiveView");
 //		MHandledToolItem maximizeCommandContribution = (MHandledToolItem) eModelService.find("info.novatec.inspectit.rcp.contributions.maximizeActiveView", mApplication);
 
-//		MToolBarContribution contri;
-
 //		CommandContributionItemParameter contributionParameters = new CommandContributionItemParameter(workbenchWindow, null, MaximizeActiveViewHandler.COMMAND_ID, params, InspectIT.getDefault()
 //				.getImageDescriptor(InspectITImages.IMG_WINDOW), null, null, null, null, getTooltipTextForMaximizeContributionItem(), SWT.CHECK, null, true);
 //		CommandContributionItem maximizeCommandContribution = new CommandContributionItem(contributionParameters);
-//		toolBarManager.add((IAction) maximizeCommandContribution);
+//		toolBarManager.add((IAction) item1);
 
+		toolBarManager.add(new MaximizeActiveViewAction("Maximize active View"));
 		if (preferenceSet.contains(PreferenceId.HTTP_AGGREGATION_REQUESTMETHOD)) {
+//			MToolBarElement switchHttpCategorizationRequestMethod = mMenuFactory.createDirectToolItem();
+//			toolbar.getChildren().add(switchHttpCategorizationRequestMethod);
+			
 			toolBarManager.add(new SwitchHttpCategorizationRequestMethod("Include Request Method in Categorization"));
 		}
 
@@ -959,6 +988,59 @@ public class FormPreferencePanel implements IPreferencePanel {
 			httpCategoriation.put(PreferenceId.InvocationSubviewMode.RAW, this.isChecked());
 			event.setPreferenceMap(httpCategoriation);
 			fireEvent(event);
+		}
+	}
+	
+	/**
+	 * Action for switching the mode of the invocation subviews from/to raw/aggregated.
+	 * 
+	 * @author Ivan Senic
+	 * 
+	 */
+	private final class MaximizeActiveViewAction extends Action {
+
+
+		
+		/**
+		 * Default constructor.
+		 * 
+		 * @param text
+		 *            Text on the action.
+		 */
+		public MaximizeActiveViewAction(String text) {
+			super(text, AS_CHECK_BOX);
+			setImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_WINDOW));
+		}
+		
+		@Inject MHandledItem mHandledItem;
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public void run() {
+			MPart editorPart = mPart;
+			if (editorPart.getObject() instanceof AbstractRootEditor) {
+				AbstractRootEditor abstractRootEditor = (AbstractRootEditor) editorPart.getObject();
+				if (abstractRootEditor.canMaximizeActiveSubView()) {
+					abstractRootEditor.maximizeActiveSubView();
+				} else if (abstractRootEditor.canMinimizeActiveSubView()) {
+					abstractRootEditor.minimizeActiveSubView();
+				}
+			}
+
+			// after the maximized/minimized is executed we need to refresh the UI elements bounded to
+			// the command, so that checked state of that elements is updated
+//			Map<Object, Object> filter = new HashMap<Object, Object>();
+//			filter.put(IServiceScopes.WINDOW_SCOPE, mWindow);
+//			List<MHandledItem> elements = eModelService.findElements(mWindow, null, MHandledItem.class, null);
+//		   // elements.addAll(eModelService.findElements(mWindow, null, MHandledItem.class, null));
+//		    for( MHandledItem hi : elements ){
+//				hi.setSelected(mHandledItem.isSelected());
+//			}
+			
+			//refreshes local objects (?)
+			mApplication.updateLocalization();
+		    
 		}
 	}
 

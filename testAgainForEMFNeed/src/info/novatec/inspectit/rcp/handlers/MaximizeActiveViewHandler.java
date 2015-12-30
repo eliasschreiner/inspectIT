@@ -4,6 +4,7 @@ import info.novatec.inspectit.rcp.editor.preferences.IPreferencePanel;
 import info.novatec.inspectit.rcp.editor.root.AbstractRootEditor;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -16,10 +17,12 @@ import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledItem;
 import org.eclipse.e4.ui.workbench.UIEvents.UIElement;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
 /**
@@ -50,43 +53,50 @@ public class MaximizeActiveViewHandler{
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public void execute(ExecutionEvent event, @Active MWindow mWindow, MHandledItem mHandledItem) throws ExecutionException {
-//		MPart editorPart = ePartService.getActivePart();
-//		if (editorPart instanceof AbstractRootEditor) {
-//			AbstractRootEditor abstractRootEditor = (AbstractRootEditor) editorPart;
-//			if (abstractRootEditor.canMaximizeActiveSubView()) {
-//				abstractRootEditor.maximizeActiveSubView();
-//			} else if (abstractRootEditor.canMinimizeActiveSubView()) {
-//				abstractRootEditor.minimizeActiveSubView();
-//			}
-//		}
-//
-//		// after the maximized/minimized is executed we need to refresh the UI elements bounded to
-//		// the command, so that checked state of that elements is updated
-//		
+	public void execute(EModelService eModelService, ExecutionEvent event, @Active MWindow mWindow, MHandledItem mHandledItem) throws ExecutionException {
+		MPart editorPart = ePartService.getActivePart();
+		if (editorPart instanceof AbstractRootEditor) {
+			AbstractRootEditor abstractRootEditor = (AbstractRootEditor) editorPart;
+			if (abstractRootEditor.canMaximizeActiveSubView()) {
+				abstractRootEditor.maximizeActiveSubView();
+			} else if (abstractRootEditor.canMinimizeActiveSubView()) {
+				abstractRootEditor.minimizeActiveSubView();
+			}
+		}
+
+		// after the maximized/minimized is executed we need to refresh the UI elements bounded to
+		// the command, so that checked state of that elements is updated
 //		Map<Object, Object> filter = new HashMap<Object, Object>();
 //		filter.put(IServiceScopes.WINDOW_SCOPE, mWindow);
-//		mHandledItem. refreshElements(event.getCommand().getId(), filter);
+		List<MHandledItem> elements = eModelService.findElements(mWindow, null, MHandledItem.class, null);
+	   // elements.addAll(eModelService.findElements(mWindow, null, MHandledItem.class, null));
+	    for( MHandledItem hi : elements ){
+			hi.setSelected(mHandledItem.isSelected());
+		}
+	    
+	    
+	    //mWindow.updateLocalization(); .refreshElements(event.getCommand().getId(), filter);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@SuppressWarnings("rawtypes")
-	public void updateElement(UIElement element, Map parameters) {
+//	@SuppressWarnings("rawtypes")
+//	@Inject
+//	public void updateElement(@Active UIElement element, Map parameters) {
 //		// we'll only update the element that is bounded to the preference panel in the active
 //		// sub-view	
 //		String preferencePanelId = (String) parameters.get(PREFERENCE_PANEL_ID_PARAMETER);
 //		if (null != preferencePanelId) {
-//			MPart editorPart = workbenchWindow.getActivePage().getActiveEditor();
+//			MPart editorPart = ePartService.getActivePart();
 //			if (editorPart instanceof AbstractRootEditor) {
 //				AbstractRootEditor abstractRootEditor = (AbstractRootEditor) editorPart;
 //				IPreferencePanel preferencePanel = abstractRootEditor.getPreferencePanel();
 //				if (preferencePanelId.equals(preferencePanel.getId())) {
-//					element.setChecked(!abstractRootEditor.canMaximizeActiveSubView());
+//					element.(!abstractRootEditor.canMaximizeActiveSubView());
 //				}
 //			}
 //		}
-	}
+//	}
 
 }

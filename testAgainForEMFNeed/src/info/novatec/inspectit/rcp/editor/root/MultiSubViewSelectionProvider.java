@@ -8,7 +8,9 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.util.SafeRunnable;
+import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
@@ -19,7 +21,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
  * @author Patrice Bouillet
  * 
  */
-public class MultiSubViewSelectionProvider{
+public class MultiSubViewSelectionProvider implements IPostSelectionProvider{
 
 	/**
 	 * Registered selection changed listeners (element type: <code>ISelectionChangedListener</code>
@@ -39,6 +41,7 @@ public class MultiSubViewSelectionProvider{
 
 	//for notifying events, that this have been fired
 	@Inject IEventBroker eventBroker;
+
 	
 	/**
 	 * Constructor needs a root editor.

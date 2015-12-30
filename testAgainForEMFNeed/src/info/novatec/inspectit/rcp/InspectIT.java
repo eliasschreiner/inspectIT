@@ -132,10 +132,10 @@ public class InspectIT implements BundleActivator {
 		InspectIT.context = context;
 		plugin = this;	
 		locateRuntimeDir();		
-		//initLogger();				
+		initLogger();				
 
 		// add log listener once logger is initialized
-		//logListener = new LogListener();
+		logListener = new LogListener();
 		
 		initializeImageRegistry(imageRegistry);	
 	}
@@ -343,7 +343,8 @@ public class InspectIT implements BundleActivator {
 	 */
 	public ImageDescriptor getImageDescriptor(String imageKey) {
 		
-		return  JFaceResources.getImageRegistry().getDescriptor(imageKey);
+		//return the InspectIT specific ImageRegistry.
+		return imageRegistry.getDescriptor(imageKey);
 	}
 
 	/**
