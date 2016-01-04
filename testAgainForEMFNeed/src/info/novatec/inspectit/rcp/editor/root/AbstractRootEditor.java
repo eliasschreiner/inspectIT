@@ -151,6 +151,12 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 */
 	private ResourceManager resourceManager = new LocalResourceManager(JFaceResources.getResources());
 
+
+	/**
+	 * Part specific inputDefinition
+	 */
+	InputDefinition inputDefinition = null;
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -179,9 +185,9 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 */
 	public InputDefinition getInputDefinition() {	
 		//ausm Kontext wa ? Hier muss ich mal schaun das ich den jeweiliger partContext nutze, oder evtl mit den Prefs arbeite... aber erstmal das. 
-		InputDefinition inputDefinition = (InputDefinition) mApplication.getContext().get(OpenViewHandler.INPUT); 
+		if(inputDefinition == null)
+		inputDefinition = (InputDefinition) mApplication.getContext().get(OpenViewHandler.INPUT); 
 		//InputDefinition itest2 = (InputDefinition) mApplication.getContext().get("RootEditorInput"); //. .find("info.novatec.inspectit.rcp.editor.inputdefinition.InputDefinition");//, mApplication); //(InputDefinition) getEditorInput().getAdapter(InputDefinition.class);
-		Assert.isNotNull(inputDefinition);
 		return inputDefinition;
 	}
 
@@ -215,6 +221,11 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 		{
 			throw new Exception("Invalid Input: Must be InputDefinition");
 		}
+		
+		//Notwendig?
+		RootEditorInput rootEditorInput = (RootEditorInput) mApplication.getContext().get("RootEditorInput");
+		
+		
 		//This is not working... How to get the Icon URI out of an image
 //		Image icon = ImageFormatter.getOverlayedEditorImage(getInputDefinition().getEditorPropertiesData().getPartImage(), getInputDefinition().getRepositoryDefinition(), resourceManager);
 //		if(getInputDefinition().getEditorPropertiesData().getPartImageFlag() == PartType.VIEW) 

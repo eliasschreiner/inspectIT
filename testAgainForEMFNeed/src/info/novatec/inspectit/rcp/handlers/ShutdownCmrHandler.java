@@ -16,6 +16,10 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.commands.IParameter;
+import org.eclipse.core.commands.ParameterValuesException;
+import org.eclipse.core.commands.ParameterizedCommand;
+import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.MApplication;
@@ -40,14 +44,24 @@ public class ShutdownCmrHandler{
 	/**
 	 * Parameter that defines if restart should be executed after along shutdown of CMR.
 	 */
-	public static final String SHOULD_RESTART_PARAMETER = "info.novatec.inspectit.rcp.commands.shutdown.shouldRestart";
+	public static final String SHOULD_RESTART_PARAMETER = "shouldRestart";
 
 	/**
-	 * {@inheritDoc}
+	 * {@inheritDoc} 
 	 */
 	@Execute
-	public void execute(IProgressService progressServiceInject, MApplication mApplication, ESelectionService eSelectionService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
-		String param = (String) mApplication.getContext().get(SHOULD_RESTART_PARAMETER);//event.getParameter(SHOULD_RESTART_PARAMETER);
+	public void execute(ParameterizedCommand cmd,IProgressService progressServiceInject, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, ESelectionService eSelectionService) throws ExecutionException {
+		
+		System.out.println("sdfg");
+		String param;
+		IParameter param2 = null;
+		try {
+			param2 = cmd.getCommand().getParameter(SHOULD_RESTART_PARAMETER);
+		} catch (NotDefinedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		param = param2.toString();
 		TreeViewer selection = (TreeViewer) eSelectionService.getSelection();
 		if (StringUtils.isNotEmpty(param) && selection.getSelection() instanceof StructuredSelection) {
 			final boolean shouldRestart = Boolean.parseBoolean(param);

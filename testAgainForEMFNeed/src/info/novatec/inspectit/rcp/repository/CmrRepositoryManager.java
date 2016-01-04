@@ -20,6 +20,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 
@@ -67,6 +69,7 @@ public class CmrRepositoryManager {
 				UpdateRepositoryJob updateRepositoryJob = new UpdateRepositoryJob(cmrRepositoryDefinition, true);
 				updateRepositoryJob.schedule();
 				repositoryUpdateJobMap.put(cmrRepositoryDefinition, updateRepositoryJob);
+
 			}
 		}
 	}

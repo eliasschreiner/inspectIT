@@ -141,17 +141,37 @@
     <definition
           id="info.novatec.inspectit.recordingExpression">
           <with variable="recordingExpression">
-             <equals
-                  value="true">
-            </equals>
+             <and>
+                <iterate>
+                   <or>
+                      <instanceof
+                            value="info.novatec.inspectit.rcp.provider.ICmrRepositoryProvider">
+                      </instanceof>
+                      <instanceof
+                            value="info.novatec.inspectit.rcp.provider.ICmrRepositoryAndAgentProvider">
+                      </instanceof>
+                   </or>
+                   <test
+                         property="info.novatec.inspectit.onlineStatus"
+                         value="ONLINE">
+                   </test>
+                   <test
+                         property="info.novatec.inspectit.recordingActive"
+                         value="false">
+                   </test>
+                </iterate>
+             </and>
          </with>
     </definition>
     <definition
           id="recordingActive">
           <with variable="recordingActive">
-            <equals
-                  value="false">
-            </equals>
+             <iterate>
+                <test
+                      property="info.novatec.inspectit.recordingActive"
+                      value="true">
+                </test>
+             </iterate>
           </with>
     </definition>
  </extension>

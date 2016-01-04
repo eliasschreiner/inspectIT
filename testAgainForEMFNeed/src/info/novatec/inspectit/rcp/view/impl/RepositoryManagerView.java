@@ -31,6 +31,7 @@ import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
@@ -227,9 +228,12 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	/**
 	 * Default constructor.
 	 */
-	public RepositoryManagerView()  {
+	@Inject
+	public RepositoryManagerView(MApplication mApplication)  {
 		cmrRepositoryManager = InspectIT.getDefault().getCmrRepositoryManager();
 		cmrRepositoryManager.addCmrRepositoryChangeListener(this);
+		//Makes the MApplication accessible from the construction of this class
+		this.mApplication = mApplication;
 		createInputList();				
 	}	
 	
@@ -259,8 +263,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 //			
 //		String text = Platform.getPreferencesService().
 //		  getString(InspectIT.ID,PreferencesConstants.CMR_REPOSITORY_DEFINITIONS,"CMR_REPOSITORY_DEFINITIONS",null); 
-
-		createViewToolbar();				
+		
 		toolkit = new FormToolkit(parent.getDisplay());
 
 		mainComposite = new SashForm(parent, SWT.VERTICAL);
@@ -322,6 +325,13 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 				StructuredSelection structuredSelection = (StructuredSelection) event.getSelection();
 				if (structuredSelection.getFirstElement() instanceof DeferredAgentsComposite) {
 					lastSelectedRepository = (DeferredAgentsComposite) structuredSelection.getFirstElement();
+					
+					//Sends an Event to the EventBus, if the selection has been changed, so ToolItems can actualize their enabled/disabled-Status.
+					//UIEvents ensures that it uses the UI-Thread for doing so. 
+					//post-Method is making this Thread async. (for sync. use send-Method)
+					if(eventBroker != null)
+						eventBroker.post(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC, UIEvents.ALL_ELEMENT_ID);		
+
 				}
 			}
 		});
@@ -335,7 +345,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 		MenuManager menuManager = new MenuManager();
 		menuManager.setRemoveAllWhenShown(true);
-		eMenuService.registerContextMenu(menuManager, MENU_ID); //treeViewer ? wo kommt der nun hin ?
+		eMenuService.registerContextMenu(treeViewer.getControl(), MENU_ID); //treeViewer brauch ich nicht, da die Selection via eSelectionService läuft.
 		Control control = treeViewer.getControl();
 		Menu menu = menuManager.createContextMenu(control);
 		control.setMenu(menu);
@@ -374,16 +384,6 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 //	    preferences.put("DUMMY","DUMMYVALUE222");
 //	    preferences.flush();
 //	}
-	
-	/**
-	 * Creates the view tool-bar.
-	 */
-	private void createViewToolbar() { 
-	//	IToolBarManager toolBarManager = eHandlerService.  mPart.getToolbar().getParent();  getViewSite().getActionBars().getToolBarManager();
-//		toolBarManager.add(new ShowAgentsAction());
-//		toolBarManager.add(new ShowPropertiesAction());
-//		toolBarManager.add(new Separator());
-	}
 
 	/**
 	 * Updates the repository map.
@@ -392,6 +392,13 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		inputList.clear();
 		List<CmrRepositoryDefinition> repositories = cmrRepositoryManager.getCmrRepositoryDefinitions();
 		for (CmrRepositoryDefinition cmrRepositoryDefinition : repositories) {
+			
+			//Injects the application-Context into all camRepositoryDefinitions, so they have access to the EventBroker-Service
+			if(mApplication != null)
+			{
+				ContextInjectionFactory.inject(cmrRepositoryDefinition, mApplication.getContext());
+			}			
+			
 			inputList.add(new DeferredAgentsComposite(cmrRepositoryDefinition, showOldAgents));
 			OnlineStatus onlineStatus = cmrRepositoryDefinition.getOnlineStatus();
 			if (onlineStatus == OnlineStatus.ONLINE || onlineStatus == OnlineStatus.OFFLINE) {

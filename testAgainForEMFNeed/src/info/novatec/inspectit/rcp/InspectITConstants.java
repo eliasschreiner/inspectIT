@@ -33,5 +33,11 @@ public interface InspectITConstants {
 	 * Path to the folder that holds images.
 	 */
 	String WIZBAN_ICON_PATH = ICON_PATH_ECLIPSE + "wizban/";
+	
+		
+	/**
+	 * EventConstant for replacing the Core Expressions and the PropertyTesters for Recording-Commands
+	 */
+	String RECORING_ACTIVE = "false";
 
 }

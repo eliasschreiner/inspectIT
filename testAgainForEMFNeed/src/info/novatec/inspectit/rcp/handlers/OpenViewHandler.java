@@ -1,6 +1,7 @@
 package info.novatec.inspectit.rcp.handlers;
 
 import info.novatec.inspectit.rcp.editor.inputdefinition.InputDefinition;
+import info.novatec.inspectit.rcp.editor.root.AbstractRootEditor;
 import info.novatec.inspectit.rcp.editor.root.FormRootEditor;
 import info.novatec.inspectit.rcp.editor.root.RootEditorInput;
 
@@ -15,6 +16,7 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
@@ -51,11 +53,30 @@ public class OpenViewHandler {
 		if (null != inputDefinition) {
 			//Das hier notwendig ?
 			RootEditorInput input = new RootEditorInput(inputDefinition);
-			ePartService.getActivePart().getContext().set("RootEditorInput", input);
 			mApplication.getContext().set("RootEditorInput", input);
 			try {
-				//ePartService.findPart("testPartDescriptor1").setParent((MElementContainer<MUIElement>) eModelService.find("inspectit.partstack.1", ePartService.getActivePart()));
-				ePartService.showPart(ePartService.createPart(FormRootEditor.ID), PartState.ACTIVATE);//page.openEditor(input, FormRootEditor.ID);
+				//Proof whether a the part is already existing
+				boolean existingPart = false;				
+				for(MPart part :  ePartService.getParts())
+				{					
+					if(part.getObject() instanceof FormRootEditor)
+					{
+						AbstractRootEditor rootEditor = (AbstractRootEditor) part.getObject();
+						String id = rootEditor.getInputDefinition().getId().getFqn() ;
+						if(id == inputDefinition.getId().getFqn())					
+							{
+							existingPart = true;
+							ePartService.activate(part);
+							break;
+							}						
+						else
+							existingPart = false;	
+					}
+				}
+				if(!(existingPart))
+				{
+					ePartService.showPart(ePartService.createPart(FormRootEditor.ID), PartState.ACTIVATE);//page.openEditor(input, FormRootEditor.ID);
+				}
 			} catch (Exception e) {
 				throw new ExecutionException("Exception occurred trying to open the editor.", e);
 			}

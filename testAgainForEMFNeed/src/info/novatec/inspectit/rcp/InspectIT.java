@@ -21,7 +21,12 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.EclipseContextFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.core.services.log.Logger;
+import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
@@ -46,6 +51,7 @@ import info.novatec.inspectit.minlog.MinlogToSLF4JLogger;
 import info.novatec.inspectit.rcp.log.LogListener;
 import info.novatec.inspectit.rcp.preferences.PreferenceSupplier;
 import info.novatec.inspectit.rcp.preferences.ScopedPreferenceStore;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryManager;
 import info.novatec.inspectit.rcp.storage.InspectITStorageManager;
 import uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J;
@@ -117,6 +123,7 @@ public class InspectIT implements BundleActivator {
 	 * {@link ILogListener} used for logging.
 	 */
 	@Inject private LogListener logListener;
+	@Inject MApplication mApplication;
 
 	/**
 	 * This method is called upon plug-in activation.
@@ -137,7 +144,7 @@ public class InspectIT implements BundleActivator {
 		// add log listener once logger is initialized
 		logListener = new LogListener();
 		
-		initializeImageRegistry(imageRegistry);	
+		initializeImageRegistry(imageRegistry);			
 	}
 
 	/**
@@ -387,7 +394,7 @@ public class InspectIT implements BundleActivator {
 	public CmrRepositoryManager getCmrRepositoryManager() {
 		if (null == cmrRepositoryManager) {
 			synchronized (this) {
-				if (null == cmrRepositoryManager) { // NOCHK: DCL works with volatile.
+				if (null == cmrRepositoryManager) { // NOCHK: DCL works with volatile.				
 					cmrRepositoryManager = new CmrRepositoryManager();
 				}
 			}
