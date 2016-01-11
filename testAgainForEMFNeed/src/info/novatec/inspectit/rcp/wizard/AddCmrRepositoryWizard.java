@@ -45,9 +45,7 @@ public class AddCmrRepositoryWizard extends Wizard {
 	@Execute
 	public void execute(Shell parent) throws ExecutionException {
 		WizardDialog dialog = new WizardDialog(parent, this);
-		dialog.open();
-			
-		
+		dialog.open();		
 		}
 	
 	/**
@@ -57,7 +55,6 @@ public class AddCmrRepositoryWizard extends Wizard {
 		this.setWindowTitle("Add Central Management Repository (CMR)");
 		this.setDefaultPageImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_WIZBAN_SERVER));
 	}
-
 
 	/**
 	 * {@inheritDoc}

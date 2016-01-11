@@ -165,11 +165,4 @@ public class GridCompositeSubView extends AbstractCompositeSubView {
 	public void layout() {
 		composite.layout();
 	}
-
-	@Override
-	public void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService) {
-		createPartControl(parent, toolkit);
-		
-	}
-
 }

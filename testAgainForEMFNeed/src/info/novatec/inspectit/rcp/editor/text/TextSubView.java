@@ -179,11 +179,4 @@ public class TextSubView extends AbstractSubView {
 	public void dispose() {
 		textInputController.dispose();
 	}
-
-	@Override
-	public void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService) {
-		createPartControl(parent, toolkit);
-		
-	}
-
 }

@@ -12,6 +12,7 @@ import info.novatec.inspectit.rcp.util.ElementOccurrenceCount;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
@@ -57,8 +58,8 @@ public class SteppingTreeSubView extends TreeSubView {
 	 *            Stepping tree input controller.
 	 * @see TreeSubView#TreeSubView(info.novatec.inspectit.rcp.editor.tree.input.TreeInputController)
 	 */
-	public SteppingTreeSubView(SteppingTreeInputController treeInputController) {
-		super(treeInputController);
+	public SteppingTreeSubView(SteppingTreeInputController treeInputController, IEclipseContext context) {
+		super(treeInputController, context);
 
 		this.steppingTreeInputController = treeInputController;
 	}

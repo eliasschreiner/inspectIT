@@ -22,11 +22,6 @@ public class LifecycleHook {
 			
 		context.set(RepositoryManagerView.KEY, Boolean.TRUE);
 		context.declareModifiable(RepositoryManagerView.KEY);
-	//	
-//		
-//		eventBroker.post(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC,
-//						UIEvents.ALL_ELEMENT_ID);						
-//		
 		
 	}
 }

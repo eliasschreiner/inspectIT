@@ -48,7 +48,6 @@ public class OpenViewHandler {
 		// Get the input definition out of the context
 		IEclipseContext context = (IEclipseContext) mApplication.getContext();
 		InputDefinition inputDefinition = (InputDefinition) context.get(INPUT);
-
 		// open the view if the input definition is set
 		if (null != inputDefinition) {
 			//Das hier notwendig ?

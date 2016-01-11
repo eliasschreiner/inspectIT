@@ -390,12 +390,4 @@ public class GraphSubView extends AbstractSubView {
 	public void dispose() {
 		plotController.dispose();
 	}
-
-	@Override
-	public void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService) {
-		createPartControl(parent, toolkit);
-	}
-
-
-
 }

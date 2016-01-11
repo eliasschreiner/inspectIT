@@ -354,12 +354,12 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 		treeViewer.addDoubleClickListener(new DoubleClickListener());
 
 		MenuManager menuManager = new MenuManager();
-		menuManager.setRemoveAllWhenShown(true);
-		eMenuService.registerContextMenu(menuManager, MENU_ID); //getSite().registerContextMenu(MENU_ID, menuManager, treeViewer);
+		menuManager.setRemoveAllWhenShown(true);	
 		Control control = treeViewer.getControl();
 		Menu menu = menuManager.createContextMenu(control);
 		control.setMenu(menu);
-
+		eMenuService.registerContextMenu(control, MENU_ID); //getSite().registerContextMenu(MENU_ID, menuManager, treeViewer);
+		
 		mainComposite.addControlListener(new ControlAdapter() {
 			@Override
 			public void controlResized(ControlEvent e) {

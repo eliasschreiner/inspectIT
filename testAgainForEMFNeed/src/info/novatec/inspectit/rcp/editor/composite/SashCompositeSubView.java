@@ -35,7 +35,6 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public class SashCompositeSubView extends AbstractCompositeSubView {
 
-	EMenuService eMenuService = null;
 	/**
 	 * The style of the sash form.
 	 */
@@ -82,10 +81,7 @@ public class SashCompositeSubView extends AbstractCompositeSubView {
 		List<ISubView> subViews = getSubViews();
 
 		for (final ISubView subView : subViews) {
-			if(eMenuService==null)
-				subView.createPartControl(sashForm, toolkit);
-			else
-				subView.createPartControl(sashForm, toolkit, eMenuService);
+			subView.createPartControl(sashForm, toolkit);
 			subView.getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 			subView.getControl().addFocusListener(new FocusAdapter() {
 				/**
@@ -190,15 +186,5 @@ public class SashCompositeSubView extends AbstractCompositeSubView {
 	public void layout() {
 		sashForm.layout();
 	}
-
-	@Override
-	public void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService) {
-	
-		this.eMenuService = eMenuService;
-		createPartControl(parent, toolkit);
-		
-	}
-
-	
 
 }

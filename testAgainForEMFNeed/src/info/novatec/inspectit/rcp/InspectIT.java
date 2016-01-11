@@ -59,21 +59,35 @@ import uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J;
 
 public class InspectIT implements BundleActivator {
 
+	/**
+	 * The BundleContext
+	 */
 	private static BundleContext context;
 
+	/**
+	 * Gets the BundleContext for a possible, later useage in the application
+	 */
 	static BundleContext getContext() {
 		return context;
-	}
+	}	
 	
-	//Alles probeweiﬂe 	
-	Provider<StatusHandler> statusHandler;
+	/**
+	 * The statusHandler is the replacement of the Eclipse 3 StatusManager
+	 * It is injected by a Provider-Service through the created restricted Activator-Kontext
+	 */
+	@Inject Provider<StatusHandler> statusHandler;
 	
+	
+	/**
+	 * The JFace ImageRegistrty, which registers the need Images
+	 */
 	ImageRegistry imageRegistry = new ImageRegistry();
 	
 	/**
 	 * The id of this plugin.
 	 */
-	public static final String ID = "info.novatec.inspectit.rcp";
+	//#TODO Change this when  renaming the project!
+	public static final String ID = "testAgainForEMFNeed";
 
 	/**
 	 * Default name of the log file.
@@ -97,7 +111,8 @@ public class InspectIT implements BundleActivator {
 	private volatile CmrRepositoryManager cmrRepositoryManager;
 
 	/**
-	 * Preferences store for the plug-in.
+	 * Preferences store for the plug-in. 
+	 * In Eclipse 4 this is needs the OPCoach.E4Preferences Bundle
 	 */
 	private volatile static ScopedPreferenceStore  preferenceStore;
 
@@ -122,8 +137,7 @@ public class InspectIT implements BundleActivator {
 	/**
 	 * {@link ILogListener} used for logging.
 	 */
-	@Inject private LogListener logListener;
-	@Inject MApplication mApplication;
+	private LogListener logListener;
 
 	/**
 	 * This method is called upon plug-in activation.
@@ -137,15 +151,38 @@ public class InspectIT implements BundleActivator {
 
 	public void start(BundleContext context) throws Exception {
 		InspectIT.context = context;
-		plugin = this;	
+		plugin = this;
+		
+		//Injects the Eclipse Context into the Activator-Class, is only for OSGi-Services!
+		IEclipseContext eContext = EclipseContextFactory.getServiceContext(context);
+		ContextInjectionFactory.inject(this, eContext);	
+		
 		locateRuntimeDir();		
 		initLogger();				
-
+		
+		//log = getLog(context.getBundle());		
 		// add log listener once logger is initialized
 		logListener = new LogListener();
+		//context.addServiceListener((ServiceListener) logListener);
+		//log.addLogListener(logListener);
 		
-		initializeImageRegistry(imageRegistry);			
+		initializeImageRegistry(imageRegistry);		
 	}
+	
+//	@SuppressWarnings("restriction")
+//	public ILog getLog(Bundle bundle) {
+//		ServiceReference<?> logser = context.getServiceReference(LogService.class);
+//		LogService ls = (LogService)context.getService(logser);
+//		IEclipseContext eclipseContext = EclipseContextFactory.getServiceContext(context);
+//		eclipseContext.set(Logger.class, new WorkbenchLogger(InspectIT.ID));
+//		Logger logger = eclipseContext.get(Logger.class);
+//			
+//		Log result = new Log(bundle, logger);
+//		ServiceTracker logReaderTracker = logReaderTracker = new ServiceTracker(context, ExtendedLogReaderService.class.getName(), null);
+//		ExtendedLogReaderService logReader = (ExtendedLogReaderService) logReaderTracker.getService();
+//		logReader.addLogListener(result, result);
+//		return result;
+//	}
 
 	/**
 	 * Locates the runtime directory. It's needed for distinguish between development and runtime.
@@ -331,8 +368,7 @@ public class InspectIT implements BundleActivator {
 	 */
 
 	public Image getImage(String imageKey) {
-		Image img2 = imageRegistry.get(imageKey);
-		return img2;
+		return imageRegistry.get(imageKey);
 	}
 	
 	
@@ -377,13 +413,12 @@ public class InspectIT implements BundleActivator {
 	/**
 	 * {@inheritDoc}
 	 */
-	public ScopedPreferenceStore getPreferenceStore() {
-		
-		if (null == preferenceStore) {
-					
-				preferenceStore = new ScopedPreferenceStore(PreferenceSupplier.SCOPE_CONTEXT, PreferenceSupplier.PREFERENCE_NODE); 
-				//preferenceStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, ID); 
-					
+	public ScopedPreferenceStore getPreferenceStore() {		
+		if (null == preferenceStore) {		
+			synchronized (this) {
+				if (null == preferenceStore) 
+				preferenceStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, ID); 
+			}					
 		} 
 		return preferenceStore;
 	}

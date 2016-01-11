@@ -12,6 +12,7 @@ import info.novatec.inspectit.rcp.repository.RepositoryDefinition;
 
 import java.util.Objects;
 
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.swt.SWT;
@@ -57,8 +58,8 @@ public class FormRootEditor extends AbstractRootEditor {
 		// create the toolkit
 		this.toolkit = new FormToolkit(parent.getDisplay());
 
-		// create the preference panel with the callback
-		IPreferencePanel preferencePanel = new FormPreferencePanel(toolkit, super.eModelService, super.mApplication, super.mPart);
+		IPreferencePanel preferencePanel = new FormPreferencePanel(toolkit, super.mApplication.getContext());
+		
 		// set the preference panel
 		setPreferencePanel(preferencePanel);
 
@@ -81,8 +82,10 @@ public class FormRootEditor extends AbstractRootEditor {
 		// create an preference area if the subviews are requesting it
 		preferencePanel.createPartControl(form.getBody(), getSubView().getPreferenceIds(), getInputDefinition(), breadcrumbTitleComposite.getToolBarManager());
 
+		
+		
 		// go further with creating the subview(s)
-		getSubView().createPartControl(form.getBody(), toolkit, super.eMenuService);
+		getSubView().createPartControl(form.getBody(), toolkit);
 		getSubView().getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 	}
 

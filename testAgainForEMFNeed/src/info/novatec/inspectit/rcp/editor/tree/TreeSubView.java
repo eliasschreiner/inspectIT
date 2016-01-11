@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.apache.commons.lang.ArrayUtils;
@@ -30,6 +31,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -64,7 +67,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 
-	EMenuService eMenuService=null;
+	private EMenuService eMenuService;
 	
 	/**
 	 * The referenced input controller.
@@ -92,12 +95,18 @@ public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 	 * @param treeInputController
 	 *            The tree input controller.
 	 */
-	public TreeSubView(TreeInputController treeInputController) {
-		Assert.isNotNull(treeInputController);
-
+	public TreeSubView(TreeInputController treeInputController, IEclipseContext context) {
+		Assert.isNotNull(treeInputController); 
+		ContextInjectionFactory.inject(this, context);
 		this.treeInputController = treeInputController;
 	}
-
+	
+	@PostConstruct
+	public void init (EMenuService eMenuService)
+	{
+		this.eMenuService =  eMenuService;		
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -159,18 +168,11 @@ public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 
 		// normal selection menu manager
 		MenuManager selectionMenuManager = new MenuManager();
-		selectionMenuManager.setRemoveAllWhenShown(true);
-		
-		if(eMenuService != null)
-			eMenuService.registerContextMenu(treeViewer, FormRootEditor.ID + ".treesubview");
-		else {
-				//Log something..
-		}
-		
-			
+		selectionMenuManager.setRemoveAllWhenShown(true);		
+		Control selectionControl = treeViewer.getControl();
 		final Menu selectionMenu = selectionMenuManager.createContextMenu(tree);
 		final Menu headerMenu = headerMenuManager.createContextMenu(tree);
-
+		
 		tree.addListener(SWT.MenuDetect, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
@@ -182,9 +184,14 @@ public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 				} else {
 					tree.setMenu(selectionMenu);
 				}
+				if(eMenuService != null)
+				{
+					eMenuService.registerContextMenu(tree, FormRootEditor.ID + ".treesubview");
+				}
 			}
 		});
-
+		
+		
 		/**
 		 * IMPORTANT: Only the menu set in the setMenu() will be disposed automatically.
 		 */
@@ -481,13 +488,6 @@ public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 	@Override
 	public void dispose() {
 		treeInputController.dispose();
-	}
-
-	@Override
-	public void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService) {
-		this.eMenuService = eMenuService;
-		createPartControl(parent, toolkit);
-		
 	}
 
 }

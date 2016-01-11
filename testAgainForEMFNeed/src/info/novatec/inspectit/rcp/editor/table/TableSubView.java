@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.core.runtime.Assert;
@@ -33,9 +34,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.EMenuService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
@@ -69,7 +73,11 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public class TableSubView extends AbstractSubView implements ISearchExecutor {
 
-	EMenuService eMenuService = null;
+	@Inject private EMenuService eMenuService;
+	
+	MPart part = null;
+	
+	@Inject EPartService ePartService;
 	
 	/**
 	 * The referenced input controller.
@@ -97,15 +105,26 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 	 * @param tableInputController
 	 *            The table input controller.
 	 */	
-	public TableSubView(TableInputController tableInputController) {
-		Assert.isNotNull(tableInputController);
+	public TableSubView(TableInputController tableInputController, IEclipseContext context) {
+		Assert.isNotNull(tableInputController);		
+		ContextInjectionFactory.inject(this, context);				
+		
 		this.tableInputController = tableInputController;
+		
+		//org.eclipse.e4.ui.internal.workbench.swt.MenuService.registerMenu(parentControl, mmenu, context)
+		
 	}
 	
 	public TableSubView() {
 		this.tableInputController=null;
 	}
 
+	@PostConstruct
+	public void init(EMenuService eMenuService)
+	{
+		this.eMenuService = eMenuService;		
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -178,7 +197,7 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 		selectionMenuManager.setRemoveAllWhenShown(true);
 		
 		if(eMenuService !=null)
-			eMenuService.registerContextMenu(tableViewer, FormRootEditor.ID + ".tablesubview");
+			eMenuService.registerContextMenu(tableViewer, "inspectit.editor.formrooteditor.tablesubview5"); //FormRootEditor.ID + ".tablesubview");
 		else{//Log something}
 		
 		final Menu selectionMenu = selectionMenuManager.createContextMenu(table);
@@ -504,14 +523,6 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 	public void dispose() {
 		doRefresh();
 		tableInputController.dispose();
-	}
-
-	@Override
-	public void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService) {
-		this.eMenuService = eMenuService;
-		
-		createPartControl(parent, toolkit);
-		
 	}
 
 }

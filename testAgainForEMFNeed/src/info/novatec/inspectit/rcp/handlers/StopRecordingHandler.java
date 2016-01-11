@@ -75,6 +75,8 @@ public class StopRecordingHandler  {
 				}
 			}
 		}
+		else
+		{visible = false;}
 		return visible;
 	}
 	
@@ -133,7 +135,7 @@ public class StopRecordingHandler  {
 		}		
 		//Post Event to signal the StartRecordingHandler		
 				if(eventBroker != null)
-					eventBroker.post(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC, UIEvents.ALL_ELEMENT_ID);		
+					eventBroker.post(InspectITConstants.RECORING_ACTIVE, UIEvents.ALL_ELEMENT_ID);		
 					//eventBroker.post(InspectITConstants.RECORING_ACTIVE, "false");
 	}
 

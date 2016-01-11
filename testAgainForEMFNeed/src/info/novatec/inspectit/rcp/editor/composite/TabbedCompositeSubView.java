@@ -208,11 +208,4 @@ public class TabbedCompositeSubView extends AbstractCompositeSubView {
 			}
 		}
 	}
-
-	@Override
-	public void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService) {
-		createPartControl(parent, toolkit);
-		
-	}
-
 }

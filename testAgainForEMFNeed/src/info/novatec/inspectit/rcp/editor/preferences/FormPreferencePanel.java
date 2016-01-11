@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -70,7 +71,10 @@ import org.eclipse.ui.forms.widgets.Section;
 import org.jfree.ui.action.ActionMenuItem;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.contexts.ContextFunction;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.bindings.EBindingService;
 import org.eclipse.e4.ui.model.application.ui.menu.MDynamicMenuContribution;
@@ -127,15 +131,12 @@ public class FormPreferencePanel implements IPreferencePanel {
 	 */
 	private Section section;
 
-	@Inject MWindow mWindow;
-	@Inject EPartService ePartService;
+
 	@Inject EBindingService eBindingService;
 	@Inject EModelService eModelService;
 	@Inject MApplication mApplication;
-	@Inject EMenuService eMenuService;
-	@Inject MMenuFactory mMenuFactory;
-	@Inject MPart mPart;
-	@Inject ECommandService eCommandService;
+	@Inject EPartService ePartService;
+	MPart mPart;
 	
 	/**
 	 * The constructor which needs a {@link ViewController} reference.
@@ -143,16 +144,21 @@ public class FormPreferencePanel implements IPreferencePanel {
 	 * @param toolkit
 	 *            The Form toolkit which defines the used colors.
 	 */
-	public FormPreferencePanel(FormToolkit toolkit, EModelService eModelService, MApplication mApplication, MPart mPart) {
+	@Inject
+	public FormPreferencePanel(FormToolkit toolkit, IEclipseContext context) {
 		Assert.isNotNull(toolkit);
-
+		ContextInjectionFactory.inject(this, context);
 		this.toolkit = toolkit;
-		this.id = UUID.randomUUID().toString();
-		this.eModelService = eModelService;
-		this.mApplication = mApplication;
-		this.mPart = mPart;
-		
+		this.id = UUID.randomUUID().toString();	
 	}
+//	
+//	@PostConstruct
+//	public void init(EModelService eModelService, MApplication mApplication, EPartService ePartService)
+//	{
+//		this.eModelService = eModelService;
+//		this.mApplication = mApplication;
+//		this.mPart = ePartService.getActivePart();		
+//	}
 
 	/**
 	 * {@inheritDoc}
@@ -292,13 +298,12 @@ public class FormPreferencePanel implements IPreferencePanel {
 	 * @param toolBarManager
 	 *            The tool bar manager.
 	 */
-	@Inject
 	private void createButtons(Set<PreferenceId> preferenceSet, IToolBarManager toolBarManager) {
 		switchLiveMode = new SwitchLiveMode("Live");
 		switchPreferences = new SwitchPreferences("Additional options"); // NOPMD
 		
-		//Test fora more e4 wayofthe toolbar. 
-		MToolBar toolbar =  mPart.getToolbar();
+		//Test fora more e4 wayofthe toolbar. #TODO
+		//MToolBar toolbar =  mPart.getToolbar();
 		
 		MenuAction menuAction = new MenuAction();
 		menuAction.setImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_TOOL));
@@ -999,7 +1004,7 @@ public class FormPreferencePanel implements IPreferencePanel {
 	 */
 	private final class MaximizeActiveViewAction extends Action {
 
-
+		private MPart editorPart;
 		
 		/**
 		 * Default constructor.
@@ -1012,13 +1017,13 @@ public class FormPreferencePanel implements IPreferencePanel {
 			setImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_WINDOW));
 		}
 		
-		@Inject MHandledItem mHandledItem;
 		/**
 		 * {@inheritDoc}
 		 */
 		@Override
 		public void run() {
-			MPart editorPart = mPart;
+
+			editorPart = ePartService.getActivePart();
 			if (editorPart.getObject() instanceof AbstractRootEditor) {
 				AbstractRootEditor abstractRootEditor = (AbstractRootEditor) editorPart.getObject();
 				if (abstractRootEditor.canMaximizeActiveSubView()) {

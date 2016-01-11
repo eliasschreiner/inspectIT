@@ -68,7 +68,8 @@ public class StartRecordingHandler{
 	boolean visible = false;
 	
 	 /**
-	  * 	Sets the enabled/disabled-Attribute via the @CanExecute-Annotation. 	 
+	  * 	Sets the enabled/disabled-Attribute via the @CanExecute-Annotation. 
+	  *  TODO check for RECORDING_ACTIVE (to not send the event to everyone)	 
 	  */
 	@CanExecute
 	public boolean isVisible(@Optional @UIEventTopic(InspectITConstants.RECORING_ACTIVE) String recoringActive, 
@@ -96,9 +97,12 @@ public class StartRecordingHandler{
 					visible = false;
 				}
 			}
-		}
+		}	
+		else
+		{visible = false;}
 		return visible;
 	}
+
 		
 	/**
 	 * {@inheritDoc}
@@ -182,7 +186,7 @@ public class StartRecordingHandler{
 		
 		//Post Event to signal the StopRecordingHandler		
 		if(eventBroker != null)
-			eventBroker.post(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC, UIEvents.ALL_ELEMENT_ID);		
+			eventBroker.post(InspectITConstants.RECORING_ACTIVE, UIEvents.ALL_ELEMENT_ID);		
 			//eventBroker.post(InspectITConstants.RECORING_ACTIVE, "true");
 		
 	}

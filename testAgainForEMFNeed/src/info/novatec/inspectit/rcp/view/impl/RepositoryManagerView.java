@@ -33,6 +33,8 @@ import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Creatable;
+import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.Focus;
@@ -41,6 +43,8 @@ import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectToolItem;
+import org.eclipse.e4.ui.model.application.ui.menu.MHandledToolItem;
+import org.eclipse.e4.ui.model.application.ui.menu.MPopupMenu;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
 import org.eclipse.e4.ui.model.application.ui.menu.impl.HandledToolItemImpl;
 import org.eclipse.e4.ui.progress.IProgressConstants;
@@ -106,7 +110,6 @@ import info.novatec.inspectit.rcp.handlers.ShowRepositoryHandler;
 import info.novatec.inspectit.rcp.model.AgentLeaf;
 import info.novatec.inspectit.rcp.model.Component;
 import info.novatec.inspectit.rcp.model.DeferredAgentsComposite;
-import info.novatec.inspectit.rcp.preferences.PreferenceSupplier;
 import info.novatec.inspectit.rcp.preferences.PreferencesConstants;
 import info.novatec.inspectit.rcp.provider.ICmrRepositoryProvider;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryChangeListener;
@@ -119,8 +122,7 @@ import info.novatec.inspectit.rcp.view.IRefreshableView;
 import info.novatec.inspectit.rcp.view.tree.TreeContentProvider2;
 import info.novatec.inspectit.util.ObjectUtils;
 
-import org.eclipse.e4.core.services.events.IEventBroker;
-import org.eclipse.e4.core.services.log.Logger;  
+import org.eclipse.e4.core.services.events.IEventBroker;  
 /**
  * Repository manager view where user can work with repositories, check agents, and give input for
  * the data explorer view.
@@ -180,6 +182,8 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	 */
 	private CmrRepositoryPropertyForm cmrPropertyForm;
 
+	public static final String KEY = "recordingExpression"; //$NON-NLS-1$
+	
 	/**
 	 * Views main composite.
 	 */
@@ -200,7 +204,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	 * Defines if agents are shown in the tree which have not sent any data since the CMR was
 	 * started.
 	 */
-	private boolean showOldAgents = false;
+	public boolean showOldAgents = false;
 
 	/**
 	 * {@link AgentStatusUpdateJob}.
@@ -212,11 +216,6 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	 */
 	private List<Object> expandedList;
 	
-	public static final String KEY = "recordingExpression"; //$NON-NLS-1$
-
-	
-	
-	//@Inject MToolBar mToolBar;
 	@Inject ESelectionService eSelectionService;
 	@Inject EMenuService eMenuService;	
 	@Inject EHandlerService eHandlerService;
@@ -233,6 +232,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		cmrRepositoryManager = InspectIT.getDefault().getCmrRepositoryManager();
 		cmrRepositoryManager.addCmrRepositoryChangeListener(this);
 		//Makes the MApplication accessible from the construction of this class
+		//So the ContextInjectionFactory can inject it into its cmrRepositoryDefinition instances
 		this.mApplication = mApplication;
 		createInputList();				
 	}	
@@ -344,12 +344,12 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		treeViewer.addSelectionChangedListener(cmrPropertyForm);
 
 		MenuManager menuManager = new MenuManager();
-		menuManager.setRemoveAllWhenShown(true);
-		eMenuService.registerContextMenu(treeViewer.getControl(), MENU_ID); //treeViewer brauch ich nicht, da die Selection via eSelectionService läuft.
+		menuManager.setRemoveAllWhenShown(true);		
 		Control control = treeViewer.getControl();
 		Menu menu = menuManager.createContextMenu(control);
 		control.setMenu(menu);
-
+		eMenuService.registerContextMenu(control, MENU_ID); //treeViewer brauch ich nicht, da die Selection via eSelectionService läuft.
+		
 		mainComposite.addControlListener(new ControlAdapter() {
 			@Override
 			public void controlResized(ControlEvent e) {
@@ -388,7 +388,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	/**
 	 * Updates the repository map.
 	 */
-	private void createInputList() {
+	public void createInputList() {
 		inputList.clear();
 		List<CmrRepositoryDefinition> repositories = cmrRepositoryManager.getCmrRepositoryDefinitions();
 		for (CmrRepositoryDefinition cmrRepositoryDefinition : repositories) {
@@ -410,7 +410,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	/**
 	 * Updates body.
 	 */
-	private void updateFormBody() {
+	public void updateFormBody() {
 		clearFormBody();
 		if (!inputList.isEmpty()) {
 			treeViewer.getTree().setVisible(true);
@@ -705,7 +705,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 			cmrPropertyForm = new CmrRepositoryPropertyForm(mainComposite, cmrRepositoryDefinition);
 			cmrPropertyForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			treeViewer.addSelectionChangedListener(cmrPropertyForm);
-			mainComposite.setWeights(new int[] { 2, 3 });
+			mainComposite.setWeights(new int[] { 2, 3, 0 });
 			mainComposite.layout();
 		} else {
 			if (null != cmrPropertyForm && !cmrPropertyForm.isDisposed()) {
@@ -713,7 +713,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 				cmrPropertyForm.dispose();
 				cmrPropertyForm = null; // NOPMD
 			}
-			mainComposite.setWeights(new int[] { 1 });
+			mainComposite.setWeights(new int[] { 1 , 0 , 0});
 			mainComposite.layout();
 		}
 	}
@@ -726,81 +726,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		cmrRepositoryManager.removeCmrRepositoryChangeListener(this);
 		agentStatusUpdateJob.cancel();
 	}
-
-	/**
-	 * Action for show hide properties.
-	 * 
-	 * @author Ivan Senic
-	 * 
-	 */
-	private class ShowPropertiesAction extends Action {
-
-		/**
-		 * Default constructor.
-		 */
-		@SuppressWarnings("unused")
-		public ShowPropertiesAction() {
-			super(null, AS_CHECK_BOX);
-			setImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_PROPERTIES));
-			setChecked(true);
-			setToolTipText("Hide Properties");
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		public void run() {
-			if (isChecked()) {
-				setShowProperties(true);
-				setToolTipText("Hide Properties");
-			} else {
-				setShowProperties(false);
-				setToolTipText("Show Properties");
-			}
-		};
-	}
-
-	/**
-	 * Action for show hide agents which have not sent any data.
-	 * 
-	 * @author Patrice Bouillet
-	 * 
-	 */
-	@SuppressWarnings("unused")
-	private class ShowAgentsAction extends Action {
-
-		/**
-		 * Default constructor.
-		 */
-		public ShowAgentsAction() {
-			super(null, AS_CHECK_BOX);
-			setImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT));
-			setChecked(showOldAgents);
-			updateToolTipText();
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		public void run() {
-			showOldAgents = isChecked();
-			updateToolTipText();
-			createInputList();
-			updateFormBody();
-		};
-
-		/**
-		 * Updates tool-tip text based on the current state.
-		 */
-		private void updateToolTipText() {
-			if (isChecked()) {
-				setToolTipText("Hide Agents which have not sent any data yet.");
-			} else {
-				setToolTipText("Show Agents which have not sent any data yet.");
-			}
-		}
-	}
-
+	
 	/**
 	 * Double click listener for the view.
 	 * 
@@ -865,32 +791,6 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 				catch (Exception e) {
 					throw new RuntimeException(e);
 				}
-				
-				
-				
-//				@SuppressWarnings("unused")
-//				Command command = eCommandService.getCommand(ShowRepositoryHandler.COMMAND);    
-//				
-//	//			if ( eventBroker != null ) //Sends async. for sending sync. use send()
-////				     eventBroker.post(ShowRepositoryHandler.COMMAND, new Event());
-//						
-//				eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new Event());
-//				
-//				ParameterizedCommand parameterCommand = eCommandService.createCommand(ShowRepositoryHandler.COMMAND, null);
-//			//	IEvaluationContext context = (IEvaluationContext) executionEvent.getApplicationContext();
-//				
-//				mApplication.getContext().set(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
-//				//context.addVariable(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
-//				if (null != platformIdent) {
-//					mApplication.getContext().set(ShowRepositoryHandler.AGENT, platformIdent); 
-//					//context.addVariable(ShowRepositoryHandler.AGENT, platformIdent);
-//				}
-//				try {
-//					if(eHandlerService.canExecute(parameterCommand)) 
-//						eHandlerService.executeHandler(parameterCommand);
-//				} catch (Exception e) {
-//					throw new RuntimeException(e);
-//				}
 			} else {
 				if (treeViewer.getExpandedState(firstElement)) {
 					treeViewer.collapseToLevel(firstElement, 1);
@@ -979,9 +879,6 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	 */
 	public final class AgentStatusUpdateJob extends Job {
 
-
-		//@Inject EModelService eModelService;		
-		//@Inject MWindow mWindow;
 		/**
 		 * Update rate in milliseconds. Currently every 60 seconds.
 		 */
@@ -1043,6 +940,8 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		}
 	}
 
+	
+	
 	/**
 	 * Listener that is added to the {@link TreeContentProvider} and is invoked when job of updating
 	 * the tree elements is done. At this point this listener will re-expand all the before expanded

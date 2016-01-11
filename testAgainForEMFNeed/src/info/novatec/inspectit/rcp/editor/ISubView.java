@@ -55,13 +55,7 @@ public interface ISubView {
 	 *            <code>null</code> to indicate that there is no toolkit.
 	 */
 	void createPartControl(Composite parent, FormToolkit toolkit);
-	
-	/**
-	 * Due to the MenuService isn´t injectable via Field-injection, in the case of the inter @PostConstruct cycle, it has to be given through the process.
-	 * 
-	 * @param EMenuService
-	 */
-	void createPartControl(Composite parent, FormToolkit toolkit, EMenuService eMenuService);
+
 
 	/**
 	 * A sub-view should return all preference IDs itself is in need of and the ones of the children

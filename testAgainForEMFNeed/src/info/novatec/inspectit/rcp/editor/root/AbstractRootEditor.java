@@ -173,7 +173,6 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	@Inject EPartService ePartService;
 	@Inject ESelectionService eSelectionService;
 	@Inject IEventBroker eventBroker;
-	@Inject EMenuService eMenuService;
 	
 	//Test to initialize this without adding it as a selectionProvider
 	public MultiSubViewSelectionProvider multiSubViewSelectionProvider;
@@ -221,7 +220,9 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 		{
 			throw new Exception("Invalid Input: Must be InputDefinition");
 		}
+		ContextInjectionFactory.make(TableSubView.class, mApplication.getContext());
 		
+
 		//Notwendig?
 		RootEditorInput rootEditorInput = (RootEditorInput) mApplication.getContext().get("RootEditorInput");
 		
@@ -238,9 +239,9 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 //		}
 		//setTitleImage(ImageFormatter.getOverlayedEditorImage(getInputDefinition().getEditorPropertiesData().getPartImage(), getInputDefinition().getRepositoryDefinition(), resourceManager);
 		//InspectIT.getDefault().getImage()		
-		
-
-		this.subView = SubViewFactory.createSubView(getInputDefinition().getId());
+	
+		//Inserts a Context into the Factory, so the Factory can Inject this Context later to SubViews (if needed). Due to it is actually only needed for the Service implementation, it´s sufficient to inject the Application-Context		
+		this.subView = SubViewFactory.createSubView(getInputDefinition().getId(), mApplication.getContext());
 		this.subView.setRootEditor(this);
 		this.subView.init();
 		multiSubViewSelectionProvider = new MultiSubViewSelectionProvider(this);
