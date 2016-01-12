@@ -1022,7 +1022,6 @@ public class FormPreferencePanel implements IPreferencePanel {
 		 */
 		@Override
 		public void run() {
-
 			editorPart = ePartService.getActivePart();
 			if (editorPart.getObject() instanceof AbstractRootEditor) {
 				AbstractRootEditor abstractRootEditor = (AbstractRootEditor) editorPart.getObject();

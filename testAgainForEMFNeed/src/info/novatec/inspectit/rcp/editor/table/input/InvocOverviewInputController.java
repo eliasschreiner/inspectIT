@@ -19,6 +19,7 @@ import info.novatec.inspectit.rcp.editor.inputdefinition.InputDefinition.IdDefin
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceEventCallback.PreferenceEvent;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceId;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceId.LiveMode;
+import info.novatec.inspectit.rcp.editor.root.AbstractRootEditor;
 import info.novatec.inspectit.rcp.editor.root.IRootEditor;
 import info.novatec.inspectit.rcp.editor.table.RemoteTableViewerComparator;
 import info.novatec.inspectit.rcp.editor.tooltip.IColumnToolTipProvider;
@@ -37,9 +38,15 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Creatable;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.progress.IProgressService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -66,6 +73,7 @@ import org.eclipse.swt.widgets.Display;
  * @author Patrice Bouillet
  * 
  */
+@Creatable
 public class InvocOverviewInputController extends AbstractTableInputController {
 
 	/**
@@ -198,6 +206,14 @@ public class InvocOverviewInputController extends AbstractTableInputController {
 
 	@Inject IProgressService progressService;
 	@Inject EPartService ePartService;
+	
+
+	public InvocOverviewInputController() {
+		//Gets the ApplicationContext out of the AbstractRooteditor to create it´s own to inject Services
+		 IEclipseContext context = AbstractRootEditor.abstractContext;
+		 ContextInjectionFactory.inject(this, context);
+	}
+	
 	
 	/**
 	 * Result comparator to be used on the server.
@@ -439,7 +455,8 @@ public class InvocOverviewInputController extends AbstractTableInputController {
 						invocationSequenceDataList.add(data);
 						Display.getDefault().asyncExec(new Runnable() {
 							public void run() {							
-								IRootEditor rootEditor = (IRootEditor) ePartService.getActivePart();
+								MPart bufferPart = ePartService.getActivePart();
+								IRootEditor rootEditor = (IRootEditor) bufferPart.getObject();
 								rootEditor.setDataInput(invocationSequenceDataList);
 							}
 						});

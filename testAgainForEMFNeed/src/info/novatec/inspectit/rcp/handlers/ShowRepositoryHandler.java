@@ -12,6 +12,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.commands.IHandlerListener;
+import org.eclipse.core.expressions.IEvaluationContext;
 import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -54,6 +55,7 @@ public class ShowRepositoryHandler  {
 	public void execute(EPartService ePartService, MApplication mApplication, @Named(IServiceConstants.ACTIVE_PART) MPart mPart) throws ExecutionException {
 		
 		// Get the repository definition and agent out of the context
+		//IEvaluationContext evacontext = (IEvaluationContext) event.getApplicationContext();
 		IEclipseContext context = (IEclipseContext) mApplication.getContext();
 		RepositoryDefinition repositoryDefinition = (RepositoryDefinition) context.get(REPOSITORY_DEFINITION);
 		PlatformIdent platformIdent = (PlatformIdent) context.get(AGENT);

@@ -1408,19 +1408,19 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 					MessageDialog dialog = new MessageDialog(shell, "Opening Writable Storage", null, dialogMessage, MessageDialog.QUESTION, new String[] { "Yes", "No" }, 0);
 					if (0 == dialog.open()) {
 						treeViewer.setSelection(treeViewer.getSelection());
-											
-						Command command = eCommandService.getCommand(CloseAndShowStorageHandler.COMMAND);
-						ParameterizedCommand parameterizedCommand = ParameterizedCommand.generateCommand(command, null);
-						
-						if(eventBroker != null) eventBroker.post(CloseAndShowStorageHandler.COMMAND, new Event());	
-						eHandlerService.activateHandler(CloseAndShowStorageHandler.COMMAND, new Event());
-						
+
+						ParameterizedCommand command =
+								eCommandService.createCommand(CloseAndShowStorageHandler.COMMAND, null);
+						eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new ShowRepositoryHandler());
 						IEclipseContext context = (IEclipseContext) mApplication.getContext();
 						context.set(CloseAndShowStorageHandler.STORAGE_DATA_PROVIDER, storageDataProvider);
-						context.set(ePartService.ACTIVE_ON_CLOSE_TAG, ePartService.getActivePart()); // ISources.ACTIVE_SITE_NAME, getSite());
-						try {
-							if(eHandlerService.canExecute(parameterizedCommand)) eHandlerService.executeHandler(parameterizedCommand);
-						} catch (Exception e) {
+						context.set(ePartService.ACTIVE_ON_CLOSE_TAG, ePartService.getActivePart());
+						try{
+							if(eHandlerService.canExecute(command)) {
+								 eHandlerService.executeHandler(command);						 
+							}
+						}
+						catch (Exception e) {
 							throw new RuntimeException(e);
 						}
 					}

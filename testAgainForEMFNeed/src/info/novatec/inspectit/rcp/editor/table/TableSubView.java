@@ -1,45 +1,17 @@
 package info.novatec.inspectit.rcp.editor.table;
 
-import info.novatec.inspectit.communication.DefaultData;
-import info.novatec.inspectit.rcp.editor.AbstractSubView;
-import info.novatec.inspectit.rcp.editor.ISubView;
-import info.novatec.inspectit.rcp.editor.preferences.IPreferenceGroup;
-import info.novatec.inspectit.rcp.editor.preferences.PreferenceEventCallback.PreferenceEvent;
-import info.novatec.inspectit.rcp.editor.preferences.PreferenceId;
-import info.novatec.inspectit.rcp.editor.root.FormRootEditor;
-import info.novatec.inspectit.rcp.editor.root.SubViewClassificationController.SubViewClassification;
-import info.novatec.inspectit.rcp.editor.search.ISearchExecutor;
-import info.novatec.inspectit.rcp.editor.search.criteria.SearchCriteria;
-import info.novatec.inspectit.rcp.editor.search.criteria.SearchResult;
-import info.novatec.inspectit.rcp.editor.search.helper.TableViewerSearchHelper;
-import info.novatec.inspectit.rcp.editor.table.input.TableInputController;
-import info.novatec.inspectit.rcp.editor.tooltip.ColumnAwareToolTipSupport;
-import info.novatec.inspectit.rcp.editor.tooltip.IColumnToolTipProvider;
-import info.novatec.inspectit.rcp.editor.viewers.CheckedDelegatingIndexLabelProvider;
-import info.novatec.inspectit.rcp.editor.viewers.StyledCellIndexLabelProvider;
-import info.novatec.inspectit.rcp.handlers.ShowHideColumnsHandler;
-import info.novatec.inspectit.rcp.menu.ShowHideMenuManager;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.e4.core.contexts.ContextInjectionFactory;
-import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.EMenuService;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
@@ -65,6 +37,25 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+import info.novatec.inspectit.communication.DefaultData;
+import info.novatec.inspectit.rcp.editor.AbstractSubView;
+import info.novatec.inspectit.rcp.editor.ISubView;
+import info.novatec.inspectit.rcp.editor.preferences.IPreferenceGroup;
+import info.novatec.inspectit.rcp.editor.preferences.PreferenceEventCallback.PreferenceEvent;
+import info.novatec.inspectit.rcp.editor.preferences.PreferenceId;
+import info.novatec.inspectit.rcp.editor.root.SubViewClassificationController.SubViewClassification;
+import info.novatec.inspectit.rcp.editor.search.ISearchExecutor;
+import info.novatec.inspectit.rcp.editor.search.criteria.SearchCriteria;
+import info.novatec.inspectit.rcp.editor.search.criteria.SearchResult;
+import info.novatec.inspectit.rcp.editor.search.helper.TableViewerSearchHelper;
+import info.novatec.inspectit.rcp.editor.table.input.TableInputController;
+import info.novatec.inspectit.rcp.editor.tooltip.ColumnAwareToolTipSupport;
+import info.novatec.inspectit.rcp.editor.tooltip.IColumnToolTipProvider;
+import info.novatec.inspectit.rcp.editor.viewers.CheckedDelegatingIndexLabelProvider;
+import info.novatec.inspectit.rcp.editor.viewers.StyledCellIndexLabelProvider;
+import info.novatec.inspectit.rcp.handlers.ShowHideColumnsHandler;
+import info.novatec.inspectit.rcp.menu.ShowHideMenuManager;
+
 /**
  * Sub-view which is used to create a table.
  * 
@@ -73,12 +64,10 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public class TableSubView extends AbstractSubView implements ISearchExecutor {
 
-	@Inject private EMenuService eMenuService;
+	static String MENU_ID = "inspectit.editor.formrooteditor.tablesubview";
 	
-	MPart part = null;
-	
-	@Inject EPartService ePartService;
-	
+	private EMenuService eMenuService;
+
 	/**
 	 * The referenced input controller.
 	 */
@@ -105,26 +94,16 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 	 * @param tableInputController
 	 *            The table input controller.
 	 */	
-	public TableSubView(TableInputController tableInputController, IEclipseContext context) {
-		Assert.isNotNull(tableInputController);		
-		ContextInjectionFactory.inject(this, context);				
-		
+	public TableSubView(TableInputController tableInputController, EMenuService eMenuService) {
+		Assert.isNotNull(tableInputController);					
+		this.eMenuService = eMenuService;
 		this.tableInputController = tableInputController;
-		
-		//org.eclipse.e4.ui.internal.workbench.swt.MenuService.registerMenu(parentControl, mmenu, context)
-		
 	}
 	
 	public TableSubView() {
 		this.tableInputController=null;
 	}
 
-	@PostConstruct
-	public void init(EMenuService eMenuService)
-	{
-		this.eMenuService = eMenuService;		
-	}
-	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -194,15 +173,11 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 
 		// normal selection menu manager
 		MenuManager selectionMenuManager = new MenuManager();
-		selectionMenuManager.setRemoveAllWhenShown(true);
-		
-		if(eMenuService !=null)
-			eMenuService.registerContextMenu(tableViewer, "inspectit.editor.formrooteditor.tablesubview5"); //FormRootEditor.ID + ".tablesubview");
-		else{//Log something}
+		selectionMenuManager.setRemoveAllWhenShown(true);	
 		
 		final Menu selectionMenu = selectionMenuManager.createContextMenu(table);
 		final Menu headerMenu = headerMenuManager.createContextMenu(table);
-
+		
 		table.addListener(SWT.MenuDetect, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
@@ -210,13 +185,17 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 				Rectangle clientArea = table.getClientArea();
 				boolean header = clientArea.y <= pt.y && pt.y < (clientArea.y + table.getHeaderHeight());
 				if (header) {
-					table.setMenu(headerMenu);
+					table.setMenu(headerMenu);	
 				} else {
 					table.setMenu(selectionMenu);
 				}
-			}
-		});
+				//case dependent registration
+			if(eMenuService !=null)
+				eMenuService.registerContextMenu(table, MENU_ID); //FormRootEditor.ID + ".tablesubview");
 
+			}
+		});	
+	
 		/**
 		 * IMPORTANT: Only the menu set in the setMenu() will be disposed automatically.
 		 */
@@ -293,8 +272,7 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 					}
 				}
 			});
-		}
-		}
+		}		
 	}
 
 	/**

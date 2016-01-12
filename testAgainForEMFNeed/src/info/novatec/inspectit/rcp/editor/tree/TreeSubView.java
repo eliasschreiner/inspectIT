@@ -67,6 +67,8 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
  */
 public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 
+	static String MENU_ID = "inspectit.editor.formrooteditor.treesubview";
+	
 	private EMenuService eMenuService;
 	
 	/**
@@ -95,16 +97,10 @@ public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 	 * @param treeInputController
 	 *            The tree input controller.
 	 */
-	public TreeSubView(TreeInputController treeInputController, IEclipseContext context) {
+	public TreeSubView(TreeInputController treeInputController, EMenuService eMenuService) {
 		Assert.isNotNull(treeInputController); 
-		ContextInjectionFactory.inject(this, context);
+		this.eMenuService = eMenuService;
 		this.treeInputController = treeInputController;
-	}
-	
-	@PostConstruct
-	public void init (EMenuService eMenuService)
-	{
-		this.eMenuService =  eMenuService;		
 	}
 	
 	/**
@@ -186,7 +182,7 @@ public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 				}
 				if(eMenuService != null)
 				{
-					eMenuService.registerContextMenu(tree, FormRootEditor.ID + ".treesubview");
+					eMenuService.registerContextMenu(tree, MENU_ID);
 				}
 			}
 		});

@@ -237,8 +237,7 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 						eHandlerService.activateHandler(OpenViewHandler.COMMAND, new OpenViewHandler());
 						ParameterizedCommand parameterCommand = eCommandService.createCommand(OpenViewHandler.COMMAND, null);							
 						mApplication.getContext().set(OpenViewHandler.INPUT, ((Component) element).getInputDefinition()); 
-						
-					
+											
 						try {
 							if(eHandlerService.canExecute(parameterCommand)) eHandlerService.executeHandler(parameterCommand);
 						} catch (Exception e) {
@@ -268,7 +267,7 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 					}
 				}
 			}
-		}
+		}		
 		eSelectionService.setSelection(treeViewer); 
 	}
 

@@ -54,6 +54,7 @@ import info.novatec.inspectit.rcp.editor.preferences.PreferenceEventCallback;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceId;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceId.LiveMode;
 import info.novatec.inspectit.rcp.editor.table.TableSubView;
+import info.novatec.inspectit.rcp.editor.table.input.InvocOverviewInputController;
 import info.novatec.inspectit.rcp.formatter.ImageFormatter;
 import info.novatec.inspectit.rcp.handlers.OpenViewHandler;
 import info.novatec.inspectit.rcp.provider.IInputDefinitionProvider;
@@ -152,6 +153,8 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	private ResourceManager resourceManager = new LocalResourceManager(JFaceResources.getResources());
 
 
+	 public static IEclipseContext abstractContext;
+	
 	/**
 	 * Part specific inputDefinition
 	 */
@@ -173,6 +176,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	@Inject EPartService ePartService;
 	@Inject ESelectionService eSelectionService;
 	@Inject IEventBroker eventBroker;
+	@Inject EMenuService eMenuService;
 	
 	//Test to initialize this without adding it as a selectionProvider
 	public MultiSubViewSelectionProvider multiSubViewSelectionProvider;
@@ -215,18 +219,21 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 */
 	@Inject
 	public void init(MPart mPart) throws Exception {
+		abstractContext = mApplication.getContext();
 		//check for valid Data, I swapped this from RootEditorInput, why do I need RootEditorInput
 		if(!(getInputDefinition() instanceof InputDefinition))
 		{
 			throw new Exception("Invalid Input: Must be InputDefinition");
-		}
-		ContextInjectionFactory.make(TableSubView.class, mApplication.getContext());
-		
+		}		
 
 		//Notwendig?
 		RootEditorInput rootEditorInput = (RootEditorInput) mApplication.getContext().get("RootEditorInput");
 		
-		
+		//Inject Context into the Classes to provide services
+//		ContextInjectionFactory.inject(InvocOverviewInputController.class, mApplication.getContext());
+//		ContextInjectionFactory.make(InvocOverviewInputController.class, mApplication.getContext());
+//		InvocOverviewInputController myClassInstance = ContextInjectionFactory.make(InvocOverviewInputController.class, mApplication.getContext());
+//		mApplication.getContext().set(InvocOverviewInputController.class, myClassInstance);
 		//This is not working... How to get the Icon URI out of an image
 //		Image icon = ImageFormatter.getOverlayedEditorImage(getInputDefinition().getEditorPropertiesData().getPartImage(), getInputDefinition().getRepositoryDefinition(), resourceManager);
 //		if(getInputDefinition().getEditorPropertiesData().getPartImageFlag() == PartType.VIEW) 
@@ -241,7 +248,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 		//InspectIT.getDefault().getImage()		
 	
 		//Inserts a Context into the Factory, so the Factory can Inject this Context later to SubViews (if needed). Due to it is actually only needed for the Service implementation, it´s sufficient to inject the Application-Context		
-		this.subView = SubViewFactory.createSubView(getInputDefinition().getId(), mApplication.getContext());
+		this.subView = SubViewFactory.createSubView(getInputDefinition().getId(), eMenuService);
 		this.subView.setRootEditor(this);
 		this.subView.init();
 		multiSubViewSelectionProvider = new MultiSubViewSelectionProvider(this);
