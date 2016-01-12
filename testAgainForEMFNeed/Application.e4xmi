@@ -48,10 +48,6 @@
               </toolbar>
             </children>
             <children xsi:type="basic:Part" xmi:id="_vzyjUHjJEeWfB_YImTWJSA" elementId="info.novatec.inspectit.rcp.view.storageManager" accessibilityPhrase="Storage Manager" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.view.impl.StorageManagerView" label="Storage Manager" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/catalog.gif" tooltip="Storage Manager" bindingContexts="_6wlLesgZEeSyMNYR5xypkQ" closeable="true">
-              <menus xsi:type="menu:PopupMenu" xmi:id="_Bc46sLfFEeWFH7_aCLqj2g" elementId="info.novatec.inspectit.rcp.view.storageManager.storageTree">
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_CqtYsLfFEeWFH7_aCLqj2g" elementId="testagainforemfneed.handledmenuitem.8"/>
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_C6ycELfFEeWFH7_aCLqj2g" elementId="testagainforemfneed.handledmenuitem.9"/>
-              </menus>
               <toolbar xmi:id="_xnV2wIRdEeWfEs4fkpwvew" elementId="info.novatec.inspectit.rcp.view.storageManager.toolbar" accessibilityPhrase="Storage Manager Toolbar">
                 <children xsi:type="menu:HandledToolItem" xmi:id="_F3q7cJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.12" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/properties.gif" type="Check"/>
                 <children xsi:type="menu:ToolBarSeparator" xmi:id="_IyrUAJ6AEeWeW-hwSGo__g" elementId="testagainforemfneed.toolbarseparator.3"/>
@@ -86,7 +82,9 @@
               </toolbar>
             </children>
           </children>
-          <children xsi:type="basic:PartStack" xmi:id="__hg2MIh8EeWPeeIbKDQGtQ" elementId="info.novatec.inspectit.rcp.editor"/>
+          <children xsi:type="basic:PartStack" xmi:id="__hg2MIh8EeWPeeIbKDQGtQ" elementId="info.novatec.inspectit.rcp.editor">
+            <children xsi:type="basic:Part" xmi:id="_gcjcsLjJEeWFH7_aCLqj2g" elementId="testagainforemfneed.part.0"/>
+          </children>
         </children>
         <properties key="onlineStatus" value="UNKNOWN"/>
         <properties key="recordingActive" value="false"/>
@@ -165,7 +163,7 @@
     <children xmi:id="_6wlLesgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_6wlLe8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
-  <descriptors xmi:id="_-L_r0KVnEeW1xYrLGfvZvA" elementId="inspectit.editor.formrooteditor" label="Test Part" tooltip="Test Part" allowMultiple="true" category="" closeable="true" dirtyable="true" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.editor.root.FormRootEditor">
+  <descriptors xmi:id="_-L_r0KVnEeW1xYrLGfvZvA" elementId="inspectit.editor.formrooteditor" label="Test Part" tooltip="Test Part" bindingContexts="_6wlLesgZEeSyMNYR5xypkQ" allowMultiple="true" category="" closeable="true" dirtyable="true" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.editor.root.FormRootEditor">
     <menus xsi:type="menu:PopupMenu" xmi:id="_2lMmULfuEeWFH7_aCLqj2g" elementId="inspectit.editor.formrooteditor.tablesubview">
       <children xsi:type="menu:HandledMenuItem" xmi:id="_3Ah3cLfuEeWFH7_aCLqj2g" elementId="testagainforemfneed.handledmenuitem.12"/>
     </menus>
@@ -174,9 +172,6 @@
       <children xsi:type="menu:HandledMenuItem" xmi:id="_PiCWkLhsEeWFH7_aCLqj2g" elementId="testagainforemfneed.handledmenuitem.4"/>
     </menus>
     <toolbar xmi:id="_E6R58K2FEeWdwO404PmFRA" elementId="inspectit.toolbar.formPreferencePanel">
-      <children xsi:type="menu:HandledToolItem" xmi:id="_VbfloKTWEeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.contributions.maximizeActiveView" accessibilityPhrase="Maximize Active View" label="Maximize Active View" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/defaultview_misc.gif" tooltip="Maximize Active View" command="_BbTYUKTXEeW1xYrLGfvZvA">
-        <parameters xmi:id="_-zDuQKTXEeW1xYrLGfvZvA" elementId="testagainforemfneed.parameter.0" name="info.novatec.inspectit.rcp.commands.maximizeActiveView.preferencePanelId" value="info.novatec.inspectit.rcp.commands.maximizeActiveView.preferencePanelId"/>
-      </children>
       <children xsi:type="menu:ToolBarSeparator" xmi:id="_Qn5gAK13EeWdwO404PmFRA" elementId="testagainforemfneed.toolbarseparator.6"/>
     </toolbar>
   </descriptors>

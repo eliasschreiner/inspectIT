@@ -32,8 +32,7 @@ public class ShowAgentsHandler {
 		mHandledToolItem.setSelected(repositoryManagerView.showOldAgents);
 		updateToolTipText();
 		
-		repositoryManagerView.showOldAgents = mHandledToolItem.isSelected();
-		updateToolTipText();
+		repositoryManagerView.showOldAgents = !(mHandledToolItem.isSelected());
 		repositoryManagerView.createInputList();
 		repositoryManagerView.updateFormBody();
 	}
@@ -47,6 +46,7 @@ public class ShowAgentsHandler {
 		} else {
 			mHandledToolItem.setTooltip("Show Agents which have not sent any data yet.");
 		}
+		//mHandledToolItem.setSelected(!mHandledToolItem.isSelected());
 	}
 	
 }

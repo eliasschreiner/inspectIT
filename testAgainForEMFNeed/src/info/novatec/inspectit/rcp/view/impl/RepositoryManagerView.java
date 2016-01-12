@@ -29,6 +29,7 @@ import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.progress.IProgressConstants;
 import org.eclipse.e4.ui.progress.UIJob;
 import org.eclipse.e4.ui.services.EMenuService;
@@ -186,23 +187,23 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	@Inject	private IEventBroker eventBroker; 
 	@Inject MApplication mApplication;
 	@Inject EModelService eModelService;
-	
+	@Inject MPart mPart;
 	/**
 	 * Default constructor.
 	 */
-	@Inject
-	public RepositoryManagerView(MApplication mApplication)  {
+	public RepositoryManagerView()  {
 		cmrRepositoryManager = InspectIT.getDefault().getCmrRepositoryManager();
 		cmrRepositoryManager.addCmrRepositoryChangeListener(this);
-		//Makes the MApplication accessible from the construction of this class
-		//So the ContextInjectionFactory can inject it into its cmrRepositoryDefinition instances
-		this.mApplication = mApplication;
+		
 		createInputList();				
 	}	
 	
 	@PostConstruct
-	public void createComposite(Composite parent)		
+	public void createComposite(Composite parent, MApplication mApplication)		
 	{	
+		//Makes the MApplication accessible from the construction of this class
+		//So the ContextInjectionFactory can inject it into its cmrRepositoryDefinition instances
+		this.mApplication = mApplication;
 //		Button btn = new Button(parent,3);
 //		btn.addSelectionListener(new SelectionListener() {
 //			
@@ -334,9 +335,10 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		updateFormBody();
 		mainComposite.setWeights(new int[] { 2, 3 });
 
-		agentStatusUpdateJob = new AgentStatusUpdateJob();
+		
 
 		eSelectionService.setSelection(treeViewer); 
+		agentStatusUpdateJob = new AgentStatusUpdateJob();
 	}
 
 //	//Method to test, whether i can access the initializer via DI
@@ -676,7 +678,8 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 				cmrPropertyForm.dispose();
 				cmrPropertyForm = null; // NOPMD
 			}
-			mainComposite.setWeights(new int[] { 1 , 0 , 0});
+			
+			mainComposite.setWeights(new int[] { 1 , 0, 0});
 			mainComposite.layout();
 		}
 	}
@@ -861,7 +864,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		 */
 		protected IStatus run(IProgressMonitor monitor) {
 			updateAgentsAndCmrStatus();
-			//schedule(UPDATE_RATE);
+			schedule(UPDATE_RATE);
 			return Status.OK_STATUS;
 		}
 

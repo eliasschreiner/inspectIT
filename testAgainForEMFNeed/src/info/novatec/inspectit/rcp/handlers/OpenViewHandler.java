@@ -75,6 +75,7 @@ public class OpenViewHandler {
 				if(!(existingPart))
 				{
 					ePartService.showPart(ePartService.createPart(FormRootEditor.ID), PartState.ACTIVATE);//page.openEditor(input, FormRootEditor.ID);
+					//ePartService.findPart(FormRootEditor.ID).setParent(eModelService.find("info.novatec.inspectit.rcp.editor", );
 				}
 			} catch (Exception e) {
 				throw new ExecutionException("Exception occurred trying to open the editor.", e);

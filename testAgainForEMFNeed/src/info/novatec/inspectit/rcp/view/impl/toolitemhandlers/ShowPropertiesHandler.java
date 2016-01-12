@@ -20,16 +20,14 @@ public class ShowPropertiesHandler {
 	@Execute
 	public void run(MHandledToolItem mHandledToolItem, EPartService ePartService) {
 		repositoryManagerView = (RepositoryManagerView) ePartService.findPart(RepositoryManagerView.VIEW_ID).getObject();
-		mHandledToolItem.setSelected(true);
 		
 		if (mHandledToolItem.isSelected()) {
-			repositoryManagerView.setShowProperties(false);
-			mHandledToolItem.setTooltip("Show Properties");
-			mHandledToolItem.setSelected(false);
-		} else {
 			repositoryManagerView.setShowProperties(true);
 			mHandledToolItem.setTooltip("Hide Properties");
-			mHandledToolItem.setSelected(true);
+		} else {
+			repositoryManagerView.setShowProperties(false);
+			mHandledToolItem.setTooltip("Show Properties");
 		}
+		//mHandledToolItem.setSelected(!mHandledToolItem.isSelected());
 	}
 }
