@@ -3,8 +3,8 @@
   <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.window.main" selectedElement="_6wlLkMgZEeSyMNYR5xypkQ" label="inspectIT" iconURI="platform:/plugin/testAgainForEMFNeed/icons/selfmade/48x48.png" width="1280" height="960">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_6wlLkMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.ide.perspectivestack">
       <children xsi:type="advanced:Perspective" xmi:id="_6wlLkcgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.perspective.mainview" accessibilityPhrase="Main View" selectedElement="_6wlLksgZEeSyMNYR5xypkQ" label="Main View" iconURI="platform:/plugin/testAgainForEMFNeed/icons/selfmade/16x16.png">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.partsashcontainer.sample" selectedElement="_pSFJ0HjJEeWfB_YImTWJSA" horizontal="true">
-          <children xsi:type="basic:PartStack" xmi:id="_pSFJ0HjJEeWfB_YImTWJSA" elementId="info.novatec.inspectit.rcp.view" selectedElement="_q5S_QHjJEeWfB_YImTWJSA">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.partsashcontainer.sample" accessibilityPhrase="inspectIT Parts" selectedElement="_pSFJ0HjJEeWfB_YImTWJSA" horizontal="true">
+          <children xsi:type="basic:PartStack" xmi:id="_pSFJ0HjJEeWfB_YImTWJSA" elementId="info.novatec.inspectit.rcp.view" accessibilityPhrase="View Area" selectedElement="_q5S_QHjJEeWfB_YImTWJSA">
             <children xsi:type="basic:Part" xmi:id="_q5S_QHjJEeWfB_YImTWJSA" elementId="info.novatec.inspectit.rcp.view.repositoryManager" accessibilityPhrase="Repository Manager" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.view.impl.RepositoryManagerView" label="Repository Manager" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/server_instance.gif" tooltip="Repository Manager" bindingContexts="_6wlLesgZEeSyMNYR5xypkQ" closeable="true">
               <menus xsi:type="menu:PopupMenu" xmi:id="_x4eVILLjEeW5Zs8jsOK7mw" elementId="info.novatec.inspectit.rcp.view.repositoryManager.repositoryTree" label="Context Menu" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/buffer_clear.gif">
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_UlLsULMGEeW5Zs8jsOK7mw" elementId="info.novatec.inspectit.rcp.view.repositoryManager.removeCmr" label="Remove CMR" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/remove_correction.gif" tooltip="Remove CMR" mnemonics="Remove CMR" command="_X2RmcJ0JEeWoUtGQMZICDw"/>
@@ -82,7 +82,7 @@
               </toolbar>
             </children>
           </children>
-          <children xsi:type="basic:PartStack" xmi:id="__hg2MIh8EeWPeeIbKDQGtQ" elementId="info.novatec.inspectit.rcp.editor" accessibilityPhrase="Editor Area"/>
+          <children xsi:type="basic:PartStack" xmi:id="__hg2MIh8EeWPeeIbKDQGtQ" elementId="info.novatec.inspectit.rcp.editor" containerData="" accessibilityPhrase="Editor Area"/>
         </children>
         <properties key="onlineStatus" value="UNKNOWN"/>
         <properties key="recordingActive" value="false"/>
@@ -159,13 +159,34 @@
     <children xmi:id="_6wlLesgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_6wlLe8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
-  <descriptors xmi:id="_-L_r0KVnEeW1xYrLGfvZvA" elementId="inspectit.editor.formrooteditor" label="Editor Part" tooltip="Editor Part to display the Measurement-Data" bindingContexts="_6wlLesgZEeSyMNYR5xypkQ" allowMultiple="true" category="" closeable="true" dirtyable="true" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.editor.root.FormRootEditor">
-    <menus xsi:type="menu:PopupMenu" xmi:id="_2lMmULfuEeWFH7_aCLqj2g" elementId="inspectit.editor.formrooteditor.tablesubview">
-      <children xsi:type="menu:HandledMenuItem" xmi:id="_3Ah3cLfuEeWFH7_aCLqj2g" elementId="testagainforemfneed.handledmenuitem.12"/>
+  <descriptors xmi:id="_-L_r0KVnEeW1xYrLGfvZvA" elementId="inspectit.editor.formrooteditor" label="Editor Part" tooltip="Editor Part to display the Measurement-Data" bindingContexts="_6wlLesgZEeSyMNYR5xypkQ" allowMultiple="true" category="" closeable="true" contributionURI="bundleclass://testAgainForEMFNeed/info.novatec.inspectit.rcp.editor.root.FormRootEditor">
+    <menus xsi:type="menu:PopupMenu" xmi:id="_2lMmULfuEeWFH7_aCLqj2g" elementId="inspectit.editor.formrooteditor.treesubview">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_3Ah3cLfuEeWFH7_aCLqj2g" elementId="inspectit.editor.formrooteditor.treesubview.details" label="Details" tooltip="Details" mnemonics="Details"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_o2i7wLthEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.treesubview.navigateto" label="Navigate To" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/next_nav.gif" tooltip="Navigate To" mnemonics="Navigate To"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_6efC0LthEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.treesubview.addtosteppingobjects" label="Add to stepping Objects" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/locate_in_hierarchy.gif" tooltip="Add to stepping Objects" mnemonics="Add to stepping Objects"/>
+      <children xsi:type="menu:MenuSeparator" xmi:id="_EOHJ0LtiEeW899zLLJtoXg" elementId="testagainforemfneed.menuseparator.0"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_65VLwLthEeW899zLLJtoXg" elementId="org.eclipse.ui.file.save" label="Save on Server" tooltip="Save on Server" mnemonics="Save on Server"/>
+      <children xsi:type="menu:MenuSeparator" xmi:id="_GWOF0LtiEeW899zLLJtoXg" elementId="testagainforemfneed.menuseparator.4"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_P9hXQLtiEeW899zLLJtoXg" elementId="org.eclipse.ui.edit.copy" label="Copy" tooltip="Copy" mnemonics="Copy"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_achswLtiEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.treesubview.copysqlquery" label="Copy SQL Query" tooltip="Copy SQL Query" mnemonics="Copy SQL Query"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_aymDYLtiEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.treesubview.copycontextparameters" label="Copy Context Parameters" tooltip="Copy Context Parameters" mnemonics="Copy Context Parameters"/>
+      <children xsi:type="menu:MenuSeparator" xmi:id="_jA8k4LtiEeW899zLLJtoXg" elementId="testagainforemfneed.menuseparator.5"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_jfm20LtiEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.treesubview.expandall" label="Expand All" tooltip="Expand All" mnemonics="Expand All"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_vh91cLtiEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.treesubview.expandthis" label="Expand This" tooltip="Expand This" mnemonics="Expand This"/>
+      <children xsi:type="menu:MenuSeparator" xmi:id="_zH5aULtiEeW899zLLJtoXg" elementId="testagainforemfneed.menuseparator.6"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_zwPzwLtiEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.treesubview.collapseall" label="Collapse All" tooltip="Collapse All" mnemonics="Collapse All"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_0ANiYLtiEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.treesubview.collapsethis" label="Collapse This" tooltip="Collapse This" mnemonics="Collapse This"/>
     </menus>
-    <menus xsi:type="menu:PopupMenu" xmi:id="_NwIUELhsEeWFH7_aCLqj2g" elementId="inspectit.editor.formrooteditor.treesubview">
-      <children xsi:type="menu:HandledMenuItem" xmi:id="_PNgRALhsEeWFH7_aCLqj2g" elementId="testagainforemfneed.handledmenuitem.3"/>
-      <children xsi:type="menu:HandledMenuItem" xmi:id="_PiCWkLhsEeWFH7_aCLqj2g" elementId="testagainforemfneed.handledmenuitem.4"/>
+    <menus xsi:type="menu:PopupMenu" xmi:id="_NwIUELhsEeWFH7_aCLqj2g" elementId="inspectit.editor.formrooteditor.tablesubview">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_C0t4gLtjEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.tablesubview.details" label="Details" tooltip="Details" mnemonics="Details"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_DW4xcLtjEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.tablesubview.navigateto" label="Navigate To" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/next_nav.gif" tooltip="Navigate To" mnemonics="Navigate To"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_FqCf0LtjEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.tablesubview.analyze" label="Analyze" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/graph_bar.gif"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_LrsgQLtjEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.tablesubview.addtosteppingobjects" label="Add to stepping Objects" iconURI="platform:/plugin/testAgainForEMFNeed/icons/eclipse/locate_in_hierarchy.gif"/>
+      <children xsi:type="menu:MenuSeparator" xmi:id="_PBjo0LtjEeW899zLLJtoXg" elementId="testagainforemfneed.menuseparator.7"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_QGhs0LtjEeW899zLLJtoXg" elementId="org.eclipse.ui.edit.copy" label="Copy" tooltip="Copy" mnemonics="Copy"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_UP1rkLtjEeW899zLLJtoXg" elementId="inspectit.editor.formrooteditor.tablesubview.copysqlquery" label="Copy SQL Query" tooltip="Copy SQL Query" mnemonics="Copy SQL Query"/>
+      <children xsi:type="menu:MenuSeparator" xmi:id="_Y_ht0LtjEeW899zLLJtoXg" elementId="testagainforemfneed.menuseparator.8"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_ZcQGELtjEeW899zLLJtoXg" elementId="org.eclipse.ui.file.save" label="Save on Server" tooltip="Save on Server" mnemonics="Save on Server"/>
     </menus>
     <toolbar xmi:id="_E6R58K2FEeWdwO404PmFRA" elementId="inspectit.toolbar.formPreferencePanel">
       <children xsi:type="menu:ToolBarSeparator" xmi:id="_Qn5gAK13EeWdwO404PmFRA" elementId="testagainforemfneed.toolbarseparator.6"/>
