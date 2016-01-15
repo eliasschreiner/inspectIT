@@ -55,6 +55,8 @@ public class CopyBufferToStorageHandler {
 		//selected element is active when count = 1, und iterate entweder Klasse ICmrRepositoryAndAgentProvider oder ICmrRepositoryProvider ist und nach recording Active und OnlineStatus getestet wurde... 
 		//cmrRepositoryDefinition.getOnlineStatus()
 		//
+		if(eSelectionService.getSelection() == null)
+		return false;
 		TreeViewer selection = (TreeViewer) eSelectionService.getSelection();
 		CmrRepositoryDefinition cmrRepositoryDefinition;
 		if (selection.getSelection() instanceof StructuredSelection) {
@@ -83,11 +85,11 @@ public class CopyBufferToStorageHandler {
 	 */
 	@Execute
 	public void execute(ESelectionService eSelectionService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
-		TreeViewer selection = (TreeViewer) eSelectionService.getSelection();
-		if (selection.getSelection() instanceof StructuredSelection) {
+		TreeViewer treeViewer = (TreeViewer) eSelectionService.getSelection();
+		if (treeViewer.getSelection() instanceof StructuredSelection) {
 			CmrRepositoryDefinition suggestedCmrRepositoryDefinition = null;
 			Collection<PlatformIdent> autoSelectedAgents = Collections.emptyList();
-			Object selectedObject = ((StructuredSelection) selection.getSelection()).getFirstElement();
+			Object selectedObject = ((StructuredSelection) treeViewer.getSelection()).getFirstElement();
 			if (selectedObject instanceof ICmrRepositoryProvider) {
 				suggestedCmrRepositoryDefinition = ((ICmrRepositoryProvider) selectedObject).getCmrRepositoryDefinition();
 			} else if (selectedObject instanceof ICmrRepositoryAndAgentProvider) {

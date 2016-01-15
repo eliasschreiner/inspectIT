@@ -269,7 +269,6 @@ public class InspectIT implements BundleActivator {
 		imageRegistry = null;
 
 	    InspectIT.context = null;
-		plugin = null; // NOPMD
 	}
 
 	/**
