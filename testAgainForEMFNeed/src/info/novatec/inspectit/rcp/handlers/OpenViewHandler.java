@@ -17,6 +17,7 @@ import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
@@ -54,7 +55,7 @@ public class OpenViewHandler {
 			RootEditorInput input = new RootEditorInput(inputDefinition);
 			mApplication.getContext().set("RootEditorInput", input);
 			try {
-				//Proof whether a the part is already existing
+				//Proof whether a the part is already existing, if so, th epart won´t be created but the existing one will show up.
 				boolean existingPart = false;				
 				for(MPart part :  ePartService.getParts())
 				{					
@@ -73,9 +74,12 @@ public class OpenViewHandler {
 					}
 				}
 				if(!(existingPart))
-				{
-					ePartService.showPart(ePartService.createPart(FormRootEditor.ID), PartState.ACTIVATE);//page.openEditor(input, FormRootEditor.ID);
-					//ePartService.findPart(FormRootEditor.ID).setParent(eModelService.find("info.novatec.inspectit.rcp.editor", );
+				{					
+					//Creates and adds the EditorPart to the the PartStack and shows it afterwards. 
+					MPart newEditorPart = ePartService.createPart(FormRootEditor.ID);
+					MPartStack editorPartStack = (MPartStack) eModelService.find("info.novatec.inspectit.rcp.editor", mApplication);
+					editorPartStack.getChildren().add(newEditorPart);
+					ePartService.showPart(newEditorPart, PartState.ACTIVATE);					
 				}
 			} catch (Exception e) {
 				throw new ExecutionException("Exception occurred trying to open the editor.", e);
