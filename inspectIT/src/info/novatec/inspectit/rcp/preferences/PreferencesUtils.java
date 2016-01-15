@@ -1,7 +1,7 @@
 package info.novatec.inspectit.rcp.preferences;
 
 import info.novatec.inspectit.rcp.InspectIT;
-import com.opcoach.e4.preferences.*;
+//import com.opcoach.e4.preferences.*;
 import info.novatec.inspectit.rcp.preferences.valueproviders.PreferenceValueProviderFactory;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
 
@@ -298,8 +298,7 @@ public final class PreferencesUtils {
 	public static <E> E getObject(String preferenceKey) {
 		try {			
 			//access to my initializor
-			String text = InspectIT.getDefault().getPreferenceStore().getDefaultString("DUMMY");
-			String text2 = InspectIT.getDefault().getPreferenceStore().getString("DUMMY");
+			
 			String value = preferenceStore.getString(preferenceKey);
 			if (value == null || "".equals(value)) {
 				return null;

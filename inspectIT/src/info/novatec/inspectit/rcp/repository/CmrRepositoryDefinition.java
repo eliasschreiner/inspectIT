@@ -21,6 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.workbench.UIEvents;
+
 /**
  * The CMR repository definition initializes the services exposed by the CMR.
  * 
@@ -45,7 +52,7 @@ public class CmrRepositoryDefinition implements RepositoryDefinition, ICmrReposi
 	/**
 	 * Default CMR port.
 	 */
-	public static final int DEFAULT_PORT = 8182;
+	public static final int DEFAULT_PORT = 8183;
 
 	/**
 	 * Default description.
@@ -413,10 +420,16 @@ public class CmrRepositoryDefinition implements RepositoryDefinition, ICmrReposi
 	 *            New status.
 	 * @return True if change was successful, false if the change is not allowed.
 	 */
+	@Inject IEventBroker eventBroker;
 	public boolean changeOnlineStatus(OnlineStatus newStatus) {
+				
+ 		if(eventBroker != null)
+		eventBroker.post(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC,
+				UIEvents.ALL_ELEMENT_ID);
+		
 		if (onlineStatus.canChangeTo(newStatus)) {
 			OnlineStatus oldStatus = onlineStatus;
-			onlineStatus = newStatus;
+			onlineStatus = newStatus;		
 			synchronized (cmrRepositoryChangeListeners) {
 				for (CmrRepositoryChangeListener changeListener : cmrRepositoryChangeListeners) {
 					changeListener.repositoryOnlineStatusUpdated(this, oldStatus, newStatus);

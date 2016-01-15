@@ -1,5 +1,6 @@
 package info.novatec.inspectit.rcp;
 
+
 /**
  * Defines all the images for the InspectIT UI. Note that all images are automatically added to the
  * registry on the inspectIT start up.

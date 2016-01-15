@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
 <plugin>
-
- <extension
+   <extension
          id="application"
          point="org.eclipse.core.runtime.applications">
       <application
             cardinality="singleton-global"
-            icon="icons/selfmade/inspectIT.ico"
             thread="main"
             visible="true">
          <run
@@ -14,6 +13,7 @@
          </run>
       </application>
    </extension>
+
    <extension
          id="product"
          point="org.eclipse.core.runtime.products">
@@ -25,32 +25,8 @@
                value="inspectIT">
          </property>
          <property
-               name="aboutImage"
-               value="about.png">
-         </property>
-         <property
-               name="aboutText"
-               value="%aboutText">
-         </property>
-         <property
-               name="windowImages"
-               value="icons/selfmade/16x16.png,icons/selfmade/32x32.png,icons/selfmade/48x48.png,icons/selfmade/64x64.png,icons/selfmade/128x128.png">
-         </property>
-         <property
-               name="startupForegroundColor"
-               value="FFFFFF">
-         </property>
-         <property
-               name="startupMessageRect"
-               value="5,10,560,20">
-         </property>
-         <property
-               name="startupProgressRect"
-               value="5,275,445,15">
-         </property>
-         <property
-               name="preferenceCustomization"
-               value="plugin_customization.ini">
+               name="lifeCycleURI"
+               value="bundleclass://inspectIT/info.novatec.inspectit.rcp.LifecycleHook">
          </property>
       </product>
    </extension>
@@ -60,5 +36,4 @@
             class="info.novatec.inspectit.rcp.preferences.InspectITPreferenceInitializer">
       </initializer>
    </extension>
-
 </plugin>

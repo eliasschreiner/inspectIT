@@ -259,7 +259,7 @@ public class InputDefinition {
 	public SensorTypeEnum getId() {
 		return id;
 	}
-
+	
 	/**
 	 * Sets {@link #id}.
 	 * 
@@ -433,5 +433,7 @@ public class InputDefinition {
 		return Objects.toStringHelper(this).add("updateRate", updateRate).add("automaticUpdate", automaticUpdate).add("repositoryDefinition", repositoryDefinition).add("idMappings", idMappings)
 				.add("id", id).add("editorPropertiesData", editorPropertiesData).add("inputDefintionExtras", inputDefintionExtras).toString();
 	}
+	
+	
 
 }

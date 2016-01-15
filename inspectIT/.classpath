@@ -3,11 +3,13 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins">
 		<accessrules>
-			<accessrule kind="accessible" pattern="org/slf4j/LoggerFactory"/>
-			<accessrule kind="accessible" pattern="org/eclipse/e4/core/commands/ECommandService"/>
-			<accessrule kind="accessible" pattern="org/eclipse/e4/core/commands/EHandlerService"/>
 			<accessrule kind="accessible" pattern="org/eclipse/e4/core/di/extensions/Preference"/>
 			<accessrule kind="accessible" pattern="org/eclipse/e4/ui/internal/workbench/swt/E4Application"/>
+			<accessrule kind="accessible" pattern="org/eclipse/e4/core/commands/EHandlerService"/>
+			<accessrule kind="accessible" pattern="org/eclipse/e4/core/commands/ECommandService"/>
+			<accessrule kind="accessible" pattern="org/eclipse/e4/ui/model/application/ui/menu/impl/HandledToolItemImpl"/>
+			<accessrule kind="accessible" pattern="org/eclipse/e4/ui/workbench/lifecycle/ProcessAdditions"/>
+			<accessrule kind="accessible" pattern="org/eclipse/e4/ui/internal/workbench/swt/MenuService"/>
 		</accessrules>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>

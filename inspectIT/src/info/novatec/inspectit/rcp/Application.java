@@ -30,13 +30,10 @@ public class Application implements IApplication {
     	Display display = e4app.getApplicationDisplay();
 
         try{               	
-        	//e4app.createE4Workbench(context, display);
-        	e4app.start(context);//creates the workbench as well... 
+        	e4app.start(context);//creates the workbench and starts the Application
         } finally {
         	display.dispose();
         }
-
-    
         
 		return exitRet;
 	}

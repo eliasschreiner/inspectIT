@@ -12,7 +12,6 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
-
 /**
  * This class extends the {@link StyledCellLabelProvider} with support for the index of the cell,
  * used in the {@link org.eclipse.swt.widgets.Tree} or the {@link org.eclipse.swt.widgets.Table}.

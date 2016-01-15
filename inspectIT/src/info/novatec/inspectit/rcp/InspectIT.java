@@ -1,16 +1,5 @@
 package info.novatec.inspectit.rcp;
 
-import info.novatec.inspectit.minlog.MinlogToSLF4JLogger;
-
-
-import info.novatec.inspectit.rcp.log.LogListener;
-import info.novatec.inspectit.rcp.preferences.InspectITPreferenceInitializer;
-import info.novatec.inspectit.rcp.preferences.PreferenceSupplierDUMMY;
-import info.novatec.inspectit.rcp.preferences.PreferencesConstants;
-import info.novatec.inspectit.rcp.preferences.ScopedPreferenceStore;
-//import info.novatec.inspectit.rcp.preferences.ScopedPreferenceStore;
-import info.novatec.inspectit.rcp.repository.CmrRepositoryManager;
-import info.novatec.inspectit.rcp.storage.InspectITStorageManager;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,10 +12,8 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Provider;
-
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.ILogListener;
@@ -34,6 +21,12 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.EclipseContextFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.core.services.log.Logger;
+import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
@@ -42,37 +35,59 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.util.StatusHandler;
 import org.eclipse.swt.graphics.Image;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
+import org.osgi.service.log.LogService;
 import org.slf4j.LoggerFactory;
 
-
-import uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
 import ch.qos.logback.core.joran.spi.JoranException;
 import ch.qos.logback.core.util.StatusPrinter;
+import info.novatec.inspectit.minlog.MinlogToSLF4JLogger;
+import info.novatec.inspectit.rcp.log.LogListener;
+import info.novatec.inspectit.rcp.preferences.PreferenceSupplier;
+import info.novatec.inspectit.rcp.preferences.ScopedPreferenceStore;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryManager;
+import info.novatec.inspectit.rcp.storage.InspectITStorageManager;
+import uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J;
 
 
-/**
- * The main plugin class to be used in the desktop.
- */
 public class InspectIT implements BundleActivator {
 
+	/**
+	 * The BundleContext
+	 */
 	private static BundleContext context;
 
+	/**
+	 * Gets the BundleContext for a possible, later useage in the application
+	 */
 	static BundleContext getContext() {
 		return context;
-	}
+	}	
 	
-	//Alles probeweiﬂe 	
-	Provider<StatusHandler> statusHandler;
+	/**
+	 * The statusHandler is the replacement of the Eclipse 3 StatusManager
+	 * It is injected by a Provider-Service through the created restricted Activator-Kontext
+	 */
+	@Inject Provider<StatusHandler> statusHandler;
+	
+	
+	/**
+	 * The JFace ImageRegistrty, which registers the need Images
+	 */
+	ImageRegistry imageRegistry = new ImageRegistry();
 	
 	/**
 	 * The id of this plugin.
 	 */
-	public static final String ID = "info.novatec.inspectit.rcp";
+	//#TODO Change this when  renaming the project!
+	public static final String ID = "inspectIT";
 
 	/**
 	 * Default name of the log file.
@@ -96,7 +111,8 @@ public class InspectIT implements BundleActivator {
 	private volatile CmrRepositoryManager cmrRepositoryManager;
 
 	/**
-	 * Preferences store for the plug-in.
+	 * Preferences store for the plug-in. 
+	 * In Eclipse 4 this is needs the OPCoach.E4Preferences Bundle
 	 */
 	private volatile static ScopedPreferenceStore  preferenceStore;
 
@@ -121,7 +137,7 @@ public class InspectIT implements BundleActivator {
 	/**
 	 * {@link ILogListener} used for logging.
 	 */
-	private ILogListener logListener;
+	private LogListener logListener;
 
 	/**
 	 * This method is called upon plug-in activation.
@@ -135,13 +151,38 @@ public class InspectIT implements BundleActivator {
 
 	public void start(BundleContext context) throws Exception {
 		InspectIT.context = context;
-		plugin = this;	
-//		locateRuntimeDir();
-//		initLogger();
-//		logListener = new LogListener();
-//		Platform.addLogListener(logListener);
-
+		plugin = this;
+		
+		//Injects the Eclipse Context into the Activator-Class, is only for OSGi-Services!
+		IEclipseContext eContext = EclipseContextFactory.getServiceContext(context);
+		ContextInjectionFactory.inject(this, eContext);	
+		
+		locateRuntimeDir();		
+		initLogger();				
+		
+		//log = getLog(context.getBundle());		
+		// add log listener once logger is initialized
+		logListener = new LogListener();
+		//context.addServiceListener((ServiceListener) logListener);
+		//log.addLogListener(logListener);
+		
+		initializeImageRegistry(imageRegistry);		
 	}
+	
+//	@SuppressWarnings("restriction")
+//	public ILog getLog(Bundle bundle) {
+//		ServiceReference<?> logser = context.getServiceReference(LogService.class);
+//		LogService ls = (LogService)context.getService(logser);
+//		IEclipseContext eclipseContext = EclipseContextFactory.getServiceContext(context);
+//		eclipseContext.set(Logger.class, new WorkbenchLogger(InspectIT.ID));
+//		Logger logger = eclipseContext.get(Logger.class);
+//			
+//		Log result = new Log(bundle, logger);
+//		ServiceTracker logReaderTracker = logReaderTracker = new ServiceTracker(context, ExtendedLogReaderService.class.getName(), null);
+//		ExtendedLogReaderService logReader = (ExtendedLogReaderService) logReaderTracker.getService();
+//		logReader.addLogListener(result, result);
+//		return result;
+//	}
 
 	/**
 	 * Locates the runtime directory. It's needed for distinguish between development and runtime.
@@ -224,12 +265,10 @@ public class InspectIT implements BundleActivator {
 			cmrRepositoryManager.cancelAllUpdateRepositoriesJobs();
 		}
 
-		// remove log listener
-		Platform.removeLogListener(logListener);
 		logListener = null; // NOPMD
+		imageRegistry = null;
 
 	    InspectIT.context = null;
-		plugin = null; // NOPMD
 	}
 
 	/**
@@ -275,19 +314,19 @@ public class InspectIT implements BundleActivator {
 			listener.propertyChange(event);
 		}
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	protected void initializeImageRegistry(ImageRegistry reg) {
-		Field[] allFields = InspectITImages.class.getFields();		
+		Field[] allFields = InspectITImages.class.getFields();
+		
 		for (Field field : allFields) {
 			if (field.getName().startsWith("IMG") && String.class.equals(field.getType())) {
 				if (!field.isAccessible()) {
 					field.setAccessible(true);
 				}
 				try {
-					
 					String key = (String) field.get(null);
 					URL url = context.getBundle().getEntry(key);
 					
@@ -312,8 +351,8 @@ public class InspectIT implements BundleActivator {
 				    statusHandler.get().show(status, "Error loading image with the key");
 					continue;
 				}
-			}
-		}
+			}			
+		}	
 	}
 
 	/**
@@ -328,9 +367,10 @@ public class InspectIT implements BundleActivator {
 	 */
 
 	public Image getImage(String imageKey) {
-		
-		return JFaceResources.getImageRegistry().get(imageKey);
+		return imageRegistry.get(imageKey);
 	}
+	
+	
 
 	/**
 	 * Returns the image descriptor for the given key. The key can be one of the IMG_ definitions in
@@ -345,7 +385,8 @@ public class InspectIT implements BundleActivator {
 	 */
 	public ImageDescriptor getImageDescriptor(String imageKey) {
 		
-		return  JFaceResources.getImageRegistry().getDescriptor(imageKey);
+		//return the InspectIT specific ImageRegistry.
+		return imageRegistry.getDescriptor(imageKey);
 	}
 
 	/**
@@ -371,13 +412,12 @@ public class InspectIT implements BundleActivator {
 	/**
 	 * {@inheritDoc}
 	 */
-	public static ScopedPreferenceStore getPreferenceStore() {
-		
-		if (null == preferenceStore) {
-					
-				preferenceStore = new ScopedPreferenceStore(PreferenceSupplierDUMMY.SCOPE_CONTEXT, PreferenceSupplierDUMMY.PREFERENCE_NODE); 
-				//preferenceStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, ID); 
-					
+	public ScopedPreferenceStore getPreferenceStore() {		
+		if (null == preferenceStore) {		
+			synchronized (this) {
+				if (null == preferenceStore) 
+				preferenceStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, ID); 
+			}					
 		} 
 		return preferenceStore;
 	}
@@ -388,7 +428,7 @@ public class InspectIT implements BundleActivator {
 	public CmrRepositoryManager getCmrRepositoryManager() {
 		if (null == cmrRepositoryManager) {
 			synchronized (this) {
-				if (null == cmrRepositoryManager) { // NOCHK: DCL works with volatile.
+				if (null == cmrRepositoryManager) { // NOCHK: DCL works with volatile.				
 					cmrRepositoryManager = new CmrRepositoryManager();
 				}
 			}
@@ -473,3 +513,4 @@ public class InspectIT implements BundleActivator {
 	}
 
 }
+

@@ -28,8 +28,6 @@ import org.eclipse.swt.widgets.TreeColumn;
  * 
  */
 public class ShowHideColumnsHandler{
-
-	@Inject MApplication mApplication;
 	
 	/**
 	 * Command ID.
@@ -76,7 +74,7 @@ public class ShowHideColumnsHandler{
 	 * {@inheritDoc}
 	 */
 	@Execute 
-	public Object execute(ExecutionEvent event) throws ExecutionException {
+	public void execute(MApplication mApplication) throws ExecutionException {
 		// Get the input definition out of the context
 		
 		Item column = (Item) mApplication.getContext().get(COLUMN_PARAM);
@@ -88,7 +86,6 @@ public class ShowHideColumnsHandler{
 //		Class<?> inputControllerClass = (Class<?>) context.getVariable(CONTROLLER_CLASS_PARAM);
 
 		showHideColumn(column, column.getText(), visible.booleanValue(), inputControllerClass);
-		return null;
 	}
 
 	/**
