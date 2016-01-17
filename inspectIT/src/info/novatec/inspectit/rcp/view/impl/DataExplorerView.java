@@ -234,7 +234,8 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 							}
 						}
 					} else {
-						eHandlerService.activateHandler(OpenViewHandler.COMMAND, new OpenViewHandler());
+						//activates the Handler for the Command. This is shown in all the tutorials but I don´t really understand why. So I skip this until I find a reason
+						//eHandlerService.activateHandler(OpenViewHandler.COMMAND, new OpenViewHandler());
 						ParameterizedCommand parameterCommand = eCommandService.createCommand(OpenViewHandler.COMMAND, null);							
 						mApplication.getContext().set(OpenViewHandler.INPUT, ((Component) element).getInputDefinition()); 
 											

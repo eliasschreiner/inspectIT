@@ -43,6 +43,7 @@ import info.novatec.inspectit.rcp.editor.ISubView;
 import info.novatec.inspectit.rcp.editor.preferences.IPreferenceGroup;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceEventCallback.PreferenceEvent;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceId;
+import info.novatec.inspectit.rcp.editor.root.AbstractRootEditor;
 import info.novatec.inspectit.rcp.editor.root.SubViewClassificationController.SubViewClassification;
 import info.novatec.inspectit.rcp.editor.search.ISearchExecutor;
 import info.novatec.inspectit.rcp.editor.search.criteria.SearchCriteria;
@@ -94,9 +95,9 @@ public class TableSubView extends AbstractSubView implements ISearchExecutor {
 	 * @param tableInputController
 	 *            The table input controller.
 	 */	
-	public TableSubView(TableInputController tableInputController, EMenuService eMenuService) {
+	public TableSubView(TableInputController tableInputController) {
 		Assert.isNotNull(tableInputController);					
-		this.eMenuService = eMenuService;
+		this.eMenuService = AbstractRootEditor.abstractContext.get(EMenuService.class);
 		this.tableInputController = tableInputController;
 	}
 	

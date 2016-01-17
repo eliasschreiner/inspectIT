@@ -57,7 +57,8 @@ public class FormRootEditor extends AbstractRootEditor {
 	public void createView(Composite parent) {
 		// create the toolkit
 		this.toolkit = new FormToolkit(parent.getDisplay());
-
+		
+		// create the preference panel with the callback
 		IPreferencePanel preferencePanel = new FormPreferencePanel(toolkit, super.mApplication.getContext());
 		
 		// set the preference panel

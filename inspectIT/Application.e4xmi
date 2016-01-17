@@ -109,7 +109,7 @@
     </mainMenu>
     <trimBars xmi:id="_BB2vcH14EeWXoa9N-IIJGQ" elementId="inspectit.trimbar.0">
       <children xsi:type="menu:ToolBar" xmi:id="_BjLT0H14EeWXoa9N-IIJGQ" elementId="inspectit.toolbar.0" accessibilityPhrase="Second menu bar from above">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_Lq6Y0H14EeWXoa9N-IIJGQ" elementId="inspectit.handledtoolitem.1" iconURI="platform:/plugin/inspectIT/icons/eclipse/add_obj.gif"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Lq6Y0H14EeWXoa9N-IIJGQ" elementId="inspectit.handledtoolitem.add" label="Add" iconURI="platform:/plugin/inspectIT/icons/eclipse/add_obj.gif"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_L9Ef0H14EeWXoa9N-IIJGQ" elementId="inspectit.handledtoolitem.import" accessibilityPhrase="Import" label="Import" iconURI="platform:/plugin/inspectIT/icons/eclipse/import.gif" tooltip="Import"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_WGQWUH14EeWXoa9N-IIJGQ" elementId="inspectit.toolbarseparator.0"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_MS93UH14EeWXoa9N-IIJGQ" elementId="inspectit.handledtoolitem.3" iconURI="platform:/plugin/inspectIT/icons/eclipse/defaultview_misc.gif"/>
@@ -188,9 +188,6 @@
       <children xsi:type="menu:MenuSeparator" xmi:id="_Y_ht0LtjEeW899zLLJtoXg" elementId="testagainforemfneed.menuseparator.8"/>
       <children xsi:type="menu:HandledMenuItem" xmi:id="_ZcQGELtjEeW899zLLJtoXg" elementId="org.eclipse.ui.file.save" label="Save on Server" tooltip="Save on Server" mnemonics="Save on Server"/>
     </menus>
-    <toolbar xmi:id="_E6R58K2FEeWdwO404PmFRA" elementId="inspectit.toolbar.formPreferencePanel">
-      <children xsi:type="menu:ToolBarSeparator" xmi:id="_Qn5gAK13EeWdwO404PmFRA" elementId="testagainforemfneed.toolbarseparator.6"/>
-    </toolbar>
   </descriptors>
   <commands xmi:id="_PBavgLMLEeW5Zs8jsOK7mw" elementId="org.eclipse.ui.edit.delete" commandName="Delete" description="deleteCommand" category="_X2opYLjBEeWFH7_aCLqj2g"/>
   <commands xmi:id="_6wlLfMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.exit" commandName="Quit" category="_X2opYLjBEeWFH7_aCLqj2g"/>

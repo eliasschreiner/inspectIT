@@ -38,10 +38,6 @@ public class MultiSubViewSelectionProvider implements IPostSelectionProvider{
 	 * The root editor.
 	 */
 	private AbstractRootEditor rootEditor;
-
-	//for notifying events, that this have been fired
-	@Inject IEventBroker eventBroker;
-
 	
 	/**
 	 * Constructor needs a root editor.
@@ -149,7 +145,6 @@ public class MultiSubViewSelectionProvider implements IPostSelectionProvider{
 			SafeRunner.run(new SafeRunnable() {
 				public void run() {
 					l.selectionChanged(event);
-					eventBroker.post("MultiSubView", event);
 				}
 			});
 		}

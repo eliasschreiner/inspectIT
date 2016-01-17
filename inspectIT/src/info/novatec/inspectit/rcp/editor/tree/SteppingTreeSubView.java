@@ -59,8 +59,8 @@ public class SteppingTreeSubView extends TreeSubView {
 	 *            Stepping tree input controller.
 	 * @see TreeSubView#TreeSubView(info.novatec.inspectit.rcp.editor.tree.input.TreeInputController)
 	 */
-	public SteppingTreeSubView(SteppingTreeInputController treeInputController, EMenuService eMenuService) {
-		super(treeInputController, eMenuService);
+	public SteppingTreeSubView(SteppingTreeInputController treeInputController) {
+		super(treeInputController);
 
 		this.steppingTreeInputController = treeInputController;
 	}

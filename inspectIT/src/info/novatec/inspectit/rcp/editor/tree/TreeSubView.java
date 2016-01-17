@@ -5,6 +5,7 @@ import info.novatec.inspectit.rcp.editor.AbstractSubView;
 import info.novatec.inspectit.rcp.editor.ISubView;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceEventCallback.PreferenceEvent;
 import info.novatec.inspectit.rcp.editor.preferences.PreferenceId;
+import info.novatec.inspectit.rcp.editor.root.AbstractRootEditor;
 import info.novatec.inspectit.rcp.editor.root.FormRootEditor;
 import info.novatec.inspectit.rcp.editor.root.SubViewClassificationController.SubViewClassification;
 import info.novatec.inspectit.rcp.editor.search.ISearchExecutor;
@@ -97,9 +98,9 @@ public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 	 * @param treeInputController
 	 *            The tree input controller.
 	 */
-	public TreeSubView(TreeInputController treeInputController, EMenuService eMenuService) {
+	public TreeSubView(TreeInputController treeInputController) {
 		Assert.isNotNull(treeInputController); 
-		this.eMenuService = eMenuService;
+		this.eMenuService = AbstractRootEditor.abstractContext.get(EMenuService.class);
 		this.treeInputController = treeInputController;
 	}
 	
@@ -181,9 +182,8 @@ public class TreeSubView extends AbstractSubView implements ISearchExecutor {
 					tree.setMenu(selectionMenu);
 				}
 				if(eMenuService != null)
-				{
 					eMenuService.registerContextMenu(tree, MENU_ID);
-				}
+				
 			}
 		});
 		

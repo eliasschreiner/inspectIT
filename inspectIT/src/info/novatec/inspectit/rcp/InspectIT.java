@@ -165,7 +165,6 @@ public class InspectIT implements BundleActivator {
 		logListener = new LogListener();
 		//context.addServiceListener((ServiceListener) logListener);
 		//log.addLogListener(logListener);
-		
 		initializeImageRegistry(imageRegistry);		
 	}
 	

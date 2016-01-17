@@ -51,9 +51,7 @@ public class OpenViewHandler {
 		InputDefinition inputDefinition = (InputDefinition) context.get(INPUT);
 		// open the view if the input definition is set
 		if (null != inputDefinition) {
-			//Das hier notwendig ?
-			RootEditorInput input = new RootEditorInput(inputDefinition);
-			mApplication.getContext().set("RootEditorInput", input);
+	
 			try {
 				//Proof whether a the part is already existing, if so, th epart won´t be created but the existing one will show up.
 				boolean existingPart = false;				
@@ -75,10 +73,12 @@ public class OpenViewHandler {
 				}
 				if(!(existingPart))
 				{					
+					RootEditorInput input = new RootEditorInput(inputDefinition);
 					//Creates and adds the EditorPart to the the PartStack and shows it afterwards. 
 					MPart newEditorPart = ePartService.createPart(FormRootEditor.ID);
 					MPartStack editorPartStack = (MPartStack) eModelService.find("info.novatec.inspectit.rcp.editor", mApplication);
 					editorPartStack.getChildren().add(newEditorPart);
+					newEditorPart.getTransientData().put("RootEditorInput", input);
 					ePartService.showPart(newEditorPart, PartState.ACTIVATE);					
 				}
 			} catch (Exception e) {

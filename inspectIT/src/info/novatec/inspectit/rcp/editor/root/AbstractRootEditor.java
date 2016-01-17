@@ -154,11 +154,12 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 
 
 	 public static IEclipseContext abstractContext;
+
 	
 	/**
-	 * Part specific inputDefinition
+	 * rootEditorInput from where the InputDefinition is extracted.
 	 */
-	InputDefinition inputDefinition = null;
+	private RootEditorInput rootEditorInput;
 	
 	/**
 	 * {@inheritDoc}
@@ -167,9 +168,6 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 		subView.doRefresh();
 	}
 
-	//Makes this Part an Editor
-	MDirtyable dirtyable;
-	
 	@Inject MPart mPart;
 	@Inject EModelService eModelService;
 	@Inject MApplication mApplication;
@@ -187,10 +185,9 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 * @return The input definition.
 	 */
 	public InputDefinition getInputDefinition() {	
-		//ausm Kontext wa ? Hier muss ich mal schaun das ich den jeweiliger partContext nutze, oder evtl mit den Prefs arbeite... aber erstmal das. 
-		if(inputDefinition == null)
-		inputDefinition = (InputDefinition) mApplication.getContext().get(OpenViewHandler.INPUT); 
-		//InputDefinition itest2 = (InputDefinition) mApplication.getContext().get("RootEditorInput"); //. .find("info.novatec.inspectit.rcp.editor.inputdefinition.InputDefinition");//, mApplication); //(InputDefinition) getEditorInput().getAdapter(InputDefinition.class);
+		//gets the InputDefinition out fo the RootEditorInput
+		InputDefinition inputDefinition = (InputDefinition) rootEditorInput.getAdapter(InputDefinition.class); //(InputDefinition) mApplication.getContext().get(OpenViewHandler.INPUT); 
+		Assert.isNotNull(inputDefinition);
 		return inputDefinition;
 	}
 
@@ -219,16 +216,15 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 */
 	@Inject
 	public void init(MPart mPart) throws Exception {
-		abstractContext = mApplication.getContext();
+		rootEditorInput = (RootEditorInput) mPart.getTransientData().get("RootEditorInput");
+		abstractContext = mPart.getContext();
 		//check for valid Data, I swapped this from RootEditorInput, why do I need RootEditorInput
-		if(!(getInputDefinition() instanceof InputDefinition))
+		if(!(rootEditorInput instanceof RootEditorInput))
 		{
 			throw new Exception("Invalid Input: Must be InputDefinition");
 		}		
-
-		//Notwendig?
-		RootEditorInput rootEditorInput = (RootEditorInput) mApplication.getContext().get("RootEditorInput");
 		
+		//#TODO set the right icon somehow...
 		//Inject Context into the Classes to provide services
 //		ContextInjectionFactory.inject(InvocOverviewInputController.class, mApplication.getContext());
 //		ContextInjectionFactory.make(InvocOverviewInputController.class, mApplication.getContext());
@@ -248,7 +244,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 		//InspectIT.getDefault().getImage()		
 	
 		//Inserts a Context into the Factory, so the Factory can Inject this Context later to SubViews (if needed). Due to it is actually only needed for the Service implementation, it´s sufficient to inject the Application-Context		
-		this.subView = SubViewFactory.createSubView(getInputDefinition().getId(), eMenuService);
+		this.subView = SubViewFactory.createSubView(getInputDefinition().getId());
 		this.subView.setRootEditor(this);
 		this.subView.init();
 		multiSubViewSelectionProvider = new MultiSubViewSelectionProvider(this);
@@ -264,10 +260,6 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	public final void createPartControl(Composite parent) {
 		mPart.setLabel(getInputDefinition().getEditorPropertiesData().getPartName());//setPartName(getInputDefinition().getEditorPropertiesData().getPartName());
 		mPart.setTooltip(getInputDefinition().getEditorPropertiesData().getPartTooltip());   //setTitleToolTip(getInputDefinition().getEditorPropertiesData().getPartTooltip());
-
-		//Test for injecting things into further non app model classes....  DOES NOT work in the PostConstruct Annot. 
-//		IEclipseContext ctx = new EclipseContext(mPart.getContext());
-//		ContextInjectionFactory.make(TableSubView.class, mApplication.getContext());
 		
 		// fill the view with content.
 		createView(parent);
