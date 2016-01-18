@@ -81,6 +81,7 @@
                 <children xsi:type="menu:HandledToolItem" xmi:id="_HSv84J6BEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.refreshpart" accessibilityPhrase="Refresh Part" label="Refresh Part" iconURI="platform:/plugin/inspectIT/icons/eclipse/refresh.gif" tooltip="Refresh Part" command="_PhS9MK9MEeWdwO404PmFRA"/>
               </toolbar>
             </children>
+            <children xsi:type="basic:Part" xmi:id="_153WoL1aEeWjyvwLojXzeA" elementId="org.eclipse.ui.views.ProgressView" visible="false" accessibilityPhrase="Progress View" contributionURI="bundleclass://org.eclipse.e4.ui.progress/org.eclipse.e4.ui.progress.ProgressView" label="Progress View" iconURI="platform:/plugin/inspectIT/icons/eclipse/pview.gif" tooltip="Progress View"/>
           </children>
           <children xsi:type="basic:PartStack" xmi:id="__hg2MIh8EeWPeeIbKDQGtQ" elementId="info.novatec.inspectit.rcp.editor" containerData="" accessibilityPhrase="Editor Area"/>
         </children>
@@ -204,7 +205,7 @@
     <parameters xmi:id="_FGkiYK9aEeWdwO404PmFRA" elementId="shouldRestart" name="shouldRestart" typeId="" optional="false"/>
   </commands>
   <commands xmi:id="_DOYjIJ0OEeWoUtGQMZICDw" elementId="info.novatec.inspectit.rcp.commands.editCmrRepository" commandName="EditCmrRepository" description="Edit the Cmr"/>
-  <commands xmi:id="_bpGKQJ0pEeWcydh7kQA73w" elementId="info.novatec.inspectit.rcp.commands.copyBufferToStorage" commandName="CopyBufferToStorage" description="Copies the Buffer to the Storage"/>
+  <commands xmi:id="_bpGKQJ0pEeWcydh7kQA73w" elementId="info.novatec.inspectit.rcp.commands.copyBufferToStorage" commandName="CopyBufferToStorage" description="Copies the Buffer to the Storage" category="_O1uCgLjBEeWFH7_aCLqj2g"/>
   <commands xmi:id="_aHKykJ0rEeWcydh7kQA73w" elementId="info.novatec.inspectit.rcp.commands.showLabelsManager" commandName="ShowLabelsManager" description="Handles the Label Manager"/>
   <commands xmi:id="_lb5KYJ80EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.commands.editStorageData" commandName="EditStorageData" description="EditStorageDataCommand"/>
   <commands xmi:id="_e_k8UJ82EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.commands.uploadStorage" commandName="UploadStorage" description="uploadStorageCommand"/>

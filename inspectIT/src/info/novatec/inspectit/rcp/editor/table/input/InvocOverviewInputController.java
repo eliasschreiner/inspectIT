@@ -73,7 +73,7 @@ import org.eclipse.swt.widgets.Display;
  * @author Patrice Bouillet
  * 
  */
-@Creatable
+//@Creatable
 public class InvocOverviewInputController extends AbstractTableInputController {
 
 	/**

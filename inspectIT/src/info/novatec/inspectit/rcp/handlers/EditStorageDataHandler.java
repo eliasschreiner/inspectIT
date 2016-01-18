@@ -15,6 +15,7 @@ import javax.inject.Named;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -34,7 +35,11 @@ public class EditStorageDataHandler {
 	 */
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, ESelectionService eSelectionService) throws ExecutionException {
-		TreeViewer selection = (TreeViewer) eSelectionService.getSelection();
+		TreeViewer selection;
+		//Proof whether selection is null or  not
+		if(eSelectionService.getSelection()!=null)
+		{	
+		selection = (TreeViewer) eSelectionService.getSelection();
 		IStorageDataProvider storageDataProvider = null;
 		Object selectedElement = ((StructuredSelection) selection.getSelection()).getFirstElement();
 		if (selectedElement instanceof IStorageDataProvider) {
@@ -63,6 +68,7 @@ public class EditStorageDataHandler {
 			} else {
 				InspectIT.getDefault().createInfoDialog("Storage data can not be updated, because the underlying repository is currently offline.", -1);
 			}
+		}
 		}
 	}
 }

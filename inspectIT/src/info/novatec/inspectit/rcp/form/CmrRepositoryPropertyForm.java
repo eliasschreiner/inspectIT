@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.ui.progress.UIJob;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.PopupDialog;
 import org.eclipse.jface.viewers.ISelection;
@@ -625,7 +626,7 @@ public class CmrRepositoryPropertyForm implements ISelectionChangedListener {
 	 * @author Ivan Senic
 	 * 
 	 */
-	private class RecordCountdownJob extends Job {
+	private class RecordCountdownJob extends UIJob {
 
 		/**
 		 * Default constructor.
@@ -639,7 +640,7 @@ public class CmrRepositoryPropertyForm implements ISelectionChangedListener {
 		 * {@inheritDoc}
 		 */
 		@Override
-		public IStatus run(IProgressMonitor monitor) {
+		public IStatus runInUIThread(IProgressMonitor monitor) {
 			if (null != recordingData && !form.isDisposed()) {
 				Date endDate = recordingData.getRecordEndDate();
 				Date startDate = recordingData.getRecordStartDate();
@@ -679,6 +680,7 @@ public class CmrRepositoryPropertyForm implements ISelectionChangedListener {
 			this.schedule(1000);
 			return Status.OK_STATUS;
 		}
+
 
 	
 	}

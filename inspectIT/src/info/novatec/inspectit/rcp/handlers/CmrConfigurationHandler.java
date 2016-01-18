@@ -32,10 +32,10 @@ import org.eclipse.swt.widgets.Shell;
  * 
  */
 public class CmrConfigurationHandler {
-//
-//	/**
-//	 * {@inheritDoc}
-//	 */
+
+	/**
+	 * {@inheritDoc}
+	 */
 //	@Execute
 //	public void execute(ESelectionService eSelectionService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
 //		StructuredSelection selection = (StructuredSelection) eSelectionService.getSelection();
@@ -57,66 +57,66 @@ public class CmrConfigurationHandler {
 //			}
 //		}
 //	}
-
-	/**
-	 * Job for updating the configuration.
-	 * 
-	 * @author Ivan Senic
-	 * 
-	 */
-	private static final class ConfigurationUpdateJob extends Job {
-
-		/**
-		 * CMR to update.
-		 */
-		private CmrRepositoryDefinition cmrRepositoryDefinition;
-
-		/**
-		 * {@link ConfigurationUpdate}.
-		 */
-		private ConfigurationUpdate configurationUpdate;
-
-		/**
-		 * If user has selected that restart should be automatically executed.
-		 */
-		private boolean executeRestart;
-
-		/**
-		 * Default constructor.
-		 * 
-		 * @param cmrRepositoryDefinition
-		 *            CMR to update.
-		 * @param configurationUpdate
-		 *            {@link ConfigurationUpdate}
-		 * @param executeRestart
-		 *            If user has selected that restart should be automatically executed.
-		 */
-		public ConfigurationUpdateJob(CmrRepositoryDefinition cmrRepositoryDefinition, ConfigurationUpdate configurationUpdate, boolean executeRestart) {
-			super("Update CMR Configuration Job");
-			this.cmrRepositoryDefinition = cmrRepositoryDefinition;
-			this.configurationUpdate = configurationUpdate;
-			this.executeRestart = executeRestart;
-			setUser(true);
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		protected IStatus run(IProgressMonitor monitor) {
-			monitor.beginTask("Updating the CMR configuration", IProgressMonitor.UNKNOWN);
-			if (cmrRepositoryDefinition.getOnlineStatus() != OnlineStatus.OFFLINE) {
-				try {
-					cmrRepositoryDefinition.getCmrManagementService().updateConfiguration(configurationUpdate, executeRestart);
-				} catch (Exception e) {
-					return new Status(Status.ERROR, InspectIT.ID, "Exception occurred trying to update the CMR configuration.", e);
-				}
-				monitor.done();
-				return Status.OK_STATUS;
-			} else {
-				return new Status(Status.ERROR, InspectIT.ID, "Can not update the configuration because selected CMR is offline.");
-			}
-		}
-	}
+//
+//	/**
+//	 * Job for updating the configuration.
+//	 * 
+//	 * @author Ivan Senic
+//	 * 
+//	 */
+//	private static final class ConfigurationUpdateJob extends Job {
+//
+//		/**
+//		 * CMR to update.
+//		 */
+//		private CmrRepositoryDefinition cmrRepositoryDefinition;
+//
+//		/**
+//		 * {@link ConfigurationUpdate}.
+//		 */
+//		private ConfigurationUpdate configurationUpdate;
+//
+//		/**
+//		 * If user has selected that restart should be automatically executed.
+//		 */
+//		private boolean executeRestart;
+//
+//		/**
+//		 * Default constructor.
+//		 * 
+//		 * @param cmrRepositoryDefinition
+//		 *            CMR to update.
+//		 * @param configurationUpdate
+//		 *            {@link ConfigurationUpdate}
+//		 * @param executeRestart
+//		 *            If user has selected that restart should be automatically executed.
+//		 */
+//		public ConfigurationUpdateJob(CmrRepositoryDefinition cmrRepositoryDefinition, ConfigurationUpdate configurationUpdate, boolean executeRestart) {
+//			super("Update CMR Configuration Job");
+//			this.cmrRepositoryDefinition = cmrRepositoryDefinition;
+//			this.configurationUpdate = configurationUpdate;
+//			this.executeRestart = executeRestart;
+//			setUser(true);
+//		}
+//
+//		/**
+//		 * {@inheritDoc}
+//		 */
+//		@Override
+//		protected IStatus run(IProgressMonitor monitor) {
+//			monitor.beginTask("Updating the CMR configuration", IProgressMonitor.UNKNOWN);
+//			if (cmrRepositoryDefinition.getOnlineStatus() != OnlineStatus.OFFLINE) {
+//				try {
+//					cmrRepositoryDefinition.getCmrManagementService().updateConfiguration(configurationUpdate, executeRestart);
+//				} catch (Exception e) {
+//					return new Status(Status.ERROR, InspectIT.ID, "Exception occurred trying to update the CMR configuration.", e);
+//				}
+//				monitor.done();
+//				return Status.OK_STATUS;
+//			} else {
+//				return new Status(Status.ERROR, InspectIT.ID, "Can not update the configuration because selected CMR is offline.");
+//			}
+//		}
+//	}
 
 }
