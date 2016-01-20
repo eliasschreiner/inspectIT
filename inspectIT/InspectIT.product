@@ -3,12 +3,11 @@
 
 <product name="inspectIT" uid="info.novatec.inspectit.rcp.product" id="inspectIT.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.5" useFeatures="false" includeLaunchers="true">
 
-
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
-      <programArgs>-clearPersistedState
+      <programArgs>-ClearPersistedState
       </programArgs>
       <vmArgs>-Xmx1024M -Xms128m
       </vmArgs>
@@ -26,10 +25,8 @@
       </win>
    </launcher>
 
-
    <vm>
    </vm>
-
 
    <plugins>
       <plugin id="ch.qos.logback.classic"/>

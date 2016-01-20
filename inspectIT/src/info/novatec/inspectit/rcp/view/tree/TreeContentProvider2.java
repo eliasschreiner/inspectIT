@@ -112,6 +112,7 @@ public class TreeContentProvider2 implements ITreeContentProvider{
 //			IDeferredWorkbenchAdapter adapter = getAdapter(element);
 //			return adapter != null && adapter.isContainer();
 //		}
+	    
 //		public Object[] getChildren(final Object parent) {
 //			IDeferredWorkbenchAdapter element = getAdapter(parent);
 //			if (element == null) {

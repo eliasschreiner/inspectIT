@@ -2,6 +2,8 @@ package info.novatec.inspectit.rcp.log;
 
 import org.eclipse.core.runtime.ILogListener;
 import org.eclipse.core.runtime.IStatus;
+import org.mockito.internal.debugging.LoggingListener;
+import org.osgi.service.log.LogEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * @author Ivan Senic
  * 
  */
-public class LogListener implements ILogListener {
+public class LogListener implements  ILogListener {
 
 	/**
 	 * Logger.
@@ -39,5 +41,4 @@ public class LogListener implements ILogListener {
 			}
 		}
 	}
-
 }

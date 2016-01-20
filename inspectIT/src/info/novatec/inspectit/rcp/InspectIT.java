@@ -81,7 +81,7 @@ public class InspectIT implements BundleActivator {
 	/**
 	 * The JFace ImageRegistrty, which registers the need Images
 	 */
-	ImageRegistry imageRegistry = new ImageRegistry();
+	ImageRegistry imageRegistry;
 	
 	/**
 	 * The id of this plugin.
@@ -152,6 +152,7 @@ public class InspectIT implements BundleActivator {
 	public void start(BundleContext context) throws Exception {
 		InspectIT.context = context;
 		plugin = this;
+		imageRegistry = new ImageRegistry();
 		
 		//Injects the Eclipse Context into the Activator-Class, is only for OSGi-Services!
 		IEclipseContext eContext = EclipseContextFactory.getServiceContext(context);
