@@ -36,7 +36,6 @@ public class TreeContentProvider2 implements ITreeContentProvider{
 				updateCompleteListenerList = new ListenerList<IJobChangeListener>();
 			}
 			updateCompleteListenerList.add(listener);
-		
 		}
 	    
 	    @Override

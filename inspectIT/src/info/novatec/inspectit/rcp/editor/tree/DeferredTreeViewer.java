@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -35,7 +36,7 @@ import org.eclipse.swt.widgets.Widget;
  * @author Patrice Bouillet
  * 
  */
-public class DeferredTreeViewer extends TreeViewer {
+public class DeferredTreeViewer extends TreeViewer implements IAdaptable {
 
 	/**
 	 * Maps the parent widgets to the level so that we know how deep we want to go.
@@ -167,7 +168,7 @@ public class DeferredTreeViewer extends TreeViewer {
 		if (level > 1 || TreeViewer.ALL_LEVELS == level) {
 			// we want to open more than one level, have to take care of that.
 			Object data = widget.getData();
-			if (!(data instanceof File)) {
+			if (!(data instanceof IAdaptable)) {
 				// just care about our own widgets
 				parentWidgets.put(widget, Integer.valueOf(level));
 			}
@@ -193,7 +194,7 @@ public class DeferredTreeViewer extends TreeViewer {
 		// our Map
 		if (1 == elementsOrPaths.length) {
 			Object object = elementsOrPaths[0];
-			if (object instanceof File) {
+			if (object instanceof IAdaptable) {
 				Widget[] widgets = findItems(object);
 				if (null != widgets && widgets.length > 0) {
 					Widget widget = widgets[0];
