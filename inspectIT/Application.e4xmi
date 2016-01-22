@@ -81,7 +81,7 @@
                 <children xsi:type="menu:HandledToolItem" xmi:id="_HSv84J6BEeWeW-hwSGo__g" elementId="testagainforemfneed.handledtoolitem.refreshpart" accessibilityPhrase="Refresh Part" label="Refresh Part" iconURI="platform:/plugin/inspectIT/icons/eclipse/refresh.gif" tooltip="Refresh Part" command="_PhS9MK9MEeWdwO404PmFRA"/>
               </toolbar>
             </children>
-            <children xsi:type="basic:Part" xmi:id="_153WoL1aEeWjyvwLojXzeA" elementId="org.eclipse.ui.views.ProgressView" visible="false" accessibilityPhrase="Progress View" contributionURI="bundleclass://org.eclipse.e4.ui.progress/org.eclipse.e4.ui.progress.ProgressView" label="Progress View" iconURI="platform:/plugin/inspectIT/icons/eclipse/pview.gif" tooltip="Progress View"/>
+            <children xsi:type="basic:Part" xmi:id="_153WoL1aEeWjyvwLojXzeA" elementId="org.eclipse.ui.progress.ProgressViewpart" accessibilityPhrase="Progress View" contributionURI="bundleclass://org.eclipse.e4.ui.progress/org.eclipse.e4.ui.progress.ProgressView" label="Progress View" iconURI="platform:/plugin/inspectIT/icons/eclipse/pview.gif" tooltip="Progress View" closeable="true"/>
           </children>
           <children xsi:type="basic:PartStack" xmi:id="__hg2MIh8EeWPeeIbKDQGtQ" elementId="info.novatec.inspectit.rcp.editor" containerData="" accessibilityPhrase="Editor Area"/>
         </children>
@@ -123,6 +123,9 @@
         <children xsi:type="menu:HandledToolItem" xmi:id="_0AiSAJzjEeWRX9fcCYEZ4w" elementId="testagainforemfneed.handledtoolitem.4" iconURI="platform:/plugin/inspectIT/icons/eclipse/help.gif"/>
         <children xsi:type="menu:ToolControl" xmi:id="_X0CGwH14EeWXoa9N-IIJGQ" elementId="inspectit.toolcontrol.0" accessibilityPhrase="Search" contributionURI="bundleclass://inspectIT/info.novatec.inspectit.rcp.menu.SearchDocumentationContributionItem"/>
       </children>
+    </trimBars>
+    <trimBars xmi:id="_MOlRMMEREeWuKfBOtl6PDg" elementId="inspectit.trimbar.1" side="Bottom">
+      <children xsi:type="menu:ToolControl" xmi:id="_U_wL4MEREeWuKfBOtl6PDg" elementId="org.eclipse.e4.ui.progress.internal.ProgressRegion " contributionURI="bundleclass://org.eclipse.e4.ui.progress/org.eclipse.e4.ui.progress.internal.ProgressRegion"/>
     </trimBars>
   </children>
   <handlers xmi:id="_6wlLfcgZEeSyMNYR5xypkQ" elementId="info.novatec.inspectit.rcp.handler.quitCommand" contributionURI="bundleclass://inspectIT/info.novatec.inspectit.rcp.handlers.QuitHandler" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
@@ -230,7 +233,7 @@
   <addons xmi:id="_6wlLdsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_6wlLd8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
   <addons xmi:id="_6wlLeMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
-  <addons xmi:id="_y_W9MIh8EeWPeeIbKDQGtQ" elementId="inspectit.addon.0" contributionURI="bundleclass://org.eclipse.e4.ui.progress/org.eclipse.e4.ui.progress.ProgressViewAddon"/>
+  <addons xmi:id="_y_W9MIh8EeWPeeIbKDQGtQ" elementId="org.eclipse.e4.ui.progress" contributionURI="bundleclass://org.eclipse.e4.ui.progress/org.eclipse.e4.ui.progress.ProgressViewAddon"/>
   <categories xmi:id="_O1uCgLjBEeWFH7_aCLqj2g" elementId="info.novatec.inspectit.rcp.commandcategorys.inspectitCommands" name="inspectIT Commands" description="Commands created via inspectIT Handlers"/>
   <categories xmi:id="_X2opYLjBEeWFH7_aCLqj2g" elementId="info.novatec.inspectit.rcp.commandcategorys.eclipseCommands" name="Eclipse Commands" description="Commands that should replace the Eclipse 3 default Commands wich arn´t available in E4"/>
 </application:Application>

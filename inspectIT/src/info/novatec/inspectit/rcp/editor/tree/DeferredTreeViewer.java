@@ -36,7 +36,7 @@ import org.eclipse.swt.widgets.Widget;
  * @author Patrice Bouillet
  * 
  */
-public class DeferredTreeViewer extends TreeViewer implements IAdaptable {
+public class DeferredTreeViewer extends TreeViewer {
 
 	/**
 	 * Maps the parent widgets to the level so that we know how deep we want to go.
