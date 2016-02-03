@@ -44,13 +44,13 @@ import org.eclipse.swt.widgets.Shell;
 public class CopyBufferToStorageHandler {
 
 	
-	boolean visible = false;
+	boolean enabled = false;
 	
 	 /**
 	  * 	Sets the enabled/disabled-Attribute via the @CanExecute-Annotation. 	 
 	  */
 	@CanExecute
-	public boolean isVisible(@Optional @UIEventTopic(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC) String test, 
+	public boolean isEnabled(@Optional @UIEventTopic(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC) String test, 
 				ESelectionService eSelectionService) {
 		//selected element is active when count = 1, und iterate entweder Klasse ICmrRepositoryAndAgentProvider oder ICmrRepositoryProvider ist und nach recording Active und OnlineStatus getestet wurde... 
 		//cmrRepositoryDefinition.getOnlineStatus()
@@ -67,17 +67,17 @@ public class CopyBufferToStorageHandler {
 				cmrRepositoryDefinition = ((ICmrRepositoryProvider) selectedObject).getCmrRepositoryDefinition();
 				if(cmrRepositoryDefinition.getOnlineStatus() == OnlineStatus.ONLINE)	
 				{			
-					visible = true;
+					enabled = true;
 				}			
 				else
 				{
-					visible = false;
+					enabled = false;
 				}
 			}
 			else
-			{visible = false;}
+			{enabled = false;}
 		}
-		return visible;
+		return enabled;
 	}
 	
 	/**

@@ -78,7 +78,6 @@ public class InspectIT implements BundleActivator {
 	 */
 	@Inject Provider<StatusHandler> statusHandler;
 	
-	
 	/**
 	 * The JFace ImageRegistrty, which registers the need Images
 	 */

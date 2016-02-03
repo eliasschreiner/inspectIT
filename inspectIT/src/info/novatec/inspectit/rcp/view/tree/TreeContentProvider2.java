@@ -50,10 +50,15 @@ public class TreeContentProvider2 implements ITreeContentProvider{
 
 	    @Override
 	    public Object[] getChildren(Object parentElement) {
-
+// parentElement only returns 0 - Children. #TODO fix
 //	    	if (manager.isDeferredAdapter(parentElement)) {
 //				Object[] children = manager.getChildren(parentElement);
-	    	
+	    	if(parentElement instanceof DeferredAgentsComposite)
+	    	{
+	    		Object[] children = ((DeferredAgentsComposite) parentElement).getChildren(parentElement);// get manager.getChildren(parentElement);
+
+				return children;
+	    	}
 			if (parentElement instanceof Composite) {
 				// direct access to the children
 				Composite composite = (Composite) parentElement;
@@ -79,7 +84,7 @@ public class TreeContentProvider2 implements ITreeContentProvider{
 			}
 	    	
 	    	if (element instanceof DeferredAgentsComposite) {
-				return false;
+				return true;
 			}
 	    	
 	    	if (element instanceof Leaf) {

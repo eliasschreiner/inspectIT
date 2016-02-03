@@ -201,33 +201,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	@PostConstruct
 	public void createComposite(Composite parent, MApplication mApplication)		
 	{	
-		//Makes the MApplication accessible from the construction of this class
-		//So the ContextInjectionFactory can inject it into its cmrRepositoryDefinition instances
-		this.mApplication = mApplication;
-//		Button btn = new Button(parent,3);
-//		btn.addSelectionListener(new SelectionListener() {
-//			
-//			@Override
-//			public void widgetSelected(SelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				mApplication.getContext().modify(KEY, "false");
-//				eventBroker.post(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC,
-//						UIEvents.ALL_ELEMENT_ID);
-//			}
-//			
-//			@Override
-//			public void widgetDefaultSelected(SelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-		
-		//		IEclipsePreferences preferences = PreferenceSupplier.getPreferences();
-//		int theAnswerToTheQuestionOfAllQuestions = preferences.getInt(PreferenceSupplier.P_INT, PreferenceSupplier.DEF_INT);
-//			
-//		String text = Platform.getPreferencesService().
-//		  getString(InspectIT.ID,PreferencesConstants.CMR_REPOSITORY_DEFINITIONS,"CMR_REPOSITORY_DEFINITIONS",null); 
-		
+		this.mApplication = mApplication;	
 		toolkit = new FormToolkit(parent.getDisplay());
 
 		mainComposite = new SashForm(parent, SWT.VERTICAL);
@@ -335,20 +309,9 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		updateFormBody();
 		mainComposite.setWeights(new int[] { 2, 3 });
 
-		
-
 		eSelectionService.setSelection(treeViewer); 
 		agentStatusUpdateJob = new AgentStatusUpdateJob();
 	}
-
-//	//Method to test, whether i can access the initializer via DI
-//	@Inject
-//	public void testPrefs(@Preference(nodePath = "/default/" + InspectIT.ID)
-//	        IEclipsePreferences preferences) throws BackingStoreException 
-//	{
-//	    preferences.put("DUMMY","DUMMYVALUE222");
-//	    preferences.flush();
-//	}
 
 	/**
 	 * Updates the repository map.
@@ -363,7 +326,8 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 			{
 				ContextInjectionFactory.inject(cmrRepositoryDefinition, mApplication.getContext());
 			}			
-			
+			//#TODO delete after Implementation of ShowOldAgents Toggle-Button. 
+			showOldAgents = true;
 			inputList.add(new DeferredAgentsComposite(cmrRepositoryDefinition, showOldAgents));
 			OnlineStatus onlineStatus = cmrRepositoryDefinition.getOnlineStatus();
 			if (onlineStatus == OnlineStatus.ONLINE || onlineStatus == OnlineStatus.OFFLINE) {
@@ -862,6 +826,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		/**
 		 * {@inheritDoc}
 		 */
+
 		protected IStatus run(IProgressMonitor monitor) {
 			updateAgentsAndCmrStatus();
 			schedule(UPDATE_RATE);

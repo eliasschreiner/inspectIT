@@ -60,7 +60,6 @@
       <plugin id="javax.inject"/>
       <plugin id="javax.servlet"/>
       <plugin id="javax.xml"/>
-      <plugin id="jcl.over.slf4j"/>
       <plugin id="log4j.over.slf4j"/>
       <plugin id="org.apache.batik.css"/>
       <plugin id="org.apache.batik.util"/>
