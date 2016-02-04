@@ -1,5 +1,6 @@
 package info.novatec.inspectit.rcp.handlers;
 
+import info.novatec.inspectit.cmr.model.PlatformIdent;
 import info.novatec.inspectit.rcp.editor.inputdefinition.InputDefinition;
 import info.novatec.inspectit.rcp.editor.root.AbstractRootEditor;
 import info.novatec.inspectit.rcp.editor.root.FormRootEditor;
@@ -21,6 +22,9 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
+import org.eclipse.swt.widgets.List;
+
+import com.esotericsoftware.kryo.io.Input;
 
 /**
  * The open view handler which takes care of opening a view by retrieving the
@@ -49,41 +53,43 @@ public class OpenViewHandler {
 		// Get the input definition out of the context
 		IEclipseContext context = (IEclipseContext) mApplication.getContext();
 		InputDefinition inputDefinition = (InputDefinition) context.get(INPUT);
-		// open the view if the input definition is set
-		if (null != inputDefinition) {
-	
-			try {
-				//Proof whether a the part is already existing, if so, th epart won´t be created but the existing one will show up.
-				boolean existingPart = false;				
-				for(MPart part :  ePartService.getParts())
-				{					
-					if(part.getObject() instanceof FormRootEditor)
+if (null != inputDefinition) {
+	try {
+		boolean existingPart = false;	
+		PlatformIdent newPlatformIdent = inputDefinition.getRepositoryDefinition().getCachedDataService().getPlatformIdentForId(inputDefinition.getIdDefinition().getPlatformId());
+		for(MPart part :  ePartService.getParts())
+		{					
+			if(part.getObject() instanceof FormRootEditor)
+			{
+				AbstractRootEditor rootEditor = (AbstractRootEditor) part.getObject();
+				String id = rootEditor.getInputDefinition().getId().getFqn() ;
+				if(id == inputDefinition.getId().getFqn())					
+				{
+					InputDefinition foreignPartsInput  = rootEditor.getInputDefinition();	
+					PlatformIdent existingPlatformIdent = foreignPartsInput.getRepositoryDefinition().getCachedDataService().getPlatformIdentForId(foreignPartsInput.getIdDefinition().getPlatformId());
+					if(newPlatformIdent.getId() == existingPlatformIdent.getId())
 					{
-						AbstractRootEditor rootEditor = (AbstractRootEditor) part.getObject();
-						String id = rootEditor.getInputDefinition().getId().getFqn() ;
-						if(id == inputDefinition.getId().getFqn())					
-							{
-							existingPart = true;
-							ePartService.activate(part);
-							break;
-							}						
-						else
-							existingPart = false;	
-					}
-				}
-				if(!(existingPart))
-				{					
-					RootEditorInput input = new RootEditorInput(inputDefinition);
-					//Creates and adds the EditorPart to the the PartStack and shows it afterwards. 
-					MPart newEditorPart = ePartService.createPart(FormRootEditor.ID);
-					MPartStack editorPartStack = (MPartStack) eModelService.find("info.novatec.inspectit.rcp.editor", mApplication);
-					editorPartStack.getChildren().add(newEditorPart);
-					newEditorPart.getTransientData().put("RootEditorInput", input);
-					ePartService.showPart(newEditorPart, PartState.ACTIVATE);					
-				}
-			} catch (Exception e) {
-				throw new ExecutionException("Exception occurred trying to open the editor.", e);
+						existingPart = true;
+						ePartService.activate(part);
+						break;
+					}								
+				}						
+				else
+					existingPart = false;	
 			}
+		}
+		if(!(existingPart))
+		{					
+			RootEditorInput input = new RootEditorInput(inputDefinition);
+			MPart newEditorPart = ePartService.createPart(FormRootEditor.ID);
+			MPartStack editorPartStack = (MPartStack) eModelService.find("info.novatec.inspectit.rcp.editor", mApplication);
+			editorPartStack.getChildren().add(newEditorPart);
+			newEditorPart.getTransientData().put("RootEditorInput", input);
+			ePartService.showPart(newEditorPart, PartState.ACTIVATE);					
+		}
+	} catch (Exception e) {
+		throw new ExecutionException("Exception occurred trying to open the editor.", e);
+	}
 			
 		}
 	}

@@ -202,8 +202,6 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	 */
 	@PostConstruct
 	public void createPartControl(MApplication mApplication ,ECommandService eCommandService, EHandlerService eHandlerService, Composite parent) {
-		createViewToolbar();
-
 		toolkit = new FormToolkit(parent.getDisplay());
 		mainForm = toolkit.createForm(parent);
 		mainForm.getBody().setLayout(new GridLayout(1, true));
@@ -324,7 +322,7 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	 * @param agent
 	 *            Hint for agent selection.
 	 */
-	//#TODO cheack for investigating stuff
+	//#TODO check for investigating stuff
 	private void selectAgentForDisplay(PlatformIdent agent) {
 		Display.getDefault().syncExec(new Runnable() {
 			@Override
@@ -334,15 +332,14 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 			}
 		});
 		try {
-			
 			if (null != agent && CollectionUtils.isNotEmpty(availableAgents) && availableAgents.contains(agent)) {
 				displayedAgent = displayedRepositoryDefinition.getGlobalDataAccessService().getCompleteAgent(agent.getId());//#TODO
-				displayedRepositoryDefinition.getGlobalDataAccessService().deleteAgent(agent.getId());
+				//displayedRepositoryDefinition.getGlobalDataAccessService().deleteAgent(agent.getId()); //#TODO 
 				PreferencesUtils.saveLongValue(PreferencesConstants.LAST_SELECTED_AGENT, agent.getId().longValue(), false);
 			} else if (CollectionUtils.isNotEmpty(availableAgents)) {
 				agent = availableAgents.iterator().next();
 				displayedAgent = displayedRepositoryDefinition.getGlobalDataAccessService().getCompleteAgent(agent.getId());
-				displayedRepositoryDefinition.getGlobalDataAccessService().deleteAgent(agent.getId()); //#TODO
+				//displayedRepositoryDefinition.getGlobalDataAccessService().deleteAgent(agent.getId()); //#TODO
 				
 				
 			} else {
@@ -451,19 +448,6 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 			updateAvailableAgentsJob.addJobChangeListener(jobListener);
 		}
 		updateAvailableAgentsJob.schedule();
-	}
-
-	/**
-	 * Creates view toolbar.
-	 */
-	private void createViewToolbar() {
-//		toolBarManager = getViewSite().getActionBars().getToolBarManager();
-//
-//		ShowHideInactiveInstrumentationsAction showHideInactiveInstrumentationsAction = new ShowHideInactiveInstrumentationsAction();
-//		toolBarManager.add(showHideInactiveInstrumentationsAction);
-//
-//		collapseAction = new CollapseAction();
-//		toolBarManager.add(collapseAction);
 	}
 
 	/**
