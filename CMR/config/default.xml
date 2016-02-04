@@ -74,7 +74,7 @@
 	</section>
 	<section name="General settings">
 		<properties>
-			<long-property name="Port" default-value="9072" server-restart-required="true" logical-name="cmr.port" advanced="false" description="The port used for communicating with agents.">
+			<long-property name="Port" default-value="9073" server-restart-required="true" logical-name="cmr.port" advanced="false" description="The port used for communicating with agents.">
 				<validators>
 					<isPositive />
 				</validators>

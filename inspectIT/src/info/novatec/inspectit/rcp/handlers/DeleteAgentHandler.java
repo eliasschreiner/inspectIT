@@ -1,12 +1,18 @@
 package info.novatec.inspectit.rcp.handlers;
 
 import info.novatec.inspectit.cmr.model.PlatformIdent;
+import info.novatec.inspectit.cmr.service.IGlobalDataAccessService;
+import info.novatec.inspectit.communication.data.cmr.AgentStatusData;
 import info.novatec.inspectit.exception.BusinessException;
 import info.novatec.inspectit.rcp.InspectIT;
 import info.novatec.inspectit.rcp.model.AgentLeaf;
+import info.novatec.inspectit.rcp.model.Component;
+import info.novatec.inspectit.rcp.model.DeferredAgentsComposite;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Named;
 
@@ -58,10 +64,35 @@ public class DeleteAgentHandler{
 		TreeViewer treeViewer = (TreeViewer) eSelectionService.getSelection();
 		IStructuredSelection selection = (IStructuredSelection) treeViewer.getSelection();
 		boolean confirmed = MessageDialog.openConfirm(shell, "Confirm Delete",
-				"Are you sure you want to permanently delete the selected Agent(s)? Note that all monitoring data related to the Agent(s) will be deleted from the repository database.");
+				"Are you sure you want to permanently delete the selected Agent(s)? Note that all monitoring data related to the Agent(s) will be deleted from the repository database."); 
+		
 		if (confirmed) {
 			for (Iterator<?> it = selection.iterator(); it.hasNext();) {
 				Object selected = (Object) it.next();
+				
+				//#TODO delete this DeferredAgent-Thing
+				if (selected instanceof DeferredAgentsComposite)
+				{
+					DeferredAgentsComposite defAgentsLeaf = (DeferredAgentsComposite) selected;
+					CmrRepositoryDefinition cmrRepositoryDefinition = defAgentsLeaf.getCmrRepositoryDefinition();
+					Map<PlatformIdent, AgentStatusData> map = (Map<PlatformIdent, AgentStatusData>) cmrRepositoryDefinition.getGlobalDataAccessService().getAgentsOverview();
+					AgentStatusData leaf = map.get(1);
+					//cmrRepositoryDefinition.getGlobalDataAccessService().deleteAgent(leaf.getId());
+					System.out.println("asf");
+					
+					//defAgentsLeaf.getChildren().clear();
+					
+//					PlatformIdent platformIdent
+//					try {
+//						cmrRepositoryDefinition.getGlobalDataAccessService().deleteAgent(platformIdent.getId());
+//						InspectIT.getDefault().getCmrRepositoryManager().repositoryAgentDeleted(cmrRepositoryDefinition, platformIdent);
+//					} catch (BusinessException e) {
+//						throw new ExecutionException("Exception occurred trying to delete the Agent from the CMR.", e);
+//					}
+					
+				}
+				
+				
 				if (selected instanceof AgentLeaf) {
 					AgentLeaf agentLeaf = (AgentLeaf) selected;
 					PlatformIdent platformIdent = agentLeaf.getPlatformIdent();

@@ -324,6 +324,7 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	 * @param agent
 	 *            Hint for agent selection.
 	 */
+	//#TODO cheack for investigating stuff
 	private void selectAgentForDisplay(PlatformIdent agent) {
 		Display.getDefault().syncExec(new Runnable() {
 			@Override
@@ -333,12 +334,17 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 			}
 		});
 		try {
+			
 			if (null != agent && CollectionUtils.isNotEmpty(availableAgents) && availableAgents.contains(agent)) {
-				displayedAgent = displayedRepositoryDefinition.getGlobalDataAccessService().getCompleteAgent(agent.getId());
+				displayedAgent = displayedRepositoryDefinition.getGlobalDataAccessService().getCompleteAgent(agent.getId());//#TODO
+				displayedRepositoryDefinition.getGlobalDataAccessService().deleteAgent(agent.getId());
 				PreferencesUtils.saveLongValue(PreferencesConstants.LAST_SELECTED_AGENT, agent.getId().longValue(), false);
 			} else if (CollectionUtils.isNotEmpty(availableAgents)) {
 				agent = availableAgents.iterator().next();
 				displayedAgent = displayedRepositoryDefinition.getGlobalDataAccessService().getCompleteAgent(agent.getId());
+				displayedRepositoryDefinition.getGlobalDataAccessService().deleteAgent(agent.getId()); //#TODO
+				
+				
 			} else {
 				displayedAgent = null; // NOPMD
 			}
@@ -413,6 +419,10 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 					CmrRepositoryDefinition cmrRepositoryDefinition = (CmrRepositoryDefinition) repositoryDefinition;
 					if (cmrRepositoryDefinition.getOnlineStatus() != OnlineStatus.OFFLINE) {
 						availableAgents = new ArrayList<PlatformIdent>(cmrRepositoryDefinition.getGlobalDataAccessService().getAgentsOverview().keySet());
+						
+						// #TODO delete after Testing
+						//availableAgents = null;
+						System.out.println("asf");
 					} else {
 						availableAgents = null; // NOPMD
 					}

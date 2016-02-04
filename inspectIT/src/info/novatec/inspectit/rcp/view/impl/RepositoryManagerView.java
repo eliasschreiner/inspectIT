@@ -16,6 +16,7 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -66,6 +67,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import info.novatec.inspectit.cmr.model.PlatformIdent;
 import info.novatec.inspectit.communication.data.cmr.AgentStatusData;
+import info.novatec.inspectit.exception.BusinessException;
 import info.novatec.inspectit.rcp.InspectIT;
 import info.novatec.inspectit.rcp.InspectITImages;
 import info.novatec.inspectit.rcp.editor.tree.DeferredTreeViewer;
@@ -311,6 +313,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 		eSelectionService.setSelection(treeViewer); 
 		agentStatusUpdateJob = new AgentStatusUpdateJob();
+		
 	}
 
 	/**
