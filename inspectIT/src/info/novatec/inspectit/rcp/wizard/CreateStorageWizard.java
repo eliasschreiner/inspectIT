@@ -21,6 +21,7 @@ import org.eclipse.jface.wizard.Wizard;
  * 
  * @author Ivan Senic
  * 
+ * For E4: Proof whether there will be a MWizard in later wizards to make it more independent of JFAce
  */
 public class CreateStorageWizard extends Wizard {
 
@@ -35,10 +36,13 @@ public class CreateStorageWizard extends Wizard {
 	private CmrRepositoryDefinition cmrRepositoryDefinition;
 
 	/**
-	 * Default constructor.
+	 * E4 service for Part Management
 	 */
 	@Inject EPartService ePartService;
 	
+	/**
+	 * Default constructor.
+	 */
 	public CreateStorageWizard() {
 		super();
 		this.setWindowTitle("Create Storage Wizard");

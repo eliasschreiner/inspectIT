@@ -13,16 +13,29 @@ import info.novatec.inspectit.rcp.view.impl.RepositoryManagerView;
 /**
  * Handler for show hide agents which have not sent any data.
  * 
+ * This shall be the toggle-button to show and hide the inactive agents.
+ *
+ * #TODO this has to be fixed due to its not working properly. 
+ * Therefore some methods of the RepositoryManager should be inspected
+ * 
  * @author Patrice Bouillet
  * 
  */
 public class ShowAgentsHandler {
 
+	/**
+	 * E4 style tool item 
+	 */
 	private MHandledToolItem mHandledToolItem;
+	
+	/**
+	 * the Repository manager 
+	 */
 	private RepositoryManagerView repositoryManagerView;
 
 
-	/**
+	/**@Execute marks the method as the executive method of this handler. 
+	 * 
 	 * {@inheritDoc}
 	 */
 	@Execute
@@ -46,7 +59,5 @@ public class ShowAgentsHandler {
 		} else {
 			mHandledToolItem.setTooltip("Show Agents which have not sent any data yet.");
 		}
-		//mHandledToolItem.setSelected(!mHandledToolItem.isSelected());
 	}
-	
 }

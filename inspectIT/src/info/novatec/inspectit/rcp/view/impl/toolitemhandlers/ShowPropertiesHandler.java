@@ -10,11 +10,28 @@ import info.novatec.inspectit.rcp.InspectIT;
 import info.novatec.inspectit.rcp.InspectITImages;
 import info.novatec.inspectit.rcp.view.impl.RepositoryManagerView;
 
+
+/**
+ * Handler for the ToggleButton to show/hide the preference side of the part.
+ * 
+ * #TODO fix the Handler due to the execution is still buggy
+ * 
+ */
 public class ShowPropertiesHandler {
 	
+	/**
+	 * RepositoryManagerView.go grant access to some methods
+	 */
 	private RepositoryManagerView repositoryManagerView;
 
-	/**
+	/**@Execute marks the method as the executable of the class
+	 * 
+	 * @param mHandledToolItem 
+	 * 				the actual E4 tool item 
+	 * 
+	 * @param ePartService 
+	 * 				 service for partmanagement
+	 * 
 	 * {@inheritDoc}
 	 */
 	@Execute

@@ -256,14 +256,50 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 	 * Selection button for showing the local storages.
 	 */
 	private Button localStorageSelection;
+	
+	/**
+	 * Service to register the context menu
+	 */
 	@Inject EMenuService eMenuService;
+	
+	/**
+	 * Service to manage parts
+	 */
 	@Inject EPartService ePartService;
+	
+	/**
+	 * get and set selections
+	 */
 	@Inject ESelectionService eSelectionService;
+	
+	/**
+	 * service for creating commands and connecting them to handlers
+	 */
 	@Inject ECommandService eCommandService;
+	
+	/**
+	 * Service for executing commands
+	 */
 	@Inject EHandlerService eHandlerService; 
+	
+	/**
+	 * Eventservice for posting events (and subscribing them)
+	 */
 	@Inject IEventBroker eventBroker;
+	
+	/**
+	 * E4 replacement of the Progress Service
+	 */
 	@Inject IProgressService progressService;
+	
+	/**
+	 * Current application
+	 */
 	@Inject MApplication mApplication;
+	
+	/**
+	 * The actual Shell
+	 */
 	@Inject @Named(IServiceConstants.ACTIVE_SHELL) Shell shell;
 
 	/**
@@ -279,7 +315,12 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 	}
 
 	/**
+	 * @PostConstruct executes the Method after the Constructor has been handled
 	 * {@inheritDoc}
+	 * 
+	 * @param parent
+	 *            Parent-Composite
+	 *            
 	 */
 	@PostConstruct
 	public void createPartControl(Composite parent) {
@@ -358,6 +399,7 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 		Control control = treeViewer.getControl();
 		Menu menu = menuManager.createContextMenu(control);
 		control.setMenu(menu);
+		//Menu Service registers the Context Menu
 		eMenuService.registerContextMenu(control, MENU_ID); //getSite().registerContextMenu(MENU_ID, menuManager, treeViewer);
 		
 		mainComposite.addControlListener(new ControlAdapter() {
@@ -381,7 +423,9 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 		updateFormBody();
 		updateViewToolbar();
 
+		
 		mainComposite.setWeights(new int[] { 2, 3 });
+		//Set selection to the treeViewer
 		eSelectionService.setSelection(treeViewer); 
 	}
 
@@ -421,11 +465,12 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 
 	/**
 	 * Creates the view tool-bar.
+	 * The JFace Toolbar-Part is the Fiter and Select (or bottompart)
+	 * the topper part is in E4 Style. 
+	 * #TODO investigate whether there is a way to make the JFace-Part in E4-Style
+	 * 
 	 */
 	private void createViewToolbar() {
-//		IToolBarManager toolBarManager = getViewSite().getActionBars().getToolBarManager();
-//		toolBarManager.add(new ShowPropertiesAction());
-//
 		MenuAction filterMenuAction = new MenuAction();
 		filterMenuAction.setText("Group and Filter");
 		filterMenuAction.setImageDescriptor(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_FILTER));
@@ -441,10 +486,6 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 		filterByStateMenu.add(new FilterStatesAction("Recording", StorageState.RECORDING));
 		filterByStateMenu.add(new FilterStatesAction("Readable", StorageState.CLOSED));
 		filterMenuAction.addContributionItem(filterByStateMenu);
-//
-//		toolBarManager.add(filterMenuAction);
-//		toolBarManager.add(new Separator());
-
 	}
 
 	/**
@@ -701,7 +742,8 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 
 	}
 
-	/**
+	/**@Flocus activates this method on part-activation and after creation 
+	 * 
 	 * {@inheritDoc}
 	 */
 	@Focus
@@ -939,7 +981,8 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 		}
 	}
 
-	/**
+	/**@PreDestroy method call before destruction of the method
+	 * 
 	 * {@inheritDoc}
 	 */
 	@PreDestroy
@@ -1354,9 +1397,12 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 		 *            Repository to open.
 		 */
 		private void executeShowRepositoryCommand(RepositoryDefinition repositoryDefinition) {
+			
+			// Creates command for ShowRepositoryHandler and executes it
 			ParameterizedCommand command =
 					eCommandService.createCommand(ShowRepositoryHandler.COMMAND, null);
 			eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new ShowRepositoryHandler());
+			//Writes the Repository Definition into the application-context
 			mApplication.getContext().set(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
 			try{
 				if(eHandlerService.canExecute(command)) {
@@ -1387,6 +1433,7 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 					executeShowRepositoryCommand(repositoryDefinition);
 				} else if (storageData.getState() == StorageState.CLOSED) {
 					// if it is closed, mount it first
+					//Progress Service needed in E4 for replacement of PlatformUI.getWorkbench().getProgressService().busyCursorWhile
 					progressService.busyCursorWhile(new IRunnableWithProgress() {
 						@Override
 						public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
@@ -1408,11 +1455,12 @@ public class StorageManagerView implements CmrRepositoryChangeListener, StorageC
 					MessageDialog dialog = new MessageDialog(shell, "Opening Writable Storage", null, dialogMessage, MessageDialog.QUESTION, new String[] { "Yes", "No" }, 0);
 					if (0 == dialog.open()) {
 						treeViewer.setSelection(treeViewer.getSelection());
-
+						//creates the command to the CloseAndShowStorageHandler
 						ParameterizedCommand command =
 								eCommandService.createCommand(CloseAndShowStorageHandler.COMMAND, null);
-						eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new ShowRepositoryHandler());
+						eHandlerService.activateHandler(CloseAndShowStorageHandler.COMMAND, new ShowRepositoryHandler());
 						IEclipseContext context = (IEclipseContext) mApplication.getContext();
+						//Writes data into the application-context
 						context.set(CloseAndShowStorageHandler.STORAGE_DATA_PROVIDER, storageDataProvider);
 						context.set(ePartService.ACTIVE_ON_CLOSE_TAG, ePartService.getActivePart());
 						try{

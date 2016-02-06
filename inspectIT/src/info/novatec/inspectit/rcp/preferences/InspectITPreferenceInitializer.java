@@ -14,7 +14,13 @@ import info.novatec.inspectit.communication.data.SqlStatementData;
 import info.novatec.inspectit.communication.data.TimerData;
 
 
-
+/**
+ * It would be a possibility to manage the preferences with the @Pref annotation in further development
+ * As well there could be found a solution to the ScopedPreferenceStore 
+ * 
+ * @author ESC
+ *
+ */
 
 public class InspectITPreferenceInitializer extends AbstractPreferenceInitializer {
 		
@@ -26,42 +32,19 @@ public class InspectITPreferenceInitializer extends AbstractPreferenceInitialize
 			defaultCmr.setDescription(CmrRepositoryDefinition.DEFAULT_DESCRIPTION);
 			defaultCmrList.add(defaultCmr);
 			PreferencesUtils.saveCmrRepositoryDefinitions(defaultCmrList, true);
-//			Preferences defaults = DefaultScope.INSTANCE.getNode(InspectIT.ID);
-//			  // Set defaults using things like:
-//			  defaults.put("DUMMY", "DUMMYCONTENT");
-//			  try {
-//				defaults.flush();
-//			} catch (BackingStoreException e) {
-//				e.printStackTrace();
-//			}
 			
-			  //And this other approach to make sure that one of them works
-//			  IPreferenceStore store = InspectIT.getDefault().getPreferenceStore();
-//			  store.setDefault("DUMMY", "DUMMYCONTENT");		 
-//			  try {
-//				  ((Preferences) store).flush();
-//			} catch (BackingStoreException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		        Map<String, String> initializationEntries = PreferenceSupplier.getInitializationEntries();
-//		        for(Map.Entry<String, String> entry : initializationEntries.entrySet()) {
-//		            store.setDefault(entry.getKey(), entry.getValue());
-//		        }			  
-
-				
-				// Editor defaults
-				PreferencesUtils.saveIntValue(PreferencesConstants.DECIMAL_PLACES, 0, true);
-				PreferencesUtils.saveLongValue(PreferencesConstants.REFRESH_RATE, 5000L, true);
-				PreferencesUtils.saveIntValue(PreferencesConstants.ITEMS_COUNT_TO_SHOW, 100, true);
-				PreferencesUtils.saveDoubleValue(PreferencesConstants.INVOCATION_FILTER_EXCLUSIVE_TIME, Double.NaN, true);
-				PreferencesUtils.saveDoubleValue(PreferencesConstants.INVOCATION_FILTER_TOTAL_TIME, Double.NaN, true);
-				Set<Class<?>> invocDataTypes = new HashSet<>();
-				invocDataTypes.add(InvocationSequenceData.class);
-				invocDataTypes.add(TimerData.class);
-				invocDataTypes.add(HttpTimerData.class);
-				invocDataTypes.add(SqlStatementData.class);
-				invocDataTypes.add(ExceptionSensorData.class);
-				PreferencesUtils.saveObject(PreferencesConstants.INVOCATION_FILTER_DATA_TYPES, invocDataTypes, true);
+			// Editor defaults
+			PreferencesUtils.saveIntValue(PreferencesConstants.DECIMAL_PLACES, 0, true);
+			PreferencesUtils.saveLongValue(PreferencesConstants.REFRESH_RATE, 5000L, true);
+			PreferencesUtils.saveIntValue(PreferencesConstants.ITEMS_COUNT_TO_SHOW, 100, true);
+			PreferencesUtils.saveDoubleValue(PreferencesConstants.INVOCATION_FILTER_EXCLUSIVE_TIME, Double.NaN, true);
+			PreferencesUtils.saveDoubleValue(PreferencesConstants.INVOCATION_FILTER_TOTAL_TIME, Double.NaN, true);
+			Set<Class<?>> invocDataTypes = new HashSet<>();
+			invocDataTypes.add(InvocationSequenceData.class);
+			invocDataTypes.add(TimerData.class);
+			invocDataTypes.add(HttpTimerData.class);
+			invocDataTypes.add(SqlStatementData.class);
+			invocDataTypes.add(ExceptionSensorData.class);
+			PreferencesUtils.saveObject(PreferencesConstants.INVOCATION_FILTER_DATA_TYPES, invocDataTypes, true);
 		}
 }

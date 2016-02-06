@@ -1,34 +1,5 @@
 package info.novatec.inspectit.rcp.view.impl;
 
-import info.novatec.inspectit.cmr.model.PlatformIdent;
-import info.novatec.inspectit.exception.BusinessException;
-import info.novatec.inspectit.rcp.InspectIT;
-import info.novatec.inspectit.rcp.InspectITImages;
-import info.novatec.inspectit.rcp.editor.tree.DeferredTreeViewer;
-import info.novatec.inspectit.rcp.formatter.ImageFormatter;
-import info.novatec.inspectit.rcp.formatter.TextFormatter;
-import info.novatec.inspectit.rcp.handlers.OpenViewHandler;
-import info.novatec.inspectit.rcp.model.Component;
-import info.novatec.inspectit.rcp.model.TreeModelManager;
-import info.novatec.inspectit.rcp.preferences.PreferencesConstants;
-import info.novatec.inspectit.rcp.preferences.PreferencesUtils;
-import info.novatec.inspectit.rcp.repository.CmrRepositoryChangeListener;
-import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
-import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition.OnlineStatus;
-import info.novatec.inspectit.rcp.repository.CmrRepositoryManager.UpdateRepositoryJob;
-import info.novatec.inspectit.rcp.repository.RepositoryDefinition;
-import info.novatec.inspectit.rcp.repository.StorageRepositoryDefinition;
-import info.novatec.inspectit.rcp.storage.listener.StorageChangeListener;
-import info.novatec.inspectit.rcp.util.SelectionProviderAdapter;
-import info.novatec.inspectit.rcp.view.IRefreshableView;
-import info.novatec.inspectit.rcp.view.listener.TreeViewDoubleClickListener;
-import info.novatec.inspectit.rcp.view.tree.TreeContentProvider2;
-import info.novatec.inspectit.rcp.view.tree.TreeLabelProvider;
-import info.novatec.inspectit.rcp.view.tree.TreeViewerComparator;
-import info.novatec.inspectit.storage.IStorageData;
-import info.novatec.inspectit.storage.LocalStorageData;
-import info.novatec.inspectit.util.ObjectUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -58,7 +29,6 @@ import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -81,10 +51,38 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Tree;
-
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+
 import com.google.common.base.Objects;
+
+import info.novatec.inspectit.cmr.model.PlatformIdent;
+import info.novatec.inspectit.exception.BusinessException;
+import info.novatec.inspectit.rcp.InspectIT;
+import info.novatec.inspectit.rcp.InspectITImages;
+import info.novatec.inspectit.rcp.editor.tree.DeferredTreeViewer;
+import info.novatec.inspectit.rcp.formatter.ImageFormatter;
+import info.novatec.inspectit.rcp.formatter.TextFormatter;
+import info.novatec.inspectit.rcp.handlers.OpenViewHandler;
+import info.novatec.inspectit.rcp.model.Component;
+import info.novatec.inspectit.rcp.model.TreeModelManager;
+import info.novatec.inspectit.rcp.preferences.PreferencesConstants;
+import info.novatec.inspectit.rcp.preferences.PreferencesUtils;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryChangeListener;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition.OnlineStatus;
+import info.novatec.inspectit.rcp.repository.CmrRepositoryManager.UpdateRepositoryJob;
+import info.novatec.inspectit.rcp.repository.RepositoryDefinition;
+import info.novatec.inspectit.rcp.repository.StorageRepositoryDefinition;
+import info.novatec.inspectit.rcp.storage.listener.StorageChangeListener;
+import info.novatec.inspectit.rcp.util.SelectionProviderAdapter;
+import info.novatec.inspectit.rcp.view.IRefreshableView;
+import info.novatec.inspectit.rcp.view.tree.TreeContentProvider2;
+import info.novatec.inspectit.rcp.view.tree.TreeLabelProvider;
+import info.novatec.inspectit.rcp.view.tree.TreeViewerComparator;
+import info.novatec.inspectit.storage.IStorageData;
+import info.novatec.inspectit.storage.LocalStorageData;
+import info.novatec.inspectit.util.ObjectUtils;
 
 /**
  * Data explorer view show one Agent from a given {@link RepositoryDefinition}. Other agents can be
@@ -131,11 +129,6 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	private ConcurrentHashMap<CmrRepositoryDefinition, OnlineStatus> cachedOnlineStatus = new ConcurrentHashMap<CmrRepositoryDefinition, OnlineStatus>();
 
 	/**
-	 * Listener for tree double clicks.
-	 */
-	private final TreeViewDoubleClickListener treeViewDoubleClickListener = new TreeViewDoubleClickListener();
-
-	/**
 	 * Toolkit used for the view components.
 	 */
 	private FormToolkit toolkit;
@@ -171,11 +164,6 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	private Combo agentsCombo;
 
 	/**
-	 * Toolbar manager for the view.
-	 */
-	private IToolBarManager toolBarManager;
-
-	/**
 	 * Map of the cached expanded objects in the agent tree per agent/repository combination. Key
 	 * for this map is the combined hash code that can be obtained by calling method
 	 * {@link #getHashCodeForAgentRepository(PlatformIdent, RepositoryDefinition)}.
@@ -187,6 +175,9 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	 */
 	private boolean hideInactiveInstrumentations = true;
 
+	/**
+	 * Eclipse 4 Service for Getting and Setting the Selection
+	 */
 	@Inject ESelectionService eSelectionService;
 	
 	/**
@@ -198,10 +189,21 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	}
 
 	/**
+	 * @PostConstruct executes the Method after the Constructor has been handled
 	 * {@inheritDoc}
+	 * 
+	 * @param mApplication
+	 *            the running application. 
+	 * @param eCommandService
+	 *            Command Service for creating Commands
+	 * @param eHandlerService
+	 *            Handler Service for executing a Command.
+	 * @param parent
+	 *            Parent-Composite
+	 *            
 	 */
 	@PostConstruct
-	public void createPartControl(MApplication mApplication ,ECommandService eCommandService, EHandlerService eHandlerService, Composite parent) {
+	public void createPartControl(MApplication mApplication, ECommandService eCommandService, EHandlerService eHandlerService, Composite parent) {
 		toolkit = new FormToolkit(parent.getDisplay());
 		mainForm = toolkit.createForm(parent);
 		mainForm.getBody().setLayout(new GridLayout(1, true));
@@ -232,12 +234,14 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 							}
 						}
 					} else {
-						//activates the Handler for the Command. This is shown in all the tutorials but I don´t really understand why. So I skip this until I find a reason
-						//eHandlerService.activateHandler(OpenViewHandler.COMMAND, new OpenViewHandler());
-						ParameterizedCommand parameterCommand = eCommandService.createCommand(OpenViewHandler.COMMAND, null);							
+						// activates the Handler for the Command. This is shown in all the tutorials but I don´t really understand why. So I skip this until I find a reason
+						// eHandlerService.activateHandler(OpenViewHandler.COMMAND, new OpenViewHandler());
+						ParameterizedCommand parameterCommand = eCommandService.createCommand(OpenViewHandler.COMMAND, null);		
+						//Writed the INPUT of the choosen TreeNode into the Application-Context
 						mApplication.getContext().set(OpenViewHandler.INPUT, ((Component) element).getInputDefinition()); 
 											
 						try {
+							//Executes the Handler and opens the OpenViewHandler.
 							if(eHandlerService.canExecute(parameterCommand)) eHandlerService.executeHandler(parameterCommand);
 						} catch (Exception e) {
 							throw new RuntimeException(e);
@@ -267,6 +271,7 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 				}
 			}
 		}		
+		//makes the treeViewer-Element the selection
 		eSelectionService.setSelection(treeViewer); 
 	}
 
@@ -322,7 +327,6 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	 * @param agent
 	 *            Hint for agent selection.
 	 */
-	//#TODO check for investigating stuff
 	private void selectAgentForDisplay(PlatformIdent agent) {
 		Display.getDefault().syncExec(new Runnable() {
 			@Override
@@ -333,14 +337,11 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 		});
 		try {
 			if (null != agent && CollectionUtils.isNotEmpty(availableAgents) && availableAgents.contains(agent)) {
-				displayedAgent = displayedRepositoryDefinition.getGlobalDataAccessService().getCompleteAgent(agent.getId());//#TODO
-				//displayedRepositoryDefinition.getGlobalDataAccessService().deleteAgent(agent.getId()); //#TODO 
+				displayedAgent = displayedRepositoryDefinition.getGlobalDataAccessService().getCompleteAgent(agent.getId());
 				PreferencesUtils.saveLongValue(PreferencesConstants.LAST_SELECTED_AGENT, agent.getId().longValue(), false);
 			} else if (CollectionUtils.isNotEmpty(availableAgents)) {
 				agent = availableAgents.iterator().next();
-				displayedAgent = displayedRepositoryDefinition.getGlobalDataAccessService().getCompleteAgent(agent.getId());
-				//displayedRepositoryDefinition.getGlobalDataAccessService().deleteAgent(agent.getId()); //#TODO
-				
+				displayedAgent = displayedRepositoryDefinition.getGlobalDataAccessService().getCompleteAgent(agent.getId());				
 				
 			} else {
 				displayedAgent = null; // NOPMD
@@ -416,10 +417,6 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 					CmrRepositoryDefinition cmrRepositoryDefinition = (CmrRepositoryDefinition) repositoryDefinition;
 					if (cmrRepositoryDefinition.getOnlineStatus() != OnlineStatus.OFFLINE) {
 						availableAgents = new ArrayList<PlatformIdent>(cmrRepositoryDefinition.getGlobalDataAccessService().getAgentsOverview().keySet());
-						
-						// #TODO delete after Testing
-						//availableAgents = null;
-						System.out.println("asf");
 					} else {
 						availableAgents = null; // NOPMD
 					}
@@ -563,17 +560,6 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	}
 
 	/**
-	 * Updates view tool-bar.
-	 */
-	private void updateViewToolbar() {
-//		collapseAction.updateEnabledState();
-//		toolBarManager.find(REFRESH_CONTRIBUTION_ITEM).setVisible(displayedRepositoryDefinition instanceof CmrRepositoryDefinition);
-//		toolBarManager.find(CLEAR_BUFFER_CONTRIBUTION_ITEM).setVisible(
-//				displayedRepositoryDefinition instanceof CmrRepositoryDefinition && !OnlineStatus.OFFLINE.equals(((CmrRepositoryDefinition) displayedRepositoryDefinition).getOnlineStatus()));
-//		toolBarManager.update(true);
-	}
-
-	/**
 	 * Clears the look of the form.
 	 */
 	private void clearFormBody() {
@@ -596,7 +582,6 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 				updateFormTitle();
 				updateFormBody();
 				updateAgentsCombo();
-				updateViewToolbar();
 				if (null != displayedAgent) {
 					List<Object> expandedObjects = expandedElementsPerAgent.get(getHashCodeForAgentRepository(displayedAgent, displayedRepositoryDefinition));
 					if (null != expandedObjects) {
@@ -611,6 +596,8 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	}
 
 	/**
+	 * @Focus activates the method on focus, meaning everytime the user clicks on the Part and after creation.
+	 * 		
 	 * {@inheritDoc}
 	 */
 	@Focus
@@ -694,7 +681,6 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 									updateFormTitle();
 									updateFormBody();
 									updateAgentsCombo();
-									updateViewToolbar();
 									mainForm.setBusy(false);
 								}
 							});
@@ -707,7 +693,6 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 							mainForm.setBusy(true);
 							updateFormTitle();
 							updateAgentsCombo();
-							updateViewToolbar();
 							mainForm.setBusy(false);
 						}
 					});
@@ -849,6 +834,7 @@ public class DataExplorerView implements CmrRepositoryChangeListener, StorageCha
 	}
 
 	/**
+	 * @PreDestroy is called before destruction of the Part
 	 * {@inheritDoc}
 	 */
 	@PreDestroy

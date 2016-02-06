@@ -28,8 +28,8 @@ import org.eclipse.swt.widgets.Display;
  * 
  * @author Ivan Senic
  * 
+ * For E4: Proof whether there will be a MWizard in later wizards to make it more independent of JFAce
  */
-
 public class UploadStorageWizard extends Wizard{
 
 	/**
@@ -42,6 +42,9 @@ public class UploadStorageWizard extends Wizard{
 	 */
 	private UploadStorageWizardPage uploadStorageWizardPage;
 
+	/**
+	 * E4 Service for part management
+	 */
 	@Inject EPartService ePartService;
 	
 	/**
@@ -88,6 +91,7 @@ public class UploadStorageWizard extends Wizard{
 					@Override
 					public void run() {
 						InspectIT.getDefault().createInfoDialog("Selected storage successfully uploaded.", -1);
+						//Searches for the StorageManagerView and gets it into the MPart 
 						MPart storageManagerView = ePartService.findPart(StorageManagerView.VIEW_ID) ;//PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(StorageManagerView.VIEW_ID);
 						if (storageManagerView instanceof StorageManagerView) {
 							((StorageManagerView) storageManagerView).refresh(cmrRepositoryDefinition);

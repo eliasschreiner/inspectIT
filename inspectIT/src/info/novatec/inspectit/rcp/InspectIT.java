@@ -26,7 +26,6 @@ import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.events.IEventBroker;
-import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -50,7 +49,6 @@ import ch.qos.logback.core.joran.spi.JoranException;
 import ch.qos.logback.core.util.StatusPrinter;
 import info.novatec.inspectit.minlog.MinlogToSLF4JLogger;
 import info.novatec.inspectit.rcp.log.LogListener;
-import info.novatec.inspectit.rcp.preferences.PreferenceSupplier;
 import info.novatec.inspectit.rcp.preferences.ScopedPreferenceStore;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryDefinition;
 import info.novatec.inspectit.rcp.repository.CmrRepositoryManager;
@@ -66,27 +64,28 @@ public class InspectIT implements BundleActivator {
 	private static BundleContext context;
 
 	/**
-	 * Gets the BundleContext for a possible, later useage in the application
+	 * Gets the BundleContext for a possible, later usage in the application
 	 */
 	static BundleContext getContext() {
 		return context;
 	}	
 	
 	/**
-	 * The statusHandler is the replacement of the Eclipse 3 StatusManager
-	 * It is injected by a Provider-Service through the created restricted Activator-Kontext
+	 * The StatusHandler is the replacement of the Eclipse 3 StatusManager.
+	 * It is injected by a Provider-Service through the created restricted Activator-Context.
 	 */
 	@Inject Provider<StatusHandler> statusHandler;
 	
 	/**
-	 * The JFace ImageRegistrty, which registers the need Images
+	 * The JFace ImageRegistrty, which registers the inspectIT-Images. 
+	 * Due to Eclipse 4 doesn´t extend the Activator that auto-implies a 
+	 * Registry, it has to be done "manually".
 	 */
 	ImageRegistry imageRegistry;
 	
 	/**
 	 * The id of this plugin.
 	 */
-	//#TODO Change this when  renaming the project!
 	public static final String ID = "inspectIT";
 
 	/**
@@ -112,7 +111,7 @@ public class InspectIT implements BundleActivator {
 
 	/**
 	 * Preferences store for the plug-in. 
-	 * In Eclipse 4 this is needs the OPCoach.E4Preferences Bundle
+	 * In Eclipse 4 this needs the OPCoach.E4Preferences Bundle
 	 */
 	private volatile static ScopedPreferenceStore  preferenceStore;
 
@@ -161,28 +160,11 @@ public class InspectIT implements BundleActivator {
 		locateRuntimeDir();		
 		initLogger();				
 		
-		//log = getLog(context.getBundle());		
-		// add log listener once logger is initialized
 		logListener = new LogListener();
-		//context.addServiceListener((ServiceListener) logListener);
-		//log.addLogListener(logListener);
+		//log.addLogListener(logListener); #TODO The LogListener need to be added in Eclipse 4 as well.
+		
 		initializeImageRegistry(imageRegistry);		
 	}
-	
-//	@SuppressWarnings("restriction")
-//	public ILog getLog(Bundle bundle) {
-//		ServiceReference<?> logser = context.getServiceReference(LogService.class);
-//		LogService ls = (LogService)context.getService(logser);
-//		IEclipseContext eclipseContext = EclipseContextFactory.getServiceContext(context);
-//		eclipseContext.set(Logger.class, new WorkbenchLogger(InspectIT.ID));
-//		Logger logger = eclipseContext.get(Logger.class);
-//			
-//		Log result = new Log(bundle, logger);
-//		ServiceTracker logReaderTracker = logReaderTracker = new ServiceTracker(context, ExtendedLogReaderService.class.getName(), null);
-//		ExtendedLogReaderService logReader = (ExtendedLogReaderService) logReaderTracker.getService();
-//		logReader.addLogListener(result, result);
-//		return result;
-//	}
 
 	/**
 	 * Locates the runtime directory. It's needed for distinguish between development and runtime.
@@ -343,8 +325,9 @@ public class InspectIT implements BundleActivator {
 						reg.get(key);
 					} else {
 						// if image does not exists (url is null) show and log error
+						// Works similar to the StatusManager
 						Status status = new Status(Status.ERROR, ID, "Image with the key '" + field.getName() + "' does not exist on the disk. ");
-						  statusHandler.get().show(status, "Image with the key '" + field.getName() + "' does not exist on the disk. ");
+					    statusHandler.get().show(status, "Image with the key '" + field.getName() + "' does not exist on the disk. ");
 					}
 				} catch (Exception e) {
 					Status status = new Status(Status.ERROR, ID, "Error loading image with the key'" + field.getName() + "'. ");

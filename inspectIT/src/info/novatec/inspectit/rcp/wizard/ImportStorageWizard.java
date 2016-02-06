@@ -33,6 +33,7 @@ import org.eclipse.swt.widgets.Display;
  * 
  * @author Ivan Senic
  * 
+ * For E4: Proof whether there will be a MWizard in later wizards to make it more independent of JFAce
  */
 public class ImportStorageWizard extends Wizard {
 
@@ -46,6 +47,9 @@ public class ImportStorageWizard extends Wizard {
 	 */
 	private ImportStorageInfoPage importStorageInfoPage;
 
+	/**
+	 * E4 service for Part Management
+	 */
 	@Inject EPartService ePartService;
 	
 	/**
@@ -173,7 +177,7 @@ public class ImportStorageWizard extends Wizard {
 					Display.getDefault().asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							//IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+							//E4 replacement for IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 							MPart storageManagerView = ePartService.findPart(StorageManagerView.VIEW_ID);//activePage.findView(StorageManagerView.VIEW_ID);
 							if (storageManagerView instanceof StorageManagerView) {
 								((StorageManagerView) storageManagerView).refresh(cmrRepositoryDefinition);

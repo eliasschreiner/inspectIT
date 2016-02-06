@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.Shell;
  * 
  * @author Ivan Senic
  * 
+ * For E4: Proof whether there will be a MWizard in later wizards to make it more independent of JFAce
  */
 public class AddCmrRepositoryWizard extends Wizard {
 
@@ -42,6 +43,10 @@ public class AddCmrRepositoryWizard extends Wizard {
 	 */
 	private PreviewCmrDataWizardPage previewCmrDataWizardPage;
 
+	/** @Execute marks this method as the executable of the wizards. 
+	 * Only necessary for wizards that have to be directly executable
+	 * #TODO proof if it is allowed to use the execute in wizards  
+	 */
 	@Execute
 	public void execute(Shell parent) throws ExecutionException {
 		WizardDialog dialog = new WizardDialog(parent, this);

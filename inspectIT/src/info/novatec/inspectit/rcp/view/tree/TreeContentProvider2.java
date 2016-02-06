@@ -16,6 +16,18 @@ import info.novatec.inspectit.rcp.model.Leaf;
 import info.novatec.inspectit.rcp.model.TreeModelManager;
 import info.novatec.inspectit.rcp.util.ListenerList;
 
+
+/**
+ * 
+ * 
+ * #TODO Look for solutions for the missing components of the progress-Bundle of E4
+ * This bundle has to be imported because it is not included in the actual build of Mars
+ * Maybe a new model should be applied because the DeferredTreeContentManager, the 
+ * IDeferredWorkbenchAdapter and the PendingUpdateAdapter are not included, BUT they are 
+ * needed for the actual DeferredTree-Model out of the E3 development
+ * 
+ * a LOT of methods have a reduced functionality. 
+ */
 public class TreeContentProvider2 implements ITreeContentProvider{
 	
 	private ListenerList<IJobChangeListener> updateCompleteListenerList;

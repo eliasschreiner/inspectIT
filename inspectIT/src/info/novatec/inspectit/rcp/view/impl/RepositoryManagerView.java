@@ -147,8 +147,6 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	 * CMR property form.
 	 */
 	private CmrRepositoryPropertyForm cmrPropertyForm;
-
-	public static final String KEY = "recordingExpression"; //$NON-NLS-1$
 	
 	/**
 	 * Views main composite.
@@ -169,6 +167,8 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	/**
 	 * Defines if agents are shown in the tree which have not sent any data since the CMR was
 	 * started.
+	 * In Eclipse4 set to public to Handler the 2 JFace-Toggle-Buttons in seperate Handlers
+	 * See package info.novatec.inspectit.rcp.view.impl.toolitemhandlers
 	 */
 	public boolean showOldAgents = false;
 
@@ -182,24 +182,55 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	 */
 	private List<Object> expandedList;
 	
+	/**
+	 * Service to set and get the selection
+	 */	
 	@Inject ESelectionService eSelectionService;
+	
+	/**
+	 * Service to set and get the selection
+	 */	
 	@Inject EMenuService eMenuService;	
+	
+	/**
+	 * Service to execute commands
+	 */	
 	@Inject EHandlerService eHandlerService;
+	
+	/**
+	 * Service to create Commands and link them with handler-classes
+	 */	
 	@Inject ECommandService eCommandService;
-	@Inject	private IEventBroker eventBroker; 
+	
+	/**
+	 * Service to subscribe and send events
+	 */	
+	@Inject IEventBroker eventBroker; 
+	
+	/**
+	 * The current Application
+	 */	
 	@Inject MApplication mApplication;
-	@Inject EModelService eModelService;
-	@Inject MPart mPart;
+	
 	/**
 	 * Default constructor.
 	 */
 	public RepositoryManagerView()  {
 		cmrRepositoryManager = InspectIT.getDefault().getCmrRepositoryManager();
 		cmrRepositoryManager.addCmrRepositoryChangeListener(this);
-		
 		createInputList();				
 	}	
 	
+	/**
+	 * @PostConstruct executes the Method after the Constructor has been handled
+	 * {@inheritDoc}
+	 * 
+	 * @param mApplication
+	 *            the running application. 
+	 * @param parent
+	 *            Parent-Composite
+	 *            
+	 */
 	@PostConstruct
 	public void createComposite(Composite parent, MApplication mApplication)		
 	{	
@@ -221,6 +252,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		treeViewer = new DeferredTreeViewer(tree);
 
 		// create tree content provider, why is there a TreecontentProvider2 ? 
+		// #TODO This is not working correctly, due to a missing DeferredTreeContentManager class in E4
 		TreeContentProvider2 treeContentProvider = new TreeContentProvider2() {
 			@SuppressWarnings("unchecked")
 			@Override
@@ -288,6 +320,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		Control control = treeViewer.getControl();
 		Menu menu = menuManager.createContextMenu(control);
 		control.setMenu(menu);
+		//Registers the Context-Menu via the Menu Service
 		eMenuService.registerContextMenu(control, MENU_ID); //treeViewer brauch ich nicht, da die Selection via eSelectionService läuft.
 		
 		mainComposite.addControlListener(new ControlAdapter() {
@@ -311,6 +344,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 		updateFormBody();
 		mainComposite.setWeights(new int[] { 2, 3 });
 
+		//Sets the current selection onnto the Treeviewer
 		eSelectionService.setSelection(treeViewer); 
 		agentStatusUpdateJob = new AgentStatusUpdateJob();
 		
@@ -329,8 +363,6 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 			{
 				ContextInjectionFactory.inject(cmrRepositoryDefinition, mApplication.getContext());
 			}			
-			//#TODO delete after Implementation of ShowOldAgents Toggle-Button. 
-			showOldAgents = true;
 			inputList.add(new DeferredAgentsComposite(cmrRepositoryDefinition, showOldAgents));
 			OnlineStatus onlineStatus = cmrRepositoryDefinition.getOnlineStatus();
 			if (onlineStatus == OnlineStatus.ONLINE || onlineStatus == OnlineStatus.OFFLINE) {
@@ -341,6 +373,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 	/**
 	 * Updates body.
+	 * in E4 set to public to access the method via the Toggle-Button Handlers
 	 */
 	public void updateFormBody() {
 		clearFormBody();
@@ -396,6 +429,8 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 	}
 
 	/**
+	 * @Focus activated this method on Part-activation and after creation
+	 * 
 	 * {@inheritDoc}
 	 */
 	@Focus
@@ -646,12 +681,15 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 				cmrPropertyForm = null; // NOPMD
 			}
 			
+			// #TODO investigate why there are 3 Values needed now, this seem a little Buggy (activation through the Toggle-Button with the preferences)
 			mainComposite.setWeights(new int[] { 1 , 0, 0});
 			mainComposite.layout();
 		}
 	}
 
 	/**
+	 * @PreDestroy method is called before destruction of the part
+	 * 
 	 * {@inheritDoc}
 	 */
 	@PreDestroy
@@ -710,10 +748,11 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 			}
 
 			if (null != repositoryDefinition) { 				
-				
+				//Creates and executes the ShowRepositoryHandler
 				ParameterizedCommand command =
 						eCommandService.createCommand(ShowRepositoryHandler.COMMAND, null);
 				eHandlerService.activateHandler(ShowRepositoryHandler.COMMAND, new ShowRepositoryHandler());
+				//Writes its definition intop the application-context
 				mApplication.getContext().set(ShowRepositoryHandler.REPOSITORY_DEFINITION, repositoryDefinition);
 				try{
 					if(eHandlerService.canExecute(command)) {
@@ -805,6 +844,7 @@ public class RepositoryManagerView implements IRefreshableView, CmrRepositoryCha
 
 	/**
 	 * Job for auto-update of view.
+	 * In E4 set to public for ranting access to the Toggle-Buttons
 	 * 
 	 * @author Ivan Senic
 	 * 
