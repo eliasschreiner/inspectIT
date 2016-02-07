@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.TreeColumn;
  * 
  * @author Ivan Senic
  * 
+ * #TODO for E4, fix the run-Method
  */
 public class ShowHideMenuManager extends MenuManager implements IMenuListener {
 
@@ -153,6 +154,8 @@ public class ShowHideMenuManager extends MenuManager implements IMenuListener {
 
 		/**
 		 * {@inheritDoc}
+		 * 
+		 * #TODO fix it
 		 */
 		@Override
 		public void run() {

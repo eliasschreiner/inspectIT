@@ -43,13 +43,17 @@ import org.eclipse.e4.ui.services.IServiceConstants;
  */
 public class CloseStorageHandler  {
 
-	/**
+	/**@Execute marks the method as the executable method of this handler
+	 * 
+	 * @param eSelectionService 
+	 * 			Service for getting and setting the selection
+	 * @param shell
+	 * 			The active shell
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public void execute(ESelectionService eSelectionService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, @Named(IServiceConstants.ACTIVE_SELECTION) TreeViewer treeViewer) throws ExecutionException {
+	public void execute(ESelectionService eSelectionService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
 		final TreeViewer selection = (TreeViewer) eSelectionService.getSelection();// HandlerUtil.getCurrentSelection(event);
-		TreeViewer selection2 = treeViewer;
 		if (selection.getSelection() instanceof StructuredSelection) {
 			Object firstElement = ((StructuredSelection) selection.getSelection()).getFirstElement();
 			if (firstElement instanceof IStorageDataProvider) {
@@ -77,8 +81,12 @@ public class CloseStorageHandler  {
 	 * 
 	 */
 	protected static class FinalizeStorageJob extends Job {
-
+		
+		/**
+		 * Service for managing parts
+		 */
 		@Inject EPartService ePartService;
+		
 		/**
 		 * Amount of milliseconds job will check for the amount of writing tasks left.
 		 */

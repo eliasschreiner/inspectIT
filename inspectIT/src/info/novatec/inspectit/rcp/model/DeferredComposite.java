@@ -17,7 +17,6 @@ import org.eclipse.e4.ui.progress.IElementCollector;
  */
 public abstract class DeferredComposite extends Composite  {
 
-	IAdapterFactory factory;
 	/**
 	 * {@inheritDoc}
 	 */

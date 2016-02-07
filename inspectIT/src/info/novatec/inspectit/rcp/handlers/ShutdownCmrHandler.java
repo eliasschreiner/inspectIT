@@ -46,8 +46,16 @@ public class ShutdownCmrHandler{
 	 */
 	public static final String SHOULD_RESTART_PARAMETER = "shouldRestart";
 
-	/**
-	 * {@inheritDoc} 
+	/**@Execute marks the method as the executable
+	 *
+	 *@param cmd
+	 *			the executing command
+	 *@param progressServiceInject
+	 *			progress Service for executing stuff and threads
+	 *@param shell 
+	 *			active shell
+	 *@param eSelectionService 
+	 *			selection service for getting and setting selection
 	 */
 	@Execute
 	public void execute(ParameterizedCommand cmd,IProgressService progressServiceInject, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, ESelectionService eSelectionService) throws ExecutionException {
@@ -122,7 +130,6 @@ public class ShutdownCmrHandler{
 										}
 									}
 								}
-
 								monitor.done();
 							}
 						});

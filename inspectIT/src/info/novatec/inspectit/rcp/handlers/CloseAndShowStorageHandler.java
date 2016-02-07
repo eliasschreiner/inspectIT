@@ -59,11 +59,18 @@ public class CloseAndShowStorageHandler {
 	 */
 	public static final String STORAGE_DATA_PROVIDER = "info.novatec.inspectit.rcp.commands.closeAndShowStorage.param";
 
-	/**
+	/**@Execute marks the method as the executable method of this handler
+	 * 
+	 * @param ePartService
+	 *   		Service for managing parts
+	 * @param mApplication
+	 * 			active application
+	 * @param shell	
+	 * 			active shell
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public void execute(EPartService ePartService, EHandlerService eHandlerService, ECommandService eCommandService, MApplication mApplication,@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
+	public void execute(EPartService ePartService, MApplication mApplication,@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
 		IStorageDataProvider storageDataProvider = (IStorageDataProvider) mApplication.getContext().get(STORAGE_DATA_PROVIDER);// HandlerUtil.getVariable(event, STORAGE_DATA_PROVIDER);
 
 		final StorageData storageData = storageDataProvider.getStorageData();

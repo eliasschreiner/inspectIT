@@ -66,12 +66,22 @@ public class StartRecordingHandler{
 
 	boolean visible = false;
 	
-	 /**
-	  * 	Sets the enabled/disabled-Attribute via the @CanExecute-Annotation. 
-	  *  TODO check for RECORDING_ACTIVE (to not send the event to everyone)	 
-	  */
+	/**@CanExecute checks the enablement status
+	 *
+	 *This is the replacement of the Eclipse 3 CoreExpression that was connected to the handler for checking the enablement status
+	 *
+	 *@param test
+	 *			subscribes the REQUEST_ENABLEMENT_UPDATE_TOPIC event
+	 *@param recoringActive 
+	 *			event subscriptions to just get callen when the recordingActive state changes
+	 *@param eSelectionService	
+	 *			gets ands sets selections
+	 *
+	 * 	Sets the enabled/disabled-Attribute via the @CanExecute-Annotation. 
+	 *  TODO check for RECORDING_ACTIVE (to not send the event to everyone)	 
+	 */
 	@CanExecute
-	public boolean isVisible(@Optional @UIEventTopic(InspectITConstants.RECORING_ACTIVE) String recoringActive, 
+	public boolean isEnabled(@Optional @UIEventTopic(InspectITConstants.RECORING_ACTIVE) String recoringActive, 
 				@Optional @UIEventTopic(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC) String test, 
 				ESelectionService eSelectionService) {
 		//selected element is active when count = 1, und iterate entweder Klasse ICmrRepositoryAndAgentProvider oder ICmrRepositoryProvider ist und nach recording Active und OnlineStatus getestet wurde... 
@@ -102,9 +112,16 @@ public class StartRecordingHandler{
 		return visible;
 	}
 
-		
-	/**
-	 * {@inheritDoc}
+	/**@Execute marks the method as the executable
+	 *
+	 *@param eventBroker
+	 *			sends and subscribes events
+	 *@param shell 
+	 *			active shell
+	 *@param eSelectionService	
+	 *			gets ands ets selections
+	 *@param ePartService
+	 *			manages parts
 	 */
 	@Execute
 	public void execute(IEventBroker eventBroker, 
@@ -183,7 +200,7 @@ public class StartRecordingHandler{
 			}
 		}
 		
-		//Post Event to signal the StopRecordingHandler		
+		//Post Event to signal the StopRecordingHandler	the Events are posted for the added name	
 		if(eventBroker != null)
 			eventBroker.post(InspectITConstants.RECORING_ACTIVE, UIEvents.ALL_ELEMENT_ID);		
 			//eventBroker.post(InspectITConstants.RECORING_ACTIVE, "true");

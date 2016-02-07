@@ -17,6 +17,11 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
 public class SaveHandler {
 
+	/**@CanExecute decdes whether the @Execute can be executed or not
+	 *
+	 *@param ePartService
+	 *			manages Parts
+	 */
 	@CanExecute
 	public boolean canExecute(EPartService partService) {
 		if (partService != null) {
@@ -25,8 +30,13 @@ public class SaveHandler {
 		return false;
 	}
 
+	/**@Execute marks the method as the executable
+	 *
+	 *@param ePartService
+	 *			manages Parts
+	 */
 	@Execute
-	public void execute(EPartService partService) {
-		partService.saveAll(false);
+	public void execute(EPartService ePartService) {
+		ePartService.saveAll(false);
 	}
 }

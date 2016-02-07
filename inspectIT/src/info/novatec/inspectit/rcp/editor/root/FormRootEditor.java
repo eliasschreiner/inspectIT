@@ -59,6 +59,7 @@ public class FormRootEditor extends AbstractRootEditor {
 		this.toolkit = new FormToolkit(parent.getDisplay());
 		
 		// create the preference panel with the callback
+		//Forwards the Application-Context to the FormPreferencePanel
 		IPreferencePanel preferencePanel = new FormPreferencePanel(toolkit, super.mApplication.getContext());
 		
 		// set the preference panel
@@ -83,8 +84,6 @@ public class FormRootEditor extends AbstractRootEditor {
 		// create an preference area if the subviews are requesting it
 		preferencePanel.createPartControl(form.getBody(), getSubView().getPreferenceIds(), getInputDefinition(), breadcrumbTitleComposite.getToolBarManager());
 
-		
-		
 		// go further with creating the subview(s)
 		getSubView().createPartControl(form.getBody(), toolkit);
 		getSubView().getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));

@@ -28,9 +28,16 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class ShowLabelsManagerHandler  {
 
-	/**
-	 * {@inheritDoc}
-	 */
+	/**@Execute marks the method as the executable
+	 *
+	 *@param ePartService
+	 *			manages Parts
+	 *@param eSelectionService
+	 *			Gets ands Sets selections
+	 *@param shell
+	 *			active shell
+	 *
+	 */	
 	@Execute
 	public void execute(ESelectionService eSelectionService, EPartService ePartService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
 		TreeViewer selection = (TreeViewer) eSelectionService.getSelection();

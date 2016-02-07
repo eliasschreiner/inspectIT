@@ -46,11 +46,19 @@ public class CopyBufferToStorageHandler {
 	
 	boolean enabled = false;
 	
-	 /**
-	  * 	Sets the enabled/disabled-Attribute via the @CanExecute-Annotation. 	 
-	  */
+	/**@CanExecute manages the enablement status of this class and the toolitems belonging to it.
+	 * 
+	 * this is the replacement of the CoreExpression modell of Eclipse 3
+	 * 
+	 * @param eSelectionService
+	 * 			Selection service getsand sets selections
+	 * @param subscribtion 
+	 * 			Event subscription, gets called when the event is send
+	 * 
+	 * Amount of milliseconds job will check for the amount of writing tasks left.
+	 */
 	@CanExecute
-	public boolean isEnabled(@Optional @UIEventTopic(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC) String test, 
+	public boolean isEnabled(@Optional @UIEventTopic(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC) String subscribtion, 
 				ESelectionService eSelectionService) {
 		//selected element is active when count = 1, und iterate entweder Klasse ICmrRepositoryAndAgentProvider oder ICmrRepositoryProvider ist und nach recording Active und OnlineStatus getestet wurde... 
 		//cmrRepositoryDefinition.getOnlineStatus()
@@ -80,8 +88,12 @@ public class CopyBufferToStorageHandler {
 		return enabled;
 	}
 	
-	/**
-	 * {@inheritDoc}
+	/**@Execute executable method of the class
+	 * 
+	 * @param eSelectionService
+	 * 			Selection service getsand sets selections
+	 * @param shell 
+	 * 			active shell
 	 */
 	@Execute
 	public void execute(ESelectionService eSelectionService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {

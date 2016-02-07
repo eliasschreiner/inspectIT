@@ -33,6 +33,7 @@ import org.eclipse.swt.widgets.Text;
  * 
  * @author Ivan Senic
  * 
+ * #TODO 
  */
 public class SearchDocumentationContributionItem{
 
@@ -46,9 +47,21 @@ public class SearchDocumentationContributionItem{
 	 */
 	private Text searchText;
 
+	/**
+	 * creates commands.
+	 */
 	@Inject ECommandService eCommandService;
+	
+	/**
+	 * service to execute a handler
+	 */
 	@Inject EHandlerService eHandlerService;
+	
+	/**
+	 * active application
+	 */
 	@Inject MApplication mApplication;
+	
 	/**
 	 * Default constructor.
 	 */
@@ -66,7 +79,7 @@ public class SearchDocumentationContributionItem{
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @PostConstruct executed the method after the constructor has been executed
 	 */
 	@PostConstruct
 	public void createControl(Composite parent) {
@@ -127,6 +140,8 @@ public class SearchDocumentationContributionItem{
 
 	/**org.eclipse.core.expressions
 	 * Executes the search.
+	 * 
+	 * #TODO check if this method works sufficient
 	 */
 	private void executeSearch() {
 		String searchString = searchText.getText();

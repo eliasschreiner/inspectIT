@@ -30,9 +30,10 @@ public class TreeViewerComparator extends TreePathViewerSorter {
 			return 1;
 		}
 
-		if (e1 instanceof File) {
-			return -1;
-		}
+		//#TODO Due to there is no pendigUpdateAdapter in E4. 
+//		if (e1 instanceof File) {
+//			return -1;
+//		}
 
 		if (parentPath.getLastSegment() instanceof DeferredComposite) {
 			IBaseLabelProvider prov = ((ContentViewer) viewer).getLabelProvider();
@@ -51,7 +52,7 @@ public class TreeViewerComparator extends TreePathViewerSorter {
 				return -1;
 			} else {
 				return 1;
-			}
+			} 
 		}
 
 		return 1;

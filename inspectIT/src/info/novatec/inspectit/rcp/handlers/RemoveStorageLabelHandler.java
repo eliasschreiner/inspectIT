@@ -47,8 +47,14 @@ public class RemoveStorageLabelHandler {
 	 */
 	public static final String INPUT = COMMAND + ".input";
 
-	/**
-	 * {@inheritDoc}
+	/**@Execute marks the method as the executable
+	 *
+	 *@param mApplication
+	 *			current application
+	 *@param eSelectionService
+	 *			Service for getting and setting selections
+	 *@param ePartService 
+	 *			manages parts
 	 */
 	@Execute
 	@SuppressWarnings("unchecked")

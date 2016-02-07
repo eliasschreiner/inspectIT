@@ -30,8 +30,12 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class EditStorageDataHandler {
 
-	/**
-	 * {@inheritDoc}
+	/**@Execute tags the method as the executable of the class
+	 * 
+	 * @param shell
+	 * 			active shell
+	 * @param eSelectionService
+	 * 			Service to get and set selections
 	 */
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, ESelectionService eSelectionService) throws ExecutionException {

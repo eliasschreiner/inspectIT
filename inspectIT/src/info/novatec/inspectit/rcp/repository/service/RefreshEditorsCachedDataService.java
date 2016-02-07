@@ -37,6 +37,8 @@ public class RefreshEditorsCachedDataService extends CachedDataService {
 
 	/**
 	 * {@inheritDoc}
+	 * 
+	 * #TODO fix the run method
 	 */
 	@Override
 	protected void postRefreshIdents() {

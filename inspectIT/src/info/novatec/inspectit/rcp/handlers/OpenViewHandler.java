@@ -45,39 +45,45 @@ public class OpenViewHandler {
 	 */
 	public static final String INPUT = COMMAND + ".input";
 
-	/**
-	 * {@inheritDoc}
+	/**@Execute marks the method as the executable
+	 *
+	 * @param mApplication
+	 * 			current application
+	 * @param eModelService
+	 * 			service to get model elements out of the applicationmodel
+	 * @param ePartService
+	 * 			service manage parts
 	 */
 	@Execute
 	public void execute(EModelService eModelService, EPartService ePartService, MApplication mApplication) throws ExecutionException {
 		// Get the input definition out of the context
 		IEclipseContext context = (IEclipseContext) mApplication.getContext();
 		InputDefinition inputDefinition = (InputDefinition) context.get(INPUT);
-if (null != inputDefinition) {
-	try {
-		boolean existingPart = false;	
-		PlatformIdent newPlatformIdent = inputDefinition.getRepositoryDefinition().getCachedDataService().getPlatformIdentForId(inputDefinition.getIdDefinition().getPlatformId());
-		for(MPart part :  ePartService.getParts())
-		{					
-			if(part.getObject() instanceof FormRootEditor)
-			{
-				AbstractRootEditor rootEditor = (AbstractRootEditor) part.getObject();
-				String id = rootEditor.getInputDefinition().getId().getFqn() ;
-				if(id == inputDefinition.getId().getFqn())					
-				{
-					InputDefinition foreignPartsInput  = rootEditor.getInputDefinition();	
-					PlatformIdent existingPlatformIdent = foreignPartsInput.getRepositoryDefinition().getCachedDataService().getPlatformIdentForId(foreignPartsInput.getIdDefinition().getPlatformId());
-					if(newPlatformIdent.getId() == existingPlatformIdent.getId())
+		if (null != inputDefinition) {
+			try {
+				boolean existingPart = false;	
+				PlatformIdent newPlatformIdent = inputDefinition.getRepositoryDefinition().getCachedDataService().getPlatformIdentForId(inputDefinition.getIdDefinition().getPlatformId());
+				for(MPart part :  ePartService.getParts())
+				{					
+					if(part.getObject() instanceof FormRootEditor)
 					{
-						existingPart = true;
-						ePartService.activate(part);
-						break;
-					}								
-				}						
-				else
-					existingPart = false;	
-			}
-		}
+						AbstractRootEditor rootEditor = (AbstractRootEditor) part.getObject();
+						String id = rootEditor.getInputDefinition().getId().getFqn() ;
+					if(id == inputDefinition.getId().getFqn())					
+					{
+						InputDefinition foreignPartsInput  = rootEditor.getInputDefinition();	
+						PlatformIdent existingPlatformIdent = foreignPartsInput.getRepositoryDefinition().getCachedDataService().getPlatformIdentForId(foreignPartsInput.getIdDefinition().getPlatformId());
+						if(newPlatformIdent.getId() == existingPlatformIdent.getId())
+						{
+							existingPart = true;
+							ePartService.activate(part);
+							break;
+						}								
+					}						
+					else
+						existingPart = false;	
+					}
+				}
 		if(!(existingPart))
 		{					
 			RootEditorInput input = new RootEditorInput(inputDefinition);

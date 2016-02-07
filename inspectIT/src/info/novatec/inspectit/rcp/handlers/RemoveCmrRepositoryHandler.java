@@ -25,8 +25,10 @@ import org.eclipse.jface.viewers.TreeViewer;
  */
 public class RemoveCmrRepositoryHandler {
 
-	/**
-	 * {@inheritDoc}
+	/**@Execute marks the method as the executable
+	 *
+	 * @param eSelectionService 
+	 * 					Service for getting and setting the selection
 	 */
 	@Execute
 	public void execute(ESelectionService eSelectionService) throws ExecutionException {

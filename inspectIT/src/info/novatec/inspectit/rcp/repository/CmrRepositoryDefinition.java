@@ -414,15 +414,19 @@ public class CmrRepositoryDefinition implements RepositoryDefinition, ICmrReposi
 	}
 
 	/**
+	 * Service that can be injected out of the context.
+	 */
+	@Inject IEventBroker eventBroker;
+	
+	/**
 	 * Updates the status of the CMR if possible.
 	 * 
 	 * @param newStatus
 	 *            New status.
 	 * @return True if change was successful, false if the change is not allowed.
 	 */
-	@Inject IEventBroker eventBroker;
 	public boolean changeOnlineStatus(OnlineStatus newStatus) {
-				
+		//Sends an Event when the Online-Status changes		
  		if(eventBroker != null)
 		eventBroker.post(UIEvents.REQUEST_ENABLEMENT_UPDATE_TOPIC,
 				UIEvents.ALL_ELEMENT_ID);

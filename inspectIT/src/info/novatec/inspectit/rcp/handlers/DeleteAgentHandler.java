@@ -39,8 +39,16 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class DeleteAgentHandler{
 
+	/**
+	 * @CanExecute ask wether the class is enabled or not
+	 * 
+	 * @param shell
+	 * 			active shell
+	 * @param eSelectionService
+	 * 			Service to get and set selections
+	 */
 	@CanExecute
-	public boolean isVisible(@Optional @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, ESelectionService eSelectionService)
+	public boolean isEnabled(@Optional @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, ESelectionService eSelectionService)
 	{
 		if(eSelectionService == null) return false;
 		if(shell == null) return false;
@@ -57,7 +65,13 @@ public class DeleteAgentHandler{
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * @Execute tags the executable method
+	 * 
+	 * @param shell
+	 * 			active shell
+	 * @param eSelectionService
+	 * 			Service to get and set selections
+	 *
 	 */
 	@Execute
 	public void execute(@Optional @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, ESelectionService eSelectionService) throws ExecutionException {
@@ -78,18 +92,7 @@ public class DeleteAgentHandler{
 					Map<PlatformIdent, AgentStatusData> map = (Map<PlatformIdent, AgentStatusData>) cmrRepositoryDefinition.getGlobalDataAccessService().getAgentsOverview();
 					AgentStatusData leaf = map.get(1);
 					//cmrRepositoryDefinition.getGlobalDataAccessService().deleteAgent(leaf.getId());
-					System.out.println("asf");
-					
-					//defAgentsLeaf.getChildren().clear();
-					
-//					PlatformIdent platformIdent
-//					try {
-//						cmrRepositoryDefinition.getGlobalDataAccessService().deleteAgent(platformIdent.getId());
-//						InspectIT.getDefault().getCmrRepositoryManager().repositoryAgentDeleted(cmrRepositoryDefinition, platformIdent);
-//					} catch (BusinessException e) {
-//						throw new ExecutionException("Exception occurred trying to delete the Agent from the CMR.", e);
-//					}
-					
+					System.out.println("asf");		
 				}
 				
 				

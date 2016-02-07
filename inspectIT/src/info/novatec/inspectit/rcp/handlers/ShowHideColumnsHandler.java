@@ -67,11 +67,11 @@ public class ShowHideColumnsHandler{
 	static {
 		startUp();
 	}
-
-
 	
-	/**
-	 * {@inheritDoc}
+	/**@Execute marks the method as the executable
+	 *
+	 *@param mApplication
+	 *			current application
 	 */
 	@Execute 
 	public void execute(MApplication mApplication) throws ExecutionException {

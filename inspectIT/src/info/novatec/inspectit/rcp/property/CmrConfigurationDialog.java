@@ -40,6 +40,7 @@ import org.eclipse.swt.widgets.Shell;
  * 
  * @author Ivan Senic
  * 
+ * #TODO needs to be implemented due to there is no FilteredPreferenceDialog-Class in E4
  */
 @SuppressWarnings("restriction")
 public class CmrConfigurationDialog extends PreferenceDialog {

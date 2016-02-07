@@ -50,7 +50,15 @@ public class ShowRepositoryHandler  {
 	 */
 	public static final String AGENT = COMMAND + ".agent";
 
-
+	/**@Execute marks the method as the executable
+	 *
+	 *@param ePartService
+	 *			manages Parts
+	 *@param mApplication
+	 *			current application
+	 *@param mPart
+	 *			active part
+	 */
 	@Execute
 	public void execute(EPartService ePartService, MApplication mApplication, @Named(IServiceConstants.ACTIVE_PART) MPart mPart) throws ExecutionException {
 		

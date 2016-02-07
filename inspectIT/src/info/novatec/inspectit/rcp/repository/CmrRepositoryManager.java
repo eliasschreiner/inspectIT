@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.progress.IProgressConstants;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 
 /**
@@ -257,9 +258,6 @@ public class CmrRepositoryManager {
 	 */
 	public static class UpdateRepositoryJob extends Job {
 
-		//@Inject EModelService eModelService;
-		
-		//@Inject MWindow mWindow;
 		/**
 		 * CMR to update.
 		 */
@@ -283,8 +281,7 @@ public class CmrRepositoryManager {
 			this.cmrRepositoryDefinition = cmrRepositoryDefinition;
 			this.rescheduleJob = rescheduleJob;
 			this.setUser(false);
-			//this.setProperty(  IProgressConstants.ICON_PROPERTY, InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_SERVER_REFRESH_SMALL));
-			//eModelService.getActivePerspective(mWindow).setIconURI(InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_AGENT).toString());
+			this.setProperty(  IProgressConstants.ICON_PROPERTY, InspectIT.getDefault().getImageDescriptor(InspectITImages.IMG_SERVER_REFRESH_SMALL));
 		}
 
 		/**

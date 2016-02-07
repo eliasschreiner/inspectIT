@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.Shell;
  * 
  * @author Ivan Senic
  * 
+ * #TODO this need to be implemented, it is just into the code for satisfying dependencies to other classes. 
  */
 public class CmrConfigurationHandler {
 

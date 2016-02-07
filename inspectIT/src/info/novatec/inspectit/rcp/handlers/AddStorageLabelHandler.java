@@ -31,14 +31,22 @@ public class AddStorageLabelHandler {
 	 */
 	public static final String COMMAND = "info.novatec.inspectit.rcp.commands.addStorageLabel";
 
-	/**
+	/**@Execute marks the method as the executable method of this handler
+	 * 
+	 * @param eSelectionService 
+	 * 			Service for getting and setting the selection
+	 * @param ePartService
+	 *   		Service for managing parts
+	 * @param shell
+	 * 			The active shell
 	 * {@inheritDoc}
 	 */
 	@Execute
-	public void execute(ESelectionService eSelectionService, EPartService ePartService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, ExecutionEvent event) throws ExecutionException {
+	public void execute(ESelectionService eSelectionService, EPartService ePartService, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell) throws ExecutionException {
 		IStorageDataProvider storageProvider = null;
 
 		// try to get it from selection
+		// E4: Difference is, that the selectionservice firstly gets the whole treeViewer, so we need to get its selection firstly
 		TreeViewer selection = (TreeViewer) eSelectionService.getSelection(); // HandlerUtil.getCurrentSelection(event);
 		if (selection.getSelection() instanceof StructuredSelection) {
 			if (((StructuredSelection) selection.getSelection()).getFirstElement() instanceof IStorageDataProvider) {

@@ -79,6 +79,7 @@ import info.novatec.inspectit.util.ObjectUtils;
  * 
  * @author Patrice Bouillet
  * 
+ * #TODO Check for the Selection Provider, this is still a lottle weird
  */
 public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitionProvider, CmrRepositoryChangeListener, StorageChangeListener {
 
@@ -168,13 +169,20 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 		subView.doRefresh();
 	}
 
+	/**
+	 * current part (should be this part)
+	 */
 	@Inject MPart mPart;
-	@Inject EModelService eModelService;
-	@Inject MApplication mApplication;
+	
+	/**
+	 * service to manag parts
+	 */
 	@Inject EPartService ePartService;
-	@Inject ESelectionService eSelectionService;
-	@Inject IEventBroker eventBroker;
-	@Inject EMenuService eMenuService;
+	
+	/**
+	 * current application, needed for its child
+	 */
+	@Inject MApplication mApplication;
 	
 	//Test to initialize this without adding it as a selectionProvider
 	public MultiSubViewSelectionProvider multiSubViewSelectionProvider;
@@ -183,10 +191,12 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 * Returns the input definition for this view.
 	 * 
 	 * @return The input definition.
+	 * 
+	 * #TODO in E4 the InputDefinition is gotten out of the RootEditorInput, not out of the E3-Superclass implementation
 	 */
 	public InputDefinition getInputDefinition() {	
 		//gets the InputDefinition out fo the RootEditorInput
-		InputDefinition inputDefinition = (InputDefinition) rootEditorInput.getAdapter(InputDefinition.class); //(InputDefinition) mApplication.getContext().get(OpenViewHandler.INPUT); 
+		InputDefinition inputDefinition = (InputDefinition) rootEditorInput.getAdapter(InputDefinition.class); 
 		Assert.isNotNull(inputDefinition);
 		return inputDefinition;
 	}
@@ -253,7 +263,11 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 		InspectIT.getDefault().getInspectITStorageManager().addStorageChangeListener(this);
 	}
 
-	/**
+	/**@PostConstruct this method is executed shortly after its construction 
+	 * 
+	 * @param parent
+	 * 			parent composite
+	 * 
 	 * {@inheritDoc}
 	 */
 	@PostConstruct
@@ -338,7 +352,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	}
 
 
-	/**
+	/**@Focus sets the method active on selection and after creation
 	 * {@inheritDoc}
 	 */
 	@Focus
@@ -359,7 +373,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 		return subView;
 	}
 
-	/**
+	/** #TODO check for affects of the missing selectionProvider
 	 * {@inheritDoc}
 	 */
 	public void setActiveSubView(ISubView subView) {
@@ -370,8 +384,8 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 			ISelectionProvider selectionProvider = activeSubView.getSelectionProvider();
 			if (selectionProvider != null) {				
 				//ISelectionProvider outerProvider = (ISelectionProvider) getSelectionProvider((MPart) this);
-//				if (outerProvider instanceof MultiSubViewSelectionProvider) {
-//					//Doesn´t work. need a functioning selection provider #TODO 
+					//if (outerProvider instanceof MultiSubViewSelectionProvider) {
+					//Doesn´t work. need a functioning selection provider #TODO 
 					ISelection newSelection = selectionProvider.getSelection();//selectionProvider.getSelection(); 
 					MultiSubViewSelectionProvider provider = multiSubViewSelectionProvider;
 
@@ -709,9 +723,13 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 			}
 		});
 	}
+	
 	ISelection provider;
 	
-
+	/**
+	 * #TODO Due to there is no E4-SelectionProvider this was kind of improvised
+	 * needs to be tested/changed for a better solution
+	 */
 	public ISelectionProvider getSelectionProvider()
 	{		
 		Assert.isNotNull(multiSubViewSelectionProvider);
@@ -727,7 +745,7 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 //		return provider;
 	}
 
-	/**
+	/** @PreDestroy calls the method before destruction of the part
 	 * {@inheritDoc}
 	 */
 	@PreDestroy

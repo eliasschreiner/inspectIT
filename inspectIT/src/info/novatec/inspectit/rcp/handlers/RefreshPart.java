@@ -22,8 +22,10 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class RefreshPart {
 
-	/**
-	 * {@inheritDoc}
+	/**@Execute marks the method as the executable
+	 *
+	 * @param mPart
+	 * 			current part
 	 */
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_PART) MPart mPart) throws ExecutionException {

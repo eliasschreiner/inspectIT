@@ -34,10 +34,6 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
  * 
  */
 public class MaximizeActiveViewHandler{
-
-	@Inject EPartService ePartService;
-	@Inject ECommandService eCommandService;
-	@Inject EHandlerService eHandlerService;
 	
 	/**
 	 * Command id.
@@ -49,11 +45,22 @@ public class MaximizeActiveViewHandler{
 	 */
 	public static final String PREFERENCE_PANEL_ID_PARAMETER = COMMAND_ID + ".preferencePanelId";
 
-	/**
-	 * {@inheritDoc}
+	/**@Execute tags the method as the executable of the class
+	 * 
+	 * @Active  the framework switches the activeContext based on which area of your UI currently
+	 *  has the input focus by calling IEclipseContext#activateBranch. This gets the active part element is the other direction 
+	 * 
+	 * @param mWindow
+	 * 			active window
+	 * @param eModelService
+	 * 			Service to get objects out of the application model
+	 * @param mHandledItem
+	 * 			the active, executing mHandledToolItem
+	 * @param ePartService
+	 * 			manages parts
 	 */
 	@Execute
-	public void execute(EModelService eModelService, ExecutionEvent event, @Active MWindow mWindow, MHandledItem mHandledItem) throws ExecutionException {
+	public void execute(EPartService ePartService ,EModelService eModelService, @Active MWindow mWindow, MHandledItem mHandledItem) throws ExecutionException {
 		MPart editorPart = ePartService.getActivePart();
 		if (editorPart instanceof AbstractRootEditor) {
 			AbstractRootEditor abstractRootEditor = (AbstractRootEditor) editorPart;
@@ -79,7 +86,7 @@ public class MaximizeActiveViewHandler{
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * #TODO need to be done
 	 */
 //	@SuppressWarnings("rawtypes")
 //	@Inject
@@ -93,7 +100,7 @@ public class MaximizeActiveViewHandler{
 //				AbstractRootEditor abstractRootEditor = (AbstractRootEditor) editorPart;
 //				IPreferencePanel preferencePanel = abstractRootEditor.getPreferencePanel();
 //				if (preferencePanelId.equals(preferencePanel.getId())) {
-//					element.(!abstractRootEditor.canMaximizeActiveSubView());
+//					//element.(!abstractRootEditor.canMaximizeActiveSubView());
 //				}
 //			}
 //		}

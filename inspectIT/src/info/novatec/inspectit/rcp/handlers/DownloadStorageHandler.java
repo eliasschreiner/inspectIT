@@ -29,8 +29,12 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class DownloadStorageHandler {
 
-	/**
-	 * {@inheritDoc}
+	/**@Execute tags the method as the executable of the class
+	 * 
+	 * @param shell
+	 * 			active shell
+	 * @param selection
+	 * 			active selection, this is the alternative of getting the selection out of the selection service, but needs a Datatype for it.
 	 */
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, @Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection)throws ExecutionException {

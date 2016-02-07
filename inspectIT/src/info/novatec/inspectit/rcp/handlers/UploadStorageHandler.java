@@ -24,8 +24,12 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class UploadStorageHandler {
 
-	/**
-	 * {@inheritDoc}
+	/**@Execute marks the method as the executable
+	 *
+	 *@param selection
+	 *			active selection
+	 *@param shell 
+	 *			active shell
 	 */
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, @Named(IServiceConstants.ACTIVE_SELECTION) ISelection selection) throws ExecutionException {

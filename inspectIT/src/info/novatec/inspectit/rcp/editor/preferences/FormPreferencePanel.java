@@ -131,18 +131,32 @@ public class FormPreferencePanel implements IPreferencePanel {
 	 */
 	private Section section;
 
-
+	/**
+	 * Service to get and set Key-Bindings
+	 */
 	@Inject EBindingService eBindingService;
-	@Inject EModelService eModelService;
+	
+	/**
+	 * current application
+	 */
 	@Inject MApplication mApplication;
+	
+	/**
+	 * Service to manage parts
+	 */
 	@Inject EPartService ePartService;
-	MPart mPart;
+	
+
+
 	
 	/**
 	 * The constructor which needs a {@link ViewController} reference.
 	 * 
 	 * @param toolkit
 	 *            The Form toolkit which defines the used colors.
+	 * @param context E4 context sent from the formRootEditor-Part
+	 * 			  to make it the context of this part as well and
+	 * 			  to inject services out of it
 	 */
 	@Inject
 	public FormPreferencePanel(FormToolkit toolkit, IEclipseContext context) {
@@ -151,14 +165,6 @@ public class FormPreferencePanel implements IPreferencePanel {
 		this.toolkit = toolkit;
 		this.id = UUID.randomUUID().toString();	
 	}
-//	
-//	@PostConstruct
-//	public void init(EModelService eModelService, MApplication mApplication, EPartService ePartService)
-//	{
-//		this.eModelService = eModelService;
-//		this.mApplication = mApplication;
-//		this.mPart = ePartService.getActivePart();		
-//	}
 
 	/**
 	 * {@inheritDoc}
@@ -297,6 +303,10 @@ public class FormPreferencePanel implements IPreferencePanel {
 	 *            the list containing the preference ids.
 	 * @param toolBarManager
 	 *            The tool bar manager.
+	 *            
+	 * #TODO in E4 thereare no CommandContributionItemParameter-classes so the JFace action 
+	 * can´t be supported as in E3. Therefore a E4 solution would be possible, but wasn´t manageable 
+	 * in the prototypical migration. Right now its replaced to a fix action without dynamical production of the Action
 	 */
 	private void createButtons(Set<PreferenceId> preferenceSet, IToolBarManager toolBarManager) {
 		switchLiveMode = new SwitchLiveMode("Live");
@@ -1004,6 +1014,9 @@ public class FormPreferencePanel implements IPreferencePanel {
 	 */
 	private final class MaximizeActiveViewAction extends Action {
 
+		/**
+		 * PArt-Instance of the editor part
+		 */
 		private MPart editorPart;
 		
 		/**
@@ -1043,6 +1056,7 @@ public class FormPreferencePanel implements IPreferencePanel {
 //			}
 			
 			//refreshes local objects (?)
+			//#TODO check whether this does the same as the E3-code above
 			mApplication.updateLocalization();
 		    
 		}

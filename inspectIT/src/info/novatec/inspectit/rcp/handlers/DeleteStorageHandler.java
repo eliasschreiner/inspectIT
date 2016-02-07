@@ -53,7 +53,13 @@ import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
  */
 public class DeleteStorageHandler{
 
-
+	/**@CanExecute sets the class enabled or disabled
+	 * 
+	 * @param shell
+	 * 			active shell
+	 * @param eSelectionService
+	 * 			Service to get and set selections
+	 */
 	@CanExecute
 	public boolean isVisible(@Optional @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, ESelectionService eSelectionService)
 	{
@@ -71,8 +77,12 @@ public class DeleteStorageHandler{
 		return true;
 	}
 	
-	/**
-	 * {@inheritDoc}
+	/**@Execute tags the method as the executable of the class
+	 * 
+	 * @param shell
+	 * 			active shell
+	 * @param eSelectionService
+	 * 			Service to get and set selections
 	 */
 	@Execute
 	public void execute(@Optional @Named(IServiceConstants.ACTIVE_SHELL) Shell shell, ESelectionService eSelectionService) throws ExecutionException {

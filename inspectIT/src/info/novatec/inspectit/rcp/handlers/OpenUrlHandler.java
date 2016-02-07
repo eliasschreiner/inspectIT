@@ -28,8 +28,12 @@ import org.eclipse.swt.widgets.Composite;
  */
 public abstract class OpenUrlHandler {
 
-	/**
-	 * {@inheritDoc}
+	/**@Execute marks the method as the executable
+	 *
+	 * @param parent
+	 * 			Parent Composite
+	 * @param event
+	 * 			the executionEvent
 	 */
 	@Execute
 	public void execute(Composite parent ,ExecutionEvent event) throws ExecutionException {

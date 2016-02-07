@@ -33,10 +33,14 @@ import org.eclipse.swt.widgets.Shell;
  */
 public class EditCmrRepositoryHandler {
 
-//	@Inject ESelectionService eSelectionService;
-//	@Inject EPartService ePartService;
-	/**
-	 * {@inheritDoc}
+	/**@Execute tags the method as the executable of the class
+	 * 
+	 * @param shell
+	 * 			active shell
+	 * @param eSelectionService
+	 * 			Service to get and set selections
+	 * @param ePartService
+	 * 			Manages parts
 	 */
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell, EPartService ePartService, ESelectionService eSelectionService) throws ExecutionException {

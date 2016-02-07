@@ -16,8 +16,15 @@ import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
-
+/**Handler to close the application
+ * standard implementation of the Eclipse 4-Sample application
+*
+*/
 public class QuitHandler {
+	
+	/**@Execute marks the method as the executable
+	 *
+	 */
 	@Execute
 	public void execute(IWorkbench workbench, Shell shell){
 		if (MessageDialog.openConfirm(shell, "Confirmation",

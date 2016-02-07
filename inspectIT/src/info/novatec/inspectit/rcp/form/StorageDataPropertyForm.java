@@ -161,11 +161,26 @@ public class StorageDataPropertyForm implements ISelectionChangedListener {
 	 */
 	private TableViewerColumn valueViewerColumn;
 
+	/**
+	 * current Application
+	 */
 	@Inject MApplication mApplication;
+	
+	/**
+	 * Service to manage parts
+	 */
 	@Inject EPartService ePartService;
+	
+	/**
+	 * Command Service can create commands
+	 */
 	@Inject ECommandService eCommandService;
+	
+	/**
+	 * Executes commands
+	 */
 	@Inject EHandlerService eHandlerService;
-	@Inject IEventBroker eventBroker;
+	
 	/**
 	 * Default constructor.
 	 * 
@@ -347,10 +362,9 @@ public class StorageDataPropertyForm implements ISelectionChangedListener {
 		addNewLabel.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				//Creates and executes the AddStorageLabelHandler
 				Command command = eCommandService.getCommand(AddStorageLabelHandler.COMMAND); // commandService.getCommand(AddStorageLabelHandler.COMMAND);
 				ParameterizedCommand parameterizedCommand = ParameterizedCommand.generateCommand(command, null);
-
-				if(eventBroker != null) eventBroker.post(AddStorageLabelHandler.COMMAND, new Event());
 				eHandlerService.activateHandler(AddStorageLabelHandler.COMMAND, new Event());
 								
 				try {
@@ -378,13 +392,10 @@ public class StorageDataPropertyForm implements ISelectionChangedListener {
 						}
 					}
 
-
+					//Creates and executed the RemoveStorageLabelHandler 
 					Command command = eCommandService.getCommand(RemoveStorageLabelHandler.COMMAND);
 					ParameterizedCommand parameterizedCommand = ParameterizedCommand.generateCommand(command, null);
 					
-					if(eventBroker != null) eventBroker.post(RemoveStorageLabelHandler.COMMAND, new Event());
-					eHandlerService.activateHandler(RemoveStorageLabelHandler.COMMAND, new Event());
-										
 					IEclipseContext context = mApplication.getContext();
 					context.set(RemoveStorageLabelHandler.INPUT, inputList);
 					
@@ -585,6 +596,7 @@ public class StorageDataPropertyForm implements ISelectionChangedListener {
 	 *            {@link CmrRepositoryDefinition}.
 	 */
 	private void refreshStorageManagerView(CmrRepositoryDefinition cmrRepositoryDefinition) {
+		//gets the StorageManagerView and reads it into the viewPart
 		MPart viewPart = ePartService.findPart(StorageManagerView.VIEW_ID); // PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findView(StorageManagerView.VIEW_ID);
 		if (viewPart instanceof StorageManagerView) {
 			((StorageManagerView) viewPart).refresh(cmrRepositoryDefinition);
