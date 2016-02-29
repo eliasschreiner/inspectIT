@@ -494,6 +494,7 @@ public class FormPreferencePanel implements IPreferencePanel {
 		if (activeBinding != null && !activeBinding.isEmpty()) {
 			String acceleratorText = activeBinding.format();
 			if (acceleratorText != null && acceleratorText.length() != 0) {
+				// #TODO Fix the CommandMessages.Tooltip_Accelerator replacement
 				tooltipText = NLS.bind("{0}({1})", tooltipText, acceleratorText);
 			}
 		}

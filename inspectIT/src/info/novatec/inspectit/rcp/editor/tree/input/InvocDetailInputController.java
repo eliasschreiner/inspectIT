@@ -456,6 +456,8 @@ public class InvocDetailInputController extends AbstractTreeInputController {
 		/**
 		 * The deferred manager is used here to update the tree in a concurrent thread so the UI
 		 * responds much better if many items are displayed.
+		 * 
+		 * #TODO it was a fast "fix" to replace the DeferredTreeContentManager
 		 */
 		private TreeNodeContentProvider manager;
 

@@ -79,7 +79,7 @@ import info.novatec.inspectit.util.ObjectUtils;
  * 
  * @author Patrice Bouillet
  * 
- * #TODO Check for the Selection Provider, this is still a lottle weird
+ * #TODO Check for the Selection Provider, this is still a little weird
  */
 public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitionProvider, CmrRepositoryChangeListener, StorageChangeListener {
 
@@ -154,7 +154,10 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	private ResourceManager resourceManager = new LocalResourceManager(JFaceResources.getResources());
 
 
-	 public static IEclipseContext abstractContext;
+	/**
+	 * Static context to inject Services in Sub-Instances.
+	 */
+	public static IEclipseContext abstractContext;
 
 	
 	/**
@@ -192,7 +195,6 @@ public abstract class AbstractRootEditor implements IRootEditor, IInputDefinitio
 	 * 
 	 * @return The input definition.
 	 * 
-	 * #TODO in E4 the InputDefinition is gotten out of the RootEditorInput, not out of the E3-Superclass implementation
 	 */
 	public InputDefinition getInputDefinition() {	
 		//gets the InputDefinition out fo the RootEditorInput

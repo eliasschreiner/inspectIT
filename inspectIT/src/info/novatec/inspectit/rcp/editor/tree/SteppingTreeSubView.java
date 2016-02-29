@@ -12,8 +12,6 @@ import info.novatec.inspectit.rcp.util.ElementOccurrenceCount;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;

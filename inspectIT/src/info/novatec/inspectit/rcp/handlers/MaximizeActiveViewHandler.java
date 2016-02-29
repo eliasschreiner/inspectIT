@@ -32,6 +32,7 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
  * 
  * @author Ivan Senic
  * 
+ * #TODO implement filter Funtionallity and fix the u()-Method
  */
 public class MaximizeActiveViewHandler{
 	

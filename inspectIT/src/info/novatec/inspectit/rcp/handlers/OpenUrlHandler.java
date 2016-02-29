@@ -25,6 +25,8 @@ import org.eclipse.swt.widgets.Composite;
  * 
  * @author Ivan Senic
  * 
+ * #TODO fix the whole Handler due to its not working (DocumentationService) creates a lot of problems.
+ * 
  */
 public abstract class OpenUrlHandler {
 

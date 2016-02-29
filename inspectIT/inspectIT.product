@@ -7,7 +7,7 @@
    </configIni>
 
    <launcherArgs>
-      <programArgs>-clearPersistedState
+      <programArgs>-persistState
       </programArgs>
       <vmArgs>-Xmx1024M -Xms128m
       </vmArgs>

@@ -80,7 +80,7 @@ public class ShowHideColumnsHandler{
 		Item column = (Item) mApplication.getContext().get(COLUMN_PARAM);
 		Boolean visible = (Boolean)  mApplication.getContext().get(VISIBLE_PARAM);
 		Class<?> inputControllerClass = (Class<?>) mApplication.getContext().get(CONTROLLER_CLASS_PARAM);
-		
+//		E3 Code was: 		
 //		Item column = (Item) context.getVariable(COLUMN_PARAM);
 //		Boolean visible = (Boolean) context.getVariable(VISIBLE_PARAM);
 //		Class<?> inputControllerClass = (Class<?>) context.getVariable(CONTROLLER_CLASS_PARAM);

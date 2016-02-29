@@ -2,13 +2,9 @@ package info.novatec.inspectit.rcp.editor.root;
 
 import info.novatec.inspectit.rcp.editor.ISubView;
 
-import javax.inject.Inject;
-
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.SafeRunner;
-import org.eclipse.e4.core.services.events.IEventBroker;
-import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.util.SafeRunnable;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelection;
@@ -21,7 +17,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
  * @author Patrice Bouillet
  * 
  */
-public class MultiSubViewSelectionProvider implements IPostSelectionProvider{
+public class MultiSubViewSelectionProvider implements IPostSelectionProvider {
 
 	/**
 	 * Registered selection changed listeners (element type: <code>ISelectionChangedListener</code>
@@ -38,7 +34,7 @@ public class MultiSubViewSelectionProvider implements IPostSelectionProvider{
 	 * The root editor.
 	 */
 	private AbstractRootEditor rootEditor;
-	
+
 	/**
 	 * Constructor needs a root editor.
 	 * 
@@ -138,7 +134,6 @@ public class MultiSubViewSelectionProvider implements IPostSelectionProvider{
 	 * @param listeners
 	 *            All the registered listeners.
 	 */
-	
 	private void fireEventChange(final SelectionChangedEvent event, Object[] listeners) {
 		for (int i = 0; i < listeners.length; ++i) {
 			final ISelectionChangedListener l = (ISelectionChangedListener) listeners[i];

@@ -15,7 +15,7 @@ import org.eclipse.e4.ui.progress.IElementCollector;
  * @author Patrice Bouillet
  * 
  */
-public abstract class DeferredComposite extends Composite  {
+public abstract class DeferredComposite extends Composite {
 
 	/**
 	 * {@inheritDoc}

@@ -8,7 +8,6 @@ import info.novatec.inspectit.rcp.editor.root.AbstractRootEditor;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -55,7 +54,6 @@ public interface ISubView {
 	 *            <code>null</code> to indicate that there is no toolkit.
 	 */
 	void createPartControl(Composite parent, FormToolkit toolkit);
-
 
 	/**
 	 * A sub-view should return all preference IDs itself is in need of and the ones of the children

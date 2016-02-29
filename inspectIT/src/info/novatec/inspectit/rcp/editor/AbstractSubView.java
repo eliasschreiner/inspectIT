@@ -5,8 +5,6 @@ import info.novatec.inspectit.rcp.repository.RepositoryDefinition;
 
 import java.util.Objects;
 
-import javax.inject.Inject;
-
 import org.eclipse.core.runtime.Assert;
 
 /**

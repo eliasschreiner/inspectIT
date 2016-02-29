@@ -103,7 +103,7 @@
       </children>
       <children xsi:type="menu:Menu" xmi:id="_6wlLjsgZEeSyMNYR5xypkQ" elementId="help" label="Help">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_HGMhoHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.welcome" label="Welcome"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_PcQNoHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.dokumentation" label="Documentation"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_PcQNoHgAEeWp6ekdJTcqtQ" elementId="inspectit.handledmenuitem.dokumentation" label="Documentation" command="_BFTzEJ9ZEeWeW-hwSGo__g"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_TMMqIHgAEeWp6ekdJTcqtQ" elementId="inspectit.menuseparator.0"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLj8gZEeSyMNYR5xypkQ" elementId="info.novatec.inspectIT.rcp.handleditem.about" label="About"/>
       </children>
@@ -145,7 +145,7 @@
   <handlers xmi:id="_eyl-UJ84EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.handlers.DownloadStorageHandler" contributionURI="bundleclass://inspectIT/info.novatec.inspectit.rcp.handlers.DownloadStorageHandler" command="_ZM2d0J84EeWeW-hwSGo__g"/>
   <handlers xmi:id="_OZPfYJ86EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.wizard.ImportStorageWizard" contributionURI="bundleclass://inspectIT/info.novatec.inspectit.rcp.wizard.ImportStorageWizard" command="_BaQgcJ86EeWeW-hwSGo__g"/>
   <handlers xmi:id="_oNncYJ86EeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.wizard.ExportStorageWizard" contributionURI="bundleclass://inspectIT/info.novatec.inspectit.rcp.wizard.ExportStorageWizard" command="_KiqPYJ86EeWeW-hwSGo__g"/>
-  <handlers xmi:id="_Gi42EJ9ZEeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.handlers.SearchDocumentationHandler" contributionURI="bundleclass://inspectIT/info.novatec.inspectit.rcp.handlers.SearchDocumentationHandler" command="_BFTzEJ9ZEeWeW-hwSGo__g"/>
+  <handlers xmi:id="_Gi42EJ9ZEeWeW-hwSGo__g" elementId="info.novatec.inspectit.rcp.handlers.SearchDocumentationHandler" contributionURI="bundleclass://inspectIT/info.novatec.inspectit.rcp.handlers.OpenUrlHandler" command="_BFTzEJ9ZEeWeW-hwSGo__g"/>
   <handlers xmi:id="_HWBDQKTXEeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.handlers.maximizeActiveViewHandler" contributionURI="bundleclass://inspectIT/info.novatec.inspectit.rcp.handlers.MaximizeActiveViewHandler" command="_BbTYUKTXEeW1xYrLGfvZvA"/>
   <handlers xmi:id="_ArzZgKWREeW1xYrLGfvZvA" elementId="info.novatec.inspectit.rcp.handlers.openView" contributionURI="bundleclass://inspectIT/info.novatec.inspectit.rcp.handlers.OpenViewHandler" command="_HJ2bAKWREeW1xYrLGfvZvA"/>
   <handlers xmi:id="__5LOQK9KEeWdwO404PmFRA" elementId="info.novatec.inspectit.rcp.handlers.clearRepositoryBufferHandler" contributionURI="bundleclass://inspectIT/info.novatec.inspectit.rcp.handlers.ClearRepositoryBufferHandler" command="_50l1oK9KEeWdwO404PmFRA"/>

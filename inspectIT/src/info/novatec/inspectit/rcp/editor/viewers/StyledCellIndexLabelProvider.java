@@ -2,9 +2,9 @@ package info.novatec.inspectit.rcp.editor.viewers;
 
 import info.novatec.inspectit.rcp.editor.tooltip.IColumnToolTipProvider;
 
-import java.io.File;
 import java.util.Arrays;
 
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.ViewerCell;
@@ -29,7 +29,7 @@ public class StyledCellIndexLabelProvider extends StyledCellLabelProvider implem
 		Object element = cell.getElement();
 		// we don't care about the PendingUpdateAdapter which is used in some of
 		// the trees and tables.
-		if (element instanceof File) {
+		if (element instanceof IAdaptable) {
 			cell.setText(element.toString());
 		} else {
 			int index = cell.getColumnIndex();
